@@ -1,9 +1,14 @@
 # Corner matrices for Analog Design Bench V2 (generated; review like code).
 #
-# Source of truth for 'which process x supply x temperature points does each
-# task sign off over'.  Regenerate with scripts/build_corners.py; check drift
-# with `make corners`.  Entries flagged needs_review, or carrying unresolved
-# placeholders, are declared debt -- not silent guesses.
+# Transitional asset: derived from task prose, decks and netlists, because the
+# site API does not expose verifiers.  The public repo does: each task ships
+# tasks/<id>/tests/verify.py with an embedded SPEC holding [pvt] and [coverage]
+# (per-bench corner subsets).  The next revision generates this matrix from that
+# SPEC and retires the prose heuristics.
+#
+# Regenerate with scripts/build_corners.py; check drift with `make corners`.
+# Entries flagged needs_review, or carrying unresolved placeholders, are
+# declared debt -- not silent guesses.
 
 schema_version = "adb-corners-1"
 

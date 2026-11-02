@@ -81,8 +81,11 @@ P1 期间确认的三件事（会影响 P2/P3）：
    回写只校验 checker 无条件拒绝的东西（正值、整数倍率、非负面积），模型范围只作搜索建议。
 2. 顶层 `.param` 会被共享 checker 拒绝，但 `sky130-bootstrap-driver-pt` 的题面把 `cboot` 声明为设计变量，
    记为已知例外（`scripts/check_p1.py` 里显式列出理由）。
-3. 只有 9/177 个 deck 带 `.meas`，118 个用 `.control` 打印 `name = value`；
-   指标解析沿用官方 `verify.py` 的正则，保证与判分口径一致。
+3. deck 分三类（177 个）：118 个用 `.control` 打印 `name = value`、9 个带 `.meas`
+   （这两类能直接从 stdout 取指标）；45 个只 `.save`，**产物是波形文件而不是文本**
+   （加 `-r` 才跑，`.meas` 输出会被 `-r` 吞掉，两种必须分开走）；另外 5 个是
+   `fixtures/*.spi`，本来就不是测试台（供别的 deck include）。我们最初把后两类
+   合称“无输出”，是错的——波形同样是指标来源，只是读取方在 verifier 里。
 
 #### corner 矩阵已作为 IaC 落地
 
@@ -101,9 +104,30 @@ kind = cartesian 21 / rows 4 / pairs 11 / none 14；43 个待审、33 个未解�
 在声明的 27 个点上全部 `ok`（4 并发 5m19s，其中 1 个命中缓存；p1_freq 2.135–2.146 GHz，
 与参考指标 `minimum_zero_control_frequency = 2.1128 GHz` 同量级）。
 
-**仍未完成**：各任务 verifier 里的 **per-bench** corner 子集（如"噪声只在 TT"）尚未建模，
-所以"重评测 gate 与 `referenceResult` 逐项一致"还差最后一步；当前口径是"每个任务的签核网格"，
-比 verifier 更保守（多跑点），因此可以给出下界而不能给出逐项相等。
+**口径修正（2026-11-03，重要）**：上面这份矩阵是**从题面散文反推**的，现在作废为"过渡资产"。
+公开仓库 `Arcadia-1/analog-design-bench` 的每个任务都带判分器源码：
+
+```
+tasks/<id>/tests/verify.py     # 内嵌 SPEC（TOML）：[pvt] 网格、[coverage] per-bench 子集、
+                               #   [monte_carlo] 种子、[operating]、[limits]、公式
+tasks/<id>/tests/test.sh       # check_circuit → verify.py → /logs/verifier/reward.json
+tasks/<id>/tests/Dockerfile    # FROM 我们已有的 sky130-tools 镜像
+tasks/<id>/environment/starter/testbench/*.spi   # 给 agent 的已渲染 deck
+tasks/<id>/results/reference.json
+```
+
+bandgap 的 `[pvt]` 是 9 个工艺角 × 3 电源 × 3 温度，`[coverage]` 写明
+`noise_corners = ["tt"]`、`startup_corners = ["tt","ss","ff"]`——这正是原先判定
+"不可得"的 per-bench 子集。因此：
+
+- 下一步把 `corners.toml` 改为**从 verifier SPEC 生成**（`[pvt]` + `[coverage]`），
+  `needs_review` 与 `unresolved` 应大幅下降；`kind` 统一为 `cartesian` + 每 bench 子集；
+- "重评测 gate 与 `referenceResult` 逐项一致"随之**可做**：直接跑 `test.sh` 拿
+  `reward.json`，与 `referenceResult.metrics` 对账，不需要自己重写公式层；
+- 45 个"只 `.save`"的 deck 不再是缺口：波形读取与 gate 计算都在 verifier 里，不重写。
+
+边界（不变）：verifier 只作 **oracle/校准** 与 A/B 的官方判分，**不作优化目标**（否则是
+F3 过拟合）；不修改 verifier；数据 CC-BY-NC，仅本地使用、不打包分发。
 
 ### P2 — 合法性护栏与预算（≈2 天）
 

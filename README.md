@@ -97,6 +97,10 @@ PYTHONPATH=src python3 -m adb_solve eval --netlist circuit.spi --bench benches/ 
 当前状态：50 个任务全部登记；36 个由题面、3 个由 deck 提供，11 个是显式假设；
 43 个标记待审、33 个未解析占位符名（分布在 7 个任务）；展开后共 1,194 个签核点。
 
+> 这份矩阵目前是**从题面散文反推**的过渡资产。公开仓库里每个任务都带判分器
+> （`tasks/<id>/tests/verify.py`，内嵌 `[pvt]`、`[coverage]`、`[monte_carlo]`），
+> 下一版将直接从 SPEC 生成，见 `DATA.md` 的“T0 未包含的部分”。
+
 ## 复现
 
 ```bash
