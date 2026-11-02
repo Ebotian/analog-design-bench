@@ -13,10 +13,21 @@ authors = [{ name = "Ebotian" }]
 dependencies = ["requests>=2.31"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8"]
+dev = ["pytest>=8", "mypy>=1.11"]
 
 [tool.setuptools]
 package-dir = { "" = "src" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = ["docker: needs the pinned Sky130 tools image (skipped when absent)"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src/adb_solve"]
+strict = true
+show_error_codes = true

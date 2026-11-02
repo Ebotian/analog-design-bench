@@ -20,7 +20,8 @@ data/
 scripts/
   fetch_t0.py                T0 抓取脚本（可重入，跳过已完成 key）
   check_t0.py                完整性校验 + 清单生成
-src/adb_solve/               求解基建包（P1 起逐步填充）
+src/adb_solve/               求解基建包（P1 已落地：解析/回写/评测/缓存/CLI）
+tests/                       pytest 单测 + docker 端到端 smoke
 manifests/
   t0.sha256                  104 个数据文件的 sha256
   t0.meta.json               快照日期、条数、体积、canary
@@ -52,6 +53,24 @@ DATA.md                      数据卡：来源、完整性、缺陷、刷新、
 | 去重 key | 3,600（无重复） |
 | 体积 | 18.3 MB（含最终网表） |
 | 榜单复算 | 前 4 名 pass@1 与 avgMinutes 与站点逐位一致 |
+
+## 求解基建（P1）
+
+```bash
+make test                     # 单测（无 docker 也能跑，docker 用例自动跳过）
+make types                    # mypy --strict src/adb_solve
+make p1                       # 50 个参考解：解析 + identity + 扰动回写 + check_circuit
+
+# 单任务实际调用
+PYTHONPATH=src python3 -m adb_solve vars   --netlist circuit.spi
+PYTHONPATH=src python3 -m adb_solve check  --netlist circuit.spi --allow-ideal R C
+PYTHONPATH=src python3 -m adb_solve eval   --netlist circuit.spi --bench benches/ \
+    --values '{"supply": 1.8, "temperature": 27}' --process tt --jobs 4 --out report.json
+PYTHONPATH=src python3 -m adb_solve apply  --netlist circuit.spi --cand cand.json --out new.spi
+```
+
+评测跑在 `ghcr.io/arcadia-1/analog-arena-sky130-tools`（ngspice-46 + Sky130 PDK）里，
+每个 worker 一个常驻容器，deck 挂在 `/app`；缓存键是 `netlist + 渲染后的 deck + image id`。
 
 ## 复现
 

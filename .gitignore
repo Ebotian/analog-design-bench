@@ -15,3 +15,6 @@ data/cache/
 # Local scratch
 /tmp/
 *.log
+.work/
+.adb-cache/
+.mypy_cache/

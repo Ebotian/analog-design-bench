@@ -41,7 +41,7 @@
 
 ## 工具线
 
-### P1 — 参数层与评测层（≈3–5 天）
+### P1 — 参数层与评测层（🚧 进行中：解析/回写/评测已可跑）
 
 - **目标**：把“改网表 → 跑仿真 → 读指标”变成一条稳定、可缓存、可并行的调用。
 - **内容**：
@@ -56,6 +56,36 @@
   - 回写后重新评测，gate 结果与 `reference.json` 一致；
   - 缓存命中率 > 80%（同一设计重复评测时）。
 - **依赖**：无。**这是唯一“只赚不赔”的阶段。**
+
+#### 实现记录（2026-11-03）
+
+已落地于 `src/adb_solve/`，`make test types p1` 可复现：
+
+| 模块 | 职责 | 验收证据 |
+|---|---|---|
+| `numbers` | SPICE 数值：尾数/指数/单位后缀，精度不够则加位数而非四舍五入 | 回写保真性质测试（7 种字面量 × 5 种倍率） |
+| `netlist` | 无损解析：原始行/列、`;`/`$` 行内注释、`+` 续行、`.subckt` 作用域 | identity 渲染逐字节一致 |
+| `params` | 参数抽取（SI 存储）、分组、搜索盒、硬合法性、只改参数位的回写 | 50/50 任务 diff 只落在参数 token |
+| `bench` | 四种占位符 `{x}` `%X%` `__X__` `@@X@@`、`.lib` 工艺角与 `.temp` 重写 | 语料实测 104/177 个 deck 带占位符 |
+| `sim` / `docker_backend` | case/result、失败分类、常驻容器（~40 ms/次） | 单测 + docker smoke |
+| `evaluate` / `cache` | bench × corner 矩阵、`sha256(netlist, deck, image id)` 缓存 | 重复评测命中率 100% |
+| `check` | `/opt/analog-arena/check_circuit.py` 包装 | 50/50 通过（1 个已知例外） |
+
+实机验证：`sky130-lc-vco-2ghz-pvt` 的 `tb_tune` 在 tt/27/1.8 下
+`p1_freq=2.140 GHz`、`power_avg=1.89 mW`、`startup_time=12.5 ns`，与参考指标同量级。
+
+P1 期间确认的三件事（会影响 P2/P3）：
+
+1. `check_circuit.py` 的**几何范围只在 `--enforce-sky130-geometry` 下生效**，而 32/50 个参考解超出该范围
+   （如 `w=50 m=16`），说明真实 verifier 不启用它。故“搜索盒”与“合法性”必须分开：
+   回写只校验 checker 无条件拒绝的东西（正值、整数倍率、非负面积），模型范围只作搜索建议。
+2. 顶层 `.param` 会被共享 checker 拒绝，但 `sky130-bootstrap-driver-pt` 的题面把 `cboot` 声明为设计变量，
+   记为已知例外（`scripts/check_p1.py` 里显式列出理由）。
+3. 只有 9/177 个 deck 带 `.meas`，118 个用 `.control` 打印 `name = value`；
+   指标解析沿用官方 `verify.py` 的正则，保证与判分口径一致。
+
+**仍未完成**：每个任务的 corner 矩阵还躺在各任务的 verifier 里（题面只给范围），
+没有它就只能做单点复算，无法完成“重评测 gate 与 `referenceResult` 逐项一致”。
 
 ### P2 — 合法性护栏与预算（≈2 天）
 
