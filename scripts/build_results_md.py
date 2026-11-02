@@ -228,7 +228,7 @@ def render() -> str:
         "`reconcile.summary.comparable_values` |"
     )
     add(
-        f"| 值匹配（容差或打印精度） | {num(rec_summary.get('values_matched'))} / "
+        f"| 数值匹配（容差/打印精度） | {num(rec_summary.get('values_matched'))} / "
         f"{num(rec_summary.get('comparable_values'))} | "
         "`reconcile.summary.values_matched` |"
     )
@@ -239,6 +239,16 @@ def render() -> str:
     add(
         f"| 其中按打印精度一致 | {num(rec_summary.get('values_matched_by_printed_precision'))} | "
         "`reconcile.summary.values_matched_by_printed_precision` |"
+    )
+    add(
+        f"| 其中按 gate 状态（零计数指标） | "
+        f"{num(rec_summary.get('values_matched_by_gate_status'))} | "
+        "`reconcile.summary.values_matched_by_gate_status` |"
+    )
+    add(
+        f"| 已对账（数值或 gate 状态） | {num(rec_summary.get('values_resolved'))} / "
+        f"{num(rec_summary.get('comparable_values'))} | "
+        "`reconcile.summary.values_resolved` |"
     )
     add(
         f"| 状态一致 | {num(rec_summary.get('status_matches'))} / "
@@ -363,12 +373,40 @@ def render() -> str:
                 f"{num(row.get('relative_error'), 6)} | {row.get('message')} |"
             )
     add("")
+    add("### 按 gate 状态一致的零计数 gate")
+    add("")
+    add(
+        "这些参考 metric 是 \"0 errors / 0 mismatches\" 型计数；verifier 消息"
+        "没有打印该计数时，用 gate 自身的 pass/fail 作为 0 值证据，并在 "
+        "`current_value_source` 标 `gate-status`。若 gate 失败且没有显式计数，"
+        "会记为无法量化的不一致，而不是猜一个 0。"
+    )
+    add("")
+    gate_status_rows = [
+        {**row, "task_id": item["task_id"]}
+        for item in cast(list[dict[str, Any]], reconcile["tasks"])
+        for row in cast(list[dict[str, Any]], item["gates"])
+        if row.get("value_match_basis") == "gate-status"
+    ]
+    if not gate_status_rows:
+        add("空。")
+    else:
+        add("| 任务 | 参考 gate | 本次 gate | 参考值 | 本次值 | 本次来源 |")
+        add("|---|---|---|---:|---:|---|")
+        for row in gate_status_rows:
+            add(
+                f"| `{row.get('task_id', '')}` | `{row.get('id')}` | "
+                f"`{row.get('gate_id')}` | {num(row.get('reference_value'), 6)} | "
+                f"{num(row.get('current_value'), 6)} | "
+                f"{row.get('current_value_source')} |"
+            )
+    add("")
     add("### 对账不一致清单")
     add("")
     mismatches = cast(list[dict[str, Any]], rec_summary.get("mismatches", []))
     run_mismatches = cast(list[dict[str, Any]], rec_summary.get("run_level_mismatches", []))
     if not mismatches and not run_mismatches:
-        add("空：每条参考 gate 都在容差或打印精度内找到对应实测值，状态全部一致。")
+        add("空：每条参考 gate 都在容差、打印精度或 gate 状态内找到对应实测值，状态全部一致。")
     else:
         add("| 任务 | gate | 参考值 | 本次值 | 相对误差 | 状态一致 |")
         add("|---|---|---:|---:|---:|---|")
@@ -410,8 +448,9 @@ def render() -> str:
     add("")
     add(
         "对账表：任务数与 gate 数 ← `reconcile.summary` 同名字段；"
-        "值匹配数为 `values_matched`，等于 `values_within_tolerance` 与 "
-        "`values_matched_by_printed_precision` 之和；"
+        "数值匹配数为 `values_matched`，等于 `values_within_tolerance` 与 "
+        "`values_matched_by_printed_precision` 之和；`values_resolved` 再加 "
+        "`values_matched_by_gate_status`；"
         "每条 gate 的 `reference_value`、`current_value`、`relative_error`、"
         "`status_match`、`current_value_source` 与原始 `message` 见 "
         "`reconcile.tasks[].gates[]`。"

@@ -49,7 +49,7 @@ UNIT = (
 NUMBER = re.compile(
     r"(?:(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*(?:=|:)\s*)?"
     r"(?P<value>[-+]?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)"
-    rf"(?P<unit>{UNIT})?"
+    rf"\s*(?P<unit>{UNIT})?"
 )
 PREFERRED_NAMES = re.compile(r"worst|max|min|range|yield|gain|power|noise|sndr|sfdr", re.I)
 SI_PREFIX = {"p": 1e-12, "n": 1e-9, "u": 1e-6, "m": 1e-3, "": 1.0, "k": 1e3, "M": 1e6, "G": 1e9}
@@ -140,10 +140,28 @@ def select_value(
                 best_yield = min(yields, key=lambda item: abs(item.value / 100.0 - reference))
                 return best_yield.value / 100.0, f"yield-percent:{best_yield.text}"
 
+        target = unit_parts(reference_unit)
+
+        def unit_rank(item: Candidate) -> int:
+            current = unit_parts(item.unit)
+            if target is None or current is None:
+                return 1
+            return 0 if current[1] == target[1] else 1
+
         def distance(item: Candidate) -> float:
             return abs(in_reference_unit(item, reference_unit) - reference)
 
-        best = min(found, key=lambda item: (distance(item), 0 if item.name else 1))
+        # A corner label such as S=0 can share a numeric value with the real
+        # metric (0 dB / 0 LSB).  Prefer a candidate whose unit matches the
+        # specification before comparing magnitudes.
+        best = min(
+            found,
+            key=lambda item: (
+                distance(item),
+                unit_rank(item),
+                0 if item.name else 1,
+            ),
+        )
         value = in_reference_unit(best, reference_unit)
         source = f"closest:{best.text}" if best.name else f"closest-number:{best.text}"
         return value, source
@@ -200,6 +218,27 @@ def find_gate(
     return "", "unmatched"
 
 
+ZERO_COUNT_SPEC = re.compile(r"=\s*0(?:\.0+)?\b", re.I)
+COUNT_WORD = re.compile(r"error|mismatch|missing|invalid|fault|failure", re.I)
+EXPLICIT_COUNT = re.compile(
+    r"(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*(?P<value>\d+(?:\.\d+)?)"
+)
+
+
+def is_zero_count_metric(reference_value: float | None, specification: str | None) -> bool:
+    return reference_value == 0.0 and bool(ZERO_COUNT_SPEC.search(specification or ""))
+
+
+def explicit_count(message: str) -> Candidate | None:
+    """An explicitly printed zero-count field (``errors=0``, ``missing=0``)."""
+    found = [
+        Candidate(value=float(match.group("value")), name=match.group("name").casefold(), text=match.group(0))
+        for match in EXPLICIT_COUNT.finditer(message)
+        if COUNT_WORD.search(match.group("name"))
+    ]
+    return found[0] if found else None
+
+
 def compare_gate(
     gate: Mapping[str, Any] | None, reference: Mapping[str, Any] | None
 ) -> dict[str, Any]:
@@ -228,6 +267,17 @@ def compare_gate(
     if boolean_metric:
         current_value = 1.0 if current_status == "passed" else 0.0
         source = "gate-status"
+    elif is_zero_count_metric(reference_value, specification):
+        count = explicit_count(message)
+        if count is not None:
+            current_value = count.value
+            source = f"explicit-count:{count.text}"
+        elif current_status == "passed":
+            current_value = 0.0
+            source = "gate-status:passed"
+        else:
+            current_value = None
+            source = "gate-status:failed-unquantified"
     elif (
         "VDD" in (specification or "")
         and (swing := re.search(r"tightest Vpp=([\d.eE+-]+)V at [^;]*?/([\d.]+)V", message))
@@ -271,11 +321,12 @@ def compare_gate(
     value_match = bool(
         error is not None and (error <= VALUE_TOLERANCE or rounding_match)
     )
-    value_match_basis = (
-        "printed-precision"
-        if rounding_match and error is not None and error > VALUE_TOLERANCE
-        else ("tolerance" if value_match else "none")
-    )
+    if value_match and "gate-status" in source and error is not None and error <= VALUE_TOLERANCE:
+        value_match_basis = "gate-status"
+    elif rounding_match and error is not None and error > VALUE_TOLERANCE:
+        value_match_basis = "printed-precision"
+    else:
+        value_match_basis = "tolerance" if value_match else "none"
     expected_pass = None if reference_status is None else reference_status == "pass"
     status_match = (
         None if expected_pass is None else expected_pass == (current_status == "passed")
@@ -336,6 +387,10 @@ def reconcile_one(run: Mapping[str, Any], reference: Mapping[str, Any]) -> dict[
     rounding_matches = [
         row for row in comparable
         if row["value_match"] and row["value_match_basis"] == "printed-precision"
+    ]
+    gate_status_matches = [
+        row for row in comparable
+        if row["value_match"] and row["value_match_basis"] == "gate-status"
     ]
     status_matches = [row for row in rows if row["status_match"] is True]
     mismatches = [
@@ -426,7 +481,11 @@ def reconcile_one(run: Mapping[str, Any], reference: Mapping[str, Any]) -> dict[
             "comparable_values": len(comparable),
             "values_within_tolerance": len(value_matches),
             "printed_precision_matches": len(rounding_matches),
+            "gate_status_matches": len(gate_status_matches),
             "values_matched": len(value_matches) + len(rounding_matches),
+            "values_resolved": (
+                len(value_matches) + len(rounding_matches) + len(gate_status_matches)
+            ),
             "status_matches": len(status_matches),
             "mismatches": len(mismatches),
             "extra_gates": len(extra),
@@ -443,6 +502,9 @@ def summarize(tasks: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     value_matches = sum(cast(int, item["counts"]["values_within_tolerance"]) for item in tasks)
     rounding_matches = sum(
         cast(int, item["counts"].get("printed_precision_matches", 0)) for item in tasks
+    )
+    gate_status_matches = sum(
+        cast(int, item["counts"].get("gate_status_matches", 0)) for item in tasks
     )
     status_matches = sum(cast(int, item["counts"]["status_matches"]) for item in tasks)
     reference_sims = sum(
@@ -524,7 +586,9 @@ def summarize(tasks: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         "comparable_values": comparable,
         "values_within_tolerance": value_matches,
         "values_matched_by_printed_precision": rounding_matches,
+        "values_matched_by_gate_status": gate_status_matches,
         "values_matched": value_matches + rounding_matches,
+        "values_resolved": value_matches + rounding_matches + gate_status_matches,
         "status_matches": status_matches,
         "reference_ngspice_runs": reference_sims,
         "local_ngspice_runs": local_sims,
@@ -583,9 +647,11 @@ def main() -> int:
     print(
         f"wrote {args.out}: {summary['tasks']} tasks, "
         f"{summary['reference_metrics']} reference metrics, "
-        f"{summary['values_matched']}/{summary['comparable_values']} values matched "
-        f"({summary['values_within_tolerance']} within {summary['tolerance']:.0%}, "
-        f"{summary['values_matched_by_printed_precision']} at printed precision), "
+        f"{summary['values_resolved']}/{summary['comparable_values']} values resolved "
+        f"({summary['values_matched']} numeric: {summary['values_within_tolerance']} within "
+        f"{summary['tolerance']:.0%} + "
+        f"{summary['values_matched_by_printed_precision']} printed precision; "
+        f"{summary['values_matched_by_gate_status']} gate-status), "
         f"{summary['mismatch_count']} mismatch(es), "
         f"{summary['run_level_mismatch_count']} run-level mismatch(es)"
     )

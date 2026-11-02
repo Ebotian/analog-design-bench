@@ -93,9 +93,11 @@ ngspice 固定单线程（`set num_threads=1`，同时挂到 `/app/.spiceinit` �
 | 参考 gate 总数 | 452 | `reconcile.summary.reference_metrics` |
 | 本次 verifier gate 总数 | 430 | `reconcile.summary.run_gates` |
 | 可比值数 | 452 | `reconcile.summary.comparable_values` |
-| 值匹配（容差或打印精度） | 452 / 452 | `reconcile.summary.values_matched` |
-| 其中容差内 | 451 | `reconcile.summary.values_within_tolerance` |
+| 数值匹配（容差/打印精度） | 438 / 452 | `reconcile.summary.values_matched` |
+| 其中容差内 | 437 | `reconcile.summary.values_within_tolerance` |
 | 其中按打印精度一致 | 1 | `reconcile.summary.values_matched_by_printed_precision` |
+| 其中按 gate 状态（零计数指标） | 14 | `reconcile.summary.values_matched_by_gate_status` |
+| 已对账（数值或 gate 状态） | 452 / 452 | `reconcile.summary.values_resolved` |
 | 状态一致 | 452 / 452 | `reconcile.summary.status_matches` |
 | 值/状态不一致 | 0 | `reconcile.summary.mismatch_count` |
 | 任务级 reward/gate 数不一致 | 0 | `reconcile.summary.run_level_mismatch_count` |
@@ -185,9 +187,30 @@ ngspice 固定单线程（`set num_threads=1`，同时挂到 `/app/.spiceinit` �
 |---|---|---|---:|---:|---:|---|
 | `sky130-transistor-divide-by-2` | `maximum_duty_cycle_error` | `duty_cycle` | 0.108700 | 0.110000 | 0.011960 | high/low duty=49.9/49.89/49.89/50.1/50.11/50.11%; low/high=4.937e-07/1.8V |
 
+### 按 gate 状态一致的零计数 gate
+
+这些参考 metric 是 "0 errors / 0 mismatches" 型计数；verifier 消息没有打印该计数时，用 gate 自身的 pass/fail 作为 0 值证据，并在 `current_value_source` 标 `gate-status`。若 gate 失败且没有显式计数，会记为无法量化的不一致，而不是猜一个 0。
+
+| 任务 | 参考 gate | 本次 gate | 参考值 | 本次值 | 本次来源 |
+|---|---|---|---:|---:|---|
+| `sky130-bandgap-reference-pvt` | `signoff_complete` | `complete_signoff` | 1.000000 | 1.000000 | gate-status |
+| `sky130-beta-multiplier-reference-pvt-mc` | `signoff_complete` | `complete_signoff` | 1.000000 | 1.000000 | gate-status |
+| `sky130-cml-tx-driver-28g-nrz-pvt` | `eye_sign` | `eye_sign` | 0.000000 | 0.000000 | gate-status:passed |
+| `sky130-cml-tx-driver-28g-nrz-pvt` | `sensitivity_sign` | `sensitivity_sign` | 0.000000 | 0.000000 | gate-status:passed |
+| `sky130-flash-adc-3bit-pvt` | `valid_output_levels_pass` | `valid_output_levels` | 1.000000 | 1.000000 | gate-status |
+| `sky130-lc-vco-2ghz-pvt` | `output_operating_range_pass` | `pvt_output_operating_range` | 1.000000 | 1.000000 | gate-status |
+| `sky130-lc-vco-2ghz-pvt` | `reference_compliance_pass` | `pvt_reference_compliance` | 1.000000 | 1.000000 | gate-status |
+| `sky130-pll-charge-pump-pvt` | `pvt_current_accuracy_pass` | `pvt_current_accuracy` | 1.000000 | 1.000000 | gate-status |
+| `sky130-pll-charge-pump-pvt` | `pvt_inactive_modes_pass` | `pvt_inactive_modes` | 1.000000 | 1.000000 | gate-status |
+| `sky130-pll-charge-pump-pvt` | `representative_pulse_fidelity_pass` | `representative_pulse_fidelity` | 1.000000 | 1.000000 | gate-status |
+| `sky130-pll-charge-pump-pvt` | `pvt_switching_speed_pass` | `pvt_switching_speed` | 1.000000 | 1.000000 | gate-status |
+| `sky130-pll-charge-pump-pvt` | `pvt_power_pass` | `pvt_power` | 1.000000 | 1.000000 | gate-status |
+| `sky130-sar-adc-4bit-async` | `code_mismatches` | `sample_hold_16_codes` | 0.000000 | 0.000000 | gate-status:passed |
+| `sky130-sar-adc-6bit-async` | `code_mismatch_count` | `sample_hold_64_codes` | 0.000000 | 0.000000 | gate-status:passed |
+
 ### 对账不一致清单
 
-空：每条参考 gate 都在容差或打印精度内找到对应实测值，状态全部一致。
+空：每条参考 gate 都在容差、打印精度或 gate 状态内找到对应实测值，状态全部一致。
 
 ## 非通过项
 
@@ -197,4 +220,4 @@ ngspice 固定单线程（`set num_threads=1`，同时挂到 `/app/.spiceinit` �
 
 逐任务表：`status` ← `<task>.status`；`reward` ← `<task>.artifacts.reward`；`gates` ← `<task>.artifacts.tests_passed/tests_total`；`sims` ← `<task>.artifacts.ngspice_runs`；`verifier 墙钟` ← `<task>.artifacts.wall_clock_s`；`调度墙钟` ← `<task>.wall_s`。`summary.sweep_wall_s` 由 `started_utc` 与 `finished_utc` 之差生成；`summary.task_wall_sum_s` 是逐任务 `wall_s` 之和，二者在并行 sweep 下不相等，故分列。
 
-对账表：任务数与 gate 数 ← `reconcile.summary` 同名字段；值匹配数为 `values_matched`，等于 `values_within_tolerance` 与 `values_matched_by_printed_precision` 之和；每条 gate 的 `reference_value`、`current_value`、`relative_error`、`status_match`、`current_value_source` 与原始 `message` 见 `reconcile.tasks[].gates[]`。
+对账表：任务数与 gate 数 ← `reconcile.summary` 同名字段；数值匹配数为 `values_matched`，等于 `values_within_tolerance` 与 `values_matched_by_printed_precision` 之和；`values_resolved` 再加 `values_matched_by_gate_status`；每条 gate 的 `reference_value`、`current_value`、`relative_error`、`status_match`、`current_value_source` 与原始 `message` 见 `reconcile.tasks[].gates[]`。
