@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 from typing import cast
 
-from . import bench, check as legality, evaluate, params
+from . import bench, check as legality, corners as corner_asset, evaluate, params
 from .docker_backend import DEFAULT_IMAGE, SimulationError
 from .sim import CornerValue
 from . import netlist as spice
@@ -90,15 +90,35 @@ def _decks(args: argparse.Namespace) -> list[bench.Deck]:
     return decks
 
 
+def _matrix(args: argparse.Namespace) -> list[dict[str, CornerValue]]:
+    """Corner matrix from the declared asset, or from ad-hoc CLI options."""
+    if args.corners is None:
+        if args.task is not None:
+            raise SystemExit("--task requires --corners")
+        values = cast(dict[str, CornerValue], _read_json(args.values))
+        return [
+            dict(corner)
+            for corner in evaluate.corner_matrix(
+                processes=args.process,
+                temperatures=args.temperature,
+                values=values,
+            )
+        ]
+    if args.task is None:
+        raise SystemExit("--corners requires --task")
+    if args.values or args.process or args.temperature:
+        raise SystemExit("--corners cannot be combined with --values/--process/--temperature")
+    entry = corner_asset.for_task(corner_asset.load(args.corners), args.task)
+    return [dict(corner) for corner in corner_asset.expand(entry)]
+
+
 def cmd_eval(args: argparse.Namespace) -> int:
     text = Path(args.netlist).read_text()
     decks = _decks(args)
-    values = cast(dict[str, CornerValue], _read_json(args.values))
-    corners = evaluate.corner_matrix(
-        processes=args.process,
-        temperatures=args.temperature,
-        values=values,
-    )
+    corners = _matrix(args)
+    keys = None
+    if args.corners is not None and args.task is not None:
+        keys = corner_asset.for_task(corner_asset.load(args.corners), args.task).keys
     options = evaluate.EvalOptions(
         image=args.image,
         jobs=args.jobs,
@@ -109,7 +129,7 @@ def cmd_eval(args: argparse.Namespace) -> int:
         oneshot=args.oneshot,
     )
     try:
-        report = evaluate.evaluate(text, decks, corners, options)
+        report = evaluate.evaluate(text, decks, corners, options, keys=keys)
     except bench.MissingValues as exc:
         print(f"missing deck values: {', '.join(exc.names)}", file=sys.stderr)
         return MISSING
@@ -194,6 +214,8 @@ def build_parser() -> argparse.ArgumentParser:
     eval_parser = sub.add_parser("eval", parents=[common_netlist], help="simulate benches")
     eval_parser.add_argument("--bench", nargs="+", required=True, help="deck files or directories")
     eval_parser.add_argument("--values", help="JSON file or inline object of deck values")
+    eval_parser.add_argument("--corners", type=Path, help="corner asset, e.g. configs/corners.toml")
+    eval_parser.add_argument("--task", help="task id inside the corner asset")
     eval_parser.add_argument("--process", nargs="*", default=None, help="process corners, e.g. tt ss ff")
     eval_parser.add_argument("--temperature", nargs="*", type=float, default=None)
     eval_parser.add_argument("--jobs", type=int, default=1)

@@ -7,7 +7,7 @@ name = "analog-design-bench-tools"
 version = "0.1.0"
 description = "Local corpus and sizing tooling for Analog Design Bench V2"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
 authors = [{ name = "Ebotian" }]
 dependencies = ["requests>=2.31"]
@@ -27,7 +27,7 @@ pythonpath = ["src"]
 markers = ["docker: needs the pinned Sky130 tools image (skipped when absent)"]
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.11"
 files = ["src/adb_solve"]
 strict = true
 show_error_codes = true

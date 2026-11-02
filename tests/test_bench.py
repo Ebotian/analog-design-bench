@@ -112,3 +112,9 @@ def test_pdk_file_names_are_not_mistaken_for_placeholders():
     )
     assert bench.placeholders(deck) == ["TEMP"]
     assert bench.render(deck, {"TEMP": 27}).endswith(".temp 27\n")
+
+
+def test_value_lookup_is_case_insensitive():
+    """ngspice parameter names are case-insensitive, so {IB} must find ib."""
+    deck = ".param IB=20u\nIREF vdd iref {IB}\n.end\n"
+    assert bench.render(deck, {"ib": "20u"}).splitlines()[1] == "IREF vdd iref 20u"

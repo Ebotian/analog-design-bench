@@ -22,6 +22,7 @@ from typing import Sequence, TypedDict, cast
 
 from . import bench
 from .cache import Cache, hash_inputs
+from .corners import SweepKeys
 from .docker_backend import DEFAULT_IMAGE, DockerBackend, image_id
 from .sim import Corner, CornerValue, SimBackend, SimCase, SimResult, SimResultPayload
 
@@ -85,18 +86,27 @@ def build_cases(
     netlist_text: str,
     decks: Sequence[bench.Deck],
     corners: Sequence[Corner],
+    keys: SweepKeys | None = None,
 ) -> list[SimCase]:
-    """Render every deck at every corner into a simulation case."""
+    """Render every deck at every corner into a simulation case.
+
+    ``keys`` names the placeholder that carries each swept dimension (the
+    corner asset may call the process placeholder ``CORNER`` rather than
+    ``process``); the same names drive the ``.lib``/``.temp`` rewrites.
+    """
+    keys = keys or SweepKeys()
     cases: list[SimCase] = []
     for deck in decks:
         for index, corner in enumerate(corners):
             # Every corner entry is also available as a deck value: decks use
             # {temperature} / {supply} placeholders as well as literal corners.
             text = deck.render(dict(corner))
-            if corner.get("process") is not None:
-                text = bench.rewrite_process(text, str(corner["process"]))
-            if corner.get("temperature") is not None:
-                text = bench.rewrite_temperature(text, float(cast(float, corner["temperature"])))
+            if corner.get(keys.process) is not None:
+                text = bench.rewrite_process(text, str(corner[keys.process]))
+            if corner.get(keys.temperature) is not None:
+                text = bench.rewrite_temperature(
+                    text, float(cast(float, corner[keys.temperature]))
+                )
             cases.append(
                 SimCase(
                     case_id=f"{deck.name}[{index}]",
@@ -129,11 +139,12 @@ def evaluate(
     corners: Sequence[Corner],
     options: EvalOptions | None = None,
     backend: SimBackend | None = None,
+    keys: SweepKeys | None = None,
 ) -> EvalReport:
     """Simulate ``netlist_text`` over ``decks × corners`` and return a report."""
     options = options or EvalOptions()
     started = time.perf_counter()
-    cases = build_cases(netlist_text, decks, corners)
+    cases = build_cases(netlist_text, decks, corners, keys)
     cache = Cache(options.cache_root, namespace="sim", enabled=options.use_cache)
 
     try:
@@ -141,14 +152,14 @@ def evaluate(
     except Exception:  # backend may be a fake; image identity is best-effort
         image = options.image
 
-    keys = {
+    cache_keys = {
         case.case_id: hash_inputs(image, case.key_material(), str(options.timeout))
         for case in cases
     }
     cached: dict[str, SimResultPayload] = {}
     pending: list[SimCase] = []
     for case in cases:
-        hit = cache.get(keys[case.case_id])
+        hit = cache.get(cache_keys[case.case_id])
         if hit is None:
             pending.append(case)
         else:
@@ -158,7 +169,7 @@ def evaluate(
     if pending:
         fresh = (backend or _backend(options)).simulate(pending)
     for result in fresh:
-        cache.put(keys[result.case_id], dict(result.to_payload()))
+        cache.put(cache_keys[result.case_id], dict(result.to_payload()))
 
     rows: list[CaseReport] = [
         cast(CaseReport, dict(result.to_payload())) for result in fresh

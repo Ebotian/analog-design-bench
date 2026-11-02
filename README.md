@@ -21,6 +21,7 @@ scripts/
   fetch_t0.py                T0 抓取脚本（可重入，跳过已完成 key）
   check_t0.py                完整性校验 + 清单生成
 src/adb_solve/               求解基建包（P1 已落地：解析/回写/评测/缓存/CLI）
+configs/corners.toml         每个任务的 corner 矩阵（IaC，声明式、受版本控制）
 tests/                       pytest 单测 + docker 端到端 smoke
 manifests/
   t0.sha256                  104 个数据文件的 sha256
@@ -71,6 +72,30 @@ PYTHONPATH=src python3 -m adb_solve apply  --netlist circuit.spi --cand cand.jso
 
 评测跑在 `ghcr.io/arcadia-1/analog-arena-sky130-tools`（ngspice-46 + Sky130 PDK）里，
 每个 worker 一个常驻容器，deck 挂在 `/app`；缓存键是 `netlist + 渲染后的 deck + image id`。
+
+## Corner 矩阵（IaC）
+
+`configs/corners.toml` 是"每个任务在哪些 process × supply × temperature 上签核"的唯一事实源。
+它由 `scripts/build_corners.py` 从证据（题面原文、bench deck、设计网表）生成，人工审阅后提交，
+评测直接消费；`make corners` 检查它是否与证据一致（漂移即失败）。
+
+```bash
+make corners                  # 重新推导并与已提交文件比对，过期则报错
+PYTHONPATH=src python3 -m adb_solve eval --netlist circuit.spi --bench benches/ \
+    --corners configs/corners.toml --task sky130-lc-vco-2ghz-pvt --jobs 4 --out report.json
+```
+
+每条记录都带出处，**不允许静默猜测**：
+
+| 字段 | 含义 |
+|---|---|
+| `provenance` | `instruction`（题面原句，带 `quote`）/ `deck`（deck 与网表自身）/ `assumption`（没找到证据，标记为假设） |
+| `kind` | `cartesian`（穷举网格）/ `rows`、`pairs`（行式或配对压力点，非穷举）/ `none` |
+| `unresolved` | 本资产无法提供的 deck 占位符（每 bench 的时序、MC 应力等），测试要求"渲染失败的恰好是这些名字" |
+| `needs_review` | 仍需人工确认；`[meta]` 里给出总数，债务可计数、不隐藏 |
+
+当前状态：50 个任务全部登记；36 个由题面、3 个由 deck 提供，11 个是显式假设；
+43 个标记待审、33 个未解析占位符名（分布在 7 个任务）；展开后共 1,194 个签核点。
 
 ## 复现
 

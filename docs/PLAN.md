@@ -84,8 +84,26 @@ P1 期间确认的三件事（会影响 P2/P3）：
 3. 只有 9/177 个 deck 带 `.meas`，118 个用 `.control` 打印 `name = value`；
    指标解析沿用官方 `verify.py` 的正则，保证与判分口径一致。
 
-**仍未完成**：每个任务的 corner 矩阵还躺在各任务的 verifier 里（题面只给范围），
-没有它就只能做单点复算，无法完成“重评测 gate 与 `referenceResult` 逐项一致”。
+#### corner 矩阵已作为 IaC 落地
+
+`configs/corners.toml` + `src/adb_solve/corners.py`（schema/校验/展开）+
+`src/adb_solve/evidence.py`（从题面、deck、网表抽取）+ `scripts/build_corners.py`（生成与漂移检查）。
+纪律：`make corners` 在证据与已提交文件不一致时失败；`[meta]` 的 `needs_review` 与
+`unresolved_values` 必须等于实际计数；测试要求"deck 渲染失败的占位符集合恰好等于该任务声明的
+`unresolved`"，因此已声明的缺口无法掩盖未声明的缺口。
+
+当前状态：50 个任务全部登记；provenance = instruction 36 / deck 3 / assumption 11；
+kind = cartesian 21 / rows 4 / pairs 11 / none 14；43 个待审、33 个未解析占位符名（7 个任务）；
+展开共 1,194 个签核点。`pairs`/`rows` 是压力点子集，展开成笛卡尔积属于保守超集，故这些任务
+保持 `needs_review`。
+
+实机验证：`adb-solve eval --corners configs/corners.toml --task sky130-lc-vco-2ghz-pvt`
+在声明的 27 个点上全部 `ok`（4 并发 5m19s，其中 1 个命中缓存；p1_freq 2.135–2.146 GHz，
+与参考指标 `minimum_zero_control_frequency = 2.1128 GHz` 同量级）。
+
+**仍未完成**：各任务 verifier 里的 **per-bench** corner 子集（如"噪声只在 TT"）尚未建模，
+所以"重评测 gate 与 `referenceResult` 逐项一致"还差最后一步；当前口径是"每个任务的签核网格"，
+比 verifier 更保守（多跑点），因此可以给出下界而不能给出逐项相等。
 
 ### P2 — 合法性护栏与预算（≈2 天）
 

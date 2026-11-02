@@ -1,0 +1,622 @@
+# Corner matrices for Analog Design Bench V2 (generated; review like code).
+#
+# Source of truth for 'which process x supply x temperature points does each
+# task sign off over'.  Regenerate with scripts/build_corners.py; check drift
+# with `make corners`.  Entries flagged needs_review, or carrying unresolved
+# placeholders, are declared debt -- not silent guesses.
+
+schema_version = "adb-corners-1"
+
+[meta]
+needs_review = 43
+unresolved_values = 33
+
+[tasks."sky130-ahuja-compensated-two-stage-load-range-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "- The bench supplies 50 uA at iref. The output target and the input common-mode voltage are 0.9 V. - The 20 pF and 200 pF AC conditions, DC follower condition, and 200 pF follower transient each run all 45 combinations of tt/ff/ss/fs/sf, 1.62/1.80/1.98 V, and -40/27/125 C. A 63 pF AC stability guard runs at 1.80 V and 27 C in every process corner."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = false
+
+[tasks."sky130-analog-input-mux-8to1-pvt"]
+provenance = "instruction"
+kind = "rows"
+quote = "- tt, 1.80 V, 40 C; - ss, 1.62 V, 125 C; - ff, 1.98 V, -10 C; - sf, 1.62 V, -10 C; - fs, 1.98 V, 125 C."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-10.0, 40.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+unresolved = ["ac0", "ac1", "ac2", "ac3", "ac4", "ac5", "ac6", "ac7"]
+
+[tasks."sky130-analog-input-mux-8to1-pvt".values]
+vcm = "0"
+
+[tasks."sky130-bandgap-reference-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "DC signoff covers the declared representative nine-section PVT set tt, ff, ss, fs, sf, ll, hh, hl, and lh, at supplies 1.62, 1.8, and 1.98 V and temperatures -40, 27, and 125 C. The set samples active-device and passive-library variation independently to keep the reference signoff tractable; simultaneous MOS/passive extremes are outside this task's declared scope. This is 81 points and is not a Cartesian combination of independently selected MOS and passive corners."
+processes = ["ff", "fs", "hh", "hl", "lh", "ll", "sf", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+unresolved = ["CLOAD", "SEED", "STEP_DOWN", "STEP_DOWN_END", "STEP_UP", "STEP_UP_END", "STOP", "VDD_HIGH", "VDD_INITIAL", "VDD_LOW"]
+
+[tasks."sky130-bandgap-reference-pvt".values]
+mc_mm_switch = "1"
+
+[tasks."sky130-beta-multiplier-reference-pvt-mc"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "Complete PVT signoff covers every Cartesian combination of process corners tt, ss, ff; supplies 1.62, 1.8, 1.98 V; and temperatures -40, 27, 125 C. At all 27 points:"
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-bootstrap-driver-pt"]
+provenance = "assumption"
+kind = "none"
+processes = ["tt"]
+supplies = [1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-bootstrap-driver-pt".values]
+cboot = "620p"
+pw = "50n"
+
+[tasks."sky130-bootstrap-sampler-fft"]
+provenance = "instruction"
+kind = "pairs"
+quote = "Meet all requirements at TT/1.8 V/27 C and, for both SS and FF, at 1.62 V/-40 C, 1.62 V/125 C, 1.80 V/27 C, 1.98 V/-40 C, and 1.98 V/125 C."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-bottom-plate-sampler-pvt"]
+provenance = "instruction"
+kind = "pairs"
+quote = "1. Bipolar acquisition accuracy. At tt/1.80 V/27 C, the sampler must acquire both +0.8 V and -0.8 V differential inputs. The absolute stored differential error for each polarity must not exceed 5 mV. 2. Track/hold function. At tt/1.80 V/27 C, ss/1.62 V/125 C, and ff/1.98 V/-40 C, the sampler first acquires +0.8 V differential."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-bottom-plate-sampler-pvt".values]
+static_diff = "0.8"
+
+[tasks."sky130-buf-ppsf-bs-gain1-sfdr90"]
+provenance = "assumption"
+kind = "none"
+processes = ["tt"]
+supplies = [1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-buf-ppsf-bs-gain1-sfdr90".values]
+ib = "20u"
+test_freq = "1Meg"
+vin = "0.8"
+
+[tasks."sky130-capless-ldo-1v0-20ma-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "DC regulation and quiescent-current signoff cover all 30 Cartesian combinations of tt, ff, ss, fs, sf; 1.5 and 1.8 V input; and -40, 27, and 85 C. At every point, over a full 0-20 mA DC load sweep, vout must stay within 30 mV (3%) of 1.0 V, and the no-load current drawn from vin, which includes the internal divider but excludes the ideal vref source, must not exceed 100 uA."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.5, 1.8]
+temperatures = [-40.0, 27.0, 85.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-capless-ldo-1v0-20ma-pvt".values]
+vfin = "1.8"
+
+[tasks."sky130-class-d-halfbridge-eff95-tt"]
+provenance = "assumption"
+kind = "none"
+processes = ["tt"]
+supplies = [1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-class-d-halfbridge-eff95-tt".values]
+cres = "345p"
+rclk = "50"
+rload = "1"
+
+[tasks."sky130-cml-divider-div2-range1gto10g"]
+provenance = "assumption"
+kind = "none"
+processes = ["tt"]
+supplies = [1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+unresolved = ["period"]
+
+[tasks."sky130-cml-divider-div2-range1gto10g".values]
+input_pp = "300m"
+stop_time = "9n"
+test_freq = "10Gig"
+tstep = "2p"
+vcm = "0.9"
+
+[tasks."sky130-cml-tx-driver-28g-nrz-pvt"]
+provenance = "instruction"
+kind = "rows"
+quote = "- slow, low-voltage, low-temperature: ss, 1.62 V, -40 C; - nominal: tt, 1.80 V, 27 C; - fast, high-voltage, high-temperature: ff, 1.98 V, 125 C."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-cmos-switched-resistor-dac-5bit-pvt"]
+provenance = "instruction"
+kind = "pairs"
+quote = "- TT at 1.80 V/27 C; - SS and FF, each at 1.62 V/-40 C, 1.62 V/125 C, 1.80 V/27 C, 1.98 V/-40 C, and 1.98 V/125 C."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-complementary-folded-cascode-ab-opamp-pvt"]
+provenance = "assumption"
+kind = "none"
+processes = ["tt"]
+supplies = [1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-complementary-folded-cascode-ab-opamp-pvt".values]
+input_common_mode = "0.9"
+sine_amplitude = "0.4"
+step_high = "1.6"
+step_low = "0.2"
+
+[tasks."sky130-constant-gm-stable-gain-amplifier-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "All requirements apply at every Cartesian combination of tt, ff, ss; 1.62 V, 1.80 V, 1.98 V; and -40 C, 27 C, 125 C. A functionally valid submission runs independent operating-point/differential-AC, cold-start, and DC-linearity measurements at all 27 PVT points (81 serial ngspice runs). Nominal OP/AC and startup gates run first; a failed gate blocks the dependent matrix."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "corner", supply = "vdd", temperature = "temp" }
+needs_review = true
+
+[tasks."sky130-constant-gm-stable-gain-amplifier-pvt".values]
+model = "/opt/sky130/continuous/sky130.lib.spice"
+
+[tasks."sky130-current-starved-ring-vco-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "The tuning, startup, waveform, and power requirements apply across all 27 combinations of tt, ss, ff; 1.62, 1.80, 1.98 V; and -40, 27, 125 C. vout drives 20 fF."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40"]
+provenance = "deck"
+kind = "none"
+processes = ["tt"]
+supplies = [0.5, 0.9, 1.3, 1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40".values]
+input_amp = "0.24"
+input_freq = "39062.5"
+input_offset = "0.020"
+input_phase = "0"
+
+[tasks."sky130-fct-residue-amplifier-900msps"]
+provenance = "assumption"
+kind = "none"
+processes = ["tt"]
+supplies = [1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+unresolved = ["sample_delay", "sample_out_delay", "sample_out_width", "sample_width", "tone_frequency", "tperiod", "transfer_delay"]
+
+[tasks."sky130-fct-residue-amplifier-900msps".values]
+bias_current = "50u"
+c_msb = "400f"
+fs = "900Meg"
+input_common_mode = "1.0"
+input_peak = "10m"
+output_load = "50f"
+output_precharge = "0.9"
+sample_count = "32"
+startup_precharge_time = "1n"
+tone_bin = "5"
+transfer_time = "500p"
+warmup_cycles = "64"
+
+[tasks."sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc"]
+provenance = "instruction"
+kind = "pairs"
+quote = "- The feedback network is Cs = Cf = 1 pF; each output additionally drives CL = 1 pF. - A 0.9 V differential output step must have static error <= 0.01% and 40 ns dynamic error <= 0.1%, with both rising and falling settling times <= 40 ns. - Return-ratio phase margin >= 60 deg."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.8, 1.98]
+temperatures = [-20.0, 80.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc".values]
+beta = "0.5"
+cf = "1p"
+cl = "1p"
+cs = "1p"
+deadline = "40n"
+delay_time = "25n"
+differential_step = "0.9"
+edge_time = "50p"
+pulse_width = "80n"
+stop_time = "170n"
+tolerance = "0.001"
+
+[tasks."sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc"]
+provenance = "instruction"
+kind = "pairs"
+quote = "- The feedback network is Cs = 8Cf = 1 pF; each output additionally drives CL = 250 fF. - For a 0.9 V differential output step from 0 V to 0.9 V, the final static error at either commanded level must be <= 1%. - For the same step, the output error at 10 ns must be <= 1%, and both rising and falling settling times must be <= 10 ns. - Return-ratio phase margin >= 60 deg."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.8, 1.98]
+temperatures = [-25.0, 85.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc".values]
+beta = "0.111111111111"
+cf = "125f"
+cl = "250f"
+cs = "1p"
+deadline = "10n"
+delay_time = "25n"
+edge_time = "50p"
+output_step = "0.9"
+pulse_width = "40n"
+stop_time = "105n"
+tolerance = "0.01"
+
+[tasks."sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt"]
+provenance = "instruction"
+kind = "pairs"
+quote = "This is a transistor-level pre-layout simulation. The main AC and noise signoff covers all 27 combinations of tt, ff, ss; 1.62, 1.8, 1.98 V; and -40, 27, and 125 C. Closed-loop range, differential settling, and output-common-mode recovery are checked at three representative points: tt/1.80 V/27 C, ss/1.62 V/125 C, and ff/1.98 V/-40 C."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-flash-adc-3bit-pvt"]
+provenance = "instruction"
+kind = "pairs"
+quote = "- tt / 1.80 V / 27 C - ff / 1.62 V / -40 C - fs / 1.98 V / 125 C"
+processes = ["ff", "fs", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-flash-adc-3bit-pvt".values]
+input_frequency_hz = "976562.5"
+input_phase_deg = "17"
+
+[tasks."sky130-flash-adc-4bit-50msps"]
+provenance = "deck"
+kind = "none"
+processes = ["tt"]
+supplies = [0.9, 1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "The bench forces 50 uA from vdd into iref. Meet the main requirements at every one of the 27 unique Cartesian combinations of tt, ss, and ff; 1.62 V, 1.80 V, and 1.98 V; and -40 C, 27 C, and 125 C. Input and target output common modes are 0.9 V; the output drives 1 pF."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-fully-differential-ota-c-biquad-pvt"]
+provenance = "instruction"
+kind = "pairs"
+quote = "OP+AC and noise signoff use 25 representative PVT points. Each process corner tt, ff, ss, fs, and sf is evaluated at the same five supply/temperature conditions: 1.62 V/-40 C, 1.62 V/125 C, 1.80 V/27 C, 1.98 V/-40 C, and 1.98 V/125 C."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch"]
+provenance = "instruction"
+kind = "pairs"
+quote = "- With 20 mV peak RF drive per side, differential conversion gain must be at least 3 dB in every scored deterministic, frequency, imbalance, and mismatch case. - Under the imbalance and tt_mm cases, LO-to-IF isolation, RF-to-IF feedthrough, and LO-to-RF isolation must each be at most -45 dB. - The worst non-IF differential-output spur must be at most -30 dBc in every single-tone case."
+processes = ["ff", "ss", "tt", "tt_mm"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch".values]
+lo_amp = "0.35"
+lo_freq = "2.2Gig"
+lo_imbalance = "0"
+lo_phase_error = "0"
+rf_amp = "20m"
+rf_freq = "2.4Gig"
+rf_imbalance = "0"
+
+[tasks."sky130-gmr-degen-amp-constant-gm-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "Implement .subckt gmr_degen IREF VCM VDD VIN VIP VON VOP VSS. The verifier runs the complete 15-point Cartesian product of five process corners (tt, ff, ss, fs, sf) and three temperatures (-40 C, 27 C, 85 C), all at VDD = 1.80 V. It supplies IREF = 50 uA, drives both input common-mode and VCM at 0.90 V, and connects 1 pF from each output to ground."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.8]
+temperatures = [-40.0, 27.0, 85.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = false
+
+[tasks."sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60"]
+provenance = "assumption"
+kind = "none"
+processes = ["tt"]
+supplies = [1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-high-psrr-bandgap-reference-pvt"]
+provenance = "instruction"
+kind = "rows"
+quote = "- Sky130 ff, 1.9 V, -40 C; - Sky130 tt, 1.8 V, 27 C; - Sky130 ss, 1.7 V, 85 C; - Sky130 fs, 1.7 V, -40 C."
+processes = ["ff", "fs", "ss", "tt"]
+supplies = [1.7, 1.8, 1.9]
+temperatures = [-40.0, 27.0, 85.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-inductive-lna-2p4ghz-gain12-nf2-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "Meet each RF requirement across all 27 combinations of tt, ss, ff; 1.62, 1.80, 1.98 V; and -40, 27, 125 C, unless its bullet explicitly names a narrower PVT scope. Both RF ports are driven and terminated in 50 ohms, and the bench supplies a 50 uA reference current."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = false
+
+[tasks."sky130-lc-vco-2ghz-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "Meet all requirements across the 27 combinations of tt, ss, ff; 1.62, 1.8, 1.98 V; and -40, 27, 125 C. outp and outn each drive 10 fF."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = false
+
+[tasks."sky130-ldo-ota5-robust-pvt-mc"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "DC signoff covers all 135 Cartesian combinations of tt, ff, ss, fs, sf; 1.62, 1.8, 1.98 V input; 1, 10, 30 mA load; and -40, 27, 125 C. The specified minimum load is 1 mA. At every point, abs(vout-1.2 V) must not exceed 20 mV. Quiescent input current, abs(I(VIN))-ILOAD, must not exceed 200 uA and must not be negative."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-low-power-line-driver-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "All requirements are evaluated over all 45 combinations of tt, ff, ss, fs, and sf; 1.62, 1.80, and 1.98 V supplies; and -40, 27, and 125 C. The testbench supplies 50 uA at iref. Closed-loop tests use two 10 kohm resistors for an inverting gain of -1 around a 0.9 V reference. The output drives a 1 uF coupling capacitor, 300 ohm line, and 200 pF lumped output/load parasitic."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = false
+
+[tasks."sky130-low-power-oscillator-2mhz-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "Together these points cover the declared tt, ss, and ff process corners, all three supplies (1.62 V, 1.80 V, and 1.98 V), and all three temperatures (-40 C, 27 C, and 85 C). They are representative stresses rather than a complete Cartesian PVT claim."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 85.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-nmos-pass-ldo-0p4v-pvt-mc"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "DC, loop-stability, PSRR, and headroom signoff covers all 54 combinations of tt/ss/ff process, 1.6/1.8/2.0 V input, -40/27/125 C, and 1/5 mA load. At every point:"
+processes = ["ff", "ss", "tt"]
+supplies = [1.6, 1.8, 2.0]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "corner", supply = "supply", temperature = "temp_c" }
+needs_review = true
+unresolved = ["LOAD_A", "SEED", "VIN_V"]
+
+[tasks."sky130-ota-5t-gain40-pm60-noise50uv-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "The fixed load is 1 pF and the external reference current is 50 uA. The input common-mode voltage is VDD/2 at every PVT point. Gain, bandwidth, phase margin, power, and noise are checked across all 27 combinations of tt, ss, and ff; 1.62, 1.8, and 1.98 V; and -40, 27, and 125 C."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-pll-charge-pump-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "DC current, compliance, inactive-state, and matching requirements use the full 3 × 3 × 3 Cartesian product (27 PVT points): tt, ss, ff; 1.62, 1.80, 1.98 V; and -40, 27, 125 C. The bench supplies a 25 uA reference; up and dn command nominal +50 uA and -50 uA output current."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-programmable-icc-iptat-current-mirror-pvt"]
+provenance = "instruction"
+kind = "rows"
+quote = "- slow, low-voltage, low-temperature: ss, 1.62 V, -40 C; - nominal: tt, 1.80 V, 27 C; - fast, high-voltage, high-temperature: ff, 1.98 V, 125 C."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-regulated-charge-pump-10mhz-pvt"]
+provenance = "instruction"
+kind = "pairs"
+quote = "This is eight enabled operating points. Power-down current is a static specification, so it is measured by DC operating-point analysis at five leakage-oriented points: tt/1.80 V/40 C, ss/1.62 V/125 C, ff/1.98 V/125 C, sf/1.62 V/125 C, and fs/1.98 V/125 C. This coverage is representative signoff and does not claim full Cartesian PVT qualification."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [40.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-regulated-charge-pump-10mhz-pvt".values]
+load = "25u"
+
+[tasks."sky130-ring-amp-3stage-gain8-400uw"]
+provenance = "deck"
+kind = "none"
+processes = ["tt"]
+supplies = [0.5, 0.9, 1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-sar-adc-4bit-async"]
+provenance = "instruction"
+kind = "pairs"
+quote = "Dynamic signoff uses TT/1.80 V/27 C, SS/1.62 V/125 C, and FF/1.98 V/-40 C. The complete sample-and-hold transfer checks use TT/1.80 V/27 C. In every test, vrefn=0, vrefp=VDD, the input common mode is VDD/2, and each registered output bit drives 10 fF to ground."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+unresolved = ["VINN_SOURCE", "VINP_SOURCE"]
+
+[tasks."sky130-sar-adc-4bit-async".values]
+input_amplitude = "0.85"
+input_frequency = "46.875Meg"
+input_phase = "0"
+
+[tasks."sky130-sar-adc-6bit-async"]
+provenance = "assumption"
+kind = "none"
+processes = ["tt"]
+supplies = [1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+unresolved = ["VINN_SOURCE", "VINP_SOURCE"]
+
+[tasks."sky130-sar-adc-6bit-async".values]
+input_amplitude = "0.85"
+input_frequency = "48.4375Meg"
+input_phase = "0"
+
+[tasks."sky130-switched-capacitor-2to1-converter-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "Complete active-device signoff covers every Cartesian combination of tt, ss, ff, sf, fs; 1.62, 1.8, 1.98 V; and -40, 27, 125 C. Dedicated ll and hh runs at 1.8 V/27 C cover MIM/passive extremes. Metrics use the 0.3–0.7 us interval of a 0.7 us transient: eight complete 20 MHz clock periods beginning at 1.5 times the maximum allowed startup time. The transient maximum step is 2 ns, giving at least 25 points per clock period in addition to source breakpoints at clock edges."
+processes = ["ff", "fs", "hh", "ll", "sf", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = false
+
+[tasks."sky130-switched-capacitor-2to1-converter-pvt".values]
+load = "680"
+
+[tasks."sky130-telescopic-cascode-ota-pvt-fix"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "The PVT requirements apply at every one of the 27 unique Cartesian combinations of tt, ff, and ss; 1.62 V, 1.80 V, and 1.98 V; and -40 C, 27 C, and 125 C. The AC response must have exactly one falling 0 dB crossing in the 1 Hz to 10 GHz sweep and must remain below unity after that first crossing. Unity-gain bandwidth and phase margin are measured at that first falling crossing."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-three-stage-nested-miller-ota-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "Design a three-gain-stage amplifier with nested Miller compensation for a 200 pF capacitive load. The bench supplies a 5 uA reference on iref, uses 0.9 V input common mode and output target, and evaluates the complete 45-point Cartesian product of process corners tt, ff, ss, fs, and sf; supplies 1.62 V, 1.80 V, and 1.98 V; and temperatures -40 C, 27 C, and 125 C."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-tia-zt8k-bw750m-noise5p-sfdr70-power5m-pt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "Implement .subckt tia IREF IN VCM VDD VOUT VSS. The verifier runs the complete 15-point Cartesian product of five process corners (tt, ff, ss, fs, sf) and three temperatures (-40 C, 27 C, 85 C), all at VDD = 1.80 V. It supplies IREF = 20 uA, drives VCM at 0.90 V, places 0.3 pF from IN to VSS, and places 0.2 pF from VOUT to VSS."
+processes = ["ff", "fs", "sf", "ss", "tt"]
+supplies = [1.8]
+temperatures = [-40.0, 27.0, 85.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = false
+
+[tasks."sky130-transistor-divide-by-2"]
+provenance = "assumption"
+kind = "none"
+processes = ["tt"]
+supplies = [1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-two-stage-miller-opamp-gain60-ugb200-pm60-noise50uv-pvt"]
+provenance = "assumption"
+kind = "none"
+processes = ["tt"]
+supplies = [1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt"]
+provenance = "instruction"
+kind = "cartesian"
+quote = "The primary PVT set is the complete 27-point Cartesian product of process corners tt, ff, and ss; supplies 1.62 V, 1.80 V, and 1.98 V; and temperatures -40 C, 27 C, and 125 C. The bench supplies a 50 uA reference, uses 0.9 V input common mode, and loads vout with 2 pF."
+processes = ["ff", "ss", "tt"]
+supplies = [1.62, 1.8, 1.98]
+temperatures = [-40.0, 27.0, 125.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true
+
+[tasks."sky130-unregulated-charge-pump-10mhz-pvt"]
+provenance = "assumption"
+kind = "none"
+processes = ["tt"]
+supplies = [1.8]
+temperatures = [27.0]
+keys = { process = "process", supply = "supply", temperature = "temperature" }
+needs_review = true

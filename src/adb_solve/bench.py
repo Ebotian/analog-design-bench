@@ -80,13 +80,16 @@ def render(text: str, values: dict[str, float | int | str]) -> str:
 
     Raises :class:`MissingValues` if any placeholder is unfilled.  Values are
     formatted with ``str`` so ``1.8`` and ``"1.8"`` both work; callers that
-    care about digits should pre-format.
+    care about digits should pre-format.  Lookup is case-insensitive because
+    ngspice parameter names are (``{IB}`` is fed by ``ib``).
     """
-    needed = set(placeholders(text))
-    missing = needed - set(values)
+    lookup = {name.casefold(): value for name, value in values.items()}
+    missing = [name for name in placeholders(text) if name.casefold() not in lookup]
     if missing:
-        raise MissingValues(list(missing))
-    return PLACEHOLDER_RE.sub(lambda match: str(values[_name_of(match)]), text)
+        raise MissingValues(missing)
+    return PLACEHOLDER_RE.sub(
+        lambda match: str(lookup[_name_of(match).casefold()]), text
+    )
 
 
 def analyses(text: str) -> list[str]:
