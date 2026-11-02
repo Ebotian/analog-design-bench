@@ -1,0 +1,13 @@
+schema_version = "1.3"
+artifacts = ["/app/circuit.spi"]
+
+[task]
+name = "analog-arena/sky130-bandgap-reference-pvt"
+description = "Implement a high-impedance first-order bandgap core targeting 1.18–1.26 V output and ≤ 50 ppm/°C temperature coefficient across the specified operating conditions."
+authors = [{ name = "Jing Wang" }]
+reviewers = [{ name = "Quanrong Zhuang" }]
+keywords = ["analog", "ngspice", "sky130", "bandgap", "reference", "bjt", "pvt", "noise", "monte-carlo", "line-transient"]
+
+[metadata]
+task_id = "sky130-bandgap-reference-pvt"
+checker_allow_ideal = ["R", "C"]

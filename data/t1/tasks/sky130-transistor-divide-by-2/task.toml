@@ -1,0 +1,12 @@
+schema_version = "1.3"
+artifacts = ["/app/circuit.spi"]
+
+[task]
+name = "analog-arena/sky130-transistor-divide-by-2"
+description = "Implement a transistor-level divide-by-two flip-flop targeting 500 MHz output frequency and ≤ 400 ps rising clock-to-output delay across the specified operating conditions."
+authors = [{ name = "Xiongjie Zhang" }]
+
+[metadata]
+task_id = "sky130-transistor-divide-by-2"
+checker_allow_ideal = ["C"]
+revision = 2

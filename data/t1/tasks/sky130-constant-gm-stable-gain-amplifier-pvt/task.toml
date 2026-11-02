@@ -1,0 +1,12 @@
+schema_version = "1.3"
+artifacts = ["/app/circuit.spi"]
+
+[task]
+name = "analog-arena/sky130-constant-gm-stable-gain-amplifier-pvt"
+description = "Implement a gain-stable differential amplifier targeting 3.0–4.0 V/V differential gain and ≥ 30 MHz bandwidth across the specified operating conditions."
+authors = [{ name = "Kezhuo Liu" }]
+keywords = ["analog", "ngspice", "sky130", "differential-amplifier", "pvt"]
+
+[metadata]
+task_id = "sky130-constant-gm-stable-gain-amplifier-pvt"
+checker_allow_ideal = ["R", "C"]

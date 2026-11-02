@@ -1,0 +1,2 @@
+{"type":"goal_created","goalId":"mvz09jk7-fg9heh","objective":"用官方 verifier（`tasks/<id>/tests/test.sh`）在本地沙箱跑完全部 50 个参考解，自动产出逐任务 JSON（reward、逐 gate metrics、sims、墙钟、状态），并与 T0 的 `referenceResult` 逐项对账；收尾时仅依据这些自动生成的 JSON 撰写 md 说明，不手写任何数字。","sisyphus":false,"autoContinue":true,"at":"2026-11-02T08:37:03.943Z"}
+{"type":"task_list_set","goalId":"mvz09jk7-fg9heh","taskCount":6,"blockCompletion":false,"at":"2026-11-02T08:37:03.943Z"}

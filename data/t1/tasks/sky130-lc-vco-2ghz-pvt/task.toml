@@ -1,0 +1,31 @@
+schema_version = "1.3"
+artifacts = ["/app/circuit.spi"]
+
+[task]
+name = "analog-arena/sky130-lc-vco-2ghz-pvt"
+description = "Implement a differential LC VCO targeting ≥ 1.25 tuning ratio and ≤ 2.4 mW average power across the specified operating conditions."
+authors = [{ name = "Yan Xu" }]
+reviewers = [{ name = "Yan Xu" }]
+keywords = ["analog", "rf", "ngspice", "sky130", "vco", "lc-oscillator", "varactor", "pvt"]
+
+[metadata]
+checker_allow_ideal = []
+task_id = "sky130-lc-vco-2ghz-pvt"
+revision = 1
+
+[verifier]
+environment_mode = "separate"
+
+[verifier.environment]
+network_mode = "no-network"
+build_timeout_sec = 1800.0
+cpus = 4
+memory_mb = 4096
+storage_mb = 10240
+
+[environment]
+network_mode = "no-network"
+build_timeout_sec = 1800.0
+cpus = 4
+memory_mb = 4096
+storage_mb = 10240

@@ -1,0 +1,13 @@
+schema_version = "1.3"
+artifacts = ["/app/circuit.spi"]
+
+[task]
+name = "analog-arena/sky130-beta-multiplier-reference-pvt-mc"
+description = "Implement a self-starting beta-multiplier current reference targeting 40 µA nominal output current and ≤ 8% compliance variation across the specified operating conditions."
+authors = [{ name = "Jing Wang" }]
+reviewers = [{ name = "Quanrong Zhuang" }]
+keywords = ["analog", "ngspice", "sky130", "beta-multiplier", "current-reference", "pvt", "monte-carlo"]
+
+[metadata]
+task_id = "sky130-beta-multiplier-reference-pvt-mc"
+checker_allow_ideal = []

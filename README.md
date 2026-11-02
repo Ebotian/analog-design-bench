@@ -22,6 +22,7 @@ scripts/
   check_t0.py                完整性校验 + 清单生成
 src/adb_solve/               求解基建包（P1 已落地：解析/回写/评测/缓存/CLI）
 configs/corners.toml         每个任务的 corner 矩阵（IaC，声明式、受版本控制）
+data/t1/                     判分器语料（tests/、task.toml、results/、environment/，见 DATA.md）
 tests/                       pytest 单测 + docker 端到端 smoke
 manifests/
   t0.sha256                  104 个数据文件的 sha256
@@ -97,9 +98,8 @@ PYTHONPATH=src python3 -m adb_solve eval --netlist circuit.spi --bench benches/ 
 当前状态：50 个任务全部登记；36 个由题面、3 个由 deck 提供，11 个是显式假设；
 43 个标记待审、33 个未解析占位符名（分布在 7 个任务）；展开后共 1,194 个签核点。
 
-> 这份矩阵目前是**从题面散文反推**的过渡资产。公开仓库里每个任务都带判分器
-> （`tasks/<id>/tests/verify.py`，内嵌 `[pvt]`、`[coverage]`、`[monte_carlo]`），
-> 下一版将直接从 SPEC 生成，见 `DATA.md` 的“T0 未包含的部分”。
+> 这份矩阵目前是**从题面散文反推**的过渡资产。判分器已取回到 `data/t1/`
+> （见 `DATA.md` 的 T1 节），下一版将直接从判分器的条件声明生成。
 
 ## 复现
 

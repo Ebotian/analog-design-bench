@@ -1,0 +1,14 @@
+schema_version = "1.3"
+artifacts = ["/app/circuit.spi"]
+
+[task]
+name = "analog-arena/sky130-switched-capacitor-2to1-converter-pvt"
+description = "Implement a two-phase switched-capacitor 2:1 converter targeting a 0.42–0.51 heavy-load conversion ratio and ≥ 70% heavy-load efficiency across the specified operating conditions."
+authors = [{ name = "Jing Wang" }]
+keywords = ["analog", "ngspice", "sky130", "power", "switched-capacitor", "dc-dc", "pvt"]
+
+[metadata]
+task_id = "sky130-switched-capacitor-2to1-converter-pvt"
+checker_allow_ideal = []
+checker_require_subcircuit = ["sc_2to1_converter", "vss", "vdd", "clk", "vout"]
+checker_enforce_sky130_geometry = true
