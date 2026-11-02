@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+# Future large corpora.  T0 is small (22 MB) and committed on purpose.
+data/traj/
+data/raw/
+data/cache/
+
+# Local scratch
+/tmp/
+*.log

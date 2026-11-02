@@ -1,0 +1,1336 @@
+[
+ {
+  "id": "sky130-class-d-halfbridge-eff95-tt",
+  "title": "Design a Half-Bridge Class-D Power Amplifier",
+  "description": "Implement a half-bridge class-D power amplifier targeting > 95% peak efficiency and > 30 mW output power across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "class-d",
+   "half-bridge",
+   "power-amplifier",
+   "efficiency",
+   "tt"
+  ],
+  "authors": [
+   "Quanrong Zhuang"
+  ],
+  "trials": {
+   "passed": 62,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 216.338
+  }
+ },
+ {
+  "id": "sky130-programmable-icc-iptat-current-mirror-pvt",
+  "title": "Design a Programmable ICC/IPTAT NMOS Current Mirror",
+  "description": "Implement a programmable ICC/IPTAT NMOS current mirror targeting 1.00 mA nominal output current and ≤ 8% output-current error across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "current-mirror",
+   "current-reference",
+   "iptat",
+   "programmable",
+   "pvt"
+  ],
+  "authors": [
+   "Mingtao Zhan"
+  ],
+  "trials": {
+   "passed": 64,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 3.769
+  }
+ },
+ {
+  "id": "sky130-gmr-degen-amp-constant-gm-pvt",
+  "title": "Design a constant-gain source-degenerated GM-R amplifier",
+  "description": "Implement a source-degenerated GM-R differential amplifier targeting 1.98–2.02 V/V gain and > 60 MHz bandwidth across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "differential-amplifier",
+   "gm-r",
+   "process-corners"
+  ],
+  "authors": [
+   "Xiyu He"
+  ],
+  "trials": {
+   "passed": 43,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 17.09
+  }
+ },
+ {
+  "id": "sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60",
+  "title": "Design a GM-R degenerated differential amplifier",
+  "description": "Implement a source-degenerated GM-R differential amplifier targeting 1.98–2.02 V/V gain and > 70 MHz bandwidth across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "differential-amplifier",
+   "gm-r",
+   "process-corners"
+  ],
+  "authors": [
+   "Xiyu He"
+  ],
+  "trials": {
+   "passed": 53,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 5.322
+  }
+ },
+ {
+  "id": "sky130-bootstrap-driver-pt",
+  "title": "Design an All-NMOS Half-Bridge Bootstrap High-Side Gate Driver",
+  "description": "Implement an all-NMOS half-bridge bootstrap gate driver with a designable off-chip bootstrap capacitor, targeting 3–7 ns dead time and < 3.5 mW driver power across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "bootstrap",
+   "half-bridge",
+   "gate-driver",
+   "level-shifter",
+   "dead-time",
+   "process-corner",
+   "temperature"
+  ],
+  "authors": [
+   "Quanrong Zhuang"
+  ],
+  "trials": {
+   "passed": 22,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 360.016
+  }
+ },
+ {
+  "id": "sky130-ring-amp-3stage-gain8-400uw",
+  "title": "Design a Three-Stage Closed-Loop Gain-8 Switched-Capacitor Ring Amplifier",
+  "description": "Implement a three-stage switched-capacitor ring amplifier targeting 7.2–8.8 V/V closed-loop gain and ≤ 50 ns settling time across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "ring-amplifier",
+   "three-stage",
+   "switched-capacitor",
+   "closed-loop"
+  ],
+  "authors": [
+   "Kezhuo Liu"
+  ],
+  "trials": {
+   "passed": 43,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 3.017
+  }
+ },
+ {
+  "id": "sky130-ldo-ota5-robust-pvt-mc",
+  "title": "Design a Robust PMOS-Pass LDO Across PVT and Mismatch",
+  "description": "Implement a PMOS-pass LDO targeting 1.20 V output within ±20 mV and ≤ 250 mV dropout across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "ldo",
+   "pvt",
+   "monte-carlo"
+  ],
+  "authors": [
+   "Jing Wang"
+  ],
+  "trials": {
+   "passed": 22,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 21.493
+  }
+ },
+ {
+  "id": "sky130-buf-ppsf-bs-gain1-sfdr90",
+  "title": "Design a differential push-pull source-follower buffer",
+  "description": "Implement a differential push-pull source-follower buffer targeting > 0.99 V/V gain through 40 MHz and > 90 dB SFDR at 1 MHz across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "buffer",
+   "source-follower",
+   "input-impedance",
+   "sfdr",
+   "process-corners"
+  ],
+  "authors": [
+   "Xiyu He"
+  ],
+  "trials": {
+   "passed": 15,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 59.339
+  }
+ },
+ {
+  "id": "sky130-cml-divider-div2-range1gto10g",
+  "title": "Design a static CML divide-by-2 frequency divider",
+  "description": "Implement a static CML divide-by-2 frequency divider targeting 1–10 GHz input operation and ≥ 200 mVpp differential output swing across the specified operating conditions.",
+  "category": "rf-clock-high-speed",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "cml",
+   "frequency-divider",
+   "divider",
+   "high-speed"
+  ],
+  "authors": [
+   "Xiyu He"
+  ],
+  "trials": {
+   "passed": 57,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 16.935
+  }
+ },
+ {
+  "id": "sky130-tia-zt8k-bw750m-noise5p-sfdr70-power5m-pt",
+  "title": "Design an 8 kOhm, 750 MHz transimpedance amplifier",
+  "description": "Implement an optical-receiver transimpedance amplifier targeting > 8 kΩ transimpedance and > 750 MHz bandwidth across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "tia",
+   "transimpedance-amplifier",
+   "optical-receiver",
+   "process-corners"
+  ],
+  "authors": [
+   "Xiyu He"
+  ],
+  "trials": {
+   "passed": 18,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 11.829
+  }
+ },
+ {
+  "id": "sky130-bandgap-reference-pvt",
+  "title": "Design a high-impedance first-order bandgap core",
+  "description": "Implement a high-impedance first-order bandgap core targeting 1.18–1.26 V output and ≤ 50 ppm/°C temperature coefficient across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "bandgap",
+   "reference",
+   "bjt",
+   "pvt",
+   "noise",
+   "monte-carlo",
+   "line-transient"
+  ],
+  "authors": [
+   "Jing Wang"
+  ],
+  "trials": {
+   "passed": 26,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 101.088
+  }
+ },
+ {
+  "id": "sky130-beta-multiplier-reference-pvt-mc",
+  "title": "Design a beta-multiplier current reference",
+  "description": "Implement a self-starting beta-multiplier current reference targeting 40 µA nominal output current and ≤ 8% compliance variation across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "beta-multiplier",
+   "current-reference",
+   "pvt",
+   "monte-carlo"
+  ],
+  "authors": [
+   "Jing Wang"
+  ],
+  "trials": {
+   "passed": 54,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 49.224
+  }
+ },
+ {
+  "id": "sky130-constant-gm-stable-gain-amplifier-pvt",
+  "title": "Design a gain-stable differential amplifier",
+  "description": "Implement a gain-stable differential amplifier targeting 3.0–4.0 V/V differential gain and ≥ 30 MHz bandwidth across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "differential-amplifier",
+   "pvt"
+  ],
+  "authors": [
+   "Kezhuo Liu"
+  ],
+  "trials": {
+   "passed": 41,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 40.964
+  }
+ },
+ {
+  "id": "sky130-low-power-oscillator-2mhz-pvt",
+  "title": "Design a 2 MHz Low-Power Oscillator",
+  "description": "Implement a low-power oscillator targeting 1.8–2.2 MHz output frequency and ≤ 20 µW nominal total power across the specified operating conditions.",
+  "category": "rf-clock-high-speed",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "oscillator",
+   "clock",
+   "low-power"
+  ],
+  "authors": [
+   "Ying Haochi"
+  ],
+  "trials": {
+   "passed": 37,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 71.898
+  }
+ },
+ {
+  "id": "sky130-unregulated-charge-pump-10mhz-pvt",
+  "title": "Design an Unregulated Charge Pump",
+  "description": "Implement an unregulated charge pump targeting 2.2–2.8 V enabled output and ≤ 5 mVpp output ripple across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "charge-pump",
+   "dc-dc",
+   "low-power"
+  ],
+  "authors": [
+   "Ying Haochi"
+  ],
+  "trials": {
+   "passed": 34,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 117.602
+  }
+ },
+ {
+  "id": "sky130-two-stage-miller-opamp-gain60-ugb200-pm60-noise50uv-pvt",
+  "title": "Design a two-stage Miller op amp",
+  "description": "Implement a two-stage Miller op amp targeting ≥ 60 dB open-loop gain and ≥ 200 MHz unity-gain bandwidth across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "two-stage",
+   "miller",
+   "op-amp",
+   "gain-60db",
+   "ugb-200mhz",
+   "pm-60deg",
+   "noise-50uv",
+   "pvt"
+  ],
+  "authors": [
+   "Yihan Wang"
+  ],
+  "trials": {
+   "passed": 28,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 35.856
+  }
+ },
+ {
+  "id": "sky130-nmos-pass-ldo-0p4v-pvt-mc",
+  "title": "Design a 0.4 V NMOS-Pass LDO Across PVT and Mismatch",
+  "description": "Implement an NMOS-pass LDO targeting 0.35–0.45 V regulated output and > 45° phase margin across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "ldo",
+   "nmos-pass",
+   "pvt",
+   "monte-carlo"
+  ],
+  "authors": [
+   "Lihan Cui"
+  ],
+  "trials": {
+   "passed": 53,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 15.034
+  }
+ },
+ {
+  "id": "sky130-regulated-charge-pump-10mhz-pvt",
+  "title": "Design a Regulated Charge Pump",
+  "description": "Implement a regulated charge pump targeting output within 5% of 1.3×VDD and ≤ 5 mVpp output ripple across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "charge-pump",
+   "regulated",
+   "dc-dc",
+   "low-power"
+  ],
+  "authors": [
+   "Ying Haochi"
+  ],
+  "trials": {
+   "passed": 32,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 61.186
+  }
+ },
+ {
+  "id": "sky130-switched-capacitor-2to1-converter-pvt",
+  "title": "Design a two-phase switched-capacitor 2:1 step-down converter",
+  "description": "Implement a two-phase switched-capacitor 2:1 converter targeting a 0.42–0.51 heavy-load conversion ratio and ≥ 70% heavy-load efficiency across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "power",
+   "switched-capacitor",
+   "dc-dc",
+   "pvt"
+  ],
+  "authors": [
+   "Jing Wang"
+  ],
+  "trials": {
+   "passed": 56,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 110.554
+  }
+ },
+ {
+  "id": "sky130-analog-input-mux-8to1-pvt",
+  "title": "Design an 8-to-1 Analog Input Mux",
+  "description": "Implement an 8-to-1 analog multiplexer targeting −0.001–0.001 dB selected-input gain and ≤ −80 dB unselected-input gain across the specified operating conditions.",
+  "category": "sampling-switched-capacitor",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "multiplexer",
+   "transmission-gate",
+   "low-power"
+  ],
+  "authors": [
+   "Ying Haochi"
+  ],
+  "trials": {
+   "passed": 53,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 11.378
+  }
+ },
+ {
+  "id": "sky130-high-psrr-bandgap-reference-pvt",
+  "title": "Design a High-PSRR Bandgap Reference",
+  "description": "Implement a high-PSRR bandgap reference targeting 1.05–1.35 V output and ≤ 50 ppm/°C temperature drift across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "bandgap",
+   "reference",
+   "psrr"
+  ],
+  "authors": [
+   "Ying Haochi"
+  ],
+  "trials": {
+   "passed": 29,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 7.574
+  }
+ },
+ {
+  "id": "sky130-bootstrap-sampler-fft",
+  "title": "Design a 100 MHz Differential Bootstrap Gate Driver",
+  "description": "Implement a differential bootstrap sampler gate driver targeting ≥ 72 dB sampled SDR and ≤ 500 µW supply power across the specified operating conditions.",
+  "category": "sampling-switched-capacitor",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "bootstrap",
+   "sampler",
+   "fft",
+   "pvt"
+  ],
+  "authors": [
+   "Siyu Huang"
+  ],
+  "trials": {
+   "passed": 38,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 35.057
+  }
+ },
+ {
+  "id": "sky130-cmos-switched-resistor-dac-5bit-pvt",
+  "title": "Design a 5-Bit Switched-Resistor DAC",
+  "description": "Implement a 5-bit switched-resistor DAC targeting ≤ 0.25 LSB INL and ≤ 0.25 LSB DNL across the specified operating conditions.",
+  "category": "data-converters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "resistor-dac",
+   "dac",
+   "inl",
+   "dnl",
+   "pvt"
+  ],
+  "authors": [
+   "Siyu Huang"
+  ],
+  "trials": {
+   "passed": 32,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 85.321
+  }
+ },
+ {
+  "id": "sky130-current-starved-ring-vco-pvt",
+  "title": "Design a Current-Starved Ring VCO",
+  "description": "Implement a current-starved ring VCO targeting ≥ 30 MHz/V minimum tuning gain and ≤ 200 µW supply power across the specified operating conditions.",
+  "category": "rf-clock-high-speed",
+  "keywords": [],
+  "authors": [
+   "Liqun Feng"
+  ],
+  "trials": {
+   "passed": 49,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 88.02
+  }
+ },
+ {
+  "id": "sky130-complementary-folded-cascode-ab-opamp-pvt",
+  "title": "Design a complementary rail-to-rail Class-AB operational amplifier",
+  "description": "Implement a complementary rail-to-rail Class-AB operational amplifier targeting ≥ 90 dB open-loop gain and ≥ 1 MHz unity-gain bandwidth across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "opamp",
+   "rail-to-rail",
+   "folded-cascode",
+   "class-ab",
+   "miller",
+   "pvt"
+  ],
+  "authors": [
+   "Siyu Huang"
+  ],
+  "trials": {
+   "passed": 12,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 159.27
+  }
+ },
+ {
+  "id": "sky130-fully-differential-ota-c-biquad-pvt",
+  "title": "Design a Fully Differential OTA-C Biquad",
+  "description": "Implement a fully differential OTA-C biquad targeting a 1.80–2.20 MHz center frequency and a 0.65–0.75 quality factor across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "gm-c",
+   "biquad",
+   "filter",
+   "cmfb",
+   "pvt"
+  ],
+  "authors": [
+   "Siyu Huang"
+  ],
+  "trials": {
+   "passed": 27,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 13.281
+  }
+ },
+ {
+  "id": "sky130-flash-adc-4bit-50msps",
+  "title": "Design a 4-bit 50 MS/s flash ADC",
+  "description": "Implement a fully differential flash ADC targeting 4-bit resolution and 50 MS/s sample rate across the specified operating conditions.",
+  "category": "data-converters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "adc",
+   "flash"
+  ],
+  "authors": [
+   "Kezhuo Liu"
+  ],
+  "trials": {
+   "passed": 50,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 200.279
+  }
+ },
+ {
+  "id": "sky130-fct-residue-amplifier-900msps",
+  "title": "Design a 900 MS/s Fully Differential Floating Charge Transfer (FCT) Residue Amplifier",
+  "description": "Implement a fully differential floating charge-transfer residue amplifier targeting 5.5–6.5 V/V sampled gain and ≥ 60 dB SFDR across the specified operating conditions.",
+  "category": "sampling-switched-capacitor",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "sampled-data",
+   "fct",
+   "residue-amplifier",
+   "fft"
+  ],
+  "authors": [
+   "Siyu Huang"
+  ],
+  "trials": {
+   "passed": 13,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 148.263
+  }
+ },
+ {
+  "id": "sky130-ahuja-compensated-two-stage-load-range-pvt",
+  "title": "Design a two-stage OTA for a 10:1 capacitive-load range",
+  "description": "Implement an Ahuja-compensated two-stage OTA targeting ≥ 58 dB low-frequency gain and ≥ 6.5 MHz unity-gain bandwidth across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "two-stage",
+   "ahuja-compensation",
+   "load-range",
+   "settling",
+   "pvt"
+  ],
+  "authors": [
+   "Yihan Wang"
+  ],
+  "trials": {
+   "passed": 35,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 23.943
+  }
+ },
+ {
+  "id": "sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch",
+  "title": "Design a 2.4 GHz Gilbert-Cell Mixer",
+  "description": "Implement a 2.4 GHz Gilbert-cell mixer targeting ≥ 3 dB conversion gain and ≤ −45 dB LO-to-IF isolation across the specified operating conditions.",
+  "category": "rf-clock-high-speed",
+  "keywords": [],
+  "authors": [
+   "Zhishuai Zhang"
+  ],
+  "trials": {
+   "passed": 30,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 13.632
+  }
+ },
+ {
+  "id": "sky130-bottom-plate-sampler-pvt",
+  "title": "Design a Differential Bottom-Plate Sampler",
+  "description": "Implement a differential bottom-plate sample-and-hold targeting ≤ 5 mV acquisition error and ≥ 80 dB sampled SFDR across the specified operating conditions.",
+  "category": "sampling-switched-capacitor",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "bottom-plate",
+   "sampler",
+   "sample-and-hold",
+   "sfdr",
+   "pvt"
+  ],
+  "authors": [
+   "Siqi Liu"
+  ],
+  "trials": {
+   "passed": 22,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 78.316
+  }
+ },
+ {
+  "id": "sky130-cml-tx-driver-28g-nrz-pvt",
+  "title": "Design a 28 Gb/s NRZ CML Transmitter Driver",
+  "description": "Implement a fully differential CML transmitter driver targeting 28 Gb/s NRZ operation and ≥ 320 mV eye height across the specified operating conditions.",
+  "category": "rf-clock-high-speed",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "cml",
+   "serdes",
+   "tx-driver",
+   "t-coil",
+   "28g",
+   "nrz",
+   "pvt"
+  ],
+  "authors": [
+   "Mingtao Zhan"
+  ],
+  "trials": {
+   "passed": 44,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 10.982
+  }
+ },
+ {
+  "id": "sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc",
+  "title": "Design a Fully Differential Sampling-Feedback OTA: Gain 1, 40 ns Settling, 300 uVrms Noise",
+  "description": "Implement a fully differential gain-1 sampling-feedback OTA targeting ≤ 40 ns settling time and ≤ 300 µVrms output noise across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "fully-differential",
+   "ota",
+   "sampling-feedback",
+   "cmfb",
+   "pvt",
+   "monte-carlo"
+  ],
+  "authors": [
+   "Xiyu He"
+  ],
+  "trials": {
+   "passed": 11,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 104.809
+  }
+ },
+ {
+  "id": "sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc",
+  "title": "Design a Fully Differential Sampling-Feedback OTA: Gain 8, 10 ns Settling, 1 mVrms Noise",
+  "description": "Implement a fully differential gain-8 sampling-feedback OTA targeting ≤ 10 ns settling time and ≤ 1 mVrms output noise across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "fully-differential",
+   "ota",
+   "sampling-feedback",
+   "cmfb",
+   "pvt",
+   "monte-carlo"
+  ],
+  "authors": [
+   "Xiyu He"
+  ],
+  "trials": {
+   "passed": 9,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 129.093
+  }
+ },
+ {
+  "id": "sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt",
+  "title": "Design a Current-Biased Fully Differential Two-Stage Op Amp: Gain 60 dB, UGB 100 MHz, PM 60 deg, Noise 50 uVrms",
+  "description": "Implement a fully differential two-stage Miller op amp targeting ≥ 60 dB differential gain and ≥ 100 MHz unity-gain bandwidth across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "design",
+   "fully-differential",
+   "two-stage",
+   "opamp",
+   "cmfb",
+   "pvt"
+  ],
+  "authors": [
+   "Xiyu He"
+  ],
+  "trials": {
+   "passed": 20,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 33.758
+  }
+ },
+ {
+  "id": "sky130-telescopic-cascode-ota-pvt-fix",
+  "title": "Design a telescopic-cascode fully differential OTA",
+  "description": "Implement a fully differential telescopic-cascode OTA targeting > 60 dB differential gain and > 50 MHz unity-gain bandwidth across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "fix",
+   "fully-differential",
+   "telescopic-cascode",
+   "ota",
+   "cmfb",
+   "sizing",
+   "pvt"
+  ],
+  "authors": [
+   "Yilin Xu"
+  ],
+  "trials": {
+   "passed": 31,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 19.389
+  }
+ },
+ {
+  "id": "sky130-three-stage-nested-miller-ota-pvt",
+  "title": "Design a three-stage nested-Miller amplifier for 200 pF loads",
+  "description": "Implement a three-stage nested-Miller amplifier targeting ≥ 110 dB low-frequency gain and ≥ 0.4 MHz unity-gain bandwidth across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "three-stage",
+   "nested-miller",
+   "large-load",
+   "micro-power",
+   "pvt"
+  ],
+  "authors": [
+   "Xiyu He"
+  ],
+  "trials": {
+   "passed": 28,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 137.105
+  }
+ },
+ {
+  "id": "sky130-capless-ldo-1v0-20ma-pvt",
+  "title": "Design a Fully-Integrated External-Capacitor-Free LDO",
+  "description": "Implement a fully integrated external-capacitor-free LDO targeting 1.0 V output within ±30 mV and ≤ 100 µA no-load current across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "ldo",
+   "external-capacitor-free",
+   "fully-integrated",
+   "psr",
+   "load-step",
+   "pvt"
+  ],
+  "authors": [
+   "Yihan Wang"
+  ],
+  "trials": {
+   "passed": 24,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 15.441
+  }
+ },
+ {
+  "id": "sky130-low-power-line-driver-pvt",
+  "title": "Design a low-power line driver",
+  "description": "Implement a low-power line driver targeting ≥ 0.5 MHz unity-gain bandwidth and ≤ 3% THD at 20 kHz across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "low-power",
+   "line-driver",
+   "thd",
+   "pvt"
+  ],
+  "authors": [
+   "Yihan Wang"
+  ],
+  "trials": {
+   "passed": 23,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 88.73
+  }
+ },
+ {
+  "id": "sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40",
+  "title": "Design a First-Order 1-bit Delta-Sigma ADC with 40 dB SNDR",
+  "description": "Implement a first-order 1-bit delta-sigma ADC targeting ≥ 40 dB SNDR at OSR 32 and ≥ 6 dB/octave noise-shaping improvement across the specified operating conditions.",
+  "category": "data-converters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "sigma-delta",
+   "noise-shaping",
+   "adc",
+   "switched-capacitor",
+   "1-bit",
+   "strongarm"
+  ],
+  "authors": [
+   "Kezhuo Liu"
+  ],
+  "trials": {
+   "passed": 31,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 39.367
+  }
+ },
+ {
+  "id": "sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt",
+  "title": "Design a Current-Biased Two-Stage Miller Op Amp: Gain 70 dB, UGB 20 MHz, PM 60 deg, Noise 50 uVrms",
+  "description": "Implement a current-biased two-stage Miller op amp targeting ≥ 70 dB loop gain and ≥ 20 MHz unity-gain bandwidth across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "op-amp",
+   "two-stage",
+   "miller",
+   "gain-70db",
+   "ugb-20mhz",
+   "pm-60deg",
+   "noise-50uv",
+   "pvt"
+  ],
+  "authors": [
+   "Yihan Wang"
+  ],
+  "trials": {
+   "passed": 27,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 37.112
+  }
+ },
+ {
+  "id": "sky130-sar-adc-6bit-async",
+  "title": "Design a 6-Bit 100 MS/s Asynchronous SAR ADC",
+  "description": "Implement a fully differential asynchronous SAR ADC targeting 6-bit resolution and 100 MS/s sample rate across the specified operating conditions.",
+  "category": "data-converters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "adc",
+   "sar",
+   "asynchronous"
+  ],
+  "authors": [
+   "Xiyu He"
+  ],
+  "trials": {
+   "passed": 12,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 165.983
+  }
+ },
+ {
+  "id": "sky130-inductive-lna-2p4ghz-gain12-nf2-pvt",
+  "title": "Design a 2.4 GHz Inductive-Degeneration LNA: Gain 12 dB, NF 2 dB",
+  "description": "Implement an inductively degenerated 2.4 GHz LNA targeting ≥ 12 dB transducer gain and ≤ 2.0 dB noise figure across the specified operating conditions.",
+  "category": "rf-clock-high-speed",
+  "keywords": [],
+  "authors": [
+   "Yan Xu"
+  ],
+  "trials": {
+   "passed": 32,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 15.433
+  }
+ },
+ {
+  "id": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+  "title": "Design a current-biased five-transistor OTA",
+  "description": "Implement a current-biased five-transistor OTA targeting ≥ 40 dB loop gain and ≥ 100 MHz unity-gain bandwidth across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [],
+  "authors": [
+   "Suyang Song"
+  ],
+  "trials": {
+   "passed": 46,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 7.674
+  }
+ },
+ {
+  "id": "sky130-transistor-divide-by-2",
+  "title": "Design a 1 GHz divide-by-two flip-flop",
+  "description": "Implement a transistor-level divide-by-two flip-flop targeting 500 MHz output frequency and ≤ 400 ps rising clock-to-output delay across the specified operating conditions.",
+  "category": "rf-clock-high-speed",
+  "keywords": [],
+  "authors": [
+   "Xiongjie Zhang"
+  ],
+  "trials": {
+   "passed": 62,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 1.14
+  }
+ },
+ {
+  "id": "sky130-flash-adc-3bit-pvt",
+  "title": "Design a 3-bit 50 MS/s flash ADC",
+  "description": "Implement a 3-bit flash ADC targeting ≤ 0.3 LSB static linearity error and 0 dynamic sample errors across the specified operating conditions.",
+  "category": "data-converters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "adc",
+   "flash",
+   "comparator",
+   "encoder",
+   "pvt"
+  ],
+  "authors": [
+   "Shixuan Wang"
+  ],
+  "trials": {
+   "passed": 41,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 56.367
+  }
+ },
+ {
+  "id": "sky130-pll-charge-pump-pvt",
+  "title": "Design a PLL Charge Pump: 50 uA Matched UP/DN Current",
+  "description": "Implement a PLL charge pump targeting ≤ 5% branch-current error and ≤ 2% UP/DN mismatch across the specified operating conditions.",
+  "category": "power-references",
+  "keywords": [],
+  "authors": [
+   "Kezhuo Liu"
+  ],
+  "trials": {
+   "passed": 31,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 75.801
+  }
+ },
+ {
+  "id": "sky130-sar-adc-4bit-async",
+  "title": "Design a 4-Bit 100 MS/s Asynchronous SAR ADC",
+  "description": "Implement a 4-bit asynchronous SAR ADC targeting > 24 dB SNDR and > 3.90-bit normalized ENOB across the specified operating conditions.",
+  "category": "data-converters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "adc",
+   "sar",
+   "asynchronous"
+  ],
+  "authors": [
+   "Xiyu He"
+  ],
+  "trials": {
+   "passed": 19,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 140.1
+  }
+ },
+ {
+  "id": "sky130-lc-vco-2ghz-pvt",
+  "title": "Design a 2 GHz Differential LC VCO",
+  "description": "Implement a differential LC VCO targeting ≥ 1.25 tuning ratio and ≤ 2.4 mW average power across the specified operating conditions.",
+  "category": "rf-clock-high-speed",
+  "keywords": [
+   "analog",
+   "rf",
+   "ngspice",
+   "sky130",
+   "vco",
+   "lc-oscillator",
+   "varactor",
+   "pvt"
+  ],
+  "authors": [
+   "Yan Xu"
+  ],
+  "trials": {
+   "passed": 20,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 58
+  }
+ },
+ {
+  "id": "sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt",
+  "title": "Design a Gain-Boosted Folded-Cascode OTA: Gain 130 dB, UGB 200 MHz, PM 60 deg, Noise 50 uVrms",
+  "description": "Implement a gain-boosted folded-cascode OTA targeting ≥ 130 dB DC gain and ≥ 200 MHz UGB across the specified operating conditions.",
+  "category": "amplifiers-filters",
+  "keywords": [
+   "analog",
+   "ngspice",
+   "sky130",
+   "folded-cascode",
+   "ota",
+   "gain-130db",
+   "ugb-200mhz",
+   "pm-60deg",
+   "noise-50uv",
+   "pvt"
+  ],
+  "authors": [
+   "Yilin Xu"
+  ],
+  "trials": {
+   "passed": 18,
+   "total": 72
+  },
+  "models": 24,
+  "reference": {
+   "status": "passed",
+   "durationSeconds": 30.733
+  }
+ }
+]
