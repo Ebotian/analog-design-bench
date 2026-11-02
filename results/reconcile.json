@@ -14,6 +14,36 @@
     "values_matched_by_printed_precision": 1,
     "values_matched": 452,
     "status_matches": 452,
+    "reference_ngspice_runs": 2297,
+    "local_ngspice_runs": 2429,
+    "sim_difference_count": 5,
+    "sim_differences": [
+      {
+        "task_id": "sky130-buf-ppsf-bs-gain1-sfdr90",
+        "reference": null,
+        "local": 20
+      },
+      {
+        "task_id": "sky130-flash-adc-4bit-50msps",
+        "reference": null,
+        "local": 3
+      },
+      {
+        "task_id": "sky130-fully-differential-ota-c-biquad-pvt",
+        "reference": 62,
+        "local": 63
+      },
+      {
+        "task_id": "sky130-nmos-pass-ldo-0p4v-pvt-mc",
+        "reference": null,
+        "local": 104
+      },
+      {
+        "task_id": "sky130-ring-amp-3stage-gain8-400uw",
+        "reference": null,
+        "local": 4
+      }
+    ],
     "mismatch_count": 0,
     "run_level_mismatch_count": 0,
     "mismatches": [],
@@ -26,7 +56,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 8,
-        "tests_total": 8
+        "tests_total": 8,
+        "ngspice_runs": 21
       },
       "run": {
         "status": "passed",
@@ -34,7 +65,7 @@
         "tests_passed": 8,
         "tests_total": 8,
         "ngspice_runs": 21,
-        "wall_s": 30.854
+        "wall_s": 16.648
       },
       "counts": {
         "reference_metrics": 8,
@@ -186,15 +217,16 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 5,
-        "tests_total": 5
+        "tests_total": 5,
+        "ngspice_runs": 15
       },
       "run": {
         "status": "passed",
         "reward": 1.0,
         "tests_passed": 5,
         "tests_total": 5,
-        "ngspice_runs": 0,
-        "wall_s": 10.843
+        "ngspice_runs": 15,
+        "wall_s": 13.553
       },
       "counts": {
         "reference_metrics": 6,
@@ -314,7 +346,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 12,
-        "tests_total": 12
+        "tests_total": 12,
+        "ngspice_runs": 189
       },
       "run": {
         "status": "passed",
@@ -322,7 +355,7 @@
         "tests_passed": 12,
         "tests_total": 12,
         "ngspice_runs": 189,
-        "wall_s": 98.967
+        "wall_s": 73.726
       },
       "counts": {
         "reference_metrics": 12,
@@ -538,7 +571,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 12,
-        "tests_total": 12
+        "tests_total": 12,
+        "ngspice_runs": 95
       },
       "run": {
         "status": "passed",
@@ -546,7 +580,7 @@
         "tests_passed": 12,
         "tests_total": 12,
         "ngspice_runs": 95,
-        "wall_s": 47.969
+        "wall_s": 35.082
       },
       "counts": {
         "reference_metrics": 12,
@@ -762,15 +796,16 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 24,
-        "tests_total": 24
+        "tests_total": 24,
+        "ngspice_runs": 3
       },
       "run": {
         "status": "passed",
         "reward": 1.0,
         "tests_passed": 24,
         "tests_total": 24,
-        "ngspice_runs": 0,
-        "wall_s": 307.649
+        "ngspice_runs": 3,
+        "wall_s": 249.348
       },
       "counts": {
         "reference_metrics": 24,
@@ -1178,15 +1213,16 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 5,
-        "tests_total": 5
+        "tests_total": 5,
+        "ngspice_runs": 22
       },
       "run": {
         "status": "passed",
         "reward": 1.0,
         "tests_passed": 5,
         "tests_total": 5,
-        "ngspice_runs": 0,
-        "wall_s": 32.142
+        "ngspice_runs": 22,
+        "wall_s": 24.367
       },
       "counts": {
         "reference_metrics": 5,
@@ -1290,7 +1326,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 6,
-        "tests_total": 6
+        "tests_total": 6,
+        "ngspice_runs": 14
       },
       "run": {
         "status": "passed",
@@ -1298,7 +1335,7 @@
         "tests_passed": 6,
         "tests_total": 6,
         "ngspice_runs": 14,
-        "wall_s": 31.412
+        "wall_s": 34.522
       },
       "counts": {
         "reference_metrics": 6,
@@ -1418,15 +1455,16 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 4,
-        "tests_total": 4
+        "tests_total": 4,
+        "ngspice_runs": null
       },
       "run": {
         "status": "passed",
         "reward": 1.0,
         "tests_passed": 4,
         "tests_total": 4,
-        "ngspice_runs": 0,
-        "wall_s": 54.059
+        "ngspice_runs": 20,
+        "wall_s": 43.983
       },
       "counts": {
         "reference_metrics": 4,
@@ -1514,7 +1552,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 8,
-        "tests_total": 8
+        "tests_total": 8,
+        "ngspice_runs": 20
       },
       "run": {
         "status": "passed",
@@ -1522,7 +1561,7 @@
         "tests_passed": 8,
         "tests_total": 8,
         "ngspice_runs": 20,
-        "wall_s": 13.407
+        "wall_s": 9.537
       },
       "counts": {
         "reference_metrics": 8,
@@ -1674,15 +1713,16 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 5,
-        "tests_total": 5
+        "tests_total": 5,
+        "ngspice_runs": 1
       },
       "run": {
         "status": "passed",
         "reward": 1.0,
         "tests_passed": 5,
         "tests_total": 5,
-        "ngspice_runs": 0,
-        "wall_s": 182.649
+        "ngspice_runs": 1,
+        "wall_s": 149.182
       },
       "counts": {
         "reference_metrics": 5,
@@ -1786,7 +1826,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 2,
-        "tests_total": 2
+        "tests_total": 2,
+        "ngspice_runs": 25
       },
       "run": {
         "status": "passed",
@@ -1794,7 +1835,7 @@
         "tests_passed": 2,
         "tests_total": 2,
         "ngspice_runs": 25,
-        "wall_s": 15.361
+        "wall_s": 11.785
       },
       "counts": {
         "reference_metrics": 2,
@@ -1850,15 +1891,16 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 23,
-        "tests_total": 23
+        "tests_total": 23,
+        "ngspice_runs": 12
       },
       "run": {
         "status": "passed",
         "reward": 1.0,
         "tests_passed": 23,
         "tests_total": 23,
-        "ngspice_runs": 0,
-        "wall_s": 9.395
+        "ngspice_runs": 12,
+        "wall_s": 6.685
       },
       "counts": {
         "reference_metrics": 23,
@@ -2250,15 +2292,16 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 8,
-        "tests_total": 8
+        "tests_total": 8,
+        "ngspice_runs": 41
       },
       "run": {
         "status": "passed",
         "reward": 1.0,
         "tests_passed": 8,
         "tests_total": 8,
-        "ngspice_runs": 0,
-        "wall_s": 78.473
+        "ngspice_runs": 41,
+        "wall_s": 59.414
       },
       "counts": {
         "reference_metrics": 8,
@@ -2410,15 +2453,16 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 14,
-        "tests_total": 14
+        "tests_total": 14,
+        "ngspice_runs": 212
       },
       "run": {
         "status": "passed",
         "reward": 1.0,
         "tests_passed": 14,
         "tests_total": 14,
-        "ngspice_runs": 0,
-        "wall_s": 139.564
+        "ngspice_runs": 212,
+        "wall_s": 103.059
       },
       "counts": {
         "reference_metrics": 14,
@@ -2666,7 +2710,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 9,
-        "tests_total": 9
+        "tests_total": 9,
+        "ngspice_runs": 81
       },
       "run": {
         "status": "passed",
@@ -2674,7 +2719,7 @@
         "tests_passed": 9,
         "tests_total": 9,
         "ngspice_runs": 81,
-        "wall_s": 29.846
+        "wall_s": 28.412
       },
       "counts": {
         "reference_metrics": 9,
@@ -2842,7 +2887,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 9,
-        "tests_total": 9
+        "tests_total": 9,
+        "ngspice_runs": 30
       },
       "run": {
         "status": "passed",
@@ -2850,7 +2896,7 @@
         "tests_passed": 9,
         "tests_total": 9,
         "ngspice_runs": 30,
-        "wall_s": 67.358
+        "wall_s": 68.521
       },
       "counts": {
         "reference_metrics": 10,
@@ -3034,7 +3080,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 9,
-        "tests_total": 9
+        "tests_total": 9,
+        "ngspice_runs": 3
       },
       "run": {
         "status": "passed",
@@ -3042,7 +3089,7 @@
         "tests_passed": 9,
         "tests_total": 9,
         "ngspice_runs": 3,
-        "wall_s": 30.017
+        "wall_s": 29.461
       },
       "counts": {
         "reference_metrics": 9,
@@ -3210,7 +3257,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 13,
-        "tests_total": 13
+        "tests_total": 13,
+        "ngspice_runs": 10
       },
       "run": {
         "status": "passed",
@@ -3218,7 +3266,7 @@
         "tests_passed": 13,
         "tests_total": 13,
         "ngspice_runs": 10,
-        "wall_s": 112.648
+        "wall_s": 113.195
       },
       "counts": {
         "reference_metrics": 21,
@@ -3578,7 +3626,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 15,
-        "tests_total": 15
+        "tests_total": 15,
+        "ngspice_runs": 114
       },
       "run": {
         "status": "passed",
@@ -3586,7 +3635,7 @@
         "tests_passed": 15,
         "tests_total": 15,
         "ngspice_runs": 114,
-        "wall_s": 65.327
+        "wall_s": 64.264
       },
       "counts": {
         "reference_metrics": 15,
@@ -3850,7 +3899,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 15,
-        "tests_total": 15
+        "tests_total": 15,
+        "ngspice_runs": 143
       },
       "run": {
         "status": "passed",
@@ -3858,7 +3908,7 @@
         "tests_passed": 15,
         "tests_total": 15,
         "ngspice_runs": 143,
-        "wall_s": 85.451
+        "wall_s": 86.79
       },
       "counts": {
         "reference_metrics": 15,
@@ -4122,7 +4172,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 11,
-        "tests_total": 11
+        "tests_total": 11,
+        "ngspice_runs": 36
       },
       "run": {
         "status": "passed",
@@ -4130,7 +4181,7 @@
         "tests_passed": 11,
         "tests_total": 11,
         "ngspice_runs": 36,
-        "wall_s": 21.21
+        "wall_s": 21.198
       },
       "counts": {
         "reference_metrics": 11,
@@ -4330,7 +4381,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 13,
-        "tests_total": 13
+        "tests_total": 13,
+        "ngspice_runs": 8
       },
       "run": {
         "status": "passed",
@@ -4338,7 +4390,7 @@
         "tests_passed": 13,
         "tests_total": 13,
         "ngspice_runs": 8,
-        "wall_s": 50.407
+        "wall_s": 41.89
       },
       "counts": {
         "reference_metrics": 13,
@@ -4570,15 +4622,16 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 6,
-        "tests_total": 6
+        "tests_total": 6,
+        "ngspice_runs": null
       },
       "run": {
         "status": "passed",
         "reward": 1.0,
         "tests_passed": 6,
         "tests_total": 6,
-        "ngspice_runs": 0,
-        "wall_s": 133.907
+        "ngspice_runs": 3,
+        "wall_s": 135.407
       },
       "counts": {
         "reference_metrics": 6,
@@ -4698,7 +4751,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 8,
-        "tests_total": 8
+        "tests_total": 8,
+        "ngspice_runs": 60
       },
       "run": {
         "status": "passed",
@@ -4706,7 +4760,7 @@
         "tests_passed": 8,
         "tests_total": 8,
         "ngspice_runs": 60,
-        "wall_s": 30.921
+        "wall_s": 31.233
       },
       "counts": {
         "reference_metrics": 11,
@@ -4906,15 +4960,16 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 16,
-        "tests_total": 16
+        "tests_total": 16,
+        "ngspice_runs": 62
       },
       "run": {
         "status": "passed",
         "reward": 1.0,
         "tests_passed": 16,
         "tests_total": 16,
-        "ngspice_runs": 62,
-        "wall_s": 18.155
+        "ngspice_runs": 63,
+        "wall_s": 17.607
       },
       "counts": {
         "reference_metrics": 16,
@@ -5194,7 +5249,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 7,
-        "tests_total": 7
+        "tests_total": 7,
+        "ngspice_runs": 23
       },
       "run": {
         "status": "passed",
@@ -5202,7 +5258,7 @@
         "tests_passed": 7,
         "tests_total": 7,
         "ngspice_runs": 23,
-        "wall_s": 9.99
+        "wall_s": 10.194
       },
       "counts": {
         "reference_metrics": 7,
@@ -5338,7 +5394,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 4,
-        "tests_total": 4
+        "tests_total": 4,
+        "ngspice_runs": 30
       },
       "run": {
         "status": "passed",
@@ -5346,7 +5403,7 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 30,
-        "wall_s": 12.048
+        "wall_s": 12.351
       },
       "counts": {
         "reference_metrics": 5,
@@ -5450,7 +5507,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 4,
-        "tests_total": 4
+        "tests_total": 4,
+        "ngspice_runs": 10
       },
       "run": {
         "status": "passed",
@@ -5458,7 +5516,7 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 10,
-        "wall_s": 3.732
+        "wall_s": 3.734
       },
       "counts": {
         "reference_metrics": 5,
@@ -5562,7 +5620,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 5,
-        "tests_total": 5
+        "tests_total": 5,
+        "ngspice_runs": 12
       },
       "run": {
         "status": "passed",
@@ -5570,7 +5629,7 @@
         "tests_passed": 5,
         "tests_total": 5,
         "ngspice_runs": 12,
-        "wall_s": 5.385
+        "wall_s": 5.431
       },
       "counts": {
         "reference_metrics": 6,
@@ -5690,7 +5749,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 7,
-        "tests_total": 7
+        "tests_total": 7,
+        "ngspice_runs": 27
       },
       "run": {
         "status": "passed",
@@ -5698,7 +5758,7 @@
         "tests_passed": 7,
         "tests_total": 7,
         "ngspice_runs": 27,
-        "wall_s": 11.213
+        "wall_s": 10.846
       },
       "counts": {
         "reference_metrics": 7,
@@ -5834,7 +5894,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 9,
-        "tests_total": 9
+        "tests_total": 9,
+        "ngspice_runs": 27
       },
       "run": {
         "status": "passed",
@@ -5842,7 +5903,7 @@
         "tests_passed": 9,
         "tests_total": 9,
         "ngspice_runs": 27,
-        "wall_s": 53.565
+        "wall_s": 52.352
       },
       "counts": {
         "reference_metrics": 9,
@@ -6010,7 +6071,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 9,
-        "tests_total": 9
+        "tests_total": 9,
+        "ngspice_runs": 161
       },
       "run": {
         "status": "passed",
@@ -6018,7 +6080,7 @@
         "tests_passed": 9,
         "tests_total": 9,
         "ngspice_runs": 161,
-        "wall_s": 36.889
+        "wall_s": 36.078
       },
       "counts": {
         "reference_metrics": 9,
@@ -6186,7 +6248,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 8,
-        "tests_total": 8
+        "tests_total": 8,
+        "ngspice_runs": 135
       },
       "run": {
         "status": "passed",
@@ -6194,7 +6257,7 @@
         "tests_passed": 8,
         "tests_total": 8,
         "ngspice_runs": 135,
-        "wall_s": 67.986
+        "wall_s": 66.304
       },
       "counts": {
         "reference_metrics": 8,
@@ -6346,7 +6409,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 3,
-        "tests_total": 3
+        "tests_total": 3,
+        "ngspice_runs": 5
       },
       "run": {
         "status": "passed",
@@ -6354,7 +6418,7 @@
         "tests_passed": 3,
         "tests_total": 3,
         "ngspice_runs": 5,
-        "wall_s": 91.429
+        "wall_s": 101.786
       },
       "counts": {
         "reference_metrics": 5,
@@ -6458,15 +6522,16 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 7,
-        "tests_total": 7
+        "tests_total": 7,
+        "ngspice_runs": null
       },
       "run": {
         "status": "passed",
         "reward": 1.0,
         "tests_passed": 7,
         "tests_total": 7,
-        "ngspice_runs": 0,
-        "wall_s": 22.423
+        "ngspice_runs": 104,
+        "wall_s": 25.626
       },
       "counts": {
         "reference_metrics": 7,
@@ -6602,7 +6667,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 7,
-        "tests_total": 7
+        "tests_total": 7,
+        "ngspice_runs": 13
       },
       "run": {
         "status": "passed",
@@ -6610,7 +6676,7 @@
         "tests_passed": 7,
         "tests_total": 7,
         "ngspice_runs": 13,
-        "wall_s": 6.093
+        "wall_s": 6.167
       },
       "counts": {
         "reference_metrics": 7,
@@ -6746,7 +6812,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 6,
-        "tests_total": 6
+        "tests_total": 6,
+        "ngspice_runs": 50
       },
       "run": {
         "status": "passed",
@@ -6754,7 +6821,7 @@
         "tests_passed": 6,
         "tests_total": 6,
         "ngspice_runs": 50,
-        "wall_s": 32.897
+        "wall_s": 33.897
       },
       "counts": {
         "reference_metrics": 6,
@@ -6874,7 +6941,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 11,
-        "tests_total": 11
+        "tests_total": 11,
+        "ngspice_runs": 6
       },
       "run": {
         "status": "passed",
@@ -6882,7 +6950,7 @@
         "tests_passed": 11,
         "tests_total": 11,
         "ngspice_runs": 6,
-        "wall_s": 2.943
+        "wall_s": 3.136
       },
       "counts": {
         "reference_metrics": 12,
@@ -7098,7 +7166,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 4,
-        "tests_total": 4
+        "tests_total": 4,
+        "ngspice_runs": 13
       },
       "run": {
         "status": "passed",
@@ -7106,7 +7175,7 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 13,
-        "wall_s": 80.286
+        "wall_s": 85.283
       },
       "counts": {
         "reference_metrics": 5,
@@ -7126,9 +7195,9 @@
           "id": "loaded_output_voltage_minimum",
           "specification": "loaded output voltage \u2265 0.95 \u00d7 1.3 VDD",
           "reference_value": 1.0039126305792971,
-          "current_value": 1.0,
-          "current_value_source": "closest-number:1uA",
-          "relative_error": 0.003897382,
+          "current_value": 1.0039126305792971,
+          "current_value_source": "derived:VOUT/(1.3*VDD):VOUT=2.11424V at ff/1.62V",
+          "relative_error": 0.0,
           "value_match": true,
           "value_match_basis": "tolerance",
           "reference_status": "pass",
@@ -7142,9 +7211,9 @@
           "id": "loaded_output_voltage_maximum",
           "specification": "loaded output voltage \u2264 1.05 \u00d7 1.3 VDD",
           "reference_value": 1.0039126305792971,
-          "current_value": 1.0,
-          "current_value_source": "closest-number:1uA",
-          "relative_error": 0.003897382,
+          "current_value": 1.0039126305792971,
+          "current_value_source": "derived:VOUT/(1.3*VDD):VOUT=2.11424V at ff/1.62V",
+          "relative_error": 0.0,
           "value_match": true,
           "value_match_basis": "tolerance",
           "reference_status": "pass",
@@ -7210,15 +7279,16 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 7,
-        "tests_total": 7
+        "tests_total": 7,
+        "ngspice_runs": null
       },
       "run": {
         "status": "passed",
         "reward": 1.0,
         "tests_passed": 7,
         "tests_total": 7,
-        "ngspice_runs": 0,
-        "wall_s": 2.652
+        "ngspice_runs": 4,
+        "wall_s": 2.646
       },
       "counts": {
         "reference_metrics": 7,
@@ -7354,7 +7424,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 4,
-        "tests_total": 4
+        "tests_total": 4,
+        "ngspice_runs": 6
       },
       "run": {
         "status": "passed",
@@ -7362,7 +7433,7 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 6,
-        "wall_s": 203.737
+        "wall_s": 189.043
       },
       "counts": {
         "reference_metrics": 4,
@@ -7450,7 +7521,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 4,
-        "tests_total": 4
+        "tests_total": 4,
+        "ngspice_runs": 12
       },
       "run": {
         "status": "passed",
@@ -7458,7 +7530,7 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 12,
-        "wall_s": 304.056
+        "wall_s": 295.915
       },
       "counts": {
         "reference_metrics": 4,
@@ -7546,7 +7618,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 9,
-        "tests_total": 9
+        "tests_total": 9,
+        "ngspice_runs": 94
       },
       "run": {
         "status": "passed",
@@ -7554,7 +7627,7 @@
         "tests_passed": 9,
         "tests_total": 9,
         "ngspice_runs": 94,
-        "wall_s": 92.548
+        "wall_s": 88.322
       },
       "counts": {
         "reference_metrics": 9,
@@ -7722,7 +7795,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 8,
-        "tests_total": 8
+        "tests_total": 8,
+        "ngspice_runs": 30
       },
       "run": {
         "status": "passed",
@@ -7730,7 +7804,7 @@
         "tests_passed": 8,
         "tests_total": 8,
         "ngspice_runs": 30,
-        "wall_s": 16.021
+        "wall_s": 14.57
       },
       "counts": {
         "reference_metrics": 8,
@@ -7882,7 +7956,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 11,
-        "tests_total": 11
+        "tests_total": 11,
+        "ngspice_runs": 225
       },
       "run": {
         "status": "passed",
@@ -7890,7 +7965,7 @@
         "tests_passed": 11,
         "tests_total": 11,
         "ngspice_runs": 225,
-        "wall_s": 112.036
+        "wall_s": 106.886
       },
       "counts": {
         "reference_metrics": 11,
@@ -8090,7 +8165,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 6,
-        "tests_total": 6
+        "tests_total": 6,
+        "ngspice_runs": 45
       },
       "run": {
         "status": "passed",
@@ -8098,7 +8174,7 @@
         "tests_passed": 6,
         "tests_total": 6,
         "ngspice_runs": 45,
-        "wall_s": 14.647
+        "wall_s": 12.218
       },
       "counts": {
         "reference_metrics": 6,
@@ -8218,7 +8294,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 4,
-        "tests_total": 4
+        "tests_total": 4,
+        "ngspice_runs": 2
       },
       "run": {
         "status": "passed",
@@ -8226,7 +8303,7 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 2,
-        "wall_s": 1.414
+        "wall_s": 1.306
       },
       "counts": {
         "reference_metrics": 5,
@@ -8330,7 +8407,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 11,
-        "tests_total": 11
+        "tests_total": 11,
+        "ngspice_runs": 69
       },
       "run": {
         "status": "passed",
@@ -8338,7 +8416,7 @@
         "tests_passed": 11,
         "tests_total": 11,
         "ngspice_runs": 69,
-        "wall_s": 30.394
+        "wall_s": 28.9
       },
       "counts": {
         "reference_metrics": 11,
@@ -8538,7 +8616,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 11,
-        "tests_total": 11
+        "tests_total": 11,
+        "ngspice_runs": 69
       },
       "run": {
         "status": "passed",
@@ -8546,7 +8625,7 @@
         "tests_passed": 11,
         "tests_total": 11,
         "ngspice_runs": 69,
-        "wall_s": 27.43
+        "wall_s": 27.32
       },
       "counts": {
         "reference_metrics": 11,
@@ -8746,7 +8825,8 @@
         "status": "passed",
         "reward": 1,
         "tests_passed": 4,
-        "tests_total": 4
+        "tests_total": 4,
+        "ngspice_runs": 16
       },
       "run": {
         "status": "passed",
@@ -8754,7 +8834,7 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 16,
-        "wall_s": 81.434
+        "wall_s": 82.503
       },
       "counts": {
         "reference_metrics": 5,

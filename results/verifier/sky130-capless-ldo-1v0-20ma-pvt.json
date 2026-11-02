@@ -2,7 +2,7 @@
   "task_id": "sky130-capless-ldo-1v0-20ma-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 13.407,
+  "wall_s": 9.537,
   "reason": "",
   "image": "adb-verifier:sky130-capless-ldo-1v0-20ma-pvt-0da3b69bfa92",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 8,
     "partial": 1.0,
     "ngspice_runs": 20,
-    "wall_clock_s": 0.0,
+    "wall_clock_s": 9.537,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -59,7 +59,8 @@
     ],
     "measurements": {},
     "metrics_rows": 0,
-    "runs_source": "stdout"
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "harness"
   },
   "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED dc_regulation: worst |vout-1.0V| over the 0-20mA DC sweep = 25.97mV at fs/1.5V/+85C/vmin_v (max 30mV)\nPASSED quiescent_current: worst no-load VIN current = 92.51uA at fs/1.8V/+85C (max 100uA; ideal VREF current is free)\nPASSED psr_1khz: 1kHz 1.5V: worst 34.32dB at sf/27C/1.5V (min 30dB); 1.8V: worst 40.86dB at fs/27C/1.8V (min 35dB)\nPASSED psr_100khz: 100kHz: worst 28.44dB at fs/27C/1.5V (min 20dB)\nPASSED psr_1mhz: 1MHz: worst 11.82dB at fs/27C/1.5V (min 10dB)\nPASSED load_step_excursion: worst excursion from 1.0V = 130.7mV at fs/1.5V/+85C/droop_v (max 150mV)\nPASSED load_step_recovery: worst tail-window deviation from 1.0V = 25.97mV at fs/1.5V/+85C/t1max_v (max 30mV, windows begin 20us after each edge completes)\nPASSED startup: worst peak = 1.002V at ss/1.5V/+85C (max 1.05V); worst 200-400us deviation = 3.655mV at sf/1.5V/-40C (max 20mV)\nngspice_processes=20"
 }

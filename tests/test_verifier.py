@@ -185,11 +185,15 @@ def test_artifacts_are_found_in_either_directory(tmp_path):
 def test_docker_command_pins_threads_and_mounts_design_as_file(tmp_path):
     command = verifier.docker_command(
         name="adb-vf-demo-abc", image="img", design=tmp_path / "circuit.spi",
-        logs=tmp_path / "logs", spiceinit=tmp_path / ".spiceinit", cpus=2, memory="6g",
+        logs=tmp_path / "logs", spiceinit=tmp_path / ".spiceinit",
+        wrapper=tmp_path / "ngspice-count", cpus=2, memory="6g",
     )
     joined = " ".join(command)
     assert "OMP_NUM_THREADS=1" in joined
     assert f"{tmp_path}/.spiceinit:/app/.spiceinit:ro" in joined
+    assert f"{tmp_path}/ngspice-count:/count/ngspice:ro" in joined
+    assert "NGSPICE=/count/ngspice" in joined
+    assert "PATH=/count:/opt/analog-arena:/opt/ngspice/bin:" in joined
     assert f"{tmp_path}/circuit.spi:/app/circuit.spi:ro" in joined
     assert "-v /app:/app" not in joined  # never shadow the image's /app
     assert command[-1] == "img"
@@ -293,3 +297,24 @@ def test_sandbox_container_runs_and_leaves_nothing_behind(tmp_path):
     assert (result.artifacts.tests_passed, result.artifacts.tests_total) == (1, 1)
     # Other sweeps may be running; this run must add no container.
     assert set(verifier.leftover_containers()) - before == set()
+
+
+def test_wrapper_count_overrides_reported_runs(tmp_path):
+    logs = write_logs(tmp_path)
+    (logs / verifier.NGSPICE_COUNTER).write_text("one\ntwo\nthree\n")
+    artifacts = verifier.parse_artifacts(logs)
+    assert artifacts is not None
+    assert artifacts.ngspice_runs == 3
+    assert artifacts.runs_source == "wrapper-count"
+
+
+def test_run_summary_runs_key_is_read(tmp_path):
+    """Several verifiers write ``runs`` rather than ``ngspice_runs``."""
+    logs = write_logs(
+        tmp_path,
+        run={"runs": 7, "workers": 1, "wall_clock_s": 12.5, "failed_runs": []},
+    )
+    artifacts = verifier.parse_artifacts(logs)
+    assert artifacts is not None
+    assert artifacts.ngspice_runs == 7
+    assert artifacts.wall_clock_s == pytest.approx(12.5)

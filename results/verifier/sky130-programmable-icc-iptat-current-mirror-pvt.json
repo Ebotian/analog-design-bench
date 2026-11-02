@@ -2,7 +2,7 @@
   "task_id": "sky130-programmable-icc-iptat-current-mirror-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 2.943,
+  "wall_s": 3.136,
   "reason": "",
   "image": "adb-verifier:sky130-programmable-icc-iptat-current-mirror-pvt-1e30f6e32fba",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 11,
     "partial": 1.0,
     "ngspice_runs": 6,
-    "wall_clock_s": 2.624,
+    "wall_clock_s": 2.806,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -74,7 +74,8 @@
     ],
     "measurements": {},
     "metrics_rows": 0,
-    "runs_source": "stdout"
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED output_current_error: max=5.04% at ff/code11 (max 8%)\nPASSED output_current_positive: min Iout=0.000732668A at ss/code11 (required >0A)\nPASSED weight_accuracy: max=8.65% at ff/code11 (max 10%)\nPASSED ratio_accuracy: max=0.78% at ff/code11 (max 10%)\nPASSED reference_pin_headroom: icc_ref 0.705..0.815V; iptat_ref 0.736..0.798V (required 0.20..1.10V, nominal+perturbed)\nPASSED reference_pin_isolation_perturbation: max=0.00mV at tt/code00 (max 25mV)\nPASSED reference_pin_isolation_code: max=0.00mV at tt/code00 (max 50mV)\nPASSED static_vdd_current: max=4.52uA at ff/code11 (max 100uA)\nPASSED digital_pin_current: max=0.000uA at tt/code00 (max 1uA)\nPASSED compliance_flatness: max=1.66% at ss/code11 (max 3%)\nPASSED output_resistance: min=294.1kohm at ff/code11 (min 100kohm)\nngspice_processes=6 wall_clock_s=2.624"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED output_current_error: max=5.04% at ff/code11 (max 8%)\nPASSED output_current_positive: min Iout=0.000732668A at ss/code11 (required >0A)\nPASSED weight_accuracy: max=8.65% at ff/code11 (max 10%)\nPASSED ratio_accuracy: max=0.78% at ff/code11 (max 10%)\nPASSED reference_pin_headroom: icc_ref 0.705..0.815V; iptat_ref 0.736..0.798V (required 0.20..1.10V, nominal+perturbed)\nPASSED reference_pin_isolation_perturbation: max=0.00mV at tt/code00 (max 25mV)\nPASSED reference_pin_isolation_code: max=0.00mV at tt/code00 (max 50mV)\nPASSED static_vdd_current: max=4.52uA at ff/code11 (max 100uA)\nPASSED digital_pin_current: max=0.000uA at tt/code00 (max 1uA)\nPASSED compliance_flatness: max=1.66% at ss/code11 (max 3%)\nPASSED output_resistance: min=294.1kohm at ff/code11 (min 100kohm)\nngspice_processes=6 wall_clock_s=2.806"
 }

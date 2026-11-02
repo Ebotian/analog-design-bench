@@ -14,11 +14,13 @@ ngspice 固定单线程（`set num_threads=1`，同时挂到 `/app/.spiceinit` �
 |---|---:|---|
 | 任务数 | 50 | `summary.tasks` |
 | 状态分布 | passed 50 | `summary.status_counts` |
-| 总 ngspice 仿真次数 | 1,991 | `summary.ngspice_runs` |
-| verifier 自报墙钟合计 | 1,975.3 s | `summary.verifier_wall_s` |
-| 逐任务墙钟合计 | 3,021.2 s | `summary.task_wall_sum_s` |
-| 本次 sweep 墙钟 | 528.0 s | `summary.sweep_wall_s` |
-| 主机 CPU 平均 / 峰值 | 42.7% / 97.2% | `summary.cpu_busy_percent.mean` / `.peak` |
+| 总 ngspice 仿真次数 | 2,429 | `summary.ngspice_runs` |
+| sims 计数来源 | wrapper-count 50 | `summary.runs_sources` |
+| 墙钟来源 | harness 11 / verifier 39 | `summary.wall_clock_sources` |
+| verifier 自报墙钟合计 | 2,750.0 s | `summary.verifier_wall_s` |
+| 逐任务墙钟合计 | 2,771.7 s | `summary.task_wall_sum_s` |
+| 本次 sweep 墙钟 | 760.0 s | `summary.sweep_wall_s` |
+| 主机 CPU 平均 / 峰值 | 39.6% / 97.2% | `summary.cpu_busy_percent.mean` / `.peak` |
 | 残留容器 | 0 | `summary.leftover_containers` |
 | 残留 ngspice 线程 | 0 | `summary.ngspice_threads_after` |
 
@@ -26,58 +28,58 @@ ngspice 固定单线程（`set num_threads=1`，同时挂到 `/app/.spiceinit` �
 
 | 任务 | 状态 | reward | gates | sims | verifier 墙钟 (s) | 调度墙钟 (s) |
 |---|---|---:|---:|---:|---:|---:|
-| `sky130-ahuja-compensated-two-stage-load-range-pvt` | passed | 1.000 | 8/8 | 21 | 0.0 | 30.9 |
-| `sky130-analog-input-mux-8to1-pvt` | passed | 1.000 | 5/5 | 0 | 0.0 | 10.8 |
-| `sky130-bandgap-reference-pvt` | passed | 1.000 | 12/12 | 189 | 98.5 | 99.0 |
-| `sky130-beta-multiplier-reference-pvt-mc` | passed | 1.000 | 12/12 | 95 | 47.5 | 48.0 |
-| `sky130-bootstrap-driver-pt` | passed | 1.000 | 24/24 | 0 | 0.0 | 307.6 |
-| `sky130-bootstrap-sampler-fft` | passed | 1.000 | 5/5 | 0 | 0.0 | 32.1 |
-| `sky130-bottom-plate-sampler-pvt` | passed | 1.000 | 6/6 | 14 | 31.1 | 31.4 |
-| `sky130-buf-ppsf-bs-gain1-sfdr90` | passed | 1.000 | 4/4 | 0 | 0.0 | 54.1 |
-| `sky130-capless-ldo-1v0-20ma-pvt` | passed | 1.000 | 8/8 | 20 | 0.0 | 13.4 |
-| `sky130-class-d-halfbridge-eff95-tt` | passed | 1.000 | 5/5 | 0 | 0.0 | 182.6 |
-| `sky130-cml-divider-div2-range1gto10g` | passed | 1.000 | 2/2 | 25 | 15.0 | 15.4 |
-| `sky130-cml-tx-driver-28g-nrz-pvt` | passed | 1.000 | 23/23 | 0 | 0.0 | 9.4 |
-| `sky130-cmos-switched-resistor-dac-5bit-pvt` | passed | 1.000 | 8/8 | 0 | 0.0 | 78.5 |
-| `sky130-complementary-folded-cascode-ab-opamp-pvt` | passed | 1.000 | 14/14 | 0 | 0.0 | 139.6 |
-| `sky130-constant-gm-stable-gain-amplifier-pvt` | passed | 1.000 | 9/9 | 81 | 29.5 | 29.8 |
-| `sky130-current-starved-ring-vco-pvt` | passed | 1.000 | 9/9 | 30 | 67.1 | 67.4 |
-| `sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40` | passed | 1.000 | 9/9 | 3 | 29.6 | 30.0 |
-| `sky130-fct-residue-amplifier-900msps` | passed | 1.000 | 13/13 | 10 | 112.3 | 112.6 |
-| `sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc` | passed | 1.000 | 15/15 | 114 | 65.0 | 65.3 |
-| `sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc` | passed | 1.000 | 15/15 | 143 | 85.1 | 85.5 |
+| `sky130-ahuja-compensated-two-stage-load-range-pvt` | passed | 1.000 | 8/8 | 21 | 16.6 | 16.6 |
+| `sky130-analog-input-mux-8to1-pvt` | passed | 1.000 | 5/5 | 15 | 13.2 | 13.6 |
+| `sky130-bandgap-reference-pvt` | passed | 1.000 | 12/12 | 189 | 73.4 | 73.7 |
+| `sky130-beta-multiplier-reference-pvt-mc` | passed | 1.000 | 12/12 | 95 | 34.7 | 35.1 |
+| `sky130-bootstrap-driver-pt` | passed | 1.000 | 24/24 | 3 | 249.3 | 249.3 |
+| `sky130-bootstrap-sampler-fft` | passed | 1.000 | 5/5 | 22 | 24.1 | 24.4 |
+| `sky130-bottom-plate-sampler-pvt` | passed | 1.000 | 6/6 | 14 | 34.2 | 34.5 |
+| `sky130-buf-ppsf-bs-gain1-sfdr90` | passed | 1.000 | 4/4 | 20 | 44.0 | 44.0 |
+| `sky130-capless-ldo-1v0-20ma-pvt` | passed | 1.000 | 8/8 | 20 | 9.5 | 9.5 |
+| `sky130-class-d-halfbridge-eff95-tt` | passed | 1.000 | 5/5 | 1 | 149.2 | 149.2 |
+| `sky130-cml-divider-div2-range1gto10g` | passed | 1.000 | 2/2 | 25 | 11.5 | 11.8 |
+| `sky130-cml-tx-driver-28g-nrz-pvt` | passed | 1.000 | 23/23 | 12 | 6.4 | 6.7 |
+| `sky130-cmos-switched-resistor-dac-5bit-pvt` | passed | 1.000 | 8/8 | 41 | 59.1 | 59.4 |
+| `sky130-complementary-folded-cascode-ab-opamp-pvt` | passed | 1.000 | 14/14 | 212 | 102.8 | 103.1 |
+| `sky130-constant-gm-stable-gain-amplifier-pvt` | passed | 1.000 | 9/9 | 81 | 28.2 | 28.4 |
+| `sky130-current-starved-ring-vco-pvt` | passed | 1.000 | 9/9 | 30 | 68.2 | 68.5 |
+| `sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40` | passed | 1.000 | 9/9 | 3 | 29.2 | 29.5 |
+| `sky130-fct-residue-amplifier-900msps` | passed | 1.000 | 13/13 | 10 | 112.9 | 113.2 |
+| `sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc` | passed | 1.000 | 15/15 | 114 | 64.0 | 64.3 |
+| `sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc` | passed | 1.000 | 15/15 | 143 | 86.5 | 86.8 |
 | `sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt` | passed | 1.000 | 11/11 | 36 | 20.9 | 21.2 |
-| `sky130-flash-adc-3bit-pvt` | passed | 1.000 | 13/13 | 8 | 49.9 | 50.4 |
-| `sky130-flash-adc-4bit-50msps` | passed | 1.000 | 6/6 | 0 | 133.6 | 133.9 |
-| `sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt` | passed | 1.000 | 8/8 | 60 | 30.6 | 30.9 |
-| `sky130-fully-differential-ota-c-biquad-pvt` | passed | 1.000 | 16/16 | 62 | 17.4 | 18.2 |
-| `sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch` | passed | 1.000 | 7/7 | 23 | 0.4 | 10.0 |
-| `sky130-gmr-degen-amp-constant-gm-pvt` | passed | 1.000 | 4/4 | 30 | 0.0 | 12.0 |
-| `sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60` | passed | 1.000 | 4/4 | 10 | 0.0 | 3.7 |
-| `sky130-high-psrr-bandgap-reference-pvt` | passed | 1.000 | 5/5 | 12 | 5.1 | 5.4 |
-| `sky130-inductive-lna-2p4ghz-gain12-nf2-pvt` | passed | 1.000 | 7/7 | 27 | 10.9 | 11.2 |
-| `sky130-lc-vco-2ghz-pvt` | passed | 1.000 | 9/9 | 27 | 0.0 | 53.6 |
-| `sky130-ldo-ota5-robust-pvt-mc` | passed | 1.000 | 9/9 | 161 | 36.6 | 36.9 |
-| `sky130-low-power-line-driver-pvt` | passed | 1.000 | 8/8 | 135 | 0.0 | 68.0 |
-| `sky130-low-power-oscillator-2mhz-pvt` | passed | 1.000 | 3/3 | 5 | 91.1 | 91.4 |
-| `sky130-nmos-pass-ldo-0p4v-pvt-mc` | passed | 1.000 | 7/7 | 0 | 0.0 | 22.4 |
-| `sky130-ota-5t-gain40-pm60-noise50uv-pvt` | passed | 1.000 | 7/7 | 13 | 0.0 | 6.1 |
-| `sky130-pll-charge-pump-pvt` | passed | 1.000 | 6/6 | 50 | 32.6 | 32.9 |
-| `sky130-programmable-icc-iptat-current-mirror-pvt` | passed | 1.000 | 11/11 | 6 | 2.6 | 2.9 |
-| `sky130-regulated-charge-pump-10mhz-pvt` | passed | 1.000 | 4/4 | 13 | 79.9 | 80.3 |
-| `sky130-ring-amp-3stage-gain8-400uw` | passed | 1.000 | 7/7 | 0 | 2.3 | 2.7 |
-| `sky130-sar-adc-4bit-async` | passed | 1.000 | 4/4 | 6 | 203.4 | 203.7 |
-| `sky130-sar-adc-6bit-async` | passed | 1.000 | 4/4 | 12 | 303.8 | 304.1 |
-| `sky130-switched-capacitor-2to1-converter-pvt` | passed | 1.000 | 9/9 | 94 | 92.2 | 92.5 |
-| `sky130-telescopic-cascode-ota-pvt-fix` | passed | 1.000 | 8/8 | 30 | 15.7 | 16.0 |
-| `sky130-three-stage-nested-miller-ota-pvt` | passed | 1.000 | 11/11 | 225 | 111.7 | 112.0 |
-| `sky130-tia-zt8k-bw750m-noise5p-sfdr70-power5m-pt` | passed | 1.000 | 6/6 | 45 | 14.3 | 14.6 |
-| `sky130-transistor-divide-by-2` | passed | 1.000 | 4/4 | 2 | 1.1 | 1.4 |
-| `sky130-two-stage-miller-opamp-gain60-ugb200-pm60-noise50uv-pvt` | passed | 1.000 | 11/11 | 69 | 30.1 | 30.4 |
-| `sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt` | passed | 1.000 | 11/11 | 69 | 27.1 | 27.4 |
-| `sky130-unregulated-charge-pump-10mhz-pvt` | passed | 1.000 | 4/4 | 16 | 81.1 | 81.4 |
+| `sky130-flash-adc-3bit-pvt` | passed | 1.000 | 13/13 | 8 | 41.6 | 41.9 |
+| `sky130-flash-adc-4bit-50msps` | passed | 1.000 | 6/6 | 3 | 135.1 | 135.4 |
+| `sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt` | passed | 1.000 | 8/8 | 60 | 30.9 | 31.2 |
+| `sky130-fully-differential-ota-c-biquad-pvt` | passed | 1.000 | 16/16 | 63 | 16.9 | 17.6 |
+| `sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch` | passed | 1.000 | 7/7 | 23 | 0.4 | 10.2 |
+| `sky130-gmr-degen-amp-constant-gm-pvt` | passed | 1.000 | 4/4 | 30 | 12.4 | 12.4 |
+| `sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60` | passed | 1.000 | 4/4 | 10 | 3.7 | 3.7 |
+| `sky130-high-psrr-bandgap-reference-pvt` | passed | 1.000 | 5/5 | 12 | 5.2 | 5.4 |
+| `sky130-inductive-lna-2p4ghz-gain12-nf2-pvt` | passed | 1.000 | 7/7 | 27 | 10.6 | 10.8 |
+| `sky130-lc-vco-2ghz-pvt` | passed | 1.000 | 9/9 | 27 | 52.4 | 52.4 |
+| `sky130-ldo-ota5-robust-pvt-mc` | passed | 1.000 | 9/9 | 161 | 35.8 | 36.1 |
+| `sky130-low-power-line-driver-pvt` | passed | 1.000 | 8/8 | 135 | 66.3 | 66.3 |
+| `sky130-low-power-oscillator-2mhz-pvt` | passed | 1.000 | 3/3 | 5 | 101.5 | 101.8 |
+| `sky130-nmos-pass-ldo-0p4v-pvt-mc` | passed | 1.000 | 7/7 | 104 | 25.6 | 25.6 |
+| `sky130-ota-5t-gain40-pm60-noise50uv-pvt` | passed | 1.000 | 7/7 | 13 | 6.2 | 6.2 |
+| `sky130-pll-charge-pump-pvt` | passed | 1.000 | 6/6 | 50 | 33.6 | 33.9 |
+| `sky130-programmable-icc-iptat-current-mirror-pvt` | passed | 1.000 | 11/11 | 6 | 2.8 | 3.1 |
+| `sky130-regulated-charge-pump-10mhz-pvt` | passed | 1.000 | 4/4 | 13 | 85.0 | 85.3 |
+| `sky130-ring-amp-3stage-gain8-400uw` | passed | 1.000 | 7/7 | 4 | 2.3 | 2.6 |
+| `sky130-sar-adc-4bit-async` | passed | 1.000 | 4/4 | 6 | 188.7 | 189.0 |
+| `sky130-sar-adc-6bit-async` | passed | 1.000 | 4/4 | 12 | 295.6 | 295.9 |
+| `sky130-switched-capacitor-2to1-converter-pvt` | passed | 1.000 | 9/9 | 94 | 87.9 | 88.3 |
+| `sky130-telescopic-cascode-ota-pvt-fix` | passed | 1.000 | 8/8 | 30 | 14.2 | 14.6 |
+| `sky130-three-stage-nested-miller-ota-pvt` | passed | 1.000 | 11/11 | 225 | 106.6 | 106.9 |
+| `sky130-tia-zt8k-bw750m-noise5p-sfdr70-power5m-pt` | passed | 1.000 | 6/6 | 45 | 11.9 | 12.2 |
+| `sky130-transistor-divide-by-2` | passed | 1.000 | 4/4 | 2 | 1.0 | 1.3 |
+| `sky130-two-stage-miller-opamp-gain60-ugb200-pm60-noise50uv-pvt` | passed | 1.000 | 11/11 | 69 | 28.6 | 28.9 |
+| `sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt` | passed | 1.000 | 11/11 | 69 | 27.0 | 27.3 |
+| `sky130-unregulated-charge-pump-10mhz-pvt` | passed | 1.000 | 4/4 | 16 | 82.2 | 82.5 |
 
-`verifier 墙钟` 为零表示该 verifier 没有自报墙钟；该任务的调度墙钟仍有实测值，`summary.verifier_wall_s` 只汇总自报值。
+`verifier 墙钟` 取 verifier 自报值；若 verifier 不报，则取该任务的调度墙钟，并以 `artifacts.wall_clock_source` 标记（见总览的墙钟来源）。`sims` 由挂在沙箱 PATH 上的 ngspice 计数包装器逐次累加，包含重试/失败调用；因此它可以高于 T0 `runtime.ngspice_runs`，差异逐条列在下方对账节。
 
 ## 与 T0 `referenceResult` 对账
 
@@ -95,7 +97,22 @@ ngspice 固定单线程（`set num_threads=1`，同时挂到 `/app/.spiceinit` �
 | 状态一致 | 452 / 452 | `reconcile.summary.status_matches` |
 | 值/状态不一致 | 0 | `reconcile.summary.mismatch_count` |
 | 任务级 reward/gate 数不一致 | 0 | `reconcile.summary.run_level_mismatch_count` |
+| T0 记录 sims 合计 | 2,297 | `reconcile.summary.reference_ngspice_runs` |
+| 本地计数 sims 合计 | 2,429 | `reconcile.summary.local_ngspice_runs` |
+| sims 不一致任务数 | 5 | `reconcile.summary.sim_difference_count` |
 | 值容差 | 1.0% | `reconcile.summary.tolerance` |
+
+### sims 差异
+
+本地计数是实际 ngspice 进程数；T0 `runtime.ngspice_runs` 为 `null` 表示参考记录未给出该字段，不是 0。
+
+| 任务 | T0 sims | 本地 sims |
+|---|---:|---:|
+| `sky130-buf-ppsf-bs-gain1-sfdr90` | — | 20 |
+| `sky130-flash-adc-4bit-50msps` | — | 3 |
+| `sky130-fully-differential-ota-c-biquad-pvt` | 62 | 63 |
+| `sky130-nmos-pass-ldo-0p4v-pvt-mc` | — | 104 |
+| `sky130-ring-amp-3stage-gain8-400uw` | — | 4 |
 
 ### 按打印精度一致的 gate
 

@@ -27,7 +27,7 @@ import shutil
 import subprocess
 import time
 import uuid
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Literal, Mapping, Sequence, TypeAlias, cast
 
@@ -43,6 +43,15 @@ HELPER_IMAGE = "alpine:3.21"
 #: temporary working directory (e.g. the bottom-plate sampler) never see a
 #: ``.spiceinit`` mounted at ``/app``, so the sandbox mounts it at both places.
 SPICEINIT = "set num_threads=1\n"
+#: Host-side wrapper mounted as ``/count/ngspice``; it appends one line per
+#: invocation under ``/logs`` and then execs the real pinned binary.  Verifiers
+#: disagree about whether they print a run count (and some use an absolute
+#: NGSPICE path), so the count is measured instead of inferred.
+NGSPICE_COUNTER = ".ngspice-invocations"
+NGSPICE_WRAPPER = """#!/bin/sh
+printf '%s\\n' "$$" >> /logs/.ngspice-invocations
+exec /opt/ngspice/bin/ngspice "$@"
+"""
 ARTIFACT_DIR = "verifier"
 REPORT_DIR = "verifier/reports/analog-signoff"
 
@@ -96,6 +105,7 @@ class VerifierArtifacts:
     measurements: Mapping[str, object]
     metrics_rows: int
     runs_source: str = "run-summary"
+    wall_clock_source: str = "verifier"
 
     @classmethod
     def from_json(cls, raw: Mapping[str, object]) -> "VerifierArtifacts":
@@ -128,6 +138,7 @@ class VerifierArtifacts:
             else {},
             metrics_rows=int(_as_float(raw.get("metrics_rows"))),
             runs_source=str(raw.get("runs_source", "run-summary")),
+            wall_clock_source=str(raw.get("wall_clock_source", "verifier")),
         )
 
     def to_json(self) -> dict[str, object]:
@@ -148,6 +159,7 @@ class VerifierArtifacts:
             "measurements": dict(self.measurements),
             "metrics_rows": self.metrics_rows,
             "runs_source": self.runs_source,
+            "wall_clock_source": self.wall_clock_source,
         }
 
 
@@ -298,7 +310,16 @@ def parse_artifacts(logs: Path, output: str = "") -> VerifierArtifacts | None:
     measurements = summary.get("measurements")
     failed = run.get("failed_runs")
     metrics_rows = len(metrics_raw) if isinstance(metrics_raw, list) else 0
-    runs = int(_as_float(run.get("ngspice_runs", summary.get("ngspice_runs"))))
+    # The wrapper mounted over the image's ngspice counts every process,
+    # including verifiers that print no run count at all.
+    counter = logs / NGSPICE_COUNTER
+    wrapper_runs = (
+        len(counter.read_text().splitlines()) if counter.is_file() else None
+    )
+    raw_runs = run.get("ngspice_runs", run.get("runs"))
+    if raw_runs is None:
+        raw_runs = summary.get("ngspice_runs", summary.get("runs"))
+    runs = int(_as_float(raw_runs))
     runs_source = "run-summary"
     if runs == 0 and metrics_rows:
         runs, runs_source = metrics_rows, "metrics-rows"
@@ -306,11 +327,16 @@ def parse_artifacts(logs: Path, output: str = "") -> VerifierArtifacts | None:
         match = re.search(r"ngspice_(?:runs|processes)=(\d+)", output)
         if match is not None:
             runs, runs_source = int(match.group(1)), "stdout"
+    if wrapper_runs is not None:
+        runs, runs_source = wrapper_runs, "wrapper-count"
     wall = _as_float(run.get("wall_clock_s", summary.get("wall_clock_s")))
+    wall_source = "verifier"
     if wall == 0.0:
         match = re.search(r"wall_clock_s=([\d.]+)", output)
         if match is not None:
             wall = float(match.group(1))
+        else:
+            wall_source = "none"
     return VerifierArtifacts(
         reward=_as_float(reward.get("reward")),
         tests_passed=int(_as_float(reward.get("tests_passed"))),
@@ -325,6 +351,7 @@ def parse_artifacts(logs: Path, output: str = "") -> VerifierArtifacts | None:
         measurements=cast(Mapping[str, object], measurements) if isinstance(measurements, dict) else {},
         metrics_rows=metrics_rows,
         runs_source=runs_source,
+        wall_clock_source=wall_source,
     )
 
 
@@ -382,6 +409,7 @@ def docker_command(
     design: Path,
     logs: Path,
     spiceinit: Path,
+    wrapper: Path,
     cpus: int,
     memory: str,
 ) -> list[str]:
@@ -390,6 +418,10 @@ def docker_command(
         "docker", "run", "--rm", "--name", name,
         "--network", "none", "--cpus", str(cpus), "--memory", memory,
         "-e", "OMP_NUM_THREADS=1",
+        "-e", "NGSPICE=/count/ngspice",
+        "-e", "PATH=/count:/opt/analog-arena:/opt/ngspice/bin:/usr/local/sbin:"
+        "/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "-v", f"{wrapper}:/count/ngspice:ro",
         "-v", f"{design}:/app/circuit.spi:ro",
         "-v", f"{spiceinit}:/app/.spiceinit:ro",
         # Verifiers that chdir into a temp directory still read $HOME/.spiceinit.
@@ -423,10 +455,13 @@ def run(
     shutil.copyfile(solution, design)
     spiceinit = case / ".spiceinit"
     spiceinit.write_text(SPICEINIT)
+    wrapper = case / "ngspice-count"
+    wrapper.write_text(NGSPICE_WRAPPER)
+    wrapper.chmod(0o755)
     name = f"adb-vf-{package.task_id[-24:]}-{uuid.uuid4().hex[:6]}".replace("_", "-")
     command = docker_command(
         name=name, image=image, design=design, logs=logs,
-        spiceinit=spiceinit, cpus=cpus, memory=memory,
+        spiceinit=spiceinit, wrapper=wrapper, cpus=cpus, memory=memory,
     )
     started = time.perf_counter()
     # Stream the container log to disk: a timed-out run must still leave evidence.
@@ -454,6 +489,12 @@ def run(
         output = log_path.read_text(errors="replace") if log_path.is_file() else ""
         _chown_logs(logs)
         artifacts = parse_artifacts(logs, output)
+        if artifacts is not None and artifacts.wall_clock_s == 0.0:
+            artifacts = replace(
+                artifacts,
+                wall_clock_s=time.perf_counter() - started,
+                wall_clock_source="harness",
+            )
         if timed_out:
             return VerifierRun(
                 task_id=package.task_id,
@@ -565,10 +606,23 @@ def summarize(results: Sequence[VerifierRun]) -> dict[str, object]:
         for gate in item.artifacts.gates
         if gate.status != "passed"
     ]
+    wall_sources: dict[str, int] = {}
+    run_sources: dict[str, int] = {}
+    for item in results:
+        if not item.artifacts:
+            continue
+        wall_sources[item.artifacts.wall_clock_source] = (
+            wall_sources.get(item.artifacts.wall_clock_source, 0) + 1
+        )
+        run_sources[item.artifacts.runs_source] = (
+            run_sources.get(item.artifacts.runs_source, 0) + 1
+        )
     return {
         "tasks": len(results),
         "status_counts": dict(sorted(counts.items())),
         "ngspice_runs": sims,
+        "runs_sources": dict(sorted(run_sources.items())),
+        "wall_clock_sources": dict(sorted(wall_sources.items())),
         "verifier_wall_s": round(verifier_wall, 1),
         "task_wall_sum_s": round(sum(item.wall_s for item in results), 1),
         "failing": [

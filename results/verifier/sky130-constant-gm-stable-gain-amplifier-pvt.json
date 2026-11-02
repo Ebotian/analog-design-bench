@@ -2,7 +2,7 @@
   "task_id": "sky130-constant-gm-stable-gain-amplifier-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 29.846,
+  "wall_s": 28.412,
   "reason": "",
   "image": "adb-verifier:sky130-constant-gm-stable-gain-amplifier-pvt-e4cdc326da07",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 9,
     "partial": 1.0,
     "ngspice_runs": 81,
-    "wall_clock_s": 29.544,
+    "wall_clock_s": 28.165,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -64,7 +64,8 @@
     ],
     "measurements": {},
     "metrics_rows": 0,
-    "runs_source": "stdout"
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED complete_signoff: pvt=27/27 startup=27/27 linearity=27/27\nPASSED absolute_gain_window: gain=3.4084..3.6369 V/V\nPASSED bandwidth: BW_min=40.00 MHz\nPASSED load_drop_window: load_drop=195.81..333.48 mV\nPASSED deterministic_output_imbalance: imbalance_max=0.0000 mV\nPASSED linearity: linearity_error_max=5.99%\nPASSED pvt_power: power_max=439.92 uW\nPASSED gain_spread: gain_spread_ratio=1.06703\nPASSED startup_power_on: gain=3.3871..3.6295 V/V zero_imbalance_max=0.0000 mV load_drop=195.81..333.52 mV\nngspice_runs=81 wall_clock_s=29.544"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED complete_signoff: pvt=27/27 startup=27/27 linearity=27/27\nPASSED absolute_gain_window: gain=3.4084..3.6369 V/V\nPASSED bandwidth: BW_min=40.00 MHz\nPASSED load_drop_window: load_drop=195.81..333.48 mV\nPASSED deterministic_output_imbalance: imbalance_max=0.0000 mV\nPASSED linearity: linearity_error_max=5.99%\nPASSED pvt_power: power_max=439.92 uW\nPASSED gain_spread: gain_spread_ratio=1.06703\nPASSED startup_power_on: gain=3.3871..3.6295 V/V zero_imbalance_max=0.0000 mV load_drop=195.81..333.52 mV\nngspice_runs=81 wall_clock_s=28.165"
 }

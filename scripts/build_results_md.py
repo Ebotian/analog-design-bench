@@ -115,6 +115,26 @@ def render() -> str:
         "`summary.ngspice_runs` |"
     )
     add(
+        "| sims 计数来源 | "
+        + " / ".join(
+            f"{name} {num(value)}"
+            for name, value in cast(
+                Mapping[str, Any], summary.get("runs_sources", {})
+            ).items()
+        )
+        + " | `summary.runs_sources` |"
+    )
+    add(
+        "| 墙钟来源 | "
+        + " / ".join(
+            f"{name} {num(value)}"
+            for name, value in cast(
+                Mapping[str, Any], summary.get("wall_clock_sources", {})
+            ).items()
+        )
+        + " | `summary.wall_clock_sources` |"
+    )
+    add(
         f"| verifier 自报墙钟合计 | {num(summary.get('verifier_wall_s'))} s | "
         "`summary.verifier_wall_s` |"
     )
@@ -159,8 +179,11 @@ def render() -> str:
         )
     add("")
     add(
-        "`verifier 墙钟` 为零表示该 verifier 没有自报墙钟；该任务的调度墙钟"
-        "仍有实测值，`summary.verifier_wall_s` 只汇总自报值。"
+        "`verifier 墙钟` 取 verifier 自报值；若 verifier 不报，则取该任务的"
+        "调度墙钟，并以 `artifacts.wall_clock_source` 标记（见总览的墙钟来源）。"
+        "`sims` 由挂在沙箱 PATH 上的 ngspice 计数包装器逐次累加，"
+        "包含重试/失败调用；因此它可以高于 T0 `runtime.ngspice_runs`，"
+        "差异逐条列在下方对账节。"
     )
     add("")
     add("## 与 T0 `referenceResult` 对账")
@@ -217,9 +240,42 @@ def render() -> str:
         "`reconcile.summary.run_level_mismatch_count` |"
     )
     add(
+        f"| T0 记录 sims 合计 | {num(rec_summary.get('reference_ngspice_runs'))} | "
+        "`reconcile.summary.reference_ngspice_runs` |"
+    )
+    add(
+        f"| 本地计数 sims 合计 | {num(rec_summary.get('local_ngspice_runs'))} | "
+        "`reconcile.summary.local_ngspice_runs` |"
+    )
+    add(
+        f"| sims 不一致任务数 | {num(rec_summary.get('sim_difference_count'))} | "
+        "`reconcile.summary.sim_difference_count` |"
+    )
+    add(
         f"| 值容差 | {num(float(rec_summary.get('tolerance', 0.0)) * 100, 1)}% | "
         "`reconcile.summary.tolerance` |"
     )
+    add("")
+    add("### sims 差异")
+    add("")
+    add(
+        "本地计数是实际 ngspice 进程数；T0 `runtime.ngspice_runs` 为 `null` 表示"
+        "参考记录未给出该字段，不是 0。"
+    )
+    add("")
+    sim_differences = cast(
+        list[dict[str, Any]], rec_summary.get("sim_differences", [])
+    )
+    if not sim_differences:
+        add("空：每个任务的本地计数与 T0 记录一致。")
+    else:
+        add("| 任务 | T0 sims | 本地 sims |")
+        add("|---|---:|---:|")
+        for row in sim_differences:
+            add(
+                f"| `{row.get('task_id')}` | {num(row.get('reference'))} | "
+                f"{num(row.get('local'))} |"
+            )
     add("")
     add("### 按打印精度一致的 gate")
     add("")

@@ -2,7 +2,7 @@
   "task_id": "sky130-nmos-pass-ldo-0p4v-pvt-mc",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 22.423,
+  "wall_s": 25.626,
   "reason": "",
   "image": "adb-verifier:sky130-nmos-pass-ldo-0p4v-pvt-mc-8c57443eeb3c",
   "artifacts": {
@@ -10,8 +10,8 @@
     "tests_passed": 7,
     "tests_total": 7,
     "partial": 1.0,
-    "ngspice_runs": 0,
-    "wall_clock_s": 0.0,
+    "ngspice_runs": 104,
+    "wall_clock_s": 25.626,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -54,7 +54,8 @@
     ],
     "measurements": {},
     "metrics_rows": 0,
-    "runs_source": "run-summary"
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "harness"
   },
   "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED complete_signoff: PVT/load=54/54 MC=50/50\nPASSED pvt_output_range: VOUT=0.399V..0.403V\nPASSED quiescent_current: Iq=316.330uA..381.082uA\nPASSED loop_stability: PM_min=87.348deg GM_min=42.688dB\nPASSED psrr_1khz: PSRR_min=49.711dB\nPASSED active_device_headroom: min(|VDS|-|VDSAT|)=162.785mV\nPASSED mismatch_3sigma_output: mean+/-3sigma: 1mA=0.3966..0.4052V, 5mA=0.3964..0.4050V"
 }

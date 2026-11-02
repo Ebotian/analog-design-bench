@@ -2,7 +2,7 @@
   "task_id": "sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 9.99,
+  "wall_s": 10.194,
   "reason": "",
   "image": "adb-verifier:sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch-d83b6a6850bc",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 7,
     "partial": 1.0,
     "ngspice_runs": 23,
-    "wall_clock_s": 0.418,
+    "wall_clock_s": 0.397,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -54,7 +54,8 @@
     ],
     "measurements": {},
     "metrics_rows": 0,
-    "runs_source": "stdout"
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\ncompleted rf tt/1.80V/+27C wall_clock_s=0.418\ncompleted rf tt/1.62V/-40C/2.3GHz wall_clock_s=0.405\ncompleted rf tt/1.62V/+125C/2.4GHz wall_clock_s=0.375\ncompleted rf tt/1.98V/+125C/2.5GHz/imbalance wall_clock_s=0.380\ncompleted rf ss/1.62V/+125C/2.3GHz/imbalance wall_clock_s=0.403\ncompleted rf ss/1.80V/-40C/2.4GHz wall_clock_s=0.375\ncompleted rf ss/1.98V/+27C/2.5GHz wall_clock_s=0.390\ncompleted rf ff/1.62V/+27C/2.3GHz wall_clock_s=0.378\ncompleted rf ff/1.80V/+125C/2.4GHz/imbalance wall_clock_s=0.362\ncompleted rf ff/1.98V/-40C/2.5GHz/imbalance wall_clock_s=0.397\ncompleted rf tt_mm/1.80V/+27C/seed43001 wall_clock_s=0.377\ncompleted rf tt_mm/1.80V/+27C/seed43002 wall_clock_s=0.445\ncompleted rf tt_mm/1.80V/+27C/seed43003 wall_clock_s=0.433\ncompleted rf tt_mm/1.80V/+27C/seed43004 wall_clock_s=0.362\ncompleted rf tt_mm/1.80V/+27C/seed43005 wall_clock_s=0.397\ncompleted rf tt_mm/1.80V/+27C/seed43006 wall_clock_s=0.361\ncompleted rf tt_mm/1.80V/+27C/seed43007 wall_clock_s=0.399\ncompleted rf tt_mm/1.80V/+27C/seed43008 wall_clock_s=0.358\ncompleted rf tt_mm/1.80V/+27C/seed43009 wall_clock_s=0.385\ncompleted rf tt_mm/1.80V/+27C/seed43010 wall_clock_s=0.356\ncompleted linearity tt/1.80V/+27C wall_clock_s=0.638\ncompleted linearity ss/1.62V/+125C wall_clock_s=0.644\ncompleted linearity ff/1.98V/-40C wall_clock_s=0.637\nPASSED conversion_gain: min=4.22dB at tt/1.62V/+125C/2.4GHz\nPASSED robust_port_isolation: LO-IF=-51.4dB at tt_mm/1.80V/+27C/seed43010; RF-IF=-53.3dB at tt/1.98V/+125C/2.5GHz/imbalance; LO-RF=-56.7dB at ff/1.98V/-40C/2.5GHz/imbalance\nPASSED output_operating_point: offset_max=4.49mV at tt_mm/1.80V/+27C/seed43003; VCM_min=0.607V at tt/1.62V/+125C/2.4GHz; headroom_min=0.982V at ss/1.80V/-40C/2.4GHz\nPASSED two_tone_iip3: IIP3_min=-2.69dBm at tt/1.80V/+27C; two_tone_gain_difference_max=1.14dB; slopes=fund 0.989..0.994, IM3 1.89..2.08\nPASSED large_signal_linearity: compression_max=0.484dB at ss/1.62V/+125C\nPASSED if_spectral_purity: worst=-32.7dBc at tt_mm/1.80V/+27C/seed43010\nPASSED average_power: max=1.31mW at tt/1.98V/+125C/2.5GHz/imbalance\nrf_points=20 linearity_points=3 ngspice_processes=23 wall_clock_s=9.675"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\ncompleted rf tt/1.80V/+27C wall_clock_s=0.397\ncompleted rf tt/1.62V/-40C/2.3GHz wall_clock_s=0.442\ncompleted rf tt/1.62V/+125C/2.4GHz wall_clock_s=0.441\ncompleted rf tt/1.98V/+125C/2.5GHz/imbalance wall_clock_s=0.401\ncompleted rf ss/1.62V/+125C/2.3GHz/imbalance wall_clock_s=0.392\ncompleted rf ss/1.80V/-40C/2.4GHz wall_clock_s=0.388\ncompleted rf ss/1.98V/+27C/2.5GHz wall_clock_s=0.379\ncompleted rf ff/1.62V/+27C/2.3GHz wall_clock_s=0.393\ncompleted rf ff/1.80V/+125C/2.4GHz/imbalance wall_clock_s=0.367\ncompleted rf ff/1.98V/-40C/2.5GHz/imbalance wall_clock_s=0.420\ncompleted rf tt_mm/1.80V/+27C/seed43001 wall_clock_s=0.361\ncompleted rf tt_mm/1.80V/+27C/seed43002 wall_clock_s=0.420\ncompleted rf tt_mm/1.80V/+27C/seed43003 wall_clock_s=0.432\ncompleted rf tt_mm/1.80V/+27C/seed43004 wall_clock_s=0.394\ncompleted rf tt_mm/1.80V/+27C/seed43005 wall_clock_s=0.367\ncompleted rf tt_mm/1.80V/+27C/seed43006 wall_clock_s=0.376\ncompleted rf tt_mm/1.80V/+27C/seed43007 wall_clock_s=0.369\ncompleted rf tt_mm/1.80V/+27C/seed43008 wall_clock_s=0.376\ncompleted rf tt_mm/1.80V/+27C/seed43009 wall_clock_s=0.385\ncompleted rf tt_mm/1.80V/+27C/seed43010 wall_clock_s=0.448\ncompleted linearity tt/1.80V/+27C wall_clock_s=0.644\ncompleted linearity ss/1.62V/+125C wall_clock_s=0.652\ncompleted linearity ff/1.98V/-40C wall_clock_s=0.645\nPASSED conversion_gain: min=4.22dB at tt/1.62V/+125C/2.4GHz\nPASSED robust_port_isolation: LO-IF=-51.4dB at tt_mm/1.80V/+27C/seed43010; RF-IF=-53.3dB at tt/1.98V/+125C/2.5GHz/imbalance; LO-RF=-56.7dB at ff/1.98V/-40C/2.5GHz/imbalance\nPASSED output_operating_point: offset_max=4.49mV at tt_mm/1.80V/+27C/seed43003; VCM_min=0.607V at tt/1.62V/+125C/2.4GHz; headroom_min=0.982V at ss/1.80V/-40C/2.4GHz\nPASSED two_tone_iip3: IIP3_min=-2.69dBm at tt/1.80V/+27C; two_tone_gain_difference_max=1.14dB; slopes=fund 0.989..0.994, IM3 1.89..2.08\nPASSED large_signal_linearity: compression_max=0.484dB at ss/1.62V/+125C\nPASSED if_spectral_purity: worst=-32.7dBc at tt_mm/1.80V/+27C/seed43010\nPASSED average_power: max=1.31mW at tt/1.98V/+125C/2.5GHz/imbalance\nrf_points=20 linearity_points=3 ngspice_processes=23 wall_clock_s=9.890"
 }

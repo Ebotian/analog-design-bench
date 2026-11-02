@@ -115,15 +115,17 @@ assumption 9；kind = cartesian 19 / rows 14 / pairs 5 / none 12；33 个待审�
 `scripts/run_verifiers.py` 用每个任务的官方 `tests/test.sh` 跑 T0 参考解，
 `scripts/reconcile_verifiers.py` 与 `referenceResult.metrics` 逐 gate 对账。结果：
 
-- 50/50 `passed`，430 个 verifier gate，1,991 次 ngspice 仿真；
-- sweep 墙钟 528.0 s，逐任务墙钟合计 3,021.2 s，verifier 自报墙钟合计 1,975.3 s，
-  CPU 平均 42.7% / 峰值 97.2%；结束后残留容器与 ngspice 线程均为 0；
+- 50/50 `passed`，430 个 verifier gate，2,429 次 ngspice 仿真（沙箱 PATH 上的
+  计数包装器逐次累加，含重试/失败调用；T0 记录合计 2,297，5 个任务有差异）；
+- sweep 墙钟 760.0 s，逐任务墙钟合计 2,771.7 s，verifier 墙钟合计 2,750.0 s
+  （39 个任务自报、11 个回退到调度墙钟），CPU 平均 39.6% / 峰值 97.2%；
+  结束后残留容器与 ngspice 线程均为 0；
 - 452 条参考 gate 全部匹配：451 条在 1% 容差内，1 条受 verifier 打印精度限制；
   状态一致 452/452，值/状态不一致 0，任务级 reward/gate 数不一致 0。
 
 逐任务 JSON 在 `results/verifier/`，对账 JSON 在 `results/reconcile.json`，
 说明文档 `docs/VERIFIER_RESULTS.md` 由 `scripts/build_results_md.py` 只读这些 JSON 生成。
-仍存缺口：16 个 verifier 不自报墙钟（记录为 0.0，调度墙钟仍有效）；
+仍存缺口：11 个 verifier 不自报墙钟（已回退到调度墙钟并标 `wall_clock_source`）；
 33 个待审 corner 条目与 33 个未解析占位符名未清零。
 
 边界（不变）：verifier 只作 **oracle/校准** 与 A/B 的官方判分，**不作优化目标**（否则是

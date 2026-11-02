@@ -4,17 +4,24 @@
   "status_counts": {
     "passed": 50
   },
-  "ngspice_runs": 1991,
-  "verifier_wall_s": 1975.3,
-  "task_wall_sum_s": 3021.2,
+  "ngspice_runs": 2429,
+  "runs_sources": {
+    "wrapper-count": 50
+  },
+  "wall_clock_sources": {
+    "harness": 11,
+    "verifier": 39
+  },
+  "verifier_wall_s": 2750.0,
+  "task_wall_sum_s": 2771.7,
   "failing": [],
   "failing_gates": [],
-  "started_utc": "2026-11-02T10:06:16+00:00",
-  "finished_utc": "2026-11-02T10:15:04+00:00",
-  "sweep_wall_s": 528.0,
+  "started_utc": "2026-11-02T10:31:03+00:00",
+  "finished_utc": "2026-11-02T10:43:43+00:00",
+  "sweep_wall_s": 760.0,
   "jobs": 4,
   "cpu_busy_percent": {
-    "mean": 42.7,
+    "mean": 39.6,
     "peak": 97.2
   },
   "leftover_containers": [],

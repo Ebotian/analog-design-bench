@@ -2,7 +2,7 @@
   "task_id": "sky130-lc-vco-2ghz-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 53.565,
+  "wall_s": 52.352,
   "reason": "",
   "image": "adb-verifier:sky130-lc-vco-2ghz-pvt-7592d1e428bc",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 9,
     "partial": 1.0,
     "ngspice_runs": 27,
-    "wall_clock_s": 0.0,
+    "wall_clock_s": 52.352,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -64,7 +64,8 @@
     ],
     "measurements": {},
     "metrics_rows": 0,
-    "runs_source": "stdout"
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "harness"
   },
   "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED complete_signoff: PVT rows=27/27\nPASSED pvt_2ghz_coverage: f(0V)_min=2.1128GHz at ff/1.98V/+125C; f(1.8V)_max=1.6702GHz at ss/1.98V/-40C\nPASSED pvt_tuning: ratio_min=1.2910 segment_drop_min=10.55MHz\nPASSED pvt_differential_swing: Vdiff_pp_min=0.356V\nPASSED pvt_startup: startup_max=13.01ns at tt/1.62V/-40C\nPASSED pvt_output_operating_range: output_min=-0.008V output_max=0.635*VDD VCM=0.217..0.411*VDD\nPASSED pvt_supply_pushing: pushing_max=0.471%/V\nPASSED pvt_reference_compliance: Viref_min=0.283V headroom_min=1.071V\nPASSED pvt_power: power_max=2.125mW at ff/1.98V/+125C\nanalysis_points=27 ngspice_processes=27"
 }

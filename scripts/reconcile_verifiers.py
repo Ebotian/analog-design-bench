@@ -228,6 +228,11 @@ def compare_gate(
     ):
         current_value = float(swing.group(1)) / float(swing.group(2))
         source = f"derived:Vpp/VDD:{swing.group(0)}"
+    elif "1.3 VDD" in (specification or "") and (
+        loaded := re.search(r"VOUT=([\d.eE+-]+)V at [^;]*?/([\d.]+)V", message)
+    ):
+        current_value = float(loaded.group(1)) / (1.3 * float(loaded.group(2)))
+        source = f"derived:VOUT/(1.3*VDD):{loaded.group(0)}"
     elif "duty" in metric_id.casefold() and (duty := re.search(r"duty=([^;]+)%", message)):
         readings = [float(item) for item in duty.group(1).split("/") if item.strip()]
         current_value = max(abs(value - 50.0) for value in readings) if readings else None
@@ -339,6 +344,9 @@ def reconcile_one(run: Mapping[str, Any], reference: Mapping[str, Any]) -> dict[
             "reward": reference.get("reward"),
             "tests_passed": reference.get("tests_passed"),
             "tests_total": reference.get("tests_total"),
+            "ngspice_runs": cast(
+                Mapping[str, Any], reference.get("runtime", {})
+            ).get("ngspice_runs"),
         },
         "run": {
             "status": run.get("status"),
@@ -374,6 +382,25 @@ def summarize(tasks: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         cast(int, item["counts"].get("printed_precision_matches", 0)) for item in tasks
     )
     status_matches = sum(cast(int, item["counts"]["status_matches"]) for item in tasks)
+    reference_sims = sum(
+        value
+        for item in tasks
+        if isinstance(value := item["reference"].get("ngspice_runs"), int)
+    )
+    local_sims = sum(
+        value
+        for item in tasks
+        if isinstance(value := item["run"].get("ngspice_runs"), int)
+    )
+    sim_differences = [
+        {
+            "task_id": item["task_id"],
+            "reference": item["reference"].get("ngspice_runs"),
+            "local": item["run"].get("ngspice_runs"),
+        }
+        for item in tasks
+        if item["reference"].get("ngspice_runs") != item["run"].get("ngspice_runs")
+    ]
     mismatches = [
         {"task_id": item["task_id"], **row}
         for item in tasks
@@ -404,6 +431,10 @@ def summarize(tasks: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         "values_matched_by_printed_precision": rounding_matches,
         "values_matched": value_matches + rounding_matches,
         "status_matches": status_matches,
+        "reference_ngspice_runs": reference_sims,
+        "local_ngspice_runs": local_sims,
+        "sim_difference_count": len(sim_differences),
+        "sim_differences": sim_differences,
         "mismatch_count": len(mismatches),
         "run_level_mismatch_count": len(run_mismatches),
         "mismatches": mismatches,

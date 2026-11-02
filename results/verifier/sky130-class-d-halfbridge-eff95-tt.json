@@ -2,7 +2,7 @@
   "task_id": "sky130-class-d-halfbridge-eff95-tt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 182.649,
+  "wall_s": 149.182,
   "reason": "",
   "image": "adb-verifier:sky130-class-d-halfbridge-eff95-tt-c98927327b88",
   "artifacts": {
@@ -10,8 +10,8 @@
     "tests_passed": 5,
     "tests_total": 5,
     "partial": 1.0,
-    "ngspice_runs": 0,
-    "wall_clock_s": 0.0,
+    "ngspice_runs": 1,
+    "wall_clock_s": 149.182,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -43,7 +43,9 @@
       }
     ],
     "measurements": {},
-    "metrics_rows": 0
+    "metrics_rows": 0,
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "harness"
   },
   "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED e1_peak_eff_27c_95pct: peak_27c=95.20% (limit > 95%)\nPASSED e2_all_eff_27c_85pct: min_27c=85.37% at 1ohm (limit > 85%)\nPASSED e3_peak_eff_125c_90pct: peak_125c=93.44% (limit > 90%)\nPASSED e4_all_eff_125c_80pct: min_125c=82.78% at 16ohm (limit > 80%)\nPASSED e5_min_output_power_30mw: min_p_out=40.26mW (limit > 30mW)\nanalysis_points=14 ngspice_processes=1"
 }

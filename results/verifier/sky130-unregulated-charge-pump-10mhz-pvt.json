@@ -2,7 +2,7 @@
   "task_id": "sky130-unregulated-charge-pump-10mhz-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 81.434,
+  "wall_s": 82.503,
   "reason": "",
   "image": "adb-verifier:sky130-unregulated-charge-pump-10mhz-pvt-24335dca46ca",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 4,
     "partial": 1.0,
     "ngspice_runs": 16,
-    "wall_clock_s": 81.099,
+    "wall_clock_s": 82.201,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -39,7 +39,8 @@
     ],
     "measurements": {},
     "metrics_rows": 0,
-    "runs_source": "stdout"
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED pvt_loaded_output_voltage: range=2.35616V at ss/1.8V/-10C .. 2.68624V at ff/1.8V/+125C (required 2.2..2.8V)\nPASSED pvt_output_ripple: worst=3.26mVpp at sf/1.8V/-10C (required <=5mVpp)\nPASSED pvt_enabled_current: worst=136.114uA at ss/1.8V/-10C (required <=200uA)\nPASSED pvt_disabled_current: worst=9.02651nA at ff/1.8V/+125C (required <=100nA)\npvt_points=8 enabled_transients=8 disabled_transients=8 ngspice_processes=16 wall_clock_s=81.099"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED pvt_loaded_output_voltage: range=2.35616V at ss/1.8V/-10C .. 2.68624V at ff/1.8V/+125C (required 2.2..2.8V)\nPASSED pvt_output_ripple: worst=3.26mVpp at sf/1.8V/-10C (required <=5mVpp)\nPASSED pvt_enabled_current: worst=136.114uA at ss/1.8V/-10C (required <=200uA)\nPASSED pvt_disabled_current: worst=9.02651nA at ff/1.8V/+125C (required <=100nA)\npvt_points=8 enabled_transients=8 disabled_transients=8 ngspice_processes=16 wall_clock_s=82.201"
 }

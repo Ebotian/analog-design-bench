@@ -2,7 +2,7 @@
   "task_id": "sky130-three-stage-nested-miller-ota-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 112.036,
+  "wall_s": 106.886,
   "reason": "",
   "image": "adb-verifier:sky130-three-stage-nested-miller-ota-pvt-49e81dba4b2f",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 11,
     "partial": 1.0,
     "ngspice_runs": 225,
-    "wall_clock_s": 111.726,
+    "wall_clock_s": 106.563,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -87,7 +87,8 @@
       "slew_fall_min_v_per_us": 0.22447106139927553
     },
     "metrics_rows": 0,
-    "runs_source": "stdout"
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED nominal_functional: gain=124.23dB UGB=0.555MHz PM=79.99deg settling=2.237us\nPASSED complete_signoff: 225 rows, five exact 45-point matrices\nPASSED pvt_gain: gain_min=114.24dB\nPASSED pvt_large_load_drive: UGB_min=0.446MHz drive_FOM_min=356.9kHz*pF/uW\nPASSED pvt_phase_margin: PM_min=78.49deg\nPASSED pvt_output_bias: output_error_max=4.73mV\nPASSED pvt_power: power_max=253.1uW\nPASSED pvt_input_bias: input_bias_max=0.00nA\nPASSED closed_loop_range: range_min=0.870Vpp\nPASSED closed_loop_settling: settling_max=2.61us final_error_max=0.946%\nPASSED slew_rate: rise_min=0.236 fall_min=0.224V/us\nngspice_processes=225 wall_clock_s=111.726"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED nominal_functional: gain=124.23dB UGB=0.555MHz PM=79.99deg settling=2.237us\nPASSED complete_signoff: 225 rows, five exact 45-point matrices\nPASSED pvt_gain: gain_min=114.24dB\nPASSED pvt_large_load_drive: UGB_min=0.446MHz drive_FOM_min=356.9kHz*pF/uW\nPASSED pvt_phase_margin: PM_min=78.49deg\nPASSED pvt_output_bias: output_error_max=4.73mV\nPASSED pvt_power: power_max=253.1uW\nPASSED pvt_input_bias: input_bias_max=0.00nA\nPASSED closed_loop_range: range_min=0.870Vpp\nPASSED closed_loop_settling: settling_max=2.61us final_error_max=0.946%\nPASSED slew_rate: rise_min=0.236 fall_min=0.224V/us\nngspice_processes=225 wall_clock_s=106.563"
 }

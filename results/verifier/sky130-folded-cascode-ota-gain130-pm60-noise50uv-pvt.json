@@ -2,7 +2,7 @@
   "task_id": "sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 30.921,
+  "wall_s": 31.233,
   "reason": "",
   "image": "adb-verifier:sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt-125935e47c01",
   "artifacts": {
@@ -11,8 +11,8 @@
     "tests_total": 8,
     "partial": 1.0,
     "ngspice_runs": 60,
-    "wall_clock_s": 30.607,
-    "summed_run_time_s": 30.491,
+    "wall_clock_s": 30.926,
+    "summed_run_time_s": 30.802,
     "workers": 1,
     "failed_runs": [],
     "gates": [
@@ -59,7 +59,8 @@
     ],
     "measurements": {},
     "metrics_rows": 60,
-    "runs_source": "run-summary"
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\nplanned=60 executed=60 blocked=0 rows=60 workers=1 wall_clock_s=30.607\nPASSED complete_signoff: rows=60/60 OP/AC=27/27 noise=27/27 range=3/3 settling=3/3 executed=60 blocked=0\nPASSED pvt_gain_bandwidth: gain_min=132.90dB at ff/1.62V/+125C; UGB_min=202.85MHz at ff/1.62V/+125C\nPASSED pvt_phase_margin: PM_min=60.91deg at ss/1.62V/-40C; worst_falling_crossings=1 post_first_max=-0.007dB at ss/1.62V/+125C\nPASSED pvt_input_noise: max=46.60uVrms at ff/1.98V/+125C (10Hz..10MHz)\nPASSED pvt_output_bias: error_max=0.401mV at ff/1.98V/-40C\nPASSED pvt_power: min=3.652mW; max=5.217mW at ff/1.98V/+125C\nPASSED closed_loop_range: range_min=0.9363Vpp at ss/1.62V/-40C; selected_interval_tracking_max=17.748mV at ss/1.62V/+125C\nPASSED closed_loop_settling: last_entry_max=6.975ns at ss/1.98V/-40C; final_5ns_error_max=0.4190mV (0.4190%) at ff/1.98V/-40C"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nplanned=60 executed=60 blocked=0 rows=60 workers=1 wall_clock_s=30.926\nPASSED complete_signoff: rows=60/60 OP/AC=27/27 noise=27/27 range=3/3 settling=3/3 executed=60 blocked=0\nPASSED pvt_gain_bandwidth: gain_min=132.90dB at ff/1.62V/+125C; UGB_min=202.85MHz at ff/1.62V/+125C\nPASSED pvt_phase_margin: PM_min=60.91deg at ss/1.62V/-40C; worst_falling_crossings=1 post_first_max=-0.007dB at ss/1.62V/+125C\nPASSED pvt_input_noise: max=46.60uVrms at ff/1.98V/+125C (10Hz..10MHz)\nPASSED pvt_output_bias: error_max=0.401mV at ff/1.98V/-40C\nPASSED pvt_power: min=3.652mW; max=5.217mW at ff/1.98V/+125C\nPASSED closed_loop_range: range_min=0.9363Vpp at ss/1.62V/-40C; selected_interval_tracking_max=17.748mV at ss/1.62V/+125C\nPASSED closed_loop_settling: last_entry_max=6.975ns at ss/1.98V/-40C; final_5ns_error_max=0.4190mV (0.4190%) at ff/1.98V/-40C"
 }

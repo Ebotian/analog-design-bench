@@ -2,7 +2,7 @@
   "task_id": "sky130-pll-charge-pump-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 32.897,
+  "wall_s": 33.897,
   "reason": "",
   "image": "adb-verifier:sky130-pll-charge-pump-pvt-c52e1e12a598",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 6,
     "partial": 1.0,
     "ngspice_runs": 50,
-    "wall_clock_s": 32.561,
+    "wall_clock_s": 33.587,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -49,7 +49,8 @@
     ],
     "measurements": {},
     "metrics_rows": 0,
-    "runs_source": "stdout"
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED pvt_current_accuracy: UP=50.64..51.72uA, DN=50.71..51.69uA; flatness=0.04953%; mismatch=0.1962% at ss/1.62V/-40C\nPASSED pvt_inactive_modes: off_leakage=0.7491nA; both_high_net=0.09812uA\nPASSED tt_mm_up_dn_matching: worst=1.136% at seed=31006, vout=1.15V; current=50.63..51.63uA; seeds=20\nPASSED representative_pulse_fidelity: 10ns_error=2.443%, 1ns_error=20.85%, overlap=14.98fC\nPASSED pvt_switching_speed: turn_on_worst=0.321ns at ss/1.62V/+125C; turn_off_worst=0.0017ns at ss/1.62V/+125C\nPASSED pvt_power: worst=317.6uW at ff/1.98V/-40C\npvt_dc_points=27 tt_mm_points=20 pulse_points=3 ngspice_processes=50 wall_clock_s=32.561"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED pvt_current_accuracy: UP=50.64..51.72uA, DN=50.71..51.69uA; flatness=0.04953%; mismatch=0.1962% at ss/1.62V/-40C\nPASSED pvt_inactive_modes: off_leakage=0.7491nA; both_high_net=0.09812uA\nPASSED tt_mm_up_dn_matching: worst=1.136% at seed=31006, vout=1.15V; current=50.63..51.63uA; seeds=20\nPASSED representative_pulse_fidelity: 10ns_error=2.443%, 1ns_error=20.85%, overlap=14.98fC\nPASSED pvt_switching_speed: turn_on_worst=0.321ns at ss/1.62V/+125C; turn_off_worst=0.0017ns at ss/1.62V/+125C\nPASSED pvt_power: worst=317.6uW at ff/1.98V/-40C\npvt_dc_points=27 tt_mm_points=20 pulse_points=3 ngspice_processes=50 wall_clock_s=33.587"
 }

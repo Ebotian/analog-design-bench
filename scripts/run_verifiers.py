@@ -146,7 +146,7 @@ def main() -> int:
         "schema": 1,
         "started_utc": started_at,
         "finished_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "harness_wall_s": round(wall, 1),
+        "sweep_wall_s": round(wall, 1),
         "jobs": args.jobs,
         "cpu_busy_percent": cpu,
         "leftover_containers": leftovers,

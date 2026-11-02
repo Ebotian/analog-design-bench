@@ -2,7 +2,7 @@
   "task_id": "sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 21.21,
+  "wall_s": 21.198,
   "reason": "",
   "image": "adb-verifier:sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt-2bc49e0cdcd9",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 11,
     "partial": 1.0,
     "ngspice_runs": 36,
-    "wall_clock_s": 20.923,
+    "wall_clock_s": 20.927,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -74,7 +74,8 @@
     ],
     "measurements": {},
     "metrics_rows": 0,
-    "runs_source": "stdout"
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\nCHARACTERIZATION mismatch: 20/20 samples; min 1MHz CMRR/PSRR+/PSRR-=52/29.41/29.41dB\nPASSED pvt_gain: worst=101.5dB at ss/1.62V/+125C (min 60dB)\nPASSED pvt_bandwidth: worst=151.2MHz at ss/1.62V/+125C (min 100MHz)\nPASSED pvt_phase_margin: worst=65.85deg at ss/1.62V/-40C (min 60deg)\nPASSED pvt_input_noise: worst=44.14uVrms at ss/1.62V/+125C (max 50uVrms)\nPASSED pvt_output_bias: worst=6.597mV at ff/1.98V/+125C (max 15mV); worst=9.375e-05mV at tt/1.98V/-40C (max 0.1mV)\nPASSED pvt_power: worst=4.932mW at ff/1.98V/+125C (max 5mW)\nPASSED common_mode_rejection: worst=55.9dB at tt/1.80V/+27C/seed-41002 (min 50dB)\nPASSED supply_rejection: worst=40.38dB at tt/1.80V/+27C/seed-41002 (min 40dB); worst=40.38dB at tt/1.80V/+27C/seed-41002 (min 40dB)\nPASSED closed_loop_range: worst=1.6Vpp at tt/1.80V/+27C (min 0.8Vpp); worst=0.007558mV at ss/1.62V/+125C (max 5mV)\nPASSED precision_settling: worst=11.78ns at ss/1.62V/+125C (max 15ns); worst=0.00085% at ss/1.62V/+125C (max 1%)\nPASSED common_mode_recovery: worst=30.12ns at ss/1.62V/+125C (max 100ns); worst=3.902mV at ff/1.98V/-40C (max 10mV)\nanalysis_points=170 ngspice_processes=36 wall_clock_s=20.923"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nCHARACTERIZATION mismatch: 20/20 samples; min 1MHz CMRR/PSRR+/PSRR-=52/29.41/29.41dB\nPASSED pvt_gain: worst=101.5dB at ss/1.62V/+125C (min 60dB)\nPASSED pvt_bandwidth: worst=151.2MHz at ss/1.62V/+125C (min 100MHz)\nPASSED pvt_phase_margin: worst=65.85deg at ss/1.62V/-40C (min 60deg)\nPASSED pvt_input_noise: worst=44.14uVrms at ss/1.62V/+125C (max 50uVrms)\nPASSED pvt_output_bias: worst=6.597mV at ff/1.98V/+125C (max 15mV); worst=9.375e-05mV at tt/1.98V/-40C (max 0.1mV)\nPASSED pvt_power: worst=4.932mW at ff/1.98V/+125C (max 5mW)\nPASSED common_mode_rejection: worst=55.9dB at tt/1.80V/+27C/seed-41002 (min 50dB)\nPASSED supply_rejection: worst=40.38dB at tt/1.80V/+27C/seed-41002 (min 40dB); worst=40.38dB at tt/1.80V/+27C/seed-41002 (min 40dB)\nPASSED closed_loop_range: worst=1.6Vpp at tt/1.80V/+27C (min 0.8Vpp); worst=0.007558mV at ss/1.62V/+125C (max 5mV)\nPASSED precision_settling: worst=11.78ns at ss/1.62V/+125C (max 15ns); worst=0.00085% at ss/1.62V/+125C (max 1%)\nPASSED common_mode_recovery: worst=30.12ns at ss/1.62V/+125C (max 100ns); worst=3.902mV at ff/1.98V/-40C (max 10mV)\nanalysis_points=170 ngspice_processes=36 wall_clock_s=20.927"
 }

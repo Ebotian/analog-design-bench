@@ -2,7 +2,7 @@
   "task_id": "sky130-ldo-ota5-robust-pvt-mc",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 36.889,
+  "wall_s": 36.078,
   "reason": "",
   "image": "adb-verifier:sky130-ldo-ota5-robust-pvt-mc-0d27968c1689",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 9,
     "partial": 1.0,
     "ngspice_runs": 161,
-    "wall_clock_s": 36.59,
+    "wall_clock_s": 35.802,
     "summed_run_time_s": 0.0,
     "workers": 4,
     "failed_runs": [],
@@ -85,7 +85,8 @@
       "mc_output_yield": 1.0
     },
     "metrics_rows": 0,
-    "runs_source": "run-summary"
+    "runs_source": "wrapper-count",
+    "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\nruns=161 failed=0 workers=4 wall=36.590s sum_run=145.493s\nPASS complete_signoff: runs=161 PVT=15/15 DC-points=135\nPASS pvt_dc_regulation_and_iq: error=14.201mV Iq=130.918uA..143.211uA\nPASS dropout: dropout=221.155mV\nPASS loop_stability: gain_min=47.254dB PM_min=64.694deg UGB_min=55.194kHz\nPASS psrr_and_output_noise: PSRR_min(100Hz/1kHz/100kHz/1MHz)=48.064dB/48.064dB/46.485dB/26.539dB noise=97.571uVrms\nPASS startup: sustained_t90=20.965us settling_after_ramp=0.675us overshoot=13.479mV\nPASS load_transient: excursion=9.194mV settling=0.000us\nPASS line_transient: excursion=9.966mV settling=0.000us\nPASS monte_carlo_output: samples=30/30 yield=100.000%"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nruns=161 failed=0 workers=4 wall=35.802s sum_run=142.490s\nPASS complete_signoff: runs=161 PVT=15/15 DC-points=135\nPASS pvt_dc_regulation_and_iq: error=14.201mV Iq=130.918uA..143.211uA\nPASS dropout: dropout=221.155mV\nPASS loop_stability: gain_min=47.254dB PM_min=64.694deg UGB_min=55.194kHz\nPASS psrr_and_output_noise: PSRR_min(100Hz/1kHz/100kHz/1MHz)=48.064dB/48.064dB/46.485dB/26.539dB noise=97.571uVrms\nPASS startup: sustained_t90=20.965us settling_after_ramp=0.675us overshoot=13.479mV\nPASS load_transient: excursion=9.194mV settling=0.000us\nPASS line_transient: excursion=9.966mV settling=0.000us\nPASS monte_carlo_output: samples=30/30 yield=100.000%"
 }
