@@ -2,7 +2,7 @@
   "task_id": "sky130-sar-adc-6bit-async",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 295.915,
+  "wall_s": 269.572,
   "reason": "",
   "image": "adb-verifier:sky130-sar-adc-6bit-async-b5c5dd8b9ce3",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 4,
     "partial": 1.0,
     "ngspice_runs": 12,
-    "wall_clock_s": 295.62,
+    "wall_clock_s": 269.306,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -42,5 +42,5 @@
     "runs_source": "wrapper-count",
     "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\ntransfer_chunk_runtime_s=transfer[0]:117.265,transfer_alt[0]:117.756,transfer[1]:119.052,transfer_alt[1]:117.272,transfer[2]:97.090,transfer_alt[2]:93.597,transfer[3]:96.187,transfer_alt[3]:95.657\ndynamic_chunk_runtime_s=dynamic[0]:80.777,dynamic[1]:79.648,dynamic[2]:80.660,dynamic[3]:80.909\nPASSED sample_hold_64_codes: transfer=[11, 48, 21, 58, 31, 4, 41, 14, 51, 24, 61, 34, 7, 44, 17, 54, 27, 0, 37, 10, 47, 20, 57, 30, 3, 40, 13, 50, 23, 60, 33, 6, 43, 16, 53, 26, 63, 36, 9, 46, 19, 56, 29, 2, 39, 12, 49, 22, 59, 32, 5, 42, 15, 52, 25, 62, 35, 8, 45, 18, 55, 28, 1, 38]; transfer_alt=[47, 4, 25, 46, 3, 24, 45, 2, 23, 44, 1, 22, 43, 0, 21, 42, 63, 20, 41, 62, 19, 40, 61, 18, 39, 60, 17, 38, 59, 16, 37, 58, 15, 36, 57, 14, 35, 56, 13, 34, 55, 12, 33, 54, 11, 32, 53, 10, 31, 52, 9, 30, 51, 8, 29, 50, 7, 28, 49, 6, 27, 48, 5, 26]\nPASSED sndr: worst=37.35dB at tt_1p80v_27c_bin31 (min 35dB)\nPASSED normalized_enob: worst=5.999 bit at tt_1p80v_27c_bin31 (> 5.9 bit)\nPASSED power: worst=2.004mW at tt_1p80v_27c_bin31 (< 3mW)\nanalysis_points=12 ngspice_processes=12 max_parallel=4 wall_clock_s=295.620"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\ntransfer_chunk_runtime_s=transfer[0]:93.274,transfer_alt[0]:93.441,transfer[1]:92.827,transfer_alt[1]:91.935,transfer[2]:90.826,transfer_alt[2]:91.930,transfer[3]:92.522,transfer_alt[3]:92.022\ndynamic_chunk_runtime_s=dynamic[0]:81.958,dynamic[1]:83.509,dynamic[2]:83.337,dynamic[3]:82.881\nPASSED sample_hold_64_codes: transfer=[11, 48, 21, 58, 31, 4, 41, 14, 51, 24, 61, 34, 7, 44, 17, 54, 27, 0, 37, 10, 47, 20, 57, 30, 3, 40, 13, 50, 23, 60, 33, 6, 43, 16, 53, 26, 63, 36, 9, 46, 19, 56, 29, 2, 39, 12, 49, 22, 59, 32, 5, 42, 15, 52, 25, 62, 35, 8, 45, 18, 55, 28, 1, 38]; transfer_alt=[47, 4, 25, 46, 3, 24, 45, 2, 23, 44, 1, 22, 43, 0, 21, 42, 63, 20, 41, 62, 19, 40, 61, 18, 39, 60, 17, 38, 59, 16, 37, 58, 15, 36, 57, 14, 35, 56, 13, 34, 55, 12, 33, 54, 11, 32, 53, 10, 31, 52, 9, 30, 51, 8, 29, 50, 7, 28, 49, 6, 27, 48, 5, 26]\nPASSED sndr: worst=37.35dB at tt_1p80v_27c_bin31 (min 35dB)\nPASSED normalized_enob: worst=5.999 bit at tt_1p80v_27c_bin31 (> 5.9 bit)\nPASSED power: worst=2.004mW at tt_1p80v_27c_bin31 (< 3mW)\nanalysis_points=12 ngspice_processes=12 max_parallel=4 wall_clock_s=269.306"
 }

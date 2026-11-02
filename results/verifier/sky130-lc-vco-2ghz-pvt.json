@@ -2,7 +2,7 @@
   "task_id": "sky130-lc-vco-2ghz-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 52.352,
+  "wall_s": 52.415,
   "reason": "",
   "image": "adb-verifier:sky130-lc-vco-2ghz-pvt-7592d1e428bc",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 9,
     "partial": 1.0,
     "ngspice_runs": 27,
-    "wall_clock_s": 52.352,
+    "wall_clock_s": 52.415,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],

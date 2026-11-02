@@ -45,15 +45,13 @@ T0 只抓站点 API，站点不暴露判分器。T1 从公开仓库补齐这部�
 | `results/reconcile.json` | 与 T0 `referenceResult.metrics` 的逐 gate 对账：参考值、本次值、相对误差、状态一致性、值提取方式与原始消息 |
 | `docs/VERIFIER_RESULTS.md` | 只由上述 JSON 生成的说明（`scripts/build_results_md.py`），不手写数字 |
 
-本次实测：50/50 `passed`，2,429 次 ngspice 进程调用（包装器计数，含重试；
-T0 记录合计 2,297，差异逐条见 `results/reconcile.json`），sweep 墙钟 760.0 s，
-逐任务墙钟合计 2,771.7 s，CPU 平均 39.6% / 峰值 97.2%，结束后残留容器
-与 ngspice 线程均为 0；452 条参考 gate 全部匹配（451 条在 1% 容差内，
-1 条受 verifier 打印精度限制），状态全部一致。
+本次实测的逐任务结果、sims/墙钟对账与汇总数字全部由
+`results/verifier/*.json` 和 `results/reconcile.json` 生成到
+`docs/VERIFIER_RESULTS.md`；本数据卡不复制这些数字，避免与 JSON 漂移。
 
-仍存缺口：11 个 verifier 不自报墙钟（记录回退到调度墙钟，并标
-`wall_clock_source=harness`）；corner 资产仍有 33 个待审条目与 33 个未解析
-占位符名，见 `docs/PLAN.md`。
+仍存缺口：部分 verifier 不自报墙钟（记录回退到调度墙钟，并标
+`wall_clock_source=harness`）；corner 资产仍有待审条目与未解析占位符名，
+计数见 `configs/corners.toml` 的 `[meta]`。
 
 ## T0 未包含的部分（现已由 T1 补齐）
 

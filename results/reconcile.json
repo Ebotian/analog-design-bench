@@ -44,6 +44,12 @@
         "local": 4
       }
     ],
+    "reference_wall_s": 3349.9,
+    "local_wall_s": 2718.5,
+    "wall_comparable_tasks": 50,
+    "wall_mean_relative_difference": 0.304066,
+    "verifier_wall_comparable_tasks": 39,
+    "verifier_wall_mean_relative_difference": 0.300312,
     "mismatch_count": 0,
     "run_level_mismatch_count": 0,
     "mismatches": [],
@@ -57,7 +63,9 @@
         "reward": 1,
         "tests_passed": 8,
         "tests_total": 8,
-        "ngspice_runs": 21
+        "ngspice_runs": 21,
+        "wall_s": 23.943,
+        "verifier_wall_s": null
       },
       "run": {
         "status": "passed",
@@ -65,7 +73,21 @@
         "tests_passed": 8,
         "tests_total": 8,
         "ngspice_runs": 21,
-        "wall_s": 16.648
+        "wall_s": 16.109,
+        "verifier_wall_s": 16.109,
+        "wall_clock_source": "harness"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 23.943,
+        "local_wall_s": 16.109,
+        "wall_delta_s": -7.834,
+        "wall_relative_difference": 0.327194,
+        "reference_verifier_wall_s": null,
+        "local_verifier_wall_s": 16.109,
+        "local_verifier_wall_source": "harness",
+        "verifier_wall_comparable": false,
+        "verifier_wall_delta_s": null,
+        "verifier_wall_relative_difference": null
       },
       "counts": {
         "reference_metrics": 8,
@@ -218,7 +240,9 @@
         "reward": 1,
         "tests_passed": 5,
         "tests_total": 5,
-        "ngspice_runs": 15
+        "ngspice_runs": 15,
+        "wall_s": 11.378,
+        "verifier_wall_s": 10.998
       },
       "run": {
         "status": "passed",
@@ -226,7 +250,21 @@
         "tests_passed": 5,
         "tests_total": 5,
         "ngspice_runs": 15,
-        "wall_s": 13.553
+        "wall_s": 13.653,
+        "verifier_wall_s": 13.312,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 11.378,
+        "local_wall_s": 13.653,
+        "wall_delta_s": 2.275,
+        "wall_relative_difference": 0.199947,
+        "reference_verifier_wall_s": 10.998,
+        "local_verifier_wall_s": 13.312,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": 2.314,
+        "verifier_wall_relative_difference": 0.210402
       },
       "counts": {
         "reference_metrics": 6,
@@ -347,7 +385,9 @@
         "reward": 1,
         "tests_passed": 12,
         "tests_total": 12,
-        "ngspice_runs": 189
+        "ngspice_runs": 189,
+        "wall_s": 101.088,
+        "verifier_wall_s": 100.73737729300046
       },
       "run": {
         "status": "passed",
@@ -355,7 +395,21 @@
         "tests_passed": 12,
         "tests_total": 12,
         "ngspice_runs": 189,
-        "wall_s": 73.726
+        "wall_s": 73.341,
+        "verifier_wall_s": 73.011,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 101.088,
+        "local_wall_s": 73.341,
+        "wall_delta_s": -27.747,
+        "wall_relative_difference": 0.274484,
+        "reference_verifier_wall_s": 100.73737729300046,
+        "local_verifier_wall_s": 73.011,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -27.726,
+        "verifier_wall_relative_difference": 0.275234
       },
       "counts": {
         "reference_metrics": 12,
@@ -572,7 +626,9 @@
         "reward": 1,
         "tests_passed": 12,
         "tests_total": 12,
-        "ngspice_runs": 95
+        "ngspice_runs": 95,
+        "wall_s": 49.224,
+        "verifier_wall_s": 48.85670987900812
       },
       "run": {
         "status": "passed",
@@ -580,7 +636,21 @@
         "tests_passed": 12,
         "tests_total": 12,
         "ngspice_runs": 95,
-        "wall_s": 35.082
+        "wall_s": 35.034,
+        "verifier_wall_s": 34.67,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 49.224,
+        "local_wall_s": 35.034,
+        "wall_delta_s": -14.19,
+        "wall_relative_difference": 0.288274,
+        "reference_verifier_wall_s": 48.85670987900812,
+        "local_verifier_wall_s": 34.67,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -14.187,
+        "verifier_wall_relative_difference": 0.290374
       },
       "counts": {
         "reference_metrics": 12,
@@ -797,7 +867,9 @@
         "reward": 1,
         "tests_passed": 24,
         "tests_total": 24,
-        "ngspice_runs": 3
+        "ngspice_runs": 3,
+        "wall_s": 360.016,
+        "verifier_wall_s": null
       },
       "run": {
         "status": "passed",
@@ -805,7 +877,21 @@
         "tests_passed": 24,
         "tests_total": 24,
         "ngspice_runs": 3,
-        "wall_s": 249.348
+        "wall_s": 251.225,
+        "verifier_wall_s": 251.225,
+        "wall_clock_source": "harness"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 360.016,
+        "local_wall_s": 251.225,
+        "wall_delta_s": -108.791,
+        "wall_relative_difference": 0.302184,
+        "reference_verifier_wall_s": null,
+        "local_verifier_wall_s": 251.225,
+        "local_verifier_wall_source": "harness",
+        "verifier_wall_comparable": false,
+        "verifier_wall_delta_s": null,
+        "verifier_wall_relative_difference": null
       },
       "counts": {
         "reference_metrics": 24,
@@ -1214,7 +1300,9 @@
         "reward": 1,
         "tests_passed": 5,
         "tests_total": 5,
-        "ngspice_runs": 22
+        "ngspice_runs": 22,
+        "wall_s": 35.057,
+        "verifier_wall_s": 34.729
       },
       "run": {
         "status": "passed",
@@ -1222,7 +1310,21 @@
         "tests_passed": 5,
         "tests_total": 5,
         "ngspice_runs": 22,
-        "wall_s": 24.367
+        "wall_s": 24.322,
+        "verifier_wall_s": 24.027,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 35.057,
+        "local_wall_s": 24.322,
+        "wall_delta_s": -10.735,
+        "wall_relative_difference": 0.306216,
+        "reference_verifier_wall_s": 34.729,
+        "local_verifier_wall_s": 24.027,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -10.702,
+        "verifier_wall_relative_difference": 0.308157
       },
       "counts": {
         "reference_metrics": 5,
@@ -1327,7 +1429,9 @@
         "reward": 1,
         "tests_passed": 6,
         "tests_total": 6,
-        "ngspice_runs": 14
+        "ngspice_runs": 14,
+        "wall_s": 78.316,
+        "verifier_wall_s": 77.926
       },
       "run": {
         "status": "passed",
@@ -1335,7 +1439,21 @@
         "tests_passed": 6,
         "tests_total": 6,
         "ngspice_runs": 14,
-        "wall_s": 34.522
+        "wall_s": 34.826,
+        "verifier_wall_s": 34.527,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 78.316,
+        "local_wall_s": 34.826,
+        "wall_delta_s": -43.49,
+        "wall_relative_difference": 0.555314,
+        "reference_verifier_wall_s": 77.926,
+        "local_verifier_wall_s": 34.527,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -43.399,
+        "verifier_wall_relative_difference": 0.556926
       },
       "counts": {
         "reference_metrics": 6,
@@ -1456,7 +1574,9 @@
         "reward": 1,
         "tests_passed": 4,
         "tests_total": 4,
-        "ngspice_runs": null
+        "ngspice_runs": null,
+        "wall_s": 59.339,
+        "verifier_wall_s": null
       },
       "run": {
         "status": "passed",
@@ -1464,7 +1584,21 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 20,
-        "wall_s": 43.983
+        "wall_s": 43.14,
+        "verifier_wall_s": 43.14,
+        "wall_clock_source": "harness"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 59.339,
+        "local_wall_s": 43.14,
+        "wall_delta_s": -16.199,
+        "wall_relative_difference": 0.272991,
+        "reference_verifier_wall_s": null,
+        "local_verifier_wall_s": 43.14,
+        "local_verifier_wall_source": "harness",
+        "verifier_wall_comparable": false,
+        "verifier_wall_delta_s": null,
+        "verifier_wall_relative_difference": null
       },
       "counts": {
         "reference_metrics": 4,
@@ -1553,7 +1687,9 @@
         "reward": 1,
         "tests_passed": 8,
         "tests_total": 8,
-        "ngspice_runs": 20
+        "ngspice_runs": 20,
+        "wall_s": 15.441,
+        "verifier_wall_s": null
       },
       "run": {
         "status": "passed",
@@ -1561,7 +1697,21 @@
         "tests_passed": 8,
         "tests_total": 8,
         "ngspice_runs": 20,
-        "wall_s": 9.537
+        "wall_s": 9.488,
+        "verifier_wall_s": 9.488,
+        "wall_clock_source": "harness"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 15.441,
+        "local_wall_s": 9.488,
+        "wall_delta_s": -5.953,
+        "wall_relative_difference": 0.385532,
+        "reference_verifier_wall_s": null,
+        "local_verifier_wall_s": 9.488,
+        "local_verifier_wall_source": "harness",
+        "verifier_wall_comparable": false,
+        "verifier_wall_delta_s": null,
+        "verifier_wall_relative_difference": null
       },
       "counts": {
         "reference_metrics": 8,
@@ -1714,7 +1864,9 @@
         "reward": 1,
         "tests_passed": 5,
         "tests_total": 5,
-        "ngspice_runs": 1
+        "ngspice_runs": 1,
+        "wall_s": 216.338,
+        "verifier_wall_s": null
       },
       "run": {
         "status": "passed",
@@ -1722,7 +1874,21 @@
         "tests_passed": 5,
         "tests_total": 5,
         "ngspice_runs": 1,
-        "wall_s": 149.182
+        "wall_s": 150.439,
+        "verifier_wall_s": 150.439,
+        "wall_clock_source": "harness"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 216.338,
+        "local_wall_s": 150.439,
+        "wall_delta_s": -65.899,
+        "wall_relative_difference": 0.304611,
+        "reference_verifier_wall_s": null,
+        "local_verifier_wall_s": 150.439,
+        "local_verifier_wall_source": "harness",
+        "verifier_wall_comparable": false,
+        "verifier_wall_delta_s": null,
+        "verifier_wall_relative_difference": null
       },
       "counts": {
         "reference_metrics": 5,
@@ -1827,7 +1993,9 @@
         "reward": 1,
         "tests_passed": 2,
         "tests_total": 2,
-        "ngspice_runs": 25
+        "ngspice_runs": 25,
+        "wall_s": 16.935,
+        "verifier_wall_s": 16.629
       },
       "run": {
         "status": "passed",
@@ -1835,7 +2003,21 @@
         "tests_passed": 2,
         "tests_total": 2,
         "ngspice_runs": 25,
-        "wall_s": 11.785
+        "wall_s": 11.796,
+        "verifier_wall_s": 11.532,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 16.935,
+        "local_wall_s": 11.796,
+        "wall_delta_s": -5.139,
+        "wall_relative_difference": 0.303454,
+        "reference_verifier_wall_s": 16.629,
+        "local_verifier_wall_s": 11.532,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -5.097,
+        "verifier_wall_relative_difference": 0.306513
       },
       "counts": {
         "reference_metrics": 2,
@@ -1892,7 +2074,9 @@
         "reward": 1,
         "tests_passed": 23,
         "tests_total": 23,
-        "ngspice_runs": 12
+        "ngspice_runs": 12,
+        "wall_s": 10.982,
+        "verifier_wall_s": 10.601
       },
       "run": {
         "status": "passed",
@@ -1900,7 +2084,21 @@
         "tests_passed": 23,
         "tests_total": 23,
         "ngspice_runs": 12,
-        "wall_s": 6.685
+        "wall_s": 6.683,
+        "verifier_wall_s": 6.41,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 10.982,
+        "local_wall_s": 6.683,
+        "wall_delta_s": -4.299,
+        "wall_relative_difference": 0.391459,
+        "reference_verifier_wall_s": 10.601,
+        "local_verifier_wall_s": 6.41,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -4.191,
+        "verifier_wall_relative_difference": 0.39534
       },
       "counts": {
         "reference_metrics": 23,
@@ -2293,7 +2491,9 @@
         "reward": 1,
         "tests_passed": 8,
         "tests_total": 8,
-        "ngspice_runs": 41
+        "ngspice_runs": 41,
+        "wall_s": 85.321,
+        "verifier_wall_s": 84.98
       },
       "run": {
         "status": "passed",
@@ -2301,7 +2501,21 @@
         "tests_passed": 8,
         "tests_total": 8,
         "ngspice_runs": 41,
-        "wall_s": 59.414
+        "wall_s": 59.705,
+        "verifier_wall_s": 59.409,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 85.321,
+        "local_wall_s": 59.705,
+        "wall_delta_s": -25.616,
+        "wall_relative_difference": 0.300231,
+        "reference_verifier_wall_s": 84.98,
+        "local_verifier_wall_s": 59.409,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -25.571,
+        "verifier_wall_relative_difference": 0.300906
       },
       "counts": {
         "reference_metrics": 8,
@@ -2454,7 +2668,9 @@
         "reward": 1,
         "tests_passed": 14,
         "tests_total": 14,
-        "ngspice_runs": 212
+        "ngspice_runs": 212,
+        "wall_s": 159.27,
+        "verifier_wall_s": 158.908
       },
       "run": {
         "status": "passed",
@@ -2462,7 +2678,21 @@
         "tests_passed": 14,
         "tests_total": 14,
         "ngspice_runs": 212,
-        "wall_s": 103.059
+        "wall_s": 103.416,
+        "verifier_wall_s": 103.141,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 159.27,
+        "local_wall_s": 103.416,
+        "wall_delta_s": -55.854,
+        "wall_relative_difference": 0.350688,
+        "reference_verifier_wall_s": 158.908,
+        "local_verifier_wall_s": 103.141,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -55.767,
+        "verifier_wall_relative_difference": 0.350939
       },
       "counts": {
         "reference_metrics": 14,
@@ -2711,7 +2941,9 @@
         "reward": 1,
         "tests_passed": 9,
         "tests_total": 9,
-        "ngspice_runs": 81
+        "ngspice_runs": 81,
+        "wall_s": 40.964,
+        "verifier_wall_s": 40.62
       },
       "run": {
         "status": "passed",
@@ -2719,7 +2951,21 @@
         "tests_passed": 9,
         "tests_total": 9,
         "ngspice_runs": 81,
-        "wall_s": 28.412
+        "wall_s": 28.429,
+        "verifier_wall_s": 28.136,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 40.964,
+        "local_wall_s": 28.429,
+        "wall_delta_s": -12.535,
+        "wall_relative_difference": 0.306,
+        "reference_verifier_wall_s": 40.62,
+        "local_verifier_wall_s": 28.136,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -12.484,
+        "verifier_wall_relative_difference": 0.307336
       },
       "counts": {
         "reference_metrics": 9,
@@ -2888,7 +3134,9 @@
         "reward": 1,
         "tests_passed": 9,
         "tests_total": 9,
-        "ngspice_runs": 30
+        "ngspice_runs": 30,
+        "wall_s": 88.02,
+        "verifier_wall_s": 87.692
       },
       "run": {
         "status": "passed",
@@ -2896,7 +3144,21 @@
         "tests_passed": 9,
         "tests_total": 9,
         "ngspice_runs": 30,
-        "wall_s": 68.521
+        "wall_s": 68.574,
+        "verifier_wall_s": 68.28,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 88.02,
+        "local_wall_s": 68.574,
+        "wall_delta_s": -19.446,
+        "wall_relative_difference": 0.220927,
+        "reference_verifier_wall_s": 87.692,
+        "local_verifier_wall_s": 68.28,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -19.412,
+        "verifier_wall_relative_difference": 0.221366
       },
       "counts": {
         "reference_metrics": 10,
@@ -3081,7 +3343,9 @@
         "reward": 1,
         "tests_passed": 9,
         "tests_total": 9,
-        "ngspice_runs": 3
+        "ngspice_runs": 3,
+        "wall_s": 39.367,
+        "verifier_wall_s": 38.958
       },
       "run": {
         "status": "passed",
@@ -3089,7 +3353,21 @@
         "tests_passed": 9,
         "tests_total": 9,
         "ngspice_runs": 3,
-        "wall_s": 29.461
+        "wall_s": 29.417,
+        "verifier_wall_s": 29.093,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 39.367,
+        "local_wall_s": 29.417,
+        "wall_delta_s": -9.95,
+        "wall_relative_difference": 0.25275,
+        "reference_verifier_wall_s": 38.958,
+        "local_verifier_wall_s": 29.093,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -9.865,
+        "verifier_wall_relative_difference": 0.253221
       },
       "counts": {
         "reference_metrics": 9,
@@ -3258,7 +3536,9 @@
         "reward": 1,
         "tests_passed": 13,
         "tests_total": 13,
-        "ngspice_runs": 10
+        "ngspice_runs": 10,
+        "wall_s": 148.263,
+        "verifier_wall_s": 147.922
       },
       "run": {
         "status": "passed",
@@ -3266,7 +3546,21 @@
         "tests_passed": 13,
         "tests_total": 13,
         "ngspice_runs": 10,
-        "wall_s": 113.195
+        "wall_s": 111.742,
+        "verifier_wall_s": 111.433,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 148.263,
+        "local_wall_s": 111.742,
+        "wall_delta_s": -36.521,
+        "wall_relative_difference": 0.246326,
+        "reference_verifier_wall_s": 147.922,
+        "local_verifier_wall_s": 111.433,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -36.489,
+        "verifier_wall_relative_difference": 0.246677
       },
       "counts": {
         "reference_metrics": 21,
@@ -3627,7 +3921,9 @@
         "reward": 1,
         "tests_passed": 15,
         "tests_total": 15,
-        "ngspice_runs": 114
+        "ngspice_runs": 114,
+        "wall_s": 104.809,
+        "verifier_wall_s": 104.396
       },
       "run": {
         "status": "passed",
@@ -3635,7 +3931,21 @@
         "tests_passed": 15,
         "tests_total": 15,
         "ngspice_runs": 114,
-        "wall_s": 64.264
+        "wall_s": 64.315,
+        "verifier_wall_s": 64.042,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 104.809,
+        "local_wall_s": 64.315,
+        "wall_delta_s": -40.494,
+        "wall_relative_difference": 0.38636,
+        "reference_verifier_wall_s": 104.396,
+        "local_verifier_wall_s": 64.042,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -40.354,
+        "verifier_wall_relative_difference": 0.386547
       },
       "counts": {
         "reference_metrics": 15,
@@ -3900,7 +4210,9 @@
         "reward": 1,
         "tests_passed": 15,
         "tests_total": 15,
-        "ngspice_runs": 143
+        "ngspice_runs": 143,
+        "wall_s": 129.093,
+        "verifier_wall_s": 128.685
       },
       "run": {
         "status": "passed",
@@ -3908,7 +4220,21 @@
         "tests_passed": 15,
         "tests_total": 15,
         "ngspice_runs": 143,
-        "wall_s": 86.79
+        "wall_s": 85.052,
+        "verifier_wall_s": 84.782,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 129.093,
+        "local_wall_s": 85.052,
+        "wall_delta_s": -44.041,
+        "wall_relative_difference": 0.341157,
+        "reference_verifier_wall_s": 128.685,
+        "local_verifier_wall_s": 84.782,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -43.903,
+        "verifier_wall_relative_difference": 0.341166
       },
       "counts": {
         "reference_metrics": 15,
@@ -4173,7 +4499,9 @@
         "reward": 1,
         "tests_passed": 11,
         "tests_total": 11,
-        "ngspice_runs": 36
+        "ngspice_runs": 36,
+        "wall_s": 33.758,
+        "verifier_wall_s": 33.43
       },
       "run": {
         "status": "passed",
@@ -4181,7 +4509,21 @@
         "tests_passed": 11,
         "tests_total": 11,
         "ngspice_runs": 36,
-        "wall_s": 21.198
+        "wall_s": 21.248,
+        "verifier_wall_s": 20.951,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 33.758,
+        "local_wall_s": 21.248,
+        "wall_delta_s": -12.51,
+        "wall_relative_difference": 0.370579,
+        "reference_verifier_wall_s": 33.43,
+        "local_verifier_wall_s": 20.951,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -12.479,
+        "verifier_wall_relative_difference": 0.373287
       },
       "counts": {
         "reference_metrics": 11,
@@ -4382,7 +4724,9 @@
         "reward": 1,
         "tests_passed": 13,
         "tests_total": 13,
-        "ngspice_runs": 8
+        "ngspice_runs": 8,
+        "wall_s": 56.367,
+        "verifier_wall_s": 56.367
       },
       "run": {
         "status": "passed",
@@ -4390,7 +4734,21 @@
         "tests_passed": 13,
         "tests_total": 13,
         "ngspice_runs": 8,
-        "wall_s": 41.89
+        "wall_s": 40.587,
+        "verifier_wall_s": 40.261,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 56.367,
+        "local_wall_s": 40.587,
+        "wall_delta_s": -15.78,
+        "wall_relative_difference": 0.279951,
+        "reference_verifier_wall_s": 56.367,
+        "local_verifier_wall_s": 40.261,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -16.106,
+        "verifier_wall_relative_difference": 0.285735
       },
       "counts": {
         "reference_metrics": 13,
@@ -4623,7 +4981,9 @@
         "reward": 1,
         "tests_passed": 6,
         "tests_total": 6,
-        "ngspice_runs": null
+        "ngspice_runs": null,
+        "wall_s": 200.279,
+        "verifier_wall_s": 199.51951598600135
       },
       "run": {
         "status": "passed",
@@ -4631,7 +4991,21 @@
         "tests_passed": 6,
         "tests_total": 6,
         "ngspice_runs": 3,
-        "wall_s": 135.407
+        "wall_s": 132.775,
+        "verifier_wall_s": 132.464,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 200.279,
+        "local_wall_s": 132.775,
+        "wall_delta_s": -67.504,
+        "wall_relative_difference": 0.33705,
+        "reference_verifier_wall_s": 199.51951598600135,
+        "local_verifier_wall_s": 132.464,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -67.056,
+        "verifier_wall_relative_difference": 0.336085
       },
       "counts": {
         "reference_metrics": 6,
@@ -4752,7 +5126,9 @@
         "reward": 1,
         "tests_passed": 8,
         "tests_total": 8,
-        "ngspice_runs": 60
+        "ngspice_runs": 60,
+        "wall_s": 30.733,
+        "verifier_wall_s": 30.733
       },
       "run": {
         "status": "passed",
@@ -4760,7 +5136,21 @@
         "tests_passed": 8,
         "tests_total": 8,
         "ngspice_runs": 60,
-        "wall_s": 31.233
+        "wall_s": 31.276,
+        "verifier_wall_s": 30.957,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 30.733,
+        "local_wall_s": 31.276,
+        "wall_delta_s": 0.543,
+        "wall_relative_difference": 0.017668,
+        "reference_verifier_wall_s": 30.733,
+        "local_verifier_wall_s": 30.957,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": 0.224,
+        "verifier_wall_relative_difference": 0.007289
       },
       "counts": {
         "reference_metrics": 11,
@@ -4961,7 +5351,9 @@
         "reward": 1,
         "tests_passed": 16,
         "tests_total": 16,
-        "ngspice_runs": 62
+        "ngspice_runs": 62,
+        "wall_s": 13.281,
+        "verifier_wall_s": 12.322328926005866
       },
       "run": {
         "status": "passed",
@@ -4969,7 +5361,21 @@
         "tests_passed": 16,
         "tests_total": 16,
         "ngspice_runs": 63,
-        "wall_s": 17.607
+        "wall_s": 17.815,
+        "verifier_wall_s": 17.053,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 13.281,
+        "local_wall_s": 17.815,
+        "wall_delta_s": 4.534,
+        "wall_relative_difference": 0.34139,
+        "reference_verifier_wall_s": 12.322328926005866,
+        "local_verifier_wall_s": 17.053,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": 4.731,
+        "verifier_wall_relative_difference": 0.38391
       },
       "counts": {
         "reference_metrics": 16,
@@ -5250,7 +5656,9 @@
         "reward": 1,
         "tests_passed": 7,
         "tests_total": 7,
-        "ngspice_runs": 23
+        "ngspice_runs": 23,
+        "wall_s": 13.632,
+        "verifier_wall_s": 13.282
       },
       "run": {
         "status": "passed",
@@ -5258,7 +5666,21 @@
         "tests_passed": 7,
         "tests_total": 7,
         "ngspice_runs": 23,
-        "wall_s": 10.194
+        "wall_s": 10.467,
+        "verifier_wall_s": 10.168,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 13.632,
+        "local_wall_s": 10.467,
+        "wall_delta_s": -3.165,
+        "wall_relative_difference": 0.232174,
+        "reference_verifier_wall_s": 13.282,
+        "local_verifier_wall_s": 10.168,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -3.114,
+        "verifier_wall_relative_difference": 0.234453
       },
       "counts": {
         "reference_metrics": 7,
@@ -5395,7 +5817,9 @@
         "reward": 1,
         "tests_passed": 4,
         "tests_total": 4,
-        "ngspice_runs": 30
+        "ngspice_runs": 30,
+        "wall_s": 17.09,
+        "verifier_wall_s": null
       },
       "run": {
         "status": "passed",
@@ -5403,7 +5827,21 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 30,
-        "wall_s": 12.351
+        "wall_s": 12.26,
+        "verifier_wall_s": 12.26,
+        "wall_clock_source": "harness"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 17.09,
+        "local_wall_s": 12.26,
+        "wall_delta_s": -4.83,
+        "wall_relative_difference": 0.282621,
+        "reference_verifier_wall_s": null,
+        "local_verifier_wall_s": 12.26,
+        "local_verifier_wall_source": "harness",
+        "verifier_wall_comparable": false,
+        "verifier_wall_delta_s": null,
+        "verifier_wall_relative_difference": null
       },
       "counts": {
         "reference_metrics": 5,
@@ -5508,7 +5946,9 @@
         "reward": 1,
         "tests_passed": 4,
         "tests_total": 4,
-        "ngspice_runs": 10
+        "ngspice_runs": 10,
+        "wall_s": 5.322,
+        "verifier_wall_s": null
       },
       "run": {
         "status": "passed",
@@ -5516,7 +5956,21 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 10,
-        "wall_s": 3.734
+        "wall_s": 3.748,
+        "verifier_wall_s": 3.748,
+        "wall_clock_source": "harness"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 5.322,
+        "local_wall_s": 3.748,
+        "wall_delta_s": -1.574,
+        "wall_relative_difference": 0.295753,
+        "reference_verifier_wall_s": null,
+        "local_verifier_wall_s": 3.748,
+        "local_verifier_wall_source": "harness",
+        "verifier_wall_comparable": false,
+        "verifier_wall_delta_s": null,
+        "verifier_wall_relative_difference": null
       },
       "counts": {
         "reference_metrics": 5,
@@ -5621,7 +6075,9 @@
         "reward": 1,
         "tests_passed": 5,
         "tests_total": 5,
-        "ngspice_runs": 12
+        "ngspice_runs": 12,
+        "wall_s": 7.574,
+        "verifier_wall_s": 7.241
       },
       "run": {
         "status": "passed",
@@ -5629,7 +6085,21 @@
         "tests_passed": 5,
         "tests_total": 5,
         "ngspice_runs": 12,
-        "wall_s": 5.431
+        "wall_s": 5.449,
+        "verifier_wall_s": 5.156,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 7.574,
+        "local_wall_s": 5.449,
+        "wall_delta_s": -2.125,
+        "wall_relative_difference": 0.280565,
+        "reference_verifier_wall_s": 7.241,
+        "local_verifier_wall_s": 5.156,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -2.085,
+        "verifier_wall_relative_difference": 0.287944
       },
       "counts": {
         "reference_metrics": 6,
@@ -5750,7 +6220,9 @@
         "reward": 1,
         "tests_passed": 7,
         "tests_total": 7,
-        "ngspice_runs": 27
+        "ngspice_runs": 27,
+        "wall_s": 15.433,
+        "verifier_wall_s": 15.074
       },
       "run": {
         "status": "passed",
@@ -5758,7 +6230,21 @@
         "tests_passed": 7,
         "tests_total": 7,
         "ngspice_runs": 27,
-        "wall_s": 10.846
+        "wall_s": 11.553,
+        "verifier_wall_s": 11.241,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 15.433,
+        "local_wall_s": 11.553,
+        "wall_delta_s": -3.88,
+        "wall_relative_difference": 0.251409,
+        "reference_verifier_wall_s": 15.074,
+        "local_verifier_wall_s": 11.241,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -3.833,
+        "verifier_wall_relative_difference": 0.254279
       },
       "counts": {
         "reference_metrics": 7,
@@ -5895,7 +6381,9 @@
         "reward": 1,
         "tests_passed": 9,
         "tests_total": 9,
-        "ngspice_runs": 27
+        "ngspice_runs": 27,
+        "wall_s": 58.0,
+        "verifier_wall_s": 58.0
       },
       "run": {
         "status": "passed",
@@ -5903,7 +6391,21 @@
         "tests_passed": 9,
         "tests_total": 9,
         "ngspice_runs": 27,
-        "wall_s": 52.352
+        "wall_s": 52.415,
+        "verifier_wall_s": 52.415,
+        "wall_clock_source": "harness"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 58.0,
+        "local_wall_s": 52.415,
+        "wall_delta_s": -5.585,
+        "wall_relative_difference": 0.096293,
+        "reference_verifier_wall_s": 58.0,
+        "local_verifier_wall_s": 52.415,
+        "local_verifier_wall_source": "harness",
+        "verifier_wall_comparable": false,
+        "verifier_wall_delta_s": null,
+        "verifier_wall_relative_difference": null
       },
       "counts": {
         "reference_metrics": 9,
@@ -6072,7 +6574,9 @@
         "reward": 1,
         "tests_passed": 9,
         "tests_total": 9,
-        "ngspice_runs": 161
+        "ngspice_runs": 161,
+        "wall_s": 21.493,
+        "verifier_wall_s": 21.077788074006094
       },
       "run": {
         "status": "passed",
@@ -6080,7 +6584,21 @@
         "tests_passed": 9,
         "tests_total": 9,
         "ngspice_runs": 161,
-        "wall_s": 36.078
+        "wall_s": 35.739,
+        "verifier_wall_s": 35.422,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 21.493,
+        "local_wall_s": 35.739,
+        "wall_delta_s": 14.246,
+        "wall_relative_difference": 0.66282,
+        "reference_verifier_wall_s": 21.077788074006094,
+        "local_verifier_wall_s": 35.422,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": 14.344,
+        "verifier_wall_relative_difference": 0.680537
       },
       "counts": {
         "reference_metrics": 9,
@@ -6249,7 +6767,9 @@
         "reward": 1,
         "tests_passed": 8,
         "tests_total": 8,
-        "ngspice_runs": 135
+        "ngspice_runs": 135,
+        "wall_s": 88.73,
+        "verifier_wall_s": null
       },
       "run": {
         "status": "passed",
@@ -6257,7 +6777,21 @@
         "tests_passed": 8,
         "tests_total": 8,
         "ngspice_runs": 135,
-        "wall_s": 66.304
+        "wall_s": 66.923,
+        "verifier_wall_s": 66.923,
+        "wall_clock_source": "harness"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 88.73,
+        "local_wall_s": 66.923,
+        "wall_delta_s": -21.807,
+        "wall_relative_difference": 0.245768,
+        "reference_verifier_wall_s": null,
+        "local_verifier_wall_s": 66.923,
+        "local_verifier_wall_source": "harness",
+        "verifier_wall_comparable": false,
+        "verifier_wall_delta_s": null,
+        "verifier_wall_relative_difference": null
       },
       "counts": {
         "reference_metrics": 8,
@@ -6410,7 +6944,9 @@
         "reward": 1,
         "tests_passed": 3,
         "tests_total": 3,
-        "ngspice_runs": 5
+        "ngspice_runs": 5,
+        "wall_s": 71.898,
+        "verifier_wall_s": 71.523
       },
       "run": {
         "status": "passed",
@@ -6418,7 +6954,21 @@
         "tests_passed": 3,
         "tests_total": 3,
         "ngspice_runs": 5,
-        "wall_s": 101.786
+        "wall_s": 102.328,
+        "verifier_wall_s": 102.008,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 71.898,
+        "local_wall_s": 102.328,
+        "wall_delta_s": 30.43,
+        "wall_relative_difference": 0.423238,
+        "reference_verifier_wall_s": 71.523,
+        "local_verifier_wall_s": 102.008,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": 30.485,
+        "verifier_wall_relative_difference": 0.426227
       },
       "counts": {
         "reference_metrics": 5,
@@ -6523,7 +7073,9 @@
         "reward": 1,
         "tests_passed": 7,
         "tests_total": 7,
-        "ngspice_runs": null
+        "ngspice_runs": null,
+        "wall_s": 15.034,
+        "verifier_wall_s": null
       },
       "run": {
         "status": "passed",
@@ -6531,7 +7083,21 @@
         "tests_passed": 7,
         "tests_total": 7,
         "ngspice_runs": 104,
-        "wall_s": 25.626
+        "wall_s": 27.605,
+        "verifier_wall_s": 27.605,
+        "wall_clock_source": "harness"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 15.034,
+        "local_wall_s": 27.605,
+        "wall_delta_s": 12.571,
+        "wall_relative_difference": 0.836171,
+        "reference_verifier_wall_s": null,
+        "local_verifier_wall_s": 27.605,
+        "local_verifier_wall_source": "harness",
+        "verifier_wall_comparable": false,
+        "verifier_wall_delta_s": null,
+        "verifier_wall_relative_difference": null
       },
       "counts": {
         "reference_metrics": 7,
@@ -6668,7 +7234,9 @@
         "reward": 1,
         "tests_passed": 7,
         "tests_total": 7,
-        "ngspice_runs": 13
+        "ngspice_runs": 13,
+        "wall_s": 7.674,
+        "verifier_wall_s": null
       },
       "run": {
         "status": "passed",
@@ -6676,7 +7244,21 @@
         "tests_passed": 7,
         "tests_total": 7,
         "ngspice_runs": 13,
-        "wall_s": 6.167
+        "wall_s": 6.458,
+        "verifier_wall_s": 6.458,
+        "wall_clock_source": "harness"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 7.674,
+        "local_wall_s": 6.458,
+        "wall_delta_s": -1.216,
+        "wall_relative_difference": 0.158457,
+        "reference_verifier_wall_s": null,
+        "local_verifier_wall_s": 6.458,
+        "local_verifier_wall_source": "harness",
+        "verifier_wall_comparable": false,
+        "verifier_wall_delta_s": null,
+        "verifier_wall_relative_difference": null
       },
       "counts": {
         "reference_metrics": 7,
@@ -6813,7 +7395,9 @@
         "reward": 1,
         "tests_passed": 6,
         "tests_total": 6,
-        "ngspice_runs": 50
+        "ngspice_runs": 50,
+        "wall_s": 75.801,
+        "verifier_wall_s": 75.801
       },
       "run": {
         "status": "passed",
@@ -6821,7 +7405,21 @@
         "tests_passed": 6,
         "tests_total": 6,
         "ngspice_runs": 50,
-        "wall_s": 33.897
+        "wall_s": 32.405,
+        "verifier_wall_s": 32.087,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 75.801,
+        "local_wall_s": 32.405,
+        "wall_delta_s": -43.396,
+        "wall_relative_difference": 0.572499,
+        "reference_verifier_wall_s": 75.801,
+        "local_verifier_wall_s": 32.087,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -43.714,
+        "verifier_wall_relative_difference": 0.576694
       },
       "counts": {
         "reference_metrics": 6,
@@ -6942,7 +7540,9 @@
         "reward": 1,
         "tests_passed": 11,
         "tests_total": 11,
-        "ngspice_runs": 6
+        "ngspice_runs": 6,
+        "wall_s": 3.769,
+        "verifier_wall_s": 3.414
       },
       "run": {
         "status": "passed",
@@ -6950,7 +7550,21 @@
         "tests_passed": 11,
         "tests_total": 11,
         "ngspice_runs": 6,
-        "wall_s": 3.136
+        "wall_s": 3.051,
+        "verifier_wall_s": 2.695,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 3.769,
+        "local_wall_s": 3.051,
+        "wall_delta_s": -0.718,
+        "wall_relative_difference": 0.190501,
+        "reference_verifier_wall_s": 3.414,
+        "local_verifier_wall_s": 2.695,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -0.719,
+        "verifier_wall_relative_difference": 0.210603
       },
       "counts": {
         "reference_metrics": 12,
@@ -7167,7 +7781,9 @@
         "reward": 1,
         "tests_passed": 4,
         "tests_total": 4,
-        "ngspice_runs": 13
+        "ngspice_runs": 13,
+        "wall_s": 61.186,
+        "verifier_wall_s": 60.835
       },
       "run": {
         "status": "passed",
@@ -7175,7 +7791,21 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 13,
-        "wall_s": 85.283
+        "wall_s": 75.586,
+        "verifier_wall_s": 75.239,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 61.186,
+        "local_wall_s": 75.586,
+        "wall_delta_s": 14.4,
+        "wall_relative_difference": 0.235348,
+        "reference_verifier_wall_s": 60.835,
+        "local_verifier_wall_s": 75.239,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": 14.404,
+        "verifier_wall_relative_difference": 0.236772
       },
       "counts": {
         "reference_metrics": 5,
@@ -7280,7 +7910,9 @@
         "reward": 1,
         "tests_passed": 7,
         "tests_total": 7,
-        "ngspice_runs": null
+        "ngspice_runs": null,
+        "wall_s": 3.017,
+        "verifier_wall_s": 2.666
       },
       "run": {
         "status": "passed",
@@ -7288,7 +7920,21 @@
         "tests_passed": 7,
         "tests_total": 7,
         "ngspice_runs": 4,
-        "wall_s": 2.646
+        "wall_s": 2.541,
+        "verifier_wall_s": 2.207,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 3.017,
+        "local_wall_s": 2.541,
+        "wall_delta_s": -0.476,
+        "wall_relative_difference": 0.157773,
+        "reference_verifier_wall_s": 2.666,
+        "local_verifier_wall_s": 2.207,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -0.459,
+        "verifier_wall_relative_difference": 0.172168
       },
       "counts": {
         "reference_metrics": 7,
@@ -7425,7 +8071,9 @@
         "reward": 1,
         "tests_passed": 4,
         "tests_total": 4,
-        "ngspice_runs": 6
+        "ngspice_runs": 6,
+        "wall_s": 140.1,
+        "verifier_wall_s": 140.1
       },
       "run": {
         "status": "passed",
@@ -7433,7 +8081,21 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 6,
-        "wall_s": 189.043
+        "wall_s": 174.199,
+        "verifier_wall_s": 173.866,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 140.1,
+        "local_wall_s": 174.199,
+        "wall_delta_s": 34.099,
+        "wall_relative_difference": 0.24339,
+        "reference_verifier_wall_s": 140.1,
+        "local_verifier_wall_s": 173.866,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": 33.766,
+        "verifier_wall_relative_difference": 0.241014
       },
       "counts": {
         "reference_metrics": 4,
@@ -7522,7 +8184,9 @@
         "reward": 1,
         "tests_passed": 4,
         "tests_total": 4,
-        "ngspice_runs": 12
+        "ngspice_runs": 12,
+        "wall_s": 165.983,
+        "verifier_wall_s": 165.622
       },
       "run": {
         "status": "passed",
@@ -7530,7 +8194,21 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 12,
-        "wall_s": 295.915
+        "wall_s": 269.572,
+        "verifier_wall_s": 269.306,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 165.983,
+        "local_wall_s": 269.572,
+        "wall_delta_s": 103.589,
+        "wall_relative_difference": 0.624094,
+        "reference_verifier_wall_s": 165.622,
+        "local_verifier_wall_s": 269.306,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": 103.684,
+        "verifier_wall_relative_difference": 0.626028
       },
       "counts": {
         "reference_metrics": 4,
@@ -7619,7 +8297,9 @@
         "reward": 1,
         "tests_passed": 9,
         "tests_total": 9,
-        "ngspice_runs": 94
+        "ngspice_runs": 94,
+        "wall_s": 110.554,
+        "verifier_wall_s": 110.206
       },
       "run": {
         "status": "passed",
@@ -7627,7 +8307,21 @@
         "tests_passed": 9,
         "tests_total": 9,
         "ngspice_runs": 94,
-        "wall_s": 88.322
+        "wall_s": 86.355,
+        "verifier_wall_s": 85.972,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 110.554,
+        "local_wall_s": 86.355,
+        "wall_delta_s": -24.199,
+        "wall_relative_difference": 0.218889,
+        "reference_verifier_wall_s": 110.206,
+        "local_verifier_wall_s": 85.972,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -24.234,
+        "verifier_wall_relative_difference": 0.219897
       },
       "counts": {
         "reference_metrics": 9,
@@ -7796,7 +8490,9 @@
         "reward": 1,
         "tests_passed": 8,
         "tests_total": 8,
-        "ngspice_runs": 30
+        "ngspice_runs": 30,
+        "wall_s": 19.389,
+        "verifier_wall_s": 18.615541190985823
       },
       "run": {
         "status": "passed",
@@ -7804,7 +8500,21 @@
         "tests_passed": 8,
         "tests_total": 8,
         "ngspice_runs": 30,
-        "wall_s": 14.57
+        "wall_s": 14.071,
+        "verifier_wall_s": 13.736,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 19.389,
+        "local_wall_s": 14.071,
+        "wall_delta_s": -5.318,
+        "wall_relative_difference": 0.274279,
+        "reference_verifier_wall_s": 18.615541190985823,
+        "local_verifier_wall_s": 13.736,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -4.88,
+        "verifier_wall_relative_difference": 0.262122
       },
       "counts": {
         "reference_metrics": 8,
@@ -7957,7 +8667,9 @@
         "reward": 1,
         "tests_passed": 11,
         "tests_total": 11,
-        "ngspice_runs": 225
+        "ngspice_runs": 225,
+        "wall_s": 137.105,
+        "verifier_wall_s": 136.751
       },
       "run": {
         "status": "passed",
@@ -7965,7 +8677,21 @@
         "tests_passed": 11,
         "tests_total": 11,
         "ngspice_runs": 225,
-        "wall_s": 106.886
+        "wall_s": 106.912,
+        "verifier_wall_s": 106.557,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 137.105,
+        "local_wall_s": 106.912,
+        "wall_delta_s": -30.193,
+        "wall_relative_difference": 0.220218,
+        "reference_verifier_wall_s": 136.751,
+        "local_verifier_wall_s": 106.557,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -30.194,
+        "verifier_wall_relative_difference": 0.220795
       },
       "counts": {
         "reference_metrics": 11,
@@ -8166,7 +8892,9 @@
         "reward": 1,
         "tests_passed": 6,
         "tests_total": 6,
-        "ngspice_runs": 45
+        "ngspice_runs": 45,
+        "wall_s": 11.829,
+        "verifier_wall_s": 11.476
       },
       "run": {
         "status": "passed",
@@ -8174,7 +8902,21 @@
         "tests_passed": 6,
         "tests_total": 6,
         "ngspice_runs": 45,
-        "wall_s": 12.218
+        "wall_s": 13.714,
+        "verifier_wall_s": 13.364,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 11.829,
+        "local_wall_s": 13.714,
+        "wall_delta_s": 1.885,
+        "wall_relative_difference": 0.159354,
+        "reference_verifier_wall_s": 11.476,
+        "local_verifier_wall_s": 13.364,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": 1.888,
+        "verifier_wall_relative_difference": 0.164517
       },
       "counts": {
         "reference_metrics": 6,
@@ -8295,7 +9037,9 @@
         "reward": 1,
         "tests_passed": 4,
         "tests_total": 4,
-        "ngspice_runs": 2
+        "ngspice_runs": 2,
+        "wall_s": 1.14,
+        "verifier_wall_s": 0.971
       },
       "run": {
         "status": "passed",
@@ -8303,7 +9047,21 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 2,
-        "wall_s": 1.306
+        "wall_s": 1.314,
+        "verifier_wall_s": 0.94,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 1.14,
+        "local_wall_s": 1.314,
+        "wall_delta_s": 0.174,
+        "wall_relative_difference": 0.152632,
+        "reference_verifier_wall_s": 0.971,
+        "local_verifier_wall_s": 0.94,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -0.031,
+        "verifier_wall_relative_difference": 0.031926
       },
       "counts": {
         "reference_metrics": 5,
@@ -8408,7 +9166,9 @@
         "reward": 1,
         "tests_passed": 11,
         "tests_total": 11,
-        "ngspice_runs": 69
+        "ngspice_runs": 69,
+        "wall_s": 35.856,
+        "verifier_wall_s": 35.488
       },
       "run": {
         "status": "passed",
@@ -8416,7 +9176,21 @@
         "tests_passed": 11,
         "tests_total": 11,
         "ngspice_runs": 69,
-        "wall_s": 28.9
+        "wall_s": 28.794,
+        "verifier_wall_s": 28.461,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 35.856,
+        "local_wall_s": 28.794,
+        "wall_delta_s": -7.062,
+        "wall_relative_difference": 0.196954,
+        "reference_verifier_wall_s": 35.488,
+        "local_verifier_wall_s": 28.461,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -7.027,
+        "verifier_wall_relative_difference": 0.198011
       },
       "counts": {
         "reference_metrics": 11,
@@ -8617,7 +9391,9 @@
         "reward": 1,
         "tests_passed": 11,
         "tests_total": 11,
-        "ngspice_runs": 69
+        "ngspice_runs": 69,
+        "wall_s": 37.112,
+        "verifier_wall_s": 36.788
       },
       "run": {
         "status": "passed",
@@ -8625,7 +9401,21 @@
         "tests_passed": 11,
         "tests_total": 11,
         "ngspice_runs": 69,
-        "wall_s": 27.32
+        "wall_s": 28.73,
+        "verifier_wall_s": 28.447,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 37.112,
+        "local_wall_s": 28.73,
+        "wall_delta_s": -8.382,
+        "wall_relative_difference": 0.225857,
+        "reference_verifier_wall_s": 36.788,
+        "local_verifier_wall_s": 28.447,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -8.341,
+        "verifier_wall_relative_difference": 0.226732
       },
       "counts": {
         "reference_metrics": 11,
@@ -8826,7 +9616,9 @@
         "reward": 1,
         "tests_passed": 4,
         "tests_total": 4,
-        "ngspice_runs": 16
+        "ngspice_runs": 16,
+        "wall_s": 117.602,
+        "verifier_wall_s": 117.222
       },
       "run": {
         "status": "passed",
@@ -8834,7 +9626,21 @@
         "tests_passed": 4,
         "tests_total": 4,
         "ngspice_runs": 16,
-        "wall_s": 82.503
+        "wall_s": 81.907,
+        "verifier_wall_s": 81.582,
+        "wall_clock_source": "verifier"
+      },
+      "wall_comparison": {
+        "reference_wall_s": 117.602,
+        "local_wall_s": 81.907,
+        "wall_delta_s": -35.695,
+        "wall_relative_difference": 0.303524,
+        "reference_verifier_wall_s": 117.222,
+        "local_verifier_wall_s": 81.582,
+        "local_verifier_wall_source": "verifier",
+        "verifier_wall_comparable": true,
+        "verifier_wall_delta_s": -35.64,
+        "verifier_wall_relative_difference": 0.304038
       },
       "counts": {
         "reference_metrics": 5,

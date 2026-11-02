@@ -2,7 +2,7 @@
   "task_id": "sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 3.734,
+  "wall_s": 3.748,
   "reason": "",
   "image": "adb-verifier:sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60-f222f836f971",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 4,
     "partial": 1.0,
     "ngspice_runs": 10,
-    "wall_clock_s": 3.734,
+    "wall_clock_s": 3.748,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],

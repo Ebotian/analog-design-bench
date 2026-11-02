@@ -158,6 +158,12 @@ def relative_error(reference: float, current: float) -> float:
     return abs(current - reference) / abs(reference)
 
 
+def _optional_float(value: object) -> float | None:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    return float(value)
+
+
 def _squash(name: str) -> str:
     """Normalised name for fuzzy fallback matching."""
     words = re.split(r"[^a-z0-9]+", name.casefold())
@@ -337,6 +343,41 @@ def reconcile_one(run: Mapping[str, Any], reference: Mapping[str, Any]) -> dict[
         for row in rows
         if row["status_match"] is False or (row["relative_error"] is not None and not row["value_match"])
     ]
+    runtime = cast(Mapping[str, Any], reference.get("runtime", {}))
+    reference_wall = _optional_float(runtime.get("wall_clock_seconds"))
+    reference_verifier_wall = _optional_float(
+        runtime.get("verifier_wall_clock_seconds")
+    )
+    local_wall = _optional_float(run.get("wall_s"))
+    local_verifier_wall = _optional_float(run_artifacts.get("wall_clock_s"))
+    local_wall_source = str(run_artifacts.get("wall_clock_source", ""))
+    wall_delta = (
+        local_wall - reference_wall
+        if local_wall is not None and reference_wall is not None
+        else None
+    )
+    wall_relative = (
+        relative_error(reference_wall, local_wall)
+        if local_wall is not None and reference_wall is not None
+        else None
+    )
+    verifier_wall_comparable = bool(
+        reference_verifier_wall is not None
+        and local_verifier_wall is not None
+        and local_wall_source == "verifier"
+    )
+    verifier_wall_delta = (
+        local_verifier_wall - reference_verifier_wall
+        if verifier_wall_comparable
+        else None
+    )
+    verifier_wall_relative = (
+        relative_error(reference_verifier_wall, local_verifier_wall)
+        if verifier_wall_comparable
+        and reference_verifier_wall is not None
+        and local_verifier_wall is not None
+        else None
+    )
     return {
         "task_id": task_id,
         "reference": {
@@ -344,9 +385,9 @@ def reconcile_one(run: Mapping[str, Any], reference: Mapping[str, Any]) -> dict[
             "reward": reference.get("reward"),
             "tests_passed": reference.get("tests_passed"),
             "tests_total": reference.get("tests_total"),
-            "ngspice_runs": cast(
-                Mapping[str, Any], reference.get("runtime", {})
-            ).get("ngspice_runs"),
+            "ngspice_runs": runtime.get("ngspice_runs"),
+            "wall_s": reference_wall,
+            "verifier_wall_s": reference_verifier_wall,
         },
         "run": {
             "status": run.get("status"),
@@ -354,7 +395,29 @@ def reconcile_one(run: Mapping[str, Any], reference: Mapping[str, Any]) -> dict[
             "tests_passed": run_artifacts.get("tests_passed"),
             "tests_total": run_artifacts.get("tests_total"),
             "ngspice_runs": run_artifacts.get("ngspice_runs"),
-            "wall_s": run.get("wall_s"),
+            "wall_s": local_wall,
+            "verifier_wall_s": local_verifier_wall,
+            "wall_clock_source": local_wall_source,
+        },
+        "wall_comparison": {
+            "reference_wall_s": reference_wall,
+            "local_wall_s": local_wall,
+            "wall_delta_s": None if wall_delta is None else round(wall_delta, 3),
+            "wall_relative_difference": (
+                None if wall_relative is None else round(wall_relative, 6)
+            ),
+            "reference_verifier_wall_s": reference_verifier_wall,
+            "local_verifier_wall_s": local_verifier_wall,
+            "local_verifier_wall_source": local_wall_source,
+            "verifier_wall_comparable": verifier_wall_comparable,
+            "verifier_wall_delta_s": (
+                None if verifier_wall_delta is None else round(verifier_wall_delta, 3)
+            ),
+            "verifier_wall_relative_difference": (
+                None
+                if verifier_wall_relative is None
+                else round(verifier_wall_relative, 6)
+            ),
         },
         "counts": {
             "reference_metrics": len(ref_metrics),
@@ -401,6 +464,38 @@ def summarize(tasks: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         for item in tasks
         if item["reference"].get("ngspice_runs") != item["run"].get("ngspice_runs")
     ]
+    reference_wall = sum(
+        value
+        for item in tasks
+        if isinstance(value := item["reference"].get("wall_s"), (int, float))
+    )
+    local_wall = sum(
+        value
+        for item in tasks
+        if isinstance(value := item["run"].get("wall_s"), (int, float))
+    )
+    wall_differences = [
+        {
+            "task_id": item["task_id"],
+            "reference": item["reference"].get("wall_s"),
+            "local": item["run"].get("wall_s"),
+            "relative_difference": item["wall_comparison"].get(
+                "wall_relative_difference"
+            ),
+        }
+        for item in tasks
+        if item["wall_comparison"].get("wall_relative_difference") is not None
+    ]
+    wall_rel = [
+        cast(float, row["relative_difference"]) for row in wall_differences
+    ]
+    verifier_wall_pairs = [
+        cast(float, item["wall_comparison"]["verifier_wall_relative_difference"])
+        for item in tasks
+        if item["wall_comparison"].get("verifier_wall_comparable")
+        and item["wall_comparison"].get("verifier_wall_relative_difference")
+        is not None
+    ]
     mismatches = [
         {"task_id": item["task_id"], **row}
         for item in tasks
@@ -435,6 +530,18 @@ def summarize(tasks: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         "local_ngspice_runs": local_sims,
         "sim_difference_count": len(sim_differences),
         "sim_differences": sim_differences,
+        "reference_wall_s": round(reference_wall, 1),
+        "local_wall_s": round(local_wall, 1),
+        "wall_comparable_tasks": len(wall_rel),
+        "wall_mean_relative_difference": (
+            round(sum(wall_rel) / len(wall_rel), 6) if wall_rel else None
+        ),
+        "verifier_wall_comparable_tasks": len(verifier_wall_pairs),
+        "verifier_wall_mean_relative_difference": (
+            round(sum(verifier_wall_pairs) / len(verifier_wall_pairs), 6)
+            if verifier_wall_pairs
+            else None
+        ),
         "mismatch_count": len(mismatches),
         "run_level_mismatch_count": len(run_mismatches),
         "mismatches": mismatches,

@@ -2,7 +2,7 @@
   "task_id": "sky130-gmr-degen-amp-constant-gm-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 12.351,
+  "wall_s": 12.26,
   "reason": "",
   "image": "adb-verifier:sky130-gmr-degen-amp-constant-gm-pvt-d045f7cc97b6",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 4,
     "partial": 1.0,
     "ngspice_runs": 30,
-    "wall_clock_s": 12.351,
+    "wall_clock_s": 12.26,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],

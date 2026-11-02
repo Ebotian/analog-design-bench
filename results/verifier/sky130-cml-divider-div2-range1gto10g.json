@@ -2,7 +2,7 @@
   "task_id": "sky130-cml-divider-div2-range1gto10g",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 11.785,
+  "wall_s": 11.796,
   "reason": "",
   "image": "adb-verifier:sky130-cml-divider-div2-range1gto10g-5e28c996ebc6",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 2,
     "partial": 1.0,
     "ngspice_runs": 25,
-    "wall_clock_s": 11.539,
+    "wall_clock_s": 11.532,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -192,5 +192,5 @@
     "runs_source": "wrapper-count",
     "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED divide_operating_points: required_points=1.000,2.000,5.000,10.000GHz; highest_passing_frequency=10.000GHz; min_cycle_swing=251.1mVpp (require >=200mVpp); target_tone=454.7mVpp (require >=200mVpp); failed_points=none\nPASSED dc_power: power_max=1.207mW (require <1.500mW)\nngspice_processes=25 wall_clock_s=11.539"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED divide_operating_points: required_points=1.000,2.000,5.000,10.000GHz; highest_passing_frequency=10.000GHz; min_cycle_swing=251.1mVpp (require >=200mVpp); target_tone=454.7mVpp (require >=200mVpp); failed_points=none\nPASSED dc_power: power_max=1.207mW (require <1.500mW)\nngspice_processes=25 wall_clock_s=11.532"
 }

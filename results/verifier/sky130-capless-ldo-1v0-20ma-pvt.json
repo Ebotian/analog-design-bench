@@ -2,7 +2,7 @@
   "task_id": "sky130-capless-ldo-1v0-20ma-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 9.537,
+  "wall_s": 9.488,
   "reason": "",
   "image": "adb-verifier:sky130-capless-ldo-1v0-20ma-pvt-0da3b69bfa92",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 8,
     "partial": 1.0,
     "ngspice_runs": 20,
-    "wall_clock_s": 9.537,
+    "wall_clock_s": 9.488,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],

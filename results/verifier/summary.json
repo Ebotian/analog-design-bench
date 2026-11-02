@@ -12,17 +12,19 @@
     "harness": 11,
     "verifier": 39
   },
-  "verifier_wall_s": 2750.0,
-  "task_wall_sum_s": 2771.7,
+  "wall_clock_sum_s": 2705.8,
+  "verifier_reported_wall_s": 2065.9,
+  "harness_fallback_wall_s": 639.8,
+  "task_wall_sum_s": 2718.5,
   "failing": [],
   "failing_gates": [],
-  "started_utc": "2026-11-02T10:31:03+00:00",
-  "finished_utc": "2026-11-02T10:43:43+00:00",
-  "sweep_wall_s": 760.0,
+  "started_utc": "2026-11-02T10:51:53+00:00",
+  "finished_utc": "2026-11-02T11:04:03+00:00",
+  "sweep_wall_s": 730.0,
   "jobs": 4,
   "cpu_busy_percent": {
-    "mean": 39.6,
-    "peak": 97.2
+    "mean": 39.8,
+    "peak": 68.3
   },
   "leftover_containers": [],
   "ngspice_threads_after": 0

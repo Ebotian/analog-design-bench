@@ -2,7 +2,7 @@
   "task_id": "sky130-low-power-line-driver-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 66.304,
+  "wall_s": 66.923,
   "reason": "",
   "image": "adb-verifier:sky130-low-power-line-driver-pvt-2fff16bceb61",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 8,
     "partial": 1.0,
     "ngspice_runs": 135,
-    "wall_clock_s": 66.304,
+    "wall_clock_s": 66.923,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],

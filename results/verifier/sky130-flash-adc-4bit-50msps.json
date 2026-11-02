@@ -2,7 +2,7 @@
   "task_id": "sky130-flash-adc-4bit-50msps",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 135.407,
+  "wall_s": 132.775,
   "reason": "",
   "image": "adb-verifier:sky130-flash-adc-4bit-50msps-d477d4077a6d",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 6,
     "partial": 1.0,
     "ngspice_runs": 3,
-    "wall_clock_s": 135.066,
+    "wall_clock_s": 132.464,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],

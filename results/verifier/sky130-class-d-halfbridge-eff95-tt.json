@@ -2,7 +2,7 @@
   "task_id": "sky130-class-d-halfbridge-eff95-tt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 149.182,
+  "wall_s": 150.439,
   "reason": "",
   "image": "adb-verifier:sky130-class-d-halfbridge-eff95-tt-c98927327b88",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 5,
     "partial": 1.0,
     "ngspice_runs": 1,
-    "wall_clock_s": 149.182,
+    "wall_clock_s": 150.439,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],

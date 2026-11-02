@@ -332,9 +332,11 @@ def parse_artifacts(logs: Path, output: str = "") -> VerifierArtifacts | None:
     wall = _as_float(run.get("wall_clock_s", summary.get("wall_clock_s")))
     wall_source = "verifier"
     if wall == 0.0:
-        match = re.search(r"wall_clock_s=([\d.]+)", output)
-        if match is not None:
-            wall = float(match.group(1))
+        # Verifiers may print per-case times before the task total; the last
+        # occurrence is the total (e.g. gilbert: 0.397 ... 9.890).
+        matches = re.findall(r"wall_clock_s=([\d.]+)", output)
+        if matches:
+            wall = float(matches[-1])
         else:
             wall_source = "none"
     return VerifierArtifacts(
@@ -608,6 +610,8 @@ def summarize(results: Sequence[VerifierRun]) -> dict[str, object]:
     ]
     wall_sources: dict[str, int] = {}
     run_sources: dict[str, int] = {}
+    verifier_wall = 0.0
+    harness_wall = 0.0
     for item in results:
         if not item.artifacts:
             continue
@@ -617,13 +621,19 @@ def summarize(results: Sequence[VerifierRun]) -> dict[str, object]:
         run_sources[item.artifacts.runs_source] = (
             run_sources.get(item.artifacts.runs_source, 0) + 1
         )
+        if item.artifacts.wall_clock_source == "verifier":
+            verifier_wall += item.artifacts.wall_clock_s
+        else:
+            harness_wall += item.artifacts.wall_clock_s
     return {
         "tasks": len(results),
         "status_counts": dict(sorted(counts.items())),
         "ngspice_runs": sims,
         "runs_sources": dict(sorted(run_sources.items())),
         "wall_clock_sources": dict(sorted(wall_sources.items())),
-        "verifier_wall_s": round(verifier_wall, 1),
+        "wall_clock_sum_s": round(verifier_wall + harness_wall, 1),
+        "verifier_reported_wall_s": round(verifier_wall, 1),
+        "harness_fallback_wall_s": round(harness_wall, 1),
         "task_wall_sum_s": round(sum(item.wall_s for item in results), 1),
         "failing": [
             {"task_id": item.task_id, "status": item.status, "reason": item.reason}

@@ -2,7 +2,7 @@
   "task_id": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 6.167,
+  "wall_s": 6.458,
   "reason": "",
   "image": "adb-verifier:sky130-ota-5t-gain40-pm60-noise50uv-pvt-d9ae9129dce4",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 7,
     "partial": 1.0,
     "ngspice_runs": 13,
-    "wall_clock_s": 6.167,
+    "wall_clock_s": 6.458,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],

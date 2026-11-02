@@ -2,7 +2,7 @@
   "task_id": "sky130-telescopic-cascode-ota-pvt-fix",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 14.57,
+  "wall_s": 14.071,
   "reason": "",
   "image": "adb-verifier:sky130-telescopic-cascode-ota-pvt-fix-955b7e1add85",
   "artifacts": {
@@ -11,8 +11,8 @@
     "tests_total": 8,
     "partial": 1.0,
     "ngspice_runs": 30,
-    "wall_clock_s": 14.213,
-    "summed_run_time_s": 14.1,
+    "wall_clock_s": 13.736,
+    "summed_run_time_s": 13.616,
     "workers": 1,
     "failed_runs": [],
     "gates": [
@@ -62,5 +62,5 @@
     "runs_source": "wrapper-count",
     "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\nplanned=30 executed=30 blocked=0 rows=30 workers=1 wall_clock_s=14.213\nPASSED complete_signoff: rows=30/30 PVT=27/27 executed=30 blocked=0\nPASSED pvt_gain_bandwidth: gain_min=62.58dB at ff/1.62V/+125C; UGB_min=77.54MHz at ss/1.62V/+125C\nPASSED pvt_phase_margin: PM_min=87.95deg at ss/1.62V/+125C; falling_crossings=1 post_first_max=-0.000dB\nPASSED pvt_output_common_mode: CM_error_max=0.145mV at ss/1.62V/-40C\nPASSED pvt_power: power_min=394.1uW; power_max=516.1uW at ff/1.98V/+125C\nPASSED closed_loop_range: range=0.900Vpp points=181/181 tracking_max=0.214mV CM_error_max=0.104mV\nPASSED closed_loop_settling: last_entry=8.120ns final_10ns_error=0.0228mV (0.0228% of step)\nPASSED common_mode_recovery: last_entry=19.275ns final_20ns_error=1.2433mV"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nplanned=30 executed=30 blocked=0 rows=30 workers=1 wall_clock_s=13.736\nPASSED complete_signoff: rows=30/30 PVT=27/27 executed=30 blocked=0\nPASSED pvt_gain_bandwidth: gain_min=62.58dB at ff/1.62V/+125C; UGB_min=77.54MHz at ss/1.62V/+125C\nPASSED pvt_phase_margin: PM_min=87.95deg at ss/1.62V/+125C; falling_crossings=1 post_first_max=-0.000dB\nPASSED pvt_output_common_mode: CM_error_max=0.145mV at ss/1.62V/-40C\nPASSED pvt_power: power_min=394.1uW; power_max=516.1uW at ff/1.98V/+125C\nPASSED closed_loop_range: range=0.900Vpp points=181/181 tracking_max=0.214mV CM_error_max=0.104mV\nPASSED closed_loop_settling: last_entry=8.120ns final_10ns_error=0.0228mV (0.0228% of step)\nPASSED common_mode_recovery: last_entry=19.275ns final_20ns_error=1.2433mV"
 }

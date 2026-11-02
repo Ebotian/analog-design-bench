@@ -2,7 +2,7 @@
   "task_id": "sky130-fct-residue-amplifier-900msps",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 113.195,
+  "wall_s": 111.742,
   "reason": "",
   "image": "adb-verifier:sky130-fct-residue-amplifier-900msps-cb6628b3d50a",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 13,
     "partial": 1.0,
     "ngspice_runs": 10,
-    "wall_clock_s": 112.888,
+    "wall_clock_s": 111.433,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -87,5 +87,5 @@
     "runs_source": "wrapper-count",
     "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\ncase=10mv-tt event=started elapsed_s=0.000\ncase=10mv-tt event=finished elapsed_s=11.007\ncase=20mv-tt event=started elapsed_s=11.007\ncase=20mv-tt event=finished elapsed_s=22.219\ncase=10mv-ss event=started elapsed_s=22.219\ncase=10mv-ss event=finished elapsed_s=32.695\ncase=10mv-ff event=started elapsed_s=32.695\ncase=10mv-ff event=finished elapsed_s=43.855\ncase=10mv-fs event=started elapsed_s=43.855\ncase=10mv-fs event=finished elapsed_s=55.523\ncase=10mv-sf event=started elapsed_s=55.523\ncase=10mv-sf event=finished elapsed_s=66.510\ncase=20mv-ss event=started elapsed_s=66.510\ncase=20mv-ss event=finished elapsed_s=77.804\ncase=20mv-ff event=started elapsed_s=77.804\ncase=20mv-ff event=finished elapsed_s=89.897\ncase=20mv-fs event=started elapsed_s=89.897\ncase=20mv-fs event=finished elapsed_s=101.757\ncase=20mv-sf event=started elapsed_s=101.757\ncase=20mv-sf event=finished elapsed_s=112.888\nPASSED sampled_gain_pvt_10mv: 10 mV range=5.7250..6.1577V/V (5.5..6.5)\nPASSED sfdr_pvt_10mv: 10 mV min=61.368dB at tt (min 60dB)\nPASSED output_common_mode_pvt_10mv: 10 mV mean range=0.7909..1.1891V (0.3..1.2V)\nPASSED output_headroom_pvt_10mv: 10 mV sample range=0.7595..1.2281V (0.2..1.6V)\nPASSED hold_transition_movement_pvt_10mv: 10 mV max=1.1510% at fs (max 1.5%)\nPASSED power_pvt_10mv: 10 mV total delivered range=3.8711..4.1171mW (0..5mW)\nPASSED sampled_gain_pvt_20mv: 20 mV range=5.7514..6.2025V/V (5.5..6.5)\nPASSED sfdr_pvt_20mv: 20 mV min=61.593dB at tt (min 60dB)\nPASSED output_common_mode_pvt_20mv: 20 mV mean range=0.7908..1.1886V (0.3..1.2V)\nPASSED output_headroom_pvt_20mv: 20 mV sample range=0.7282..1.2565V (0.2..1.6V)\nPASSED hold_transition_movement_pvt_20mv: 20 mV max=1.1343% at fs (max 1.5%)\nPASSED power_pvt_20mv: 20 mV total delivered range=3.8717..4.1170mW (0..5mW)\nPASSED complete_signoff: 10/10 unique finite transients: tt/ss/ff/fs/sf at 10mV and 20mV\nanalysis_points=10 ngspice_processes=10 max_concurrent_ngspice=1 wall_clock_s=112.888"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\ncase=10mv-tt event=started elapsed_s=0.000\ncase=10mv-tt event=finished elapsed_s=11.036\ncase=20mv-tt event=started elapsed_s=11.036\ncase=20mv-tt event=finished elapsed_s=22.209\ncase=10mv-ss event=started elapsed_s=22.209\ncase=10mv-ss event=finished elapsed_s=32.720\ncase=10mv-ff event=started elapsed_s=32.720\ncase=10mv-ff event=finished elapsed_s=43.798\ncase=10mv-fs event=started elapsed_s=43.798\ncase=10mv-fs event=finished elapsed_s=55.444\ncase=10mv-sf event=started elapsed_s=55.444\ncase=10mv-sf event=finished elapsed_s=66.508\ncase=20mv-ss event=started elapsed_s=66.508\ncase=20mv-ss event=finished elapsed_s=77.167\ncase=20mv-ff event=started elapsed_s=77.168\ncase=20mv-ff event=finished elapsed_s=88.540\ncase=20mv-fs event=started elapsed_s=88.540\ncase=20mv-fs event=finished elapsed_s=100.257\ncase=20mv-sf event=started elapsed_s=100.257\ncase=20mv-sf event=finished elapsed_s=111.433\nPASSED sampled_gain_pvt_10mv: 10 mV range=5.7250..6.1577V/V (5.5..6.5)\nPASSED sfdr_pvt_10mv: 10 mV min=61.368dB at tt (min 60dB)\nPASSED output_common_mode_pvt_10mv: 10 mV mean range=0.7909..1.1891V (0.3..1.2V)\nPASSED output_headroom_pvt_10mv: 10 mV sample range=0.7595..1.2281V (0.2..1.6V)\nPASSED hold_transition_movement_pvt_10mv: 10 mV max=1.1510% at fs (max 1.5%)\nPASSED power_pvt_10mv: 10 mV total delivered range=3.8711..4.1171mW (0..5mW)\nPASSED sampled_gain_pvt_20mv: 20 mV range=5.7514..6.2025V/V (5.5..6.5)\nPASSED sfdr_pvt_20mv: 20 mV min=61.593dB at tt (min 60dB)\nPASSED output_common_mode_pvt_20mv: 20 mV mean range=0.7908..1.1886V (0.3..1.2V)\nPASSED output_headroom_pvt_20mv: 20 mV sample range=0.7282..1.2565V (0.2..1.6V)\nPASSED hold_transition_movement_pvt_20mv: 20 mV max=1.1343% at fs (max 1.5%)\nPASSED power_pvt_20mv: 20 mV total delivered range=3.8717..4.1170mW (0..5mW)\nPASSED complete_signoff: 10/10 unique finite transients: tt/ss/ff/fs/sf at 10mV and 20mV\nanalysis_points=10 ngspice_processes=10 max_concurrent_ngspice=1 wall_clock_s=111.433"
 }

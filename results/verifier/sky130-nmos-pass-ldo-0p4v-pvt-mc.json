@@ -2,7 +2,7 @@
   "task_id": "sky130-nmos-pass-ldo-0p4v-pvt-mc",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 25.626,
+  "wall_s": 27.605,
   "reason": "",
   "image": "adb-verifier:sky130-nmos-pass-ldo-0p4v-pvt-mc-8c57443eeb3c",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 7,
     "partial": 1.0,
     "ngspice_runs": 104,
-    "wall_clock_s": 25.626,
+    "wall_clock_s": 27.605,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],

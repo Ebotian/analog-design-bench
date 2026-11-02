@@ -2,7 +2,7 @@
   "task_id": "sky130-ahuja-compensated-two-stage-load-range-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 16.648,
+  "wall_s": 16.109,
   "reason": "",
   "image": "adb-verifier:sky130-ahuja-compensated-two-stage-load-range-pvt-5780ee65b23d",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 8,
     "partial": 1.0,
     "ngspice_runs": 21,
-    "wall_clock_s": 16.648,
+    "wall_clock_s": 16.109,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],

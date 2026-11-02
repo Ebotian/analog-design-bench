@@ -2,7 +2,7 @@
   "task_id": "sky130-fully-differential-ota-c-biquad-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 17.607,
+  "wall_s": 17.815,
   "reason": "",
   "image": "adb-verifier:sky130-fully-differential-ota-c-biquad-pvt-7be463c8db09",
   "artifacts": {
@@ -11,8 +11,8 @@
     "tests_total": 16,
     "partial": 1.0,
     "ngspice_runs": 63,
-    "wall_clock_s": 16.901,
-    "summed_run_time_s": 65.93,
+    "wall_clock_s": 17.053,
+    "summed_run_time_s": 66.541,
     "workers": 4,
     "failed_runs": [],
     "gates": [
@@ -131,5 +131,5 @@
     "runs_source": "wrapper-count",
     "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\n1 ngspice runs, 4 workers, 0.404 s wall clock\n62 ngspice runs, 4 workers, 16.901 s wall clock\nPASS complete_signoff: runs=62/62 failed=0\nPASS pvt_center_frequency: fitted f0 1.971..2.124 MHz (band 1.8..2.2)\nPASS pvt_quality_factor: fitted Q 0.677..0.711 (band 0.65..0.75)\nPASS pvt_passband_gain: passband gain -0.689..-0.605 dB (band -1..1)\nPASS pvt_second_order_fit: second-order fit RMS error 0.002 dB (max 0.5)\nPASS pvt_stopband_attenuation: attenuation at 20 MHz 38.91 dB (min 35)\nPASS pvt_bandpass_output: BP peak 1.950..2.138 MHz, gain -6.58..-6.13 dB, worst decade-edge attenuation 15.77 dB\nPASS pvt_bandpass_low_frequency_rejection: 1 kHz rejection from BP peak 22.02 dB (min 18)\nPASS pvt_output_common_mode: output common-mode error 9.09 mV on both node pairs (max 10 mV)\nPASS pvt_power: supply power 430.0 uW (max 500)\nPASS stress_thd_nominal: THD -51.07 dB, fundamental gain 0.920 at 0.6 Vpp diff\nPASS stress_thd_large_signal: THD -40.85 dB, fundamental gain 0.911 at 0.9 Vpp diff\nPASS stress_thd_near_f0: at 2 MHz and 0.9 Vpp: LP THD -57.99 dB / gain 0.647, BP THD -52.62 dB / gain 0.476\nPASS pvt_output_noise: integrated output noise 433.3 uVrms over 1 kHz..4 MHz (max 500)\nPASS stress_cmfb_settling: common-mode step settling 0.432 us on both loops (max 1)\nPASS stress_cmfb_damping: late common-mode excursion 8.66 mV (max 10 mV)"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\n1 ngspice runs, 4 workers, 0.422 s wall clock\n62 ngspice runs, 4 workers, 17.053 s wall clock\nPASS complete_signoff: runs=62/62 failed=0\nPASS pvt_center_frequency: fitted f0 1.971..2.124 MHz (band 1.8..2.2)\nPASS pvt_quality_factor: fitted Q 0.677..0.711 (band 0.65..0.75)\nPASS pvt_passband_gain: passband gain -0.689..-0.605 dB (band -1..1)\nPASS pvt_second_order_fit: second-order fit RMS error 0.002 dB (max 0.5)\nPASS pvt_stopband_attenuation: attenuation at 20 MHz 38.91 dB (min 35)\nPASS pvt_bandpass_output: BP peak 1.950..2.138 MHz, gain -6.58..-6.13 dB, worst decade-edge attenuation 15.77 dB\nPASS pvt_bandpass_low_frequency_rejection: 1 kHz rejection from BP peak 22.02 dB (min 18)\nPASS pvt_output_common_mode: output common-mode error 9.09 mV on both node pairs (max 10 mV)\nPASS pvt_power: supply power 430.0 uW (max 500)\nPASS stress_thd_nominal: THD -51.07 dB, fundamental gain 0.920 at 0.6 Vpp diff\nPASS stress_thd_large_signal: THD -40.85 dB, fundamental gain 0.911 at 0.9 Vpp diff\nPASS stress_thd_near_f0: at 2 MHz and 0.9 Vpp: LP THD -57.99 dB / gain 0.647, BP THD -52.62 dB / gain 0.476\nPASS pvt_output_noise: integrated output noise 433.3 uVrms over 1 kHz..4 MHz (max 500)\nPASS stress_cmfb_settling: common-mode step settling 0.432 us on both loops (max 1)\nPASS stress_cmfb_damping: late common-mode excursion 8.66 mV (max 10 mV)"
 }

@@ -318,3 +318,11 @@ def test_run_summary_runs_key_is_read(tmp_path):
     assert artifacts is not None
     assert artifacts.ngspice_runs == 7
     assert artifacts.wall_clock_s == pytest.approx(12.5)
+
+
+def test_wall_clock_uses_the_task_total_not_a_per_case_line(tmp_path):
+    logs = write_logs(tmp_path, run=None, summary=None)
+    output = "completed rf tt_mm/1.80V wall_clock_s=0.448\n" "INFO wall_clock_s=9.890\n"
+    artifacts = verifier.parse_artifacts(logs, output)
+    assert artifacts is not None
+    assert artifacts.wall_clock_s == pytest.approx(9.89)

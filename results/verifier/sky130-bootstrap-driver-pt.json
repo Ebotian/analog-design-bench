@@ -2,7 +2,7 @@
   "task_id": "sky130-bootstrap-driver-pt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 249.348,
+  "wall_s": 251.225,
   "reason": "",
   "image": "adb-verifier:sky130-bootstrap-driver-pt-06b337ecbcc1",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 24,
     "partial": 1.0,
     "ngspice_runs": 3,
-    "wall_clock_s": 249.348,
+    "wall_clock_s": 251.225,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],

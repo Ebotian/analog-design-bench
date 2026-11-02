@@ -2,7 +2,7 @@
   "task_id": "sky130-sar-adc-4bit-async",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 189.043,
+  "wall_s": 174.199,
   "reason": "",
   "image": "adb-verifier:sky130-sar-adc-4bit-async-e1abafc88312",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 4,
     "partial": 1.0,
     "ngspice_runs": 6,
-    "wall_clock_s": 188.741,
+    "wall_clock_s": 173.866,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -42,5 +42,5 @@
     "runs_source": "wrapper-count",
     "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\ndynamic_runtime_s=tt_1p80v_27c_bin15:113.853,ss_1p62v_125c_bin15:105.922,ff_1p98v_m40c_bin15:132.727,tt_1p80v_27c_bin13_phase17:113.699\nPASSED sample_hold_16_codes: transfer=[0, 11, 4, 15, 2, 9, 6, 13, 1, 8, 5, 14, 3, 10, 7, 12]; transfer_alt=[15, 0, 8, 7, 3, 12, 5, 10, 1, 14, 6, 9, 2, 13, 4, 11]\nPASSED sndr: worst=27.1365dB at ss_1p62v_125c_bin15 (> 24dB)\nPASSED normalized_enob: worst=4.31308 bit at ss_1p62v_125c_bin15 (> 3.9 bit)\nPASSED power: worst=4.28715mW at ff_1p98v_m40c_bin15 (max 5mW)\nanalysis_points=6 ngspice_processes=6 max_parallel=4 wall_clock_s=188.741"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\ndynamic_runtime_s=tt_1p80v_27c_bin15:101.707,ss_1p62v_125c_bin15:93.579,ff_1p98v_m40c_bin15:120.934,tt_1p80v_27c_bin13_phase17:101.917\nPASSED sample_hold_16_codes: transfer=[0, 11, 4, 15, 2, 9, 6, 13, 1, 8, 5, 14, 3, 10, 7, 12]; transfer_alt=[15, 0, 8, 7, 3, 12, 5, 10, 1, 14, 6, 9, 2, 13, 4, 11]\nPASSED sndr: worst=27.1365dB at ss_1p62v_125c_bin15 (> 24dB)\nPASSED normalized_enob: worst=4.31308 bit at ss_1p62v_125c_bin15 (> 3.9 bit)\nPASSED power: worst=4.28715mW at ff_1p98v_m40c_bin15 (max 5mW)\nanalysis_points=6 ngspice_processes=6 max_parallel=4 wall_clock_s=173.866"
 }

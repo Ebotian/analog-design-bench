@@ -2,7 +2,7 @@
   "task_id": "sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 27.32,
+  "wall_s": 28.73,
   "reason": "",
   "image": "adb-verifier:sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt-a14c3d13c70c",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 11,
     "partial": 1.0,
     "ngspice_runs": 69,
-    "wall_clock_s": 27.025,
+    "wall_clock_s": 28.447,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -77,5 +77,5 @@
     "runs_source": "wrapper-count",
     "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED nominal_functional: gain=76.60dB UGB=38.14MHz PM=73.68deg\nPASSED pvt_gain_bandwidth: worst=73.63dB at ff/1.62V/-40C (min 70dB); worst=31.3MHz at ss/1.62V/+125C (min 20MHz)\nPASSED pvt_phase_margin: worst=70.68deg at ss/1.80V/+125C (min 60deg)\nPASSED pvt_output_bias: worst=0.04558mV at ss/1.62V/-40C (max 25mV)\nPASSED pvt_power: worst=517.4uW at ff/1.98V/+125C (max 600uW)\nPASSED pvt_input_noise: worst=46.27uVrms integrated 10Hz-1.693MHz at ss/1.98V/+125C (max 50uVrms)\nPASSED pvt_supply_rejection: worst=75.4dB at ss/1.62V/+125C (min 65dB); worst=30.44dB at ss/1.62V/+125C (min 20dB)\nPASSED pvt_common_mode_rejection: worst=77.61dB at ss/1.62V/+125C (min 60dB)\nPASSED closed_loop_range: worst=1.193Vpp at ss/1.62V/+125C (min 0.8Vpp)\nPASSED closed_loop_settling: time_max=17.24ns at ss/1.62V/+125C (max 30ns); final_max=0.0364% at ss/1.62V/+125C; static_max=0.0364mV at ss/1.62V/+125C\nPASSED slew_rate: worst=27.66V/us at ss/1.62V/+125C (min 10V/us); worst=24.85V/us at ff/1.98V/-40C (min 10V/us)\nanalysis_points=69 ngspice_processes=69 wall_clock_s=27.025"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED nominal_functional: gain=76.60dB UGB=38.14MHz PM=73.68deg\nPASSED pvt_gain_bandwidth: worst=73.63dB at ff/1.62V/-40C (min 70dB); worst=31.3MHz at ss/1.62V/+125C (min 20MHz)\nPASSED pvt_phase_margin: worst=70.68deg at ss/1.80V/+125C (min 60deg)\nPASSED pvt_output_bias: worst=0.04558mV at ss/1.62V/-40C (max 25mV)\nPASSED pvt_power: worst=517.4uW at ff/1.98V/+125C (max 600uW)\nPASSED pvt_input_noise: worst=46.27uVrms integrated 10Hz-1.693MHz at ss/1.98V/+125C (max 50uVrms)\nPASSED pvt_supply_rejection: worst=75.4dB at ss/1.62V/+125C (min 65dB); worst=30.44dB at ss/1.62V/+125C (min 20dB)\nPASSED pvt_common_mode_rejection: worst=77.61dB at ss/1.62V/+125C (min 60dB)\nPASSED closed_loop_range: worst=1.193Vpp at ss/1.62V/+125C (min 0.8Vpp)\nPASSED closed_loop_settling: time_max=17.24ns at ss/1.62V/+125C (max 30ns); final_max=0.0364% at ss/1.62V/+125C; static_max=0.0364mV at ss/1.62V/+125C\nPASSED slew_rate: worst=27.66V/us at ss/1.62V/+125C (min 10V/us); worst=24.85V/us at ff/1.98V/-40C (min 10V/us)\nanalysis_points=69 ngspice_processes=69 wall_clock_s=28.447"
 }

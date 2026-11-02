@@ -47,6 +47,12 @@ def pct(value: object, digits: int = 1) -> str:
     return f"{float(value):.{digits}f}%"
 
 
+def frac_pct(value: object, digits: int = 1) -> str:
+    if value is None:
+        return "—"
+    return f"{float(value) * 100:.{digits}f}%"
+
+
 def num(value: object, digits: int = 1) -> str:
     if value is None:
         return "—"
@@ -135,8 +141,16 @@ def render() -> str:
         + " | `summary.wall_clock_sources` |"
     )
     add(
-        f"| verifier 自报墙钟合计 | {num(summary.get('verifier_wall_s'))} s | "
-        "`summary.verifier_wall_s` |"
+        f"| verifier 自报墙钟合计 | {num(summary.get('verifier_reported_wall_s'))} s | "
+        "`summary.verifier_reported_wall_s` |"
+    )
+    add(
+        f"| harness 回退墙钟合计 | {num(summary.get('harness_fallback_wall_s'))} s | "
+        "`summary.harness_fallback_wall_s` |"
+    )
+    add(
+        f"| 墙钟合计（自报+回退） | {num(summary.get('wall_clock_sum_s'))} s | "
+        "`summary.wall_clock_sum_s` |"
     )
     add(
         f"| 逐任务墙钟合计 | {num(summary.get('task_wall_sum_s'))} s | "
@@ -252,6 +266,32 @@ def render() -> str:
         "`reconcile.summary.sim_difference_count` |"
     )
     add(
+        f"| T0 墙钟合计 | {num(rec_summary.get('reference_wall_s'))} s | "
+        "`reconcile.summary.reference_wall_s` |"
+    )
+    add(
+        f"| 本地墙钟合计 | {num(rec_summary.get('local_wall_s'))} s | "
+        "`reconcile.summary.local_wall_s` |"
+    )
+    add(
+        f"| 墙钟可比任务数 | {num(rec_summary.get('wall_comparable_tasks'))} | "
+        "`reconcile.summary.wall_comparable_tasks` |"
+    )
+    add(
+        f"| 墙钟平均相对差 | {frac_pct(rec_summary.get('wall_mean_relative_difference'))} | "
+        "`reconcile.summary.wall_mean_relative_difference` |"
+    )
+    add(
+        f"| verifier 墙钟可比任务数 | "
+        f"{num(rec_summary.get('verifier_wall_comparable_tasks'))} | "
+        "`reconcile.summary.verifier_wall_comparable_tasks` |"
+    )
+    add(
+        f"| verifier 墙钟平均相对差 | "
+        f"{frac_pct(rec_summary.get('verifier_wall_mean_relative_difference'))} | "
+        "`reconcile.summary.verifier_wall_mean_relative_difference` |"
+    )
+    add(
         f"| 值容差 | {num(float(rec_summary.get('tolerance', 0.0)) * 100, 1)}% | "
         "`reconcile.summary.tolerance` |"
     )
@@ -276,6 +316,30 @@ def render() -> str:
                 f"| `{row.get('task_id')}` | {num(row.get('reference'))} | "
                 f"{num(row.get('local'))} |"
             )
+    add("")
+    add("### 墙钟对账")
+    add("")
+    add(
+        "墙钟受机器负载与 Docker 启动开销影响，不设通过阈值；这里记录 T0 与本次的"
+        "差值和相对差，`verifier 墙钟` 仅在本次来源为 `verifier` 时与 T0 自报值可比。"
+    )
+    add("")
+    add(
+        "| 任务 | T0 墙钟 (s) | 本地墙钟 (s) | 相对差 | T0 verifier 墙钟 (s) | "
+        "本地 verifier 墙钟 (s) | 本地来源 |"
+    )
+    add("|---|---:|---:|---:|---:|---:|---|")
+    for item in cast(list[dict[str, Any]], reconcile["tasks"]):
+        comparison = cast(Mapping[str, Any], item.get("wall_comparison", {}))
+        add(
+            f"| `{item.get('task_id')}` | "
+            f"{num(comparison.get('reference_wall_s'))} | "
+            f"{num(comparison.get('local_wall_s'))} | "
+            f"{frac_pct(comparison.get('wall_relative_difference'))} | "
+            f"{num(comparison.get('reference_verifier_wall_s'))} | "
+            f"{num(comparison.get('local_verifier_wall_s'))} | "
+            f"{comparison.get('local_verifier_wall_source')} |"
+        )
     add("")
     add("### 按打印精度一致的 gate")
     add("")

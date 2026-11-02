@@ -2,7 +2,7 @@
   "task_id": "sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 64.264,
+  "wall_s": 64.315,
   "reason": "",
   "image": "adb-verifier:sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc-5df02e0d8b19",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 15,
     "partial": 1.0,
     "ngspice_runs": 114,
-    "wall_clock_s": 63.983,
+    "wall_clock_s": 64.042,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -97,5 +97,5 @@
     "runs_source": "wrapper-count",
     "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\nCHARACTERIZATION power: worst=3.07349mW at ff/1.98V/+80C\nCHARACTERIZATION mismatch rejection: 20/20 rejection samples; nominal TT closed-loop differential gain at 10Hz=6.0205dB\nPASSED pvt_phase_margin: worst=74.9205deg at ss/1.80V/+80C; limit >=60deg\nPASSED pvt_output_common_mode: worst=4.07273mV at ss/1.80V/+80C; limit <=25mV\nPASSED pvt_power: worst=3.07349mW at ff/1.98V/+80C; limit <=5mW\nPASSED pvt_static_accuracy: worst=0.00516667% at ff/1.80V/+80C; limit <=0.01%\nPASSED pvt_dynamic_accuracy: worst=0.0114556% at ff/1.80V/+80C; limit <=0.1%\nPASSED pvt_rise_settling: worst=34.2647ns at sf/1.80V/+80C; limit <=40ns\nPASSED pvt_fall_settling: worst=33.9096ns at sf/1.80V/+80C; limit <=40ns\nPASSED pvt_output_range: 3dB-compression differential range=2.16716V at tt/1.80V/+27C; limit >=1.8V\nPASSED pvt_output_noise: worst=274.886uVrms at fs/1.80V/+80C; limit <=300uVrms\nPASSED mc_cmrr: worst=66.3223dB at tt/1.80V/+27C/seed-41003; limit >=60dB\nPASSED mc_psrr_plus: worst=74.4195dB at tt/1.80V/+27C/seed-41007; limit >=70dB\nPASSED mc_psrr_minus: worst=74.4195dB at tt/1.80V/+27C/seed-41007; limit >=70dB\nPASSED cmfb_peak_deviation: worst=8.33004mV at ss/1.80V/+80C; limit <=150mV\nPASSED cmfb_residual_20ns: worst=0.0858042mV at ss/1.80V/+80C; limit <=50mV\nPASSED cmfb_residual_100ns: worst=1.09021e-05mV at ss/1.80V/+80C; limit <=20mV\nanalysis_points=154 ngspice_processes=114 wall_clock_s=63.983"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nCHARACTERIZATION power: worst=3.07349mW at ff/1.98V/+80C\nCHARACTERIZATION mismatch rejection: 20/20 rejection samples; nominal TT closed-loop differential gain at 10Hz=6.0205dB\nPASSED pvt_phase_margin: worst=74.9205deg at ss/1.80V/+80C; limit >=60deg\nPASSED pvt_output_common_mode: worst=4.07273mV at ss/1.80V/+80C; limit <=25mV\nPASSED pvt_power: worst=3.07349mW at ff/1.98V/+80C; limit <=5mW\nPASSED pvt_static_accuracy: worst=0.00516667% at ff/1.80V/+80C; limit <=0.01%\nPASSED pvt_dynamic_accuracy: worst=0.0114556% at ff/1.80V/+80C; limit <=0.1%\nPASSED pvt_rise_settling: worst=34.2647ns at sf/1.80V/+80C; limit <=40ns\nPASSED pvt_fall_settling: worst=33.9096ns at sf/1.80V/+80C; limit <=40ns\nPASSED pvt_output_range: 3dB-compression differential range=2.16716V at tt/1.80V/+27C; limit >=1.8V\nPASSED pvt_output_noise: worst=274.886uVrms at fs/1.80V/+80C; limit <=300uVrms\nPASSED mc_cmrr: worst=66.3223dB at tt/1.80V/+27C/seed-41003; limit >=60dB\nPASSED mc_psrr_plus: worst=74.4195dB at tt/1.80V/+27C/seed-41007; limit >=70dB\nPASSED mc_psrr_minus: worst=74.4195dB at tt/1.80V/+27C/seed-41007; limit >=70dB\nPASSED cmfb_peak_deviation: worst=8.33004mV at ss/1.80V/+80C; limit <=150mV\nPASSED cmfb_residual_20ns: worst=0.0858042mV at ss/1.80V/+80C; limit <=50mV\nPASSED cmfb_residual_100ns: worst=1.09021e-05mV at ss/1.80V/+80C; limit <=20mV\nanalysis_points=154 ngspice_processes=114 wall_clock_s=64.042"
 }

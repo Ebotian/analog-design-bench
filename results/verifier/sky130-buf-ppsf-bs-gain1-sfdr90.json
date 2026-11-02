@@ -2,7 +2,7 @@
   "task_id": "sky130-buf-ppsf-bs-gain1-sfdr90",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 43.983,
+  "wall_s": 43.14,
   "reason": "",
   "image": "adb-verifier:sky130-buf-ppsf-bs-gain1-sfdr90-9f3faaf9b953",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 4,
     "partial": 1.0,
     "ngspice_runs": 20,
-    "wall_clock_s": 43.983,
+    "wall_clock_s": 43.14,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],

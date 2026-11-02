@@ -157,7 +157,7 @@ def main() -> int:
 
     print(
         f"\n{summary['status_counts']} tasks={summary['tasks']} "
-        f"sims={summary['ngspice_runs']} verifier_wall={summary['verifier_wall_s']}s "
+        f"sims={summary['ngspice_runs']} wall={summary['wall_clock_sum_s']}s "
         f"harness_wall={round(wall, 1)}s cpu={cpu['mean']}%/{cpu['peak']}%"
     )
     if leftovers or threads_after:

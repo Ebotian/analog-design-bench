@@ -2,7 +2,7 @@
   "task_id": "sky130-flash-adc-3bit-pvt",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 41.89,
+  "wall_s": 40.587,
   "reason": "",
   "image": "adb-verifier:sky130-flash-adc-3bit-pvt-cc482a0dce98",
   "artifacts": {
@@ -11,7 +11,7 @@
     "tests_total": 13,
     "partial": 1.0,
     "ngspice_runs": 8,
-    "wall_clock_s": 41.575,
+    "wall_clock_s": 40.261,
     "summed_run_time_s": 0.0,
     "workers": 1,
     "failed_runs": [],
@@ -87,5 +87,5 @@
     "runs_source": "wrapper-count",
     "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\n[1/1] transition_tt_1p80v_27c\n[1/7] transition_ff_1p98v_125c\n[2/7] transition_fs_1p98v_125c\n[3/7] ramp_tt_1p80v_27c\n[4/7] ramp_ff_1p62v_m40c\n[5/7] sine_low_ff_1p98v_125c\n[6/7] sine_high_fs_1p98v_125c\n[7/7] ramp_fs_1p98v_125c\nPASSED valid_output_levels: runs=8/8 unique=8 failures=0 finite=True invalid_levels=0 at transition_tt_1p80v_27c stable_level_violations=0 at transition_tt_1p80v_27c\nPASSED pvt_code_progression: monotonic=1 codes=8/8 thresholds=7/7 at ramp_tt_1p80v_27c\nPASSED pvt_dnl: worst=0.100 LSB at ramp_tt_1p80v_27c (<= 0.30)\nPASSED pvt_inl: worst=0.120 LSB at ramp_tt_1p80v_27c (<= 0.30)\nPASSED pvt_absolute_threshold_error: worst=0.200 LSB at ramp_fs_1p98v_125c (<= 0.30)\nPASSED hidden_transition_sequence: code_errors=0 at transition_tt_1p80v_27c missing_expected_transitions=0 at transition_tt_1p80v_27c stable_level_violations=0 at transition_tt_1p80v_27c\nPASSED pvt_clock_to_output_delay: last_crossing=1.752 ns at transition_tt_1p80v_27c late_crossings=0 at transition_tt_1p80v_27c\nPASSED pvt_core_reference_power: worst=0.476 mW at transition_ff_1p98v_125c (<= 1.00)\nPASSED pvt_clock_delivery_power: positive-delivery average=0.070 mW at transition_ff_1p98v_125c (<= 0.25)\nPASSED low_frequency_sndr: SNDR=18.458 dB, diagnostic codes=7/8 at sine_low_ff_1p98v_125c (>= 17.0)\nPASSED high_frequency_sndr: SNDR=22.415 dB, diagnostic codes=7/8 at sine_high_fs_1p98v_125c (>= 17.0)\nPASSED dynamic_sfdr: worst=22.012 dB at sine_low_ff_1p98v_125c (>= 21.0)\nPASSED dynamic_normalized_enob: worst=2.846 bit at sine_low_ff_1p98v_125c (>= 2.50)\n8 ngspice runs, 2 workers, 41.575 s wall clock"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\n[1/1] transition_tt_1p80v_27c\n[1/7] transition_ff_1p98v_125c\n[2/7] transition_fs_1p98v_125c\n[3/7] ramp_tt_1p80v_27c\n[4/7] ramp_ff_1p62v_m40c\n[5/7] sine_low_ff_1p98v_125c\n[6/7] sine_high_fs_1p98v_125c\n[7/7] ramp_fs_1p98v_125c\nPASSED valid_output_levels: runs=8/8 unique=8 failures=0 finite=True invalid_levels=0 at transition_tt_1p80v_27c stable_level_violations=0 at transition_tt_1p80v_27c\nPASSED pvt_code_progression: monotonic=1 codes=8/8 thresholds=7/7 at ramp_tt_1p80v_27c\nPASSED pvt_dnl: worst=0.100 LSB at ramp_tt_1p80v_27c (<= 0.30)\nPASSED pvt_inl: worst=0.120 LSB at ramp_tt_1p80v_27c (<= 0.30)\nPASSED pvt_absolute_threshold_error: worst=0.200 LSB at ramp_fs_1p98v_125c (<= 0.30)\nPASSED hidden_transition_sequence: code_errors=0 at transition_tt_1p80v_27c missing_expected_transitions=0 at transition_tt_1p80v_27c stable_level_violations=0 at transition_tt_1p80v_27c\nPASSED pvt_clock_to_output_delay: last_crossing=1.752 ns at transition_tt_1p80v_27c late_crossings=0 at transition_tt_1p80v_27c\nPASSED pvt_core_reference_power: worst=0.476 mW at transition_ff_1p98v_125c (<= 1.00)\nPASSED pvt_clock_delivery_power: positive-delivery average=0.070 mW at transition_ff_1p98v_125c (<= 0.25)\nPASSED low_frequency_sndr: SNDR=18.458 dB, diagnostic codes=7/8 at sine_low_ff_1p98v_125c (>= 17.0)\nPASSED high_frequency_sndr: SNDR=22.415 dB, diagnostic codes=7/8 at sine_high_fs_1p98v_125c (>= 17.0)\nPASSED dynamic_sfdr: worst=22.012 dB at sine_low_ff_1p98v_125c (>= 21.0)\nPASSED dynamic_normalized_enob: worst=2.846 bit at sine_low_ff_1p98v_125c (>= 2.50)\n8 ngspice runs, 2 workers, 40.261 s wall clock"
 }

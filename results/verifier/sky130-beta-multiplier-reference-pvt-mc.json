@@ -2,7 +2,7 @@
   "task_id": "sky130-beta-multiplier-reference-pvt-mc",
   "status": "passed",
   "exit_code": 0,
-  "wall_s": 35.082,
+  "wall_s": 35.034,
   "reason": "",
   "image": "adb-verifier:sky130-beta-multiplier-reference-pvt-mc-9a02e11e2f36",
   "artifacts": {
@@ -11,8 +11,8 @@
     "tests_total": 12,
     "partial": 1.0,
     "ngspice_runs": 95,
-    "wall_clock_s": 34.717,
-    "summed_run_time_s": 34.55,
+    "wall_clock_s": 34.67,
+    "summed_run_time_s": 34.507,
     "workers": 1,
     "failed_runs": [],
     "gates": [
@@ -102,5 +102,5 @@
     "runs_source": "wrapper-count",
     "wall_clock_source": "verifier"
   },
-  "stdout_tail": "/app/circuit.spi: netlist check passed\n95 serial ngspice runs, 34.717 s wall clock\nPASS complete_signoff: runs=95 PVT=27/27 compliance=27/27 startup=18/18 MC=50/50\nPASS pvt_output_current: current=29.148..44.972uA\nPASS nominal_current_accuracy: TT/1.8V/27C current=36.109uA\nPASS pvt_vref: VREF=0.6334..0.7101V\nPASS pvt_power: power_max=64.97uW\nPASS pvt_output_compliance: current=28.477..45.679uA flatness_max=5.343%\nPASS pvt_multi_ramp_startup_final: final_current=30.267..43.892uA VREF=0.6334..0.7101V\nPASS pvt_multi_ramp_startup_settling: settling_time_max=5.812us\nPASS startup_overshoot: peak_to_final_current_ratio_max=1.2781\nPASS startup_inrush_and_energy: peak_supply_current=0.012mA energy=0.180nJ\nPASS mc_current_yield: samples=50 yield=100.0% in 30..50uA\nPASS mc_current_sigma: samples=50 sigma=1.048uA"
+  "stdout_tail": "/app/circuit.spi: netlist check passed\n95 serial ngspice runs, 34.670 s wall clock\nPASS complete_signoff: runs=95 PVT=27/27 compliance=27/27 startup=18/18 MC=50/50\nPASS pvt_output_current: current=29.148..44.972uA\nPASS nominal_current_accuracy: TT/1.8V/27C current=36.109uA\nPASS pvt_vref: VREF=0.6334..0.7101V\nPASS pvt_power: power_max=64.97uW\nPASS pvt_output_compliance: current=28.477..45.679uA flatness_max=5.343%\nPASS pvt_multi_ramp_startup_final: final_current=30.267..43.892uA VREF=0.6334..0.7101V\nPASS pvt_multi_ramp_startup_settling: settling_time_max=5.812us\nPASS startup_overshoot: peak_to_final_current_ratio_max=1.2781\nPASS startup_inrush_and_energy: peak_supply_current=0.012mA energy=0.180nJ\nPASS mc_current_yield: samples=50 yield=100.0% in 30..50uA\nPASS mc_current_sigma: samples=50 sigma=1.048uA"
 }
