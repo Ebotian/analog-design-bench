@@ -1,0 +1,45 @@
+{
+  "task_id": "sky130-transistor-divide-by-2",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 1.414,
+  "reason": "",
+  "image": "adb-verifier:sky130-transistor-divide-by-2-22c90b4b1903",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 4,
+    "tests_total": 4,
+    "partial": 1.0,
+    "ngspice_runs": 2,
+    "wall_clock_s": 1.079,
+    "summed_run_time_s": 0.0,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "reset",
+        "status": "passed",
+        "message": "delay=0.0773ns; pre/asserted/release/next=1.8/0.004928/0.002661/1.8V"
+      },
+      {
+        "name": "frequency",
+        "status": "passed",
+        "message": "input=1GHz; output=500MHz; ratio=2"
+      },
+      {
+        "name": "duty_cycle",
+        "status": "passed",
+        "message": "high/low duty=49.9/49.89/49.89/50.1/50.11/50.11%; low/high=4.937e-07/1.8V"
+      },
+      {
+        "name": "clock_to_output_delay",
+        "status": "passed",
+        "message": "delays=252/252.4/252.4/252.4ps"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 0,
+    "runs_source": "stdout"
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED reset: delay=0.0773ns; pre/asserted/release/next=1.8/0.004928/0.002661/1.8V\nPASSED frequency: input=1GHz; output=500MHz; ratio=2\nPASSED duty_cycle: high/low duty=49.9/49.89/49.89/50.1/50.11/50.11%; low/high=4.937e-07/1.8V\nPASSED clock_to_output_delay: delays=252/252.4/252.4/252.4ps\nngspice_processes=2 wall_clock_s=1.079"
+}

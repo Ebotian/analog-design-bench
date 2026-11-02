@@ -1,7 +1,11 @@
 """Derive corner declarations from corpus evidence.
 
-Three evidence sources, strictest first:
+Four evidence sources, strictest first:
 
+``verifier``
+    The official verifier's own SPEC or constants (see
+    :mod:`adb_solve.verifier_spec`): ``[pvt]``/``[coverage]`` or
+    ``CORNERS``/``SUPPLIES``/``TEMPERATURES`` and point lists.
 ``instruction``
     A sentence of the task text that names processes, supplies and
     temperatures together -- either as a cartesian statement ("all 45
@@ -23,8 +27,11 @@ from __future__ import annotations
 import re
 from typing import Any, Iterable, Mapping, cast
 
+from pathlib import Path
+
 from . import bench
 from . import netlist as spice
+from . import verifier_spec
 from .corners import GridKind, Provenance, SweepKeys, TaskCorners
 from .numbers import to_si
 
@@ -281,18 +288,37 @@ def _pick_key(candidates: Iterable[str], available: set[str]) -> str:
     return next(iter(candidates))
 
 
-def build_entry(task: Mapping[str, Any]) -> TaskCorners:
-    """Turn one task record into a validated corner declaration."""
+def build_entry(
+    task: Mapping[str, Any], tests_dir: str | Path | None = None
+) -> TaskCorners:
+    """Turn one task record into a validated corner declaration.
+
+    The official verifier is consulted first: its SPEC/constants are the
+    authority for the signoff grid.  Only when it declares no usable grid do
+    the prose/deck heuristics run, and those entries stay flagged.
+    """
     task_id = str(task["id"])
     names = placeholder_names(task)
     available = {name.casefold() for name in names}
+    verifier = verifier_spec.from_tests_dir(tests_dir) if tests_dir is not None else None
     grids = instruction_grids(str(task["instruction"]))
     evidence = deck_evidence(task)
     grid = grids[0] if grids else None
+    coverage: Mapping[str, tuple[str, ...]] = {}
+    verifier_kind: GridKind | None = None
 
-    if grid is not None:
-        provenance: Provenance = "instruction"
-        kind = str(grid["kind"])
+    if verifier is not None:
+        provenance: Provenance = "verifier"
+        kind = verifier.kind
+        verifier_kind = verifier.kind
+        processes = list(verifier.processes)
+        supplies = [float(value) for value in verifier.supplies]
+        temperatures = [float(value) for value in verifier.temperatures]
+        coverage = dict(verifier.coverage)
+        quote = f"{verifier.quote} in tasks/{task_id}/tests/verify.py"
+    elif grid is not None:
+        provenance = "instruction"
+        kind = cast(GridKind, grid["kind"])
         processes = list(grid["processes"]) or list(evidence["processes"]) or ["tt"]
         supplies = [float(value) for value in grid["supplies"]]
         temperatures = [float(value) for value in grid["temperatures"]]
@@ -344,13 +370,16 @@ def build_entry(task: Mapping[str, Any]) -> TaskCorners:
         if name.casefold() not in swept
     }
 
-    needs_review = bool(
-        provenance != "instruction"
-        or unresolved
-        or len(grids) > 1
-        or (grid is not None and grid["kind"] in {"rows", "pairs"})
-        or MC_WORDS_RE.search(str(task["instruction"]))
-    )
+    if provenance == "verifier":
+        needs_review = bool(unresolved or verifier_kind in {"rows", "pairs"})
+    else:
+        needs_review = bool(
+            provenance != "instruction"
+            or unresolved
+            or len(grids) > 1
+            or (grid is not None and grid["kind"] in {"rows", "pairs"})
+            or MC_WORDS_RE.search(str(task["instruction"]))
+        )
     return TaskCorners(
         task_id=task_id,
         provenance=provenance,
@@ -362,5 +391,6 @@ def build_entry(task: Mapping[str, Any]) -> TaskCorners:
         keys=keys,
         unresolved=tuple(unresolved),
         needs_review=needs_review,
-        kind=cast(GridKind, kind),
+        kind=kind,
+        coverage=coverage,
     )

@@ -1,0 +1,134 @@
+{
+  "task_id": "sky130-fully-differential-ota-c-biquad-pvt",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 18.155,
+  "reason": "",
+  "image": "adb-verifier:sky130-fully-differential-ota-c-biquad-pvt-7be463c8db09",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 16,
+    "tests_total": 16,
+    "partial": 1.0,
+    "ngspice_runs": 62,
+    "wall_clock_s": 17.418,
+    "summed_run_time_s": 68.262,
+    "workers": 4,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "complete_signoff",
+        "status": "passed",
+        "message": "runs=62/62 failed=0"
+      },
+      {
+        "name": "pvt_center_frequency",
+        "status": "passed",
+        "message": "fitted f0 1.971..2.124 MHz (band 1.8..2.2)"
+      },
+      {
+        "name": "pvt_quality_factor",
+        "status": "passed",
+        "message": "fitted Q 0.677..0.711 (band 0.65..0.75)"
+      },
+      {
+        "name": "pvt_passband_gain",
+        "status": "passed",
+        "message": "passband gain -0.689..-0.605 dB (band -1..1)"
+      },
+      {
+        "name": "pvt_second_order_fit",
+        "status": "passed",
+        "message": "second-order fit RMS error 0.002 dB (max 0.5)"
+      },
+      {
+        "name": "pvt_stopband_attenuation",
+        "status": "passed",
+        "message": "attenuation at 20 MHz 38.91 dB (min 35)"
+      },
+      {
+        "name": "pvt_bandpass_output",
+        "status": "passed",
+        "message": "BP peak 1.950..2.138 MHz, gain -6.58..-6.13 dB, worst decade-edge attenuation 15.77 dB"
+      },
+      {
+        "name": "pvt_bandpass_low_frequency_rejection",
+        "status": "passed",
+        "message": "1 kHz rejection from BP peak 22.02 dB (min 18)"
+      },
+      {
+        "name": "pvt_output_common_mode",
+        "status": "passed",
+        "message": "output common-mode error 9.09 mV on both node pairs (max 10 mV)"
+      },
+      {
+        "name": "pvt_power",
+        "status": "passed",
+        "message": "supply power 430.0 uW (max 500)"
+      },
+      {
+        "name": "stress_thd_nominal",
+        "status": "passed",
+        "message": "THD -51.07 dB, fundamental gain 0.920 at 0.6 Vpp diff"
+      },
+      {
+        "name": "stress_thd_large_signal",
+        "status": "passed",
+        "message": "THD -40.85 dB, fundamental gain 0.911 at 0.9 Vpp diff"
+      },
+      {
+        "name": "stress_thd_near_f0",
+        "status": "passed",
+        "message": "at 2 MHz and 0.9 Vpp: LP THD -57.99 dB / gain 0.647, BP THD -52.62 dB / gain 0.476"
+      },
+      {
+        "name": "pvt_output_noise",
+        "status": "passed",
+        "message": "integrated output noise 433.3 uVrms over 1 kHz..4 MHz (max 500)"
+      },
+      {
+        "name": "stress_cmfb_settling",
+        "status": "passed",
+        "message": "common-mode step settling 0.432 us on both loops (max 1)"
+      },
+      {
+        "name": "stress_cmfb_damping",
+        "status": "passed",
+        "message": "late common-mode excursion 8.66 mV (max 10 mV)"
+      }
+    ],
+    "measurements": {
+      "f0_hz_min": 1970602.4603056042,
+      "f0_hz_max": 2123864.46533802,
+      "q_min": 0.6773187370475012,
+      "q_max": 0.7111699495472754,
+      "passband_gain_db_min": -0.6892552067139303,
+      "passband_gain_db_max": -0.6051428685157221,
+      "fit_error_db_rms_max": 0.002004054829636938,
+      "attenuation_20mhz_db_min": 38.913064094917914,
+      "bp_peak_frequency_hz_min": 1949844.599758025,
+      "bp_peak_frequency_hz_max": 2137962.08950221,
+      "bp_peak_gain_db_min": -6.575145024432612,
+      "bp_peak_gain_db_max": -6.133075631049696,
+      "bp_low_frequency_attenuation_db_min": 22.019519894548274,
+      "bp_edge_attenuation_db_min": 15.766877491566785,
+      "output_cm_error_v_max": 0.00908648365322795,
+      "power_w_max": 0.0004299666171179005,
+      "thd_db_max": -51.072150080172094,
+      "thd_large_db_max": -40.84766168320971,
+      "thd_fundamental_gain_min": 0.9196110965891332,
+      "thd_large_fundamental_gain_min": 0.9109422826475664,
+      "near_f0_lowpass_thd_db_max": -57.99330288266325,
+      "near_f0_bandpass_thd_db_max": -52.61642671770311,
+      "near_f0_lowpass_fundamental_gain_min": 0.6474146896502974,
+      "near_f0_bandpass_fundamental_gain_min": 0.47588888117526434,
+      "output_noise_vrms_max": 0.0004333168670838134,
+      "dynamic_range_db_min": 53.167018715510366,
+      "cm_settle_time_s_max": 4.324999999999963e-07,
+      "cm_late_excursion_v_max": 0.00865719169287571
+    },
+    "metrics_rows": 62,
+    "runs_source": "run-summary"
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\n1 ngspice runs, 4 workers, 0.434 s wall clock\n62 ngspice runs, 4 workers, 17.418 s wall clock\nPASS complete_signoff: runs=62/62 failed=0\nPASS pvt_center_frequency: fitted f0 1.971..2.124 MHz (band 1.8..2.2)\nPASS pvt_quality_factor: fitted Q 0.677..0.711 (band 0.65..0.75)\nPASS pvt_passband_gain: passband gain -0.689..-0.605 dB (band -1..1)\nPASS pvt_second_order_fit: second-order fit RMS error 0.002 dB (max 0.5)\nPASS pvt_stopband_attenuation: attenuation at 20 MHz 38.91 dB (min 35)\nPASS pvt_bandpass_output: BP peak 1.950..2.138 MHz, gain -6.58..-6.13 dB, worst decade-edge attenuation 15.77 dB\nPASS pvt_bandpass_low_frequency_rejection: 1 kHz rejection from BP peak 22.02 dB (min 18)\nPASS pvt_output_common_mode: output common-mode error 9.09 mV on both node pairs (max 10 mV)\nPASS pvt_power: supply power 430.0 uW (max 500)\nPASS stress_thd_nominal: THD -51.07 dB, fundamental gain 0.920 at 0.6 Vpp diff\nPASS stress_thd_large_signal: THD -40.85 dB, fundamental gain 0.911 at 0.9 Vpp diff\nPASS stress_thd_near_f0: at 2 MHz and 0.9 Vpp: LP THD -57.99 dB / gain 0.647, BP THD -52.62 dB / gain 0.476\nPASS pvt_output_noise: integrated output noise 433.3 uVrms over 1 kHz..4 MHz (max 500)\nPASS stress_cmfb_settling: common-mode step settling 0.432 us on both loops (max 1)\nPASS stress_cmfb_damping: late common-mode excursion 8.66 mV (max 10 mV)"
+}

@@ -1,0 +1,91 @@
+{
+  "task_id": "sky130-ldo-ota5-robust-pvt-mc",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 36.889,
+  "reason": "",
+  "image": "adb-verifier:sky130-ldo-ota5-robust-pvt-mc-0d27968c1689",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 9,
+    "tests_total": 9,
+    "partial": 1.0,
+    "ngspice_runs": 161,
+    "wall_clock_s": 36.59,
+    "summed_run_time_s": 0.0,
+    "workers": 4,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "complete_signoff",
+        "status": "passed",
+        "message": "runs=161 PVT=15/15 DC-points=135"
+      },
+      {
+        "name": "pvt_dc_regulation_and_iq",
+        "status": "passed",
+        "message": "error=14.201mV Iq=130.918uA..143.211uA"
+      },
+      {
+        "name": "dropout",
+        "status": "passed",
+        "message": "dropout=221.155mV"
+      },
+      {
+        "name": "loop_stability",
+        "status": "passed",
+        "message": "gain_min=47.254dB PM_min=64.694deg UGB_min=55.194kHz"
+      },
+      {
+        "name": "psrr_and_output_noise",
+        "status": "passed",
+        "message": "PSRR_min(100Hz/1kHz/100kHz/1MHz)=48.064dB/48.064dB/46.485dB/26.539dB noise=97.571uVrms"
+      },
+      {
+        "name": "startup",
+        "status": "passed",
+        "message": "sustained_t90=20.965us settling_after_ramp=0.675us overshoot=13.479mV"
+      },
+      {
+        "name": "load_transient",
+        "status": "passed",
+        "message": "excursion=9.194mV settling=0.000us"
+      },
+      {
+        "name": "line_transient",
+        "status": "passed",
+        "message": "excursion=9.966mV settling=0.000us"
+      },
+      {
+        "name": "monte_carlo_output",
+        "status": "passed",
+        "message": "samples=30/30 yield=100.000%"
+      }
+    ],
+    "measurements": {
+      "pvt_error_max_v": 0.014201153045350079,
+      "pvt_iq_min_a": 0.00013091820141767144,
+      "pvt_iq_max_a": 0.00014321062633482293,
+      "dropout_v": 0.2211546839250218,
+      "loop_dc_gain_min_db": 47.25383189816226,
+      "phase_margin_min_deg": 64.69444461583416,
+      "loop_ugb_min_hz": 55193.903184490846,
+      "psrr_100hz_min_db": 48.06448134161649,
+      "psrr_1khz_min_db": 48.06429602440051,
+      "psrr_100khz_min_db": 46.48544630981492,
+      "psrr_1mhz_min_db": 26.53898625010711,
+      "output_noise_rms_v": 9.757055462097968e-05,
+      "startup_t90_s": 2.096484858633282e-05,
+      "startup_settling_after_ramp_s": 6.750000000000198e-07,
+      "startup_overshoot_v": 0.013478601630954934,
+      "load_transient_excursion_v": 0.009194197569857954,
+      "load_transient_settling_s": 0.0,
+      "line_transient_excursion_v": 0.009966373902461134,
+      "line_transient_settling_s": 0.0,
+      "mc_output_yield": 1.0
+    },
+    "metrics_rows": 0,
+    "runs_source": "run-summary"
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nruns=161 failed=0 workers=4 wall=36.590s sum_run=145.493s\nPASS complete_signoff: runs=161 PVT=15/15 DC-points=135\nPASS pvt_dc_regulation_and_iq: error=14.201mV Iq=130.918uA..143.211uA\nPASS dropout: dropout=221.155mV\nPASS loop_stability: gain_min=47.254dB PM_min=64.694deg UGB_min=55.194kHz\nPASS psrr_and_output_noise: PSRR_min(100Hz/1kHz/100kHz/1MHz)=48.064dB/48.064dB/46.485dB/26.539dB noise=97.571uVrms\nPASS startup: sustained_t90=20.965us settling_after_ramp=0.675us overshoot=13.479mV\nPASS load_transient: excursion=9.194mV settling=0.000us\nPASS line_transient: excursion=9.966mV settling=0.000us\nPASS monte_carlo_output: samples=30/30 yield=100.000%"
+}

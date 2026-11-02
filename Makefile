@@ -1,6 +1,6 @@
 PY ?= python3
 
-.PHONY: fetch-t0 check manifest test types corners p1 ci clean
+.PHONY: fetch-t0 check manifest test types corners p1 results ci clean
 
 fetch-t0:
 	$(PY) scripts/fetch_t0.py --tasks-only
@@ -24,7 +24,11 @@ corners:
 p1:
 	$(PY) scripts/check_p1.py
 
-ci: test types corners
+results:
+	$(PY) scripts/reconcile_verifiers.py
+	$(PY) scripts/build_results_md.py --check
+
+ci: test types corners results
 
 clean:
 	rm -rf .pytest_cache __pycache__ src/*/__pycache__ scripts/__pycache__

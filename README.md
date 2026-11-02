@@ -20,8 +20,15 @@ data/
 scripts/
   fetch_t0.py                T0 抓取脚本（可重入，跳过已完成 key）
   check_t0.py                完整性校验 + 清单生成
+  run_verifiers.py           官方 test.sh × 50 参考解，写 results/verifier/
+  reconcile_verifiers.py     与 referenceResult 逐 gate 对账
+  build_results_md.py        只读结果 JSON 生成 docs/VERIFIER_RESULTS.md
 src/adb_solve/               求解基建包（P1 已落地：解析/回写/评测/缓存/CLI）
 configs/corners.toml         每个任务的 corner 矩阵（IaC，声明式、受版本控制）
+results/
+  verifier/<task_id>.json    官方判分逐任务结果（reward/gates/sims/墙钟/状态）
+  verifier/summary.json      sweep 汇总（状态、sims、墙钟、CPU、残留检查）
+  reconcile.json             与 T0 referenceResult 的逐 gate 对账
 data/t1/                     判分器语料（tests/、task.toml、results/、environment/，见 DATA.md）
 tests/                       pytest 单测 + docker 端到端 smoke
 manifests/
@@ -30,6 +37,7 @@ manifests/
 docs/
   PLAN.md                    数据阶段 T0/T1/T2 与工具阶段 P1–P5
   REQUIREMENTS.md            通用求解基建的需求规格（核心文档）
+  VERIFIER_RESULTS.md        参考解实测与逐 gate 对账（由 JSON 生成）
 LICENSE                      Apache-2.0（代码）
 LICENSES/CC-BY-NC-4.0.txt    数据与 benchmark 内容
 NOTICE                       许可分层与署名
@@ -77,8 +85,9 @@ PYTHONPATH=src python3 -m adb_solve apply  --netlist circuit.spi --cand cand.jso
 ## Corner 矩阵（IaC）
 
 `configs/corners.toml` 是"每个任务在哪些 process × supply × temperature 上签核"的唯一事实源。
-它由 `scripts/build_corners.py` 从证据（题面原文、bench deck、设计网表）生成，人工审阅后提交，
-评测直接消费；`make corners` 检查它是否与证据一致（漂移即失败）。
+它由 `scripts/build_corners.py` 生成：先读官方判分器 `tests/verify.py`
+（TOML SPEC 或 Python 常量），只有判分器没有可用网格时才回退到题面原文、bench deck 与设计网表。
+人工审阅后提交，评测直接消费；`make corners` 检查它是否与证据一致（漂移即失败）。
 
 ```bash
 make corners                  # 重新推导并与已提交文件比对，过期则报错
@@ -90,16 +99,20 @@ PYTHONPATH=src python3 -m adb_solve eval --netlist circuit.spi --bench benches/ 
 
 | 字段 | 含义 |
 |---|---|
-| `provenance` | `instruction`（题面原句，带 `quote`）/ `deck`（deck 与网表自身）/ `assumption`（没找到证据，标记为假设） |
+| `provenance` | `verifier`（判分器 SPEC/常量，带来源说明）/ `instruction`（题面原句，带 `quote`）/ `deck`（deck 与网表自身）/ `assumption`（没找到证据，标记为假设） |
 | `kind` | `cartesian`（穷举网格）/ `rows`、`pairs`（行式或配对压力点，非穷举）/ `none` |
 | `unresolved` | 本资产无法提供的 deck 占位符（每 bench 的时序、MC 应力等），测试要求"渲染失败的恰好是这些名字" |
 | `needs_review` | 仍需人工确认；`[meta]` 里给出总数，债务可计数、不隐藏 |
 
-当前状态：50 个任务全部登记；36 个由题面、3 个由 deck 提供，11 个是显式假设；
-43 个标记待审、33 个未解析占位符名（分布在 7 个任务）；展开后共 1,194 个签核点。
+当前状态：50 个任务全部登记；`provenance` = verifier 31 / instruction 7 / deck 3 /
+assumption 9；`kind` = cartesian 19 / rows 14 / pairs 5 / none 12；
+33 个标记待审、33 个未解析占位符名（分布在 7 个任务）；14 个任务带
+22 组 per-bench `coverage` 子集；展开后共 1,218 个签核点。
 
-> 这份矩阵目前是**从题面散文反推**的过渡资产。判分器已取回到 `data/t1/`
-> （见 `DATA.md` 的 T1 节），下一版将直接从判分器的条件声明生成。
+> 判分器证据并不统一：4 个任务内嵌 TOML SPEC（含 `[pvt]`/`[coverage]`），27 个用
+> Python 常量或点列表声明同一组条件，因此由 `src/adb_solve/verifier_spec.py`
+> 统一提取；剩余 19 个没有可用网格，仍由题面/deck 回退并保留待审标记。
+> 实测判分结果见 `docs/VERIFIER_RESULTS.md` 与 `results/`。
 
 ## 复现
 

@@ -1,0 +1,126 @@
+{
+  "task_id": "sky130-bandgap-reference-pvt",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 98.967,
+  "reason": "",
+  "image": "adb-verifier:sky130-bandgap-reference-pvt-abc7ef8d9451",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 12,
+    "tests_total": 12,
+    "partial": 1.0,
+    "ngspice_runs": 189,
+    "wall_clock_s": 98.461,
+    "summed_run_time_s": 98.201,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "complete_signoff",
+        "status": "passed",
+        "message": "runs=189 groups={'pvt_op': 81, 'line': 27, 'temperature': 54, 'startup': 18, 'ac': 15, 'noise': 3, 'line_step': 15, 'monte_carlo': 30}"
+      },
+      {
+        "name": "pvt_reference_voltage",
+        "status": "passed",
+        "message": "VREF=1.222638..1.233071V"
+      },
+      {
+        "name": "pvt_power",
+        "status": "passed",
+        "message": "power_max=114.489uW"
+      },
+      {
+        "name": "temperature_coefficient",
+        "status": "passed",
+        "message": "per_corner_ppm_per_C={'tt': 16.223531496050665, 'ff': 15.756738920875723, 'ss': 16.899628380657383, 'fs': 15.907865863574072, 'sf': 16.52182252495599, 'll': 15.957648571412095, 'hh': 18.199499266917986, 'hl': 18.199499266917986, 'lh': 15.957648571412095} max=18.199"
+      },
+      {
+        "name": "line_regulation",
+        "status": "passed",
+        "message": "per_corner_mV_per_V={tt: 11.949, ff: 11.939, ss: 11.961, fs: 11.802, sf: 12.196, ll: 12.106, hh: 11.871, hl: 11.871, lh: 12.106} max=12.196"
+      },
+      {
+        "name": "multi_ramp_startup_settling",
+        "status": "passed",
+        "message": "continuous_window=1.222822..1.230723V after entry; endpoints=1.222822..1.230723V/1.222854..1.230723V"
+      },
+      {
+        "name": "startup_overshoot",
+        "status": "passed",
+        "message": "overshoot_max=17.276mV"
+      },
+      {
+        "name": "startup_inrush_and_energy",
+        "status": "passed",
+        "message": "peak_supply_current=0.879mA energy=1.760nJ"
+      },
+      {
+        "name": "supply_rejection",
+        "status": "passed",
+        "message": "VDD_to_VREF_gain_max=0.149045V/V"
+      },
+      {
+        "name": "integrated_output_noise",
+        "status": "passed",
+        "message": "noise_10Hz_to_1MHz=299.064uVrms"
+      },
+      {
+        "name": "supply_step_response",
+        "status": "passed",
+        "message": "excursion_max=56.959mV settling_max=5.236us within 1mV"
+      },
+      {
+        "name": "monte_carlo_reference_accuracy",
+        "status": "passed",
+        "message": "runs=30 mean=1.225834V sigma=14.067mV yield=1.000 in 1.15..1.28V"
+      }
+    ],
+    "measurements": {
+      "pvt_reference_voltage_v_min": 1.222638063270882,
+      "pvt_reference_voltage_v_max": 1.233071275243268,
+      "pvt_power_w_max": 0.00011448852531800363,
+      "temperature_coefficient_ppm_per_c": {
+        "tt": 16.223531496050665,
+        "ff": 15.756738920875723,
+        "ss": 16.899628380657383,
+        "fs": 15.907865863574072,
+        "sf": 16.52182252495599,
+        "ll": 15.957648571412095,
+        "hh": 18.199499266917986,
+        "hl": 18.199499266917986,
+        "lh": 15.957648571412095
+      },
+      "line_regulation_v_per_v": {
+        "tt": 0.011948637352461449,
+        "ff": 0.011939355532538916,
+        "ss": 0.011960617164922006,
+        "fs": 0.011802351153811234,
+        "sf": 0.01219551157471904,
+        "ll": 0.012106167505747547,
+        "hh": 0.011870852095688701,
+        "hl": 0.011870852095688701,
+        "lh": 0.012106167505747547
+      },
+      "startup_check_v_min": 1.222822134460703,
+      "startup_check_v_max": 1.230722554434303,
+      "startup_final_v_min": 1.222854070463724,
+      "startup_final_v_max": 1.230722996485035,
+      "startup_window_v_min": 1.222822134460703,
+      "startup_window_v_max": 1.230722996485035,
+      "startup_overshoot_v_max": 0.017275816108052844,
+      "startup_peak_supply_current_a_max": 0.0008794193688782467,
+      "startup_energy_j_max": 1.7596596171710283e-09,
+      "supply_gain_max": 0.14904516377973112,
+      "integrated_noise_v": 0.00029906403982883005,
+      "line_step_excursion_v_max": 0.05695932411749105,
+      "line_step_settling_time_s_max": 5.23562870428163e-06,
+      "monte_carlo_reference_voltage_v_mean": 1.2258337600697664,
+      "monte_carlo_reference_sigma_v": 0.014067456174534988,
+      "monte_carlo_reference_yield": 1.0
+    },
+    "metrics_rows": 189
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\n189 serial ngspice runs, 98.461 s wall clock\nPASS complete_signoff: runs=189 groups={'pvt_op': 81, 'line': 27, 'temperature': 54, 'startup': 18, 'ac': 15, 'noise': 3, 'line_step': 15, 'monte_carlo': 30}\nPASS pvt_reference_voltage: VREF=1.222638..1.233071V\nPASS pvt_power: power_max=114.489uW\nPASS temperature_coefficient: per_corner_ppm_per_C={'tt': 16.223531496050665, 'ff': 15.756738920875723, 'ss': 16.899628380657383, 'fs': 15.907865863574072, 'sf': 16.52182252495599, 'll': 15.957648571412095, 'hh': 18.199499266917986, 'hl': 18.199499266917986, 'lh': 15.957648571412095} max=18.199\nPASS line_regulation: per_corner_mV_per_V={tt: 11.949, ff: 11.939, ss: 11.961, fs: 11.802, sf: 12.196, ll: 12.106, hh: 11.871, hl: 11.871, lh: 12.106} max=12.196\nPASS multi_ramp_startup_settling: continuous_window=1.222822..1.230723V after entry; endpoints=1.222822..1.230723V/1.222854..1.230723V\nPASS startup_overshoot: overshoot_max=17.276mV\nPASS startup_inrush_and_energy: peak_supply_current=0.879mA energy=1.760nJ\nPASS supply_rejection: VDD_to_VREF_gain_max=0.149045V/V\nPASS integrated_output_noise: noise_10Hz_to_1MHz=299.064uVrms\nPASS supply_step_response: excursion_max=56.959mV settling_max=5.236us within 1mV\nPASS monte_carlo_reference_accuracy: runs=30 mean=1.225834V sigma=14.067mV yield=1.000 in 1.15..1.28V"
+}

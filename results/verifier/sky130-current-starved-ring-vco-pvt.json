@@ -1,0 +1,70 @@
+{
+  "task_id": "sky130-current-starved-ring-vco-pvt",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 67.358,
+  "reason": "",
+  "image": "adb-verifier:sky130-current-starved-ring-vco-pvt-b2baf5cb8e9b",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 9,
+    "tests_total": 9,
+    "partial": 1.0,
+    "ngspice_runs": 30,
+    "wall_clock_s": 67.104,
+    "summed_run_time_s": 0.0,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "pvt_frequency_coverage",
+        "status": "passed",
+        "message": "f(0.9V)_range=12.55..20.68MHz; f(1.2V)_min=26.42MHz at ff/1.98V/+125C"
+      },
+      {
+        "name": "pvt_tuning_ratio",
+        "status": "passed",
+        "message": "worst=1.791 at ff/1.98V/+125C"
+      },
+      {
+        "name": "pvt_kvco_monotonic_linear",
+        "status": "passed",
+        "message": "KVCO_min=37.26MHz/V at ff/1.98V/+125C; linearity_max=1.095 at ss/1.98V/+125C"
+      },
+      {
+        "name": "pvt_frequency_settling",
+        "status": "passed",
+        "message": "worst=0.004786% at tt/1.62V/-40C"
+      },
+      {
+        "name": "pvt_duty_cycle",
+        "status": "passed",
+        "message": "range=0.486..0.4999"
+      },
+      {
+        "name": "pvt_startup",
+        "status": "passed",
+        "message": "worst=47.61ns at ss/1.62V/-40C"
+      },
+      {
+        "name": "pvt_output_swing",
+        "status": "passed",
+        "message": "low_max=0.0001658 at ff/1.98V/+125C; high_min=1.001 at ff/1.98V/+125C"
+      },
+      {
+        "name": "pvt_power",
+        "status": "passed",
+        "message": "worst=151.6uW at ff/1.98V/+125C"
+      },
+      {
+        "name": "supply_pushing",
+        "status": "passed",
+        "message": "worst=88.9%/V at ff/27C"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 0,
+    "runs_source": "stdout"
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED pvt_frequency_coverage: f(0.9V)_range=12.55..20.68MHz; f(1.2V)_min=26.42MHz at ff/1.98V/+125C\nPASSED pvt_tuning_ratio: worst=1.791 at ff/1.98V/+125C\nPASSED pvt_kvco_monotonic_linear: KVCO_min=37.26MHz/V at ff/1.98V/+125C; linearity_max=1.095 at ss/1.98V/+125C\nPASSED pvt_frequency_settling: worst=0.004786% at tt/1.62V/-40C\nPASSED pvt_duty_cycle: range=0.486..0.4999\nPASSED pvt_startup: worst=47.61ns at ss/1.62V/-40C\nPASSED pvt_output_swing: low_max=0.0001658 at ff/1.98V/+125C; high_min=1.001 at ff/1.98V/+125C\nPASSED pvt_power: worst=151.6uW at ff/1.98V/+125C\nPASSED supply_pushing: worst=88.9%/V at ff/27C\npvt_completed=27 push_completed=3 ngspice_processes=30 wall_clock_s=67.104"
+}

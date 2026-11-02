@@ -2,13 +2,15 @@
 
 ``configs/corners.toml`` is the single source of truth for "which process ×
 supply × temperature points does each task sign off over".  It is generated
-from corpus evidence (task instructions, bench decks, design netlists) by
+from verifier evidence first (``tests/verify.py``'s SPEC/constants), then from
+task instructions, bench decks and design netlists by
 ``scripts/build_corners.py``, reviewed like code, and consumed by ``evaluate``.
 
 The schema is deliberately narrow so that what it cannot know is visible:
 
-* ``provenance`` says where the grid came from -- ``instruction`` (quoted),
-  ``deck`` (the decks' own defaults) or ``assumption``;
+* ``provenance`` says where the grid came from -- ``verifier`` (its SPEC or
+  constants), ``instruction`` (quoted), ``deck`` (the decks' own defaults) or
+  ``assumption``;
 * ``unresolved`` lists deck placeholders this asset cannot supply (per-bench
   timings, MC stresses); tests assert that *exactly* those names fail to
   render, so a real gap can never hide behind a declared one;
@@ -30,8 +32,8 @@ from typing import Any, Literal, Mapping, Sequence, TypeAlias, cast
 from .sim import Corner, CornerValue
 
 SCHEMA_VERSION = "adb-corners-1"
-Provenance: TypeAlias = Literal["instruction", "deck", "assumption"]
-PROVENANCES: frozenset[str] = frozenset({"instruction", "deck", "assumption"})
+Provenance: TypeAlias = Literal["instruction", "deck", "assumption", "verifier"]
+PROVENANCES: frozenset[str] = frozenset({"instruction", "deck", "assumption", "verifier"})
 
 #: How the source text declared the grid.  ``cartesian`` is exhaustive;
 #: ``rows`` and ``pairs`` are stress subsets, which :func:`expand` widens into a
@@ -53,6 +55,7 @@ _ALLOWED_TASK_KEYS = frozenset(
         "unresolved",
         "needs_review",
         "kind",
+        "coverage",
     }
 )
 
@@ -83,6 +86,7 @@ class TaskCorners:
     unresolved: tuple[str, ...] = ()
     needs_review: bool = False
     kind: GridKind = "cartesian"
+    coverage: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -251,6 +255,7 @@ def _parse_task(task_id: str, body: object, problems: list[str]) -> TaskCorners 
         table.get("unresolved"), f"{prefix}.unresolved", problems,
         required=False, allow_empty=True,
     )
+    coverage = _parse_coverage(table.get("coverage"), prefix, problems)
     needs_review = table.get("needs_review", False)
     if not isinstance(needs_review, bool):
         problems.append(f"{prefix}.needs_review must be a boolean")
@@ -270,6 +275,7 @@ def _parse_task(task_id: str, body: object, problems: list[str]) -> TaskCorners 
         unresolved=tuple(unresolved),
         needs_review=bool(needs_review),
         kind=cast(GridKind, kind),
+        coverage=coverage,
     )
 
 
@@ -353,6 +359,27 @@ def _parse_keys(raw: object, prefix: str, problems: list[str]) -> SweepKeys:
     return SweepKeys(process=names["process"], supply=names["supply"], temperature=names["temperature"])
 
 
+def _parse_coverage(
+    raw: object, prefix: str, problems: list[str]
+) -> dict[str, tuple[str, ...]]:
+    if raw is None:
+        return {}
+    if not isinstance(raw, dict):
+        problems.append(f"{prefix}.coverage: must be a table")
+        return {}
+    coverage: dict[str, tuple[str, ...]] = {}
+    for name, value in cast(dict[str, Any], raw).items():
+        if not isinstance(name, str) or not name.strip():
+            problems.append(f"{prefix}.coverage: empty subset name")
+            continue
+        items = _string_list(
+            value, f"{prefix}.coverage.{name}", problems,
+            required=True, allow_empty=False,
+        )
+        coverage[name] = tuple(items)
+    return coverage
+
+
 def _parse_values(raw: object, prefix: str, problems: list[str]) -> dict[str, CornerValue]:
     if raw is None:
         return {}
@@ -415,6 +442,15 @@ def dumps(tasks: Sequence[TaskCorners], header: str = "") -> str:
         if entry.unresolved:
             lines.append(
                 f"unresolved = [{', '.join(_toml_string(name) for name in entry.unresolved)}]"
+            )
+        if entry.coverage:
+            lines.append(
+                "coverage = { "
+                + ", ".join(
+                    f"{_toml_string(name)} = [{', '.join(_toml_string(item) for item in corners)}]"
+                    for name, corners in sorted(entry.coverage.items())
+                )
+                + " }"
             )
         if entry.values:
             lines.append("")

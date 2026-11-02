@@ -1,0 +1,49 @@
+{
+  "task_id": "sky130-analog-input-mux-8to1-pvt",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 10.843,
+  "reason": "",
+  "image": "adb-verifier:sky130-analog-input-mux-8to1-pvt-30de014ed24a",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 5,
+    "tests_total": 5,
+    "partial": 1.0,
+    "ngspice_runs": 0,
+    "wall_clock_s": 0.0,
+    "summed_run_time_s": 0.0,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "pvt_selected_gain",
+        "status": "passed",
+        "message": "range=-0.000286639dB at ss/1.62V/+125C/VCM=0.81V/S=0 .. 0dB at tt/1.80V/+40C/VCM=0.9V/S=2 (required -0.001..0.001dB)"
+      },
+      {
+        "name": "pvt_crosstalk_dc",
+        "status": "passed",
+        "message": "worst=-112.059dB at ss/1.62V/+125C/VCM=0V/S=4 from VIN0 (required <=-80dB at 1mHz)"
+      },
+      {
+        "name": "pvt_crosstalk_1mhz",
+        "status": "passed",
+        "message": "worst=-81.8418dB at ss/1.62V/+125C/VCM=0V/S=0 from VIN4 (required <=-80dB at 1MHz)"
+      },
+      {
+        "name": "pvt_selected_bandwidth",
+        "status": "passed",
+        "message": "worst 3dB bandwidth=17.3061MHz at ss/1.62V/+125C/VCM=0.81V/S=0 (required >=5MHz)"
+      },
+      {
+        "name": "pvt_supply_current",
+        "status": "passed",
+        "message": "worst=0.722615uA at fs/1.98V/+125C/VCM=0V/S=7 (required <=5uA)"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 0
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED pvt_selected_gain: range=-0.000286639dB at ss/1.62V/+125C/VCM=0.81V/S=0 .. 0dB at tt/1.80V/+40C/VCM=0.9V/S=2 (required -0.001..0.001dB)\nPASSED pvt_crosstalk_dc: worst=-112.059dB at ss/1.62V/+125C/VCM=0V/S=4 from VIN0 (required <=-80dB at 1mHz)\nPASSED pvt_crosstalk_1mhz: worst=-81.8418dB at ss/1.62V/+125C/VCM=0V/S=0 from VIN4 (required <=-80dB at 1MHz)\nPASSED pvt_selected_bandwidth: worst 3dB bandwidth=17.3061MHz at ss/1.62V/+125C/VCM=0.81V/S=0 (required >=5MHz)\nPASSED pvt_supply_current: worst=0.722615uA at fs/1.98V/+125C/VCM=0V/S=7 (required <=5uA)\npvt_vcm_points=15 select_states=120 transfer_functions=960 ngspice_processes=15 wall_clock_s=10.431"
+}

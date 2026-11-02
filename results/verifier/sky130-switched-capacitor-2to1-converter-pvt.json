@@ -1,0 +1,70 @@
+{
+  "task_id": "sky130-switched-capacitor-2to1-converter-pvt",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 92.548,
+  "reason": "",
+  "image": "adb-verifier:sky130-switched-capacitor-2to1-converter-pvt-6384b9a2c4f2",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 9,
+    "tests_total": 9,
+    "partial": 1.0,
+    "ngspice_runs": 94,
+    "wall_clock_s": 92.233,
+    "summed_run_time_s": 0.0,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "complete_signoff",
+        "status": "passed",
+        "message": "heavy=47/47 light=47/47 unique matched points"
+      },
+      {
+        "name": "pvt_loaded_conversion_ratio",
+        "status": "passed",
+        "message": "ratio=0.43087 at fs/1.62V/-40C..0.46589 at ff/1.98V/-40C"
+      },
+      {
+        "name": "pvt_efficiency",
+        "status": "passed",
+        "message": "efficiency=75.763% at fs/1.62V/-40C..83.447% at ff/1.80V/-40C"
+      },
+      {
+        "name": "pvt_output_ripple",
+        "status": "passed",
+        "message": "ripple_max=53.186mVpp at ff/1.98V/-40C"
+      },
+      {
+        "name": "pvt_startup",
+        "status": "passed",
+        "message": "startup_max=35.410ns at ss/1.62V/-40C; post_200ns_margin_min=80.241mV at fs/1.62V/-40C"
+      },
+      {
+        "name": "pvt_light_conversion_ratio",
+        "status": "passed",
+        "message": "ratio=0.47422 at fs/1.62V/-40C..0.49434 at ff/1.98V/-40C"
+      },
+      {
+        "name": "pvt_light_overhead_power",
+        "status": "passed",
+        "message": "input_power=208.101uW at ss/1.62V/-40C..367.013uW at ff/1.98V/+125C"
+      },
+      {
+        "name": "pvt_light_efficiency",
+        "status": "passed",
+        "message": "efficiency=38.338% at ff/1.98V/+125C..44.698% at ll/1.80V/+27C"
+      },
+      {
+        "name": "pvt_output_resistance",
+        "status": "passed",
+        "message": "Rout=46.451ohm at ff/1.98V/-40C..78.082ohm at ss/1.62V/-40C"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 0,
+    "runs_source": "stdout"
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED complete_signoff: heavy=47/47 light=47/47 unique matched points\nPASSED pvt_loaded_conversion_ratio: ratio=0.43087 at fs/1.62V/-40C..0.46589 at ff/1.98V/-40C\nPASSED pvt_efficiency: efficiency=75.763% at fs/1.62V/-40C..83.447% at ff/1.80V/-40C\nPASSED pvt_output_ripple: ripple_max=53.186mVpp at ff/1.98V/-40C\nPASSED pvt_startup: startup_max=35.410ns at ss/1.62V/-40C; post_200ns_margin_min=80.241mV at fs/1.62V/-40C\nPASSED pvt_light_conversion_ratio: ratio=0.47422 at fs/1.62V/-40C..0.49434 at ff/1.98V/-40C\nPASSED pvt_light_overhead_power: input_power=208.101uW at ss/1.62V/-40C..367.013uW at ff/1.98V/+125C\nPASSED pvt_light_efficiency: efficiency=38.338% at ff/1.98V/+125C..44.698% at ll/1.80V/+27C\nPASSED pvt_output_resistance: Rout=46.451ohm at ff/1.98V/-40C..78.082ohm at ss/1.62V/-40C\nanalysis_points=94 ngspice_processes=94 peak_concurrency=1 wall_clock_s=92.233"
+}

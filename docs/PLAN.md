@@ -95,36 +95,36 @@ P1 期间确认的三件事（会影响 P2/P3）：
 `unresolved_values` 必须等于实际计数；测试要求"deck 渲染失败的占位符集合恰好等于该任务声明的
 `unresolved`"，因此已声明的缺口无法掩盖未声明的缺口。
 
-当前状态：50 个任务全部登记；provenance = instruction 36 / deck 3 / assumption 11；
-kind = cartesian 21 / rows 4 / pairs 11 / none 14；43 个待审、33 个未解析占位符名（7 个任务）；
-展开共 1,194 个签核点。`pairs`/`rows` 是压力点子集，展开成笛卡尔积属于保守超集，故这些任务
-保持 `needs_review`。
+**已按判分器重建（2026-11-02）**。`src/adb_solve/verifier_spec.py` 先读
+`tasks/<id>/tests/verify.py`：4 个任务有 TOML SPEC（`[pvt]`/`[coverage]`），27 个用
+Python 常量或点列表声明同一组条件；AST 只解释字面量、容器与 `product`，不执行 verifier。
+其余 19 个没有可用网格，才回退到题面/deck，并保留待审标记。
+
+当前状态：50 个任务全部登记；provenance = verifier 31 / instruction 7 / deck 3 /
+assumption 9；kind = cartesian 19 / rows 14 / pairs 5 / none 12；33 个待审、
+33 个未解析占位符名（7 个任务）；14 个任务带 22 组 per-bench `coverage` 子集；
+展开共 1,218 个签核点。`pairs`/`rows` 是压力点子集，展开成笛卡尔积属于保守超集，
+故这些任务保持 `needs_review`。
 
 实机验证：`adb-solve eval --corners configs/corners.toml --task sky130-lc-vco-2ghz-pvt`
 在声明的 27 个点上全部 `ok`（4 并发 5m19s，其中 1 个命中缓存；p1_freq 2.135–2.146 GHz，
 与参考指标 `minimum_zero_control_frequency = 2.1128 GHz` 同量级）。
 
-**口径修正（2026-11-03，重要）**：上面这份矩阵是**从题面散文反推**的，现在作废为"过渡资产"。
-公开仓库 `Arcadia-1/analog-design-bench` 的每个任务都带判分器源码：
+#### 官方判分实测（2026-11-02）
 
-```
-tasks/<id>/tests/verify.py     # 内嵌 SPEC（TOML）：[pvt] 网格、[coverage] per-bench 子集、
-                               #   [monte_carlo] 种子、[operating]、[limits]、公式
-tasks/<id>/tests/test.sh       # check_circuit → verify.py → /logs/verifier/reward.json
-tasks/<id>/tests/Dockerfile    # FROM 我们已有的 sky130-tools 镜像
-tasks/<id>/environment/starter/testbench/*.spi   # 给 agent 的已渲染 deck
-tasks/<id>/results/reference.json
-```
+`scripts/run_verifiers.py` 用每个任务的官方 `tests/test.sh` 跑 T0 参考解，
+`scripts/reconcile_verifiers.py` 与 `referenceResult.metrics` 逐 gate 对账。结果：
 
-bandgap 的 `[pvt]` 是 9 个工艺角 × 3 电源 × 3 温度，`[coverage]` 写明
-`noise_corners = ["tt"]`、`startup_corners = ["tt","ss","ff"]`——这正是原先判定
-"不可得"的 per-bench 子集。因此：
+- 50/50 `passed`，430 个 verifier gate，1,991 次 ngspice 仿真；
+- sweep 墙钟 528.0 s，逐任务墙钟合计 3,021.2 s，verifier 自报墙钟合计 1,975.3 s，
+  CPU 平均 42.7% / 峰值 97.2%；结束后残留容器与 ngspice 线程均为 0；
+- 452 条参考 gate 全部匹配：451 条在 1% 容差内，1 条受 verifier 打印精度限制；
+  状态一致 452/452，值/状态不一致 0，任务级 reward/gate 数不一致 0。
 
-- 下一步把 `corners.toml` 改为**从 verifier SPEC 生成**（`[pvt]` + `[coverage]`），
-  `needs_review` 与 `unresolved` 应大幅下降；`kind` 统一为 `cartesian` + 每 bench 子集；
-- "重评测 gate 与 `referenceResult` 逐项一致"随之**可做**：直接跑 `test.sh` 拿
-  `reward.json`，与 `referenceResult.metrics` 对账，不需要自己重写公式层；
-- 45 个"只 `.save`"的 deck 不再是缺口：波形读取与 gate 计算都在 verifier 里，不重写。
+逐任务 JSON 在 `results/verifier/`，对账 JSON 在 `results/reconcile.json`，
+说明文档 `docs/VERIFIER_RESULTS.md` 由 `scripts/build_results_md.py` 只读这些 JSON 生成。
+仍存缺口：16 个 verifier 不自报墙钟（记录为 0.0，调度墙钟仍有效）；
+33 个待审 corner 条目与 33 个未解析占位符名未清零。
 
 边界（不变）：verifier 只作 **oracle/校准** 与 A/B 的官方判分，**不作优化目标**（否则是
 F3 过拟合）；不修改 verifier；数据 CC-BY-NC，仅本地使用、不打包分发。

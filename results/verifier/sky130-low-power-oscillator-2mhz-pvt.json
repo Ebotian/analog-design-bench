@@ -1,0 +1,40 @@
+{
+  "task_id": "sky130-low-power-oscillator-2mhz-pvt",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 91.429,
+  "reason": "",
+  "image": "adb-verifier:sky130-low-power-oscillator-2mhz-pvt-1c6cd8cc05a8",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 3,
+    "tests_total": 3,
+    "partial": 1.0,
+    "ngspice_runs": 5,
+    "wall_clock_s": 91.104,
+    "summed_run_time_s": 0.0,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "pvt_frequency",
+        "status": "passed",
+        "message": "range=1.83618MHz at ff/1.98V/-40C .. 2.19846MHz at ff/1.62V/+27C (required 1.8..2.2MHz)"
+      },
+      {
+        "name": "pvt_output_swing",
+        "status": "passed",
+        "message": "tightest Vpp=1.62046V at ss/1.62V/-40C; bounds=1.539..1.701V"
+      },
+      {
+        "name": "nominal_power",
+        "status": "passed",
+        "message": "18.9772uW at tt/1.80V/+27C (required <=20uW, including 2uA bias and 1pF load drive)"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 0,
+    "runs_source": "stdout"
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED pvt_frequency: range=1.83618MHz at ff/1.98V/-40C .. 2.19846MHz at ff/1.62V/+27C (required 1.8..2.2MHz)\nPASSED pvt_output_swing: tightest Vpp=1.62046V at ss/1.62V/-40C; bounds=1.539..1.701V\nPASSED nominal_power: 18.9772uW at tt/1.80V/+27C (required <=20uW, including 2uA bias and 1pF load drive)\npvt_points=5 ngspice_processes=5 wall_clock_s=91.104"
+}

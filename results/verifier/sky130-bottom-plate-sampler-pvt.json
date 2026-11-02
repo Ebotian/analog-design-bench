@@ -1,0 +1,55 @@
+{
+  "task_id": "sky130-bottom-plate-sampler-pvt",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 31.412,
+  "reason": "",
+  "image": "adb-verifier:sky130-bottom-plate-sampler-pvt-c2fcaaece954",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 6,
+    "tests_total": 6,
+    "partial": 1.0,
+    "ngspice_runs": 14,
+    "wall_clock_s": 31.113,
+    "summed_run_time_s": 0.0,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "bipolar_acquisition_5mv",
+        "status": "passed",
+        "message": "+0.8V=2.938mV, -0.8V=2.937mV"
+      },
+      {
+        "name": "hold_isolation_and_reacquisition_5mv",
+        "status": "passed",
+        "message": "capture=2.992mV at ss/1.62V/+125C, shift=0.0082mV at ss/1.62V/+125C, reacquire=2.988mV at ss/1.62V/+125C (max 5mV each)"
+      },
+      {
+        "name": "representative_sfdr_80db",
+        "status": "passed",
+        "message": "worst=88.283dB at ff/1.98V/-40C (min 80dB)"
+      },
+      {
+        "name": "representative_gain_error_0p5pct",
+        "status": "passed",
+        "message": "worst=0.3846% at fs/1.80V/+27C (max 0.5%)"
+      },
+      {
+        "name": "representative_stored_common_mode_25mv",
+        "status": "passed",
+        "message": "worst=21.3041mV at ff/1.98V/-40C (max 25mV)"
+      },
+      {
+        "name": "representative_total_source_power_0p6mw",
+        "status": "passed",
+        "message": "worst=0.4975mW at ff/1.98V/-40C (max 0.6mW)"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 0,
+    "runs_source": "stdout"
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED bipolar_acquisition_5mv: +0.8V=2.938mV, -0.8V=2.937mV\nPASSED hold_isolation_and_reacquisition_5mv: capture=2.992mV at ss/1.62V/+125C, shift=0.0082mV at ss/1.62V/+125C, reacquire=2.988mV at ss/1.62V/+125C (max 5mV each)\nPASSED representative_sfdr_80db: worst=88.283dB at ff/1.98V/-40C (min 80dB)\nPASSED representative_gain_error_0p5pct: worst=0.3846% at fs/1.80V/+27C (max 0.5%)\nPASSED representative_stored_common_mode_25mv: worst=21.3041mV at ff/1.98V/-40C (max 25mV)\nPASSED representative_total_source_power_0p6mw: worst=0.4975mW at ff/1.98V/-40C (max 0.6mW)\nINFO worst_total_source_components_mw=vdd:0.4193,vcm:0.0269,vinp:0.0253,vinn:0.0253,clock:0.0007 at ff/1.98V/-40C\nINFO ngspice_processes=14 wall_clock_s=31.113 workers=4"
+}

@@ -1,0 +1,139 @@
+{
+  "task_id": "sky130-cml-tx-driver-28g-nrz-pvt",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 9.395,
+  "reason": "",
+  "image": "adb-verifier:sky130-cml-tx-driver-28g-nrz-pvt-d820cfc3799a",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 23,
+    "tests_total": 23,
+    "partial": 1.0,
+    "ngspice_runs": 0,
+    "wall_clock_s": 0.0,
+    "summed_run_time_s": 0.0,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "differential_swing",
+        "status": "passed",
+        "message": "min=429.3mV at ff (need 400-900mV)"
+      },
+      {
+        "name": "output_common_mode",
+        "status": "passed",
+        "message": "worst range margin=181.212mV at ff/vocm0 (required >=0mV)"
+      },
+      {
+        "name": "common_mode_shift",
+        "status": "passed",
+        "message": "max=0.00mV (max 30mV)"
+      },
+      {
+        "name": "output_rail_range_static",
+        "status": "passed",
+        "message": "worst range margin=241.794mV at ss/vn0 (required >=0mV)"
+      },
+      {
+        "name": "static_offset",
+        "status": "passed",
+        "message": "max=0.00mV at ff (max 20mV)"
+      },
+      {
+        "name": "vdd_current_balance",
+        "status": "passed",
+        "message": "max=0.00% at tt (max 10%)"
+      },
+      {
+        "name": "gain_100mhz",
+        "status": "passed",
+        "message": "worst=1.441V/V at ff (need 1.3-4.0)"
+      },
+      {
+        "name": "bandwidth_22ghz",
+        "status": "passed",
+        "message": "worst=26.53GHz at ff (min 22GHz)"
+      },
+      {
+        "name": "passband_peaking",
+        "status": "passed",
+        "message": "worst=-0.000dB at ss (max 1.5dB)"
+      },
+      {
+        "name": "group_delay_variation",
+        "status": "passed",
+        "message": "worst=0.022ps at ss (max 8ps)"
+      },
+      {
+        "name": "eye_height",
+        "status": "passed",
+        "message": "worst=429.3mV at ff (min 320mV)"
+      },
+      {
+        "name": "eye_sign",
+        "status": "passed",
+        "message": "worst=0 errors at ss (need 0)"
+      },
+      {
+        "name": "rise_fall_time_28g",
+        "status": "passed",
+        "message": "worst=12.14ps at ff (max 15ps)"
+      },
+      {
+        "name": "overshoot_undershoot",
+        "status": "passed",
+        "message": "worst=6.89% at ss (max 12%)"
+      },
+      {
+        "name": "vocm_deviation_transient",
+        "status": "passed",
+        "message": "worst=3.56mV at ss (max 50mV)"
+      },
+      {
+        "name": "output_rail_range_transient",
+        "status": "passed",
+        "message": "worst range margin=222.761mV at ss (required >=0mV)"
+      },
+      {
+        "name": "jitter_pp",
+        "status": "passed",
+        "message": "worst=1.049ps at ss (max 5.0ps)"
+      },
+      {
+        "name": "jitter_rms",
+        "status": "passed",
+        "message": "worst=0.430ps at ss (max 1.5ps)"
+      },
+      {
+        "name": "dcd",
+        "status": "passed",
+        "message": "worst=0.011ps at ss (max 2.0ps)"
+      },
+      {
+        "name": "average_power",
+        "status": "passed",
+        "message": "worst=29.39mW at ff (max 45mW)"
+      },
+      {
+        "name": "sensitivity_swing",
+        "status": "passed",
+        "message": "worst=302.8mV at ff (min 250mV)"
+      },
+      {
+        "name": "sensitivity_sign",
+        "status": "passed",
+        "message": "worst=0 errors at ss (need 0)"
+      },
+      {
+        "name": "sensitivity_rise_fall",
+        "status": "passed",
+        "message": "worst=13.22ps at ss (max 17ps)"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 0
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED differential_swing: min=429.3mV at ff (need 400-900mV)\nPASSED output_common_mode: worst range margin=181.212mV at ff/vocm0 (required >=0mV)\nPASSED common_mode_shift: max=0.00mV (max 30mV)\nPASSED output_rail_range_static: worst range margin=241.794mV at ss/vn0 (required >=0mV)\nPASSED static_offset: max=0.00mV at ff (max 20mV)\nPASSED vdd_current_balance: max=0.00% at tt (max 10%)\nPASSED gain_100mhz: worst=1.441V/V at ff (need 1.3-4.0)\nPASSED bandwidth_22ghz: worst=26.53GHz at ff (min 22GHz)\nPASSED passband_peaking: worst=-0.000dB at ss (max 1.5dB)\nPASSED group_delay_variation: worst=0.022ps at ss (max 8ps)\nPASSED eye_height: worst=429.3mV at ff (min 320mV)\nPASSED eye_sign: worst=0 errors at ss (need 0)\nPASSED rise_fall_time_28g: worst=12.14ps at ff (max 15ps)\nPASSED overshoot_undershoot: worst=6.89% at ss (max 12%)\nPASSED vocm_deviation_transient: worst=3.56mV at ss (max 50mV)\nPASSED output_rail_range_transient: worst range margin=222.761mV at ss (required >=0mV)\nPASSED jitter_pp: worst=1.049ps at ss (max 5.0ps)\nPASSED jitter_rms: worst=0.430ps at ss (max 1.5ps)\nPASSED dcd: worst=0.011ps at ss (max 2.0ps)\nPASSED average_power: worst=29.39mW at ff (max 45mW)\nPASSED sensitivity_swing: worst=302.8mV at ff (min 250mV)\nPASSED sensitivity_sign: worst=0 errors at ss (need 0)\nPASSED sensitivity_rise_fall: worst=13.22ps at ss (max 17ps)\nngspice_processes=12 wall_clock_s=8.946"
+}

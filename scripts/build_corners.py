@@ -25,15 +25,16 @@ from adb_solve import corners  # noqa: E402
 from adb_solve.evidence import build_entry  # noqa: E402
 
 TASKS = ROOT / "data" / "tasks"
+T1_TASKS = ROOT / "data" / "t1" / "tasks"
 DEFAULT_OUT = ROOT / "configs" / "corners.toml"
 HEADER = """\
 Corner matrices for Analog Design Bench V2 (generated; review like code).
 
-Transitional asset: derived from task prose, decks and netlists, because the
-site API does not expose verifiers.  The public repo does: each task ships
-tasks/<id>/tests/verify.py with an embedded SPEC holding [pvt] and [coverage]
-(per-bench corner subsets).  The next revision generates this matrix from that
-SPEC and retires the prose heuristics.
+The official verifier is the primary evidence: each task ships
+tasks/<id>/tests/verify.py, sometimes with a TOML SPEC ([pvt]/[coverage]) and
+otherwise with Python constants (CORNERS/SUPPLIES/TEMPERATURES or point
+lists).  Only when the verifier declares no usable grid do the task prose,
+decks and netlists supply the fallback, and those entries stay flagged.
 
 Regenerate with scripts/build_corners.py; check drift with `make corners`.
 Entries flagged needs_review, or carrying unresolved placeholders, are
@@ -42,7 +43,7 @@ declared debt -- not silent guesses."""
 
 def collect() -> list[corners.TaskCorners]:
     return [
-        build_entry(json.loads(path.read_text()))
+        build_entry(json.loads(path.read_text()), T1_TASKS / path.stem / "tests")
         for path in sorted(TASKS.glob("*.json"))
     ]
 

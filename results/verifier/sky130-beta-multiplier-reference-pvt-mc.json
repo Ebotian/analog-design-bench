@@ -1,0 +1,104 @@
+{
+  "task_id": "sky130-beta-multiplier-reference-pvt-mc",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 47.969,
+  "reason": "",
+  "image": "adb-verifier:sky130-beta-multiplier-reference-pvt-mc-9a02e11e2f36",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 12,
+    "tests_total": 12,
+    "partial": 1.0,
+    "ngspice_runs": 95,
+    "wall_clock_s": 47.497,
+    "summed_run_time_s": 47.289,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "complete_signoff",
+        "status": "passed",
+        "message": "runs=95 PVT=27/27 compliance=27/27 startup=18/18 MC=50/50"
+      },
+      {
+        "name": "pvt_output_current",
+        "status": "passed",
+        "message": "current=29.148..44.972uA"
+      },
+      {
+        "name": "nominal_current_accuracy",
+        "status": "passed",
+        "message": "TT/1.8V/27C current=36.109uA"
+      },
+      {
+        "name": "pvt_vref",
+        "status": "passed",
+        "message": "VREF=0.6334..0.7101V"
+      },
+      {
+        "name": "pvt_power",
+        "status": "passed",
+        "message": "power_max=64.97uW"
+      },
+      {
+        "name": "pvt_output_compliance",
+        "status": "passed",
+        "message": "current=28.477..45.679uA flatness_max=5.343%"
+      },
+      {
+        "name": "pvt_multi_ramp_startup_final",
+        "status": "passed",
+        "message": "final_current=30.267..43.892uA VREF=0.6334..0.7101V"
+      },
+      {
+        "name": "pvt_multi_ramp_startup_settling",
+        "status": "passed",
+        "message": "settling_time_max=5.812us"
+      },
+      {
+        "name": "startup_overshoot",
+        "status": "passed",
+        "message": "peak_to_final_current_ratio_max=1.2781"
+      },
+      {
+        "name": "startup_inrush_and_energy",
+        "status": "passed",
+        "message": "peak_supply_current=0.012mA energy=0.180nJ"
+      },
+      {
+        "name": "mc_current_yield",
+        "status": "passed",
+        "message": "samples=50 yield=100.0% in 30..50uA"
+      },
+      {
+        "name": "mc_current_sigma",
+        "status": "passed",
+        "message": "samples=50 sigma=1.048uA"
+      }
+    ],
+    "measurements": {
+      "pvt_current_min_a": 2.914843898027542e-05,
+      "pvt_current_max_a": 4.497159029570597e-05,
+      "pvt_vref_min_v": 0.6334046511813163,
+      "pvt_vref_max_v": 0.7101023169124787,
+      "pvt_power_max_w": 6.497281110842801e-05,
+      "pvt_compliance_current_min_a": 2.847707953201883e-05,
+      "pvt_compliance_current_max_a": 4.56793598035965e-05,
+      "pvt_compliance_flatness_max": 0.053425411165614355,
+      "startup_final_current_min_a": 3.0267419757434798e-05,
+      "startup_final_current_max_a": 4.389176801891479e-05,
+      "startup_final_vref_min_v": 0.6334046511787608,
+      "startup_final_vref_max_v": 0.710102316915589,
+      "startup_settling_time_max_s": 5.812499999999946e-06,
+      "startup_current_overshoot_ratio_max": 1.2780566134785991,
+      "startup_peak_supply_current_max_a": 1.206648412965805e-05,
+      "startup_energy_max_j": 1.7950958268124746e-10,
+      "mc_current_mean_a": 3.5987480886929825e-05,
+      "mc_current_sigma_a": 1.0481719661026307e-06,
+      "mc_current_yield": 1.0
+    },
+    "metrics_rows": 95
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\n95 serial ngspice runs, 47.497 s wall clock\nPASS complete_signoff: runs=95 PVT=27/27 compliance=27/27 startup=18/18 MC=50/50\nPASS pvt_output_current: current=29.148..44.972uA\nPASS nominal_current_accuracy: TT/1.8V/27C current=36.109uA\nPASS pvt_vref: VREF=0.6334..0.7101V\nPASS pvt_power: power_max=64.97uW\nPASS pvt_output_compliance: current=28.477..45.679uA flatness_max=5.343%\nPASS pvt_multi_ramp_startup_final: final_current=30.267..43.892uA VREF=0.6334..0.7101V\nPASS pvt_multi_ramp_startup_settling: settling_time_max=5.812us\nPASS startup_overshoot: peak_to_final_current_ratio_max=1.2781\nPASS startup_inrush_and_energy: peak_supply_current=0.012mA energy=0.180nJ\nPASS mc_current_yield: samples=50 yield=100.0% in 30..50uA\nPASS mc_current_sigma: samples=50 sigma=1.048uA"
+}

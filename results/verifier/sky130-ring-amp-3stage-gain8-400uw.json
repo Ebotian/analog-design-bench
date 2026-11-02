@@ -1,0 +1,60 @@
+{
+  "task_id": "sky130-ring-amp-3stage-gain8-400uw",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 2.652,
+  "reason": "",
+  "image": "adb-verifier:sky130-ring-amp-3stage-gain8-400uw-412332024328",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 7,
+    "tests_total": 7,
+    "partial": 1.0,
+    "ngspice_runs": 0,
+    "wall_clock_s": 2.327,
+    "summed_run_time_s": 0.0,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "gain_transfer",
+        "status": "passed",
+        "message": "gain_positive=8.037 gain_bipolar=8.027 (each target [7.2, 8.8])"
+      },
+      {
+        "name": "gain_zero_input",
+        "status": "passed",
+        "message": "zero_input_residual=0.000857 (<= 0.005)"
+      },
+      {
+        "name": "static_error",
+        "status": "passed",
+        "message": "worst_static_error=0.004537 (<= 0.01)"
+      },
+      {
+        "name": "vout_cm",
+        "status": "passed",
+        "message": "worst_vout_cm_error=0.03914 (<= 0.05)"
+      },
+      {
+        "name": "power",
+        "status": "passed",
+        "message": "worst_power_w=0.0002881 (<= 0.0004)"
+      },
+      {
+        "name": "settle_ns",
+        "status": "passed",
+        "message": "worst_settle_ns=43.3 ns (<= 50 ns)"
+      },
+      {
+        "name": "ripple",
+        "status": "passed",
+        "message": "worst_ripple=7.414e-06 (<= 0.005)"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 0,
+    "runs_source": "run-summary"
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED gain_transfer: gain_positive=8.037 gain_bipolar=8.027 (each target [7.2, 8.8])\nPASSED gain_zero_input: zero_input_residual=0.000857 (<= 0.005)\nPASSED static_error: worst_static_error=0.004537 (<= 0.01)\nPASSED vout_cm: worst_vout_cm_error=0.03914 (<= 0.05)\nPASSED power: worst_power_w=0.0002881 (<= 0.0004)\nPASSED settle_ns: worst_settle_ns=43.3 ns (<= 50 ns)\nPASSED ripple: worst_ripple=7.414e-06 (<= 0.005)\nwall_clock_s=2.327"
+}

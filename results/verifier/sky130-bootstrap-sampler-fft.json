@@ -1,0 +1,49 @@
+{
+  "task_id": "sky130-bootstrap-sampler-fft",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 32.142,
+  "reason": "",
+  "image": "adb-verifier:sky130-bootstrap-sampler-fft-e34c7625f7c4",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 5,
+    "tests_total": 5,
+    "partial": 1.0,
+    "ngspice_runs": 0,
+    "wall_clock_s": 0.0,
+    "summed_run_time_s": 0.0,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "complete_signoff",
+        "status": "passed",
+        "message": "22/22 serial analyses complete"
+      },
+      {
+        "name": "pvt_sdr",
+        "status": "passed",
+        "message": "worst=75.50dB at ss_1p98v_125c (min 72dB)"
+      },
+      {
+        "name": "pvt_midtrack_vgs",
+        "status": "passed",
+        "message": "worst=0.8162*VDD at ff_1p62v_125c (min 0.8*VDD)"
+      },
+      {
+        "name": "acquisition_and_hold",
+        "status": "passed",
+        "message": "worst retained gain=0.9841 at ff_1p98v_m40c negative_retained_gain (min 0.9)"
+      },
+      {
+        "name": "pvt_power",
+        "status": "passed",
+        "message": "max=303.1uW at ff_1p98v_125c (max 500uW)"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 0
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED complete_signoff: 22/22 serial analyses complete\nPASSED pvt_sdr: worst=75.50dB at ss_1p98v_125c (min 72dB)\nPASSED pvt_midtrack_vgs: worst=0.8162*VDD at ff_1p62v_125c (min 0.8*VDD)\nPASSED acquisition_and_hold: worst retained gain=0.9841 at ff_1p98v_m40c negative_retained_gain (min 0.9)\nPASSED pvt_power: max=303.1uW at ff_1p98v_125c (max 500uW)\nanalysis_points=22 ngspice_processes=22 wall_clock_s=31.685"
+}

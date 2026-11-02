@@ -1,0 +1,55 @@
+{
+  "task_id": "sky130-flash-adc-4bit-50msps",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 133.907,
+  "reason": "",
+  "image": "adb-verifier:sky130-flash-adc-4bit-50msps-d477d4077a6d",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 6,
+    "tests_total": 6,
+    "partial": 1.0,
+    "ngspice_runs": 0,
+    "wall_clock_s": 133.6,
+    "summed_run_time_s": 0.0,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "transfer",
+        "status": "passed",
+        "message": "codes=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] errors=0 missing=0"
+      },
+      {
+        "name": "sndr",
+        "status": "passed",
+        "message": "25.483 dB"
+      },
+      {
+        "name": "sfdr",
+        "status": "passed",
+        "message": "29.034 dB"
+      },
+      {
+        "name": "power",
+        "status": "passed",
+        "message": "2.398 mW"
+      },
+      {
+        "name": "inl",
+        "status": "passed",
+        "message": "|INL|=0.000 LSB valid=True"
+      },
+      {
+        "name": "dnl",
+        "status": "passed",
+        "message": "|DNL|=0.000 LSB monotonic=True missing=0"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 0,
+    "runs_source": "run-summary"
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASS transfer: codes=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] errors=0 missing=0\nPASS sndr: 25.483 dB\nPASS sfdr: 29.034 dB\nPASS power: 2.398 mW\nPASS inl: |INL|=0.000 LSB valid=True\nPASS dnl: |DNL|=0.000 LSB monotonic=True missing=0"
+}

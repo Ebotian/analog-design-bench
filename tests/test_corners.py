@@ -122,9 +122,9 @@ def test_declaration_covers_exactly_the_corpus(declaration, corpus):
 
 def test_every_entry_declares_its_evidence(declaration):
     for task_id, entry in declaration.tasks.items():
-        assert entry.provenance in {"instruction", "deck", "assumption"}, task_id
-        if entry.provenance == "instruction":
-            assert entry.quote, f"{task_id}: instruction-sourced entries need a quote"
+        assert entry.provenance in {"instruction", "deck", "assumption", "verifier"}, task_id
+        if entry.provenance in {"instruction", "verifier"}:
+            assert entry.quote, f"{task_id}: sourced entries need a quote"
         assert entry.processes and entry.supplies and entry.temperatures, task_id
         assert all(value > 0 for value in entry.supplies), task_id
 
@@ -163,7 +163,7 @@ def test_kind_says_how_exhaustive_the_grid_is(declaration):
             assert entry.needs_review, f"{task_id}: a {entry.kind} grid cannot be exhaustive"
         if entry.provenance == "instruction":
             assert entry.kind != "none", task_id
-        else:
+        elif entry.provenance != "verifier":
             assert entry.kind == "none", task_id
 
 
@@ -217,3 +217,13 @@ def test_dumps_round_trips_through_load(tmp_path):
     loaded = corners.load(path)
     assert loaded.tasks == {entry.task_id: entry for entry in entries}
     assert list(loaded.tasks) == ["a-task", "b-task"]  # sorted on write
+
+
+def test_verifier_entries_carry_coverage_subsets(declaration):
+    """A [coverage] table in the verifier SPEC survives into the asset."""
+    entry = declaration.tasks["sky130-bandgap-reference-pvt"]
+    assert entry.provenance == "verifier"
+    assert entry.coverage["noise_corners"] == ("tt",)
+    assert set(entry.coverage["startup_corners"]) == {"tt", "ss", "ff"}
+    for name, corners in entry.coverage.items():
+        assert name and corners, (entry.task_id, name)

@@ -1,0 +1,65 @@
+{
+  "task_id": "sky130-telescopic-cascode-ota-pvt-fix",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 16.021,
+  "reason": "",
+  "image": "adb-verifier:sky130-telescopic-cascode-ota-pvt-fix-955b7e1add85",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 8,
+    "tests_total": 8,
+    "partial": 1.0,
+    "ngspice_runs": 30,
+    "wall_clock_s": 15.682,
+    "summed_run_time_s": 15.55,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "complete_signoff",
+        "status": "passed",
+        "message": "rows=30/30 PVT=27/27 executed=30 blocked=0"
+      },
+      {
+        "name": "pvt_gain_bandwidth",
+        "status": "passed",
+        "message": "gain_min=62.58dB at ff/1.62V/+125C; UGB_min=77.54MHz at ss/1.62V/+125C"
+      },
+      {
+        "name": "pvt_phase_margin",
+        "status": "passed",
+        "message": "PM_min=87.95deg at ss/1.62V/+125C; falling_crossings=1 post_first_max=-0.000dB"
+      },
+      {
+        "name": "pvt_output_common_mode",
+        "status": "passed",
+        "message": "CM_error_max=0.145mV at ss/1.62V/-40C"
+      },
+      {
+        "name": "pvt_power",
+        "status": "passed",
+        "message": "power_min=394.1uW; power_max=516.1uW at ff/1.98V/+125C"
+      },
+      {
+        "name": "closed_loop_range",
+        "status": "passed",
+        "message": "range=0.900Vpp points=181/181 tracking_max=0.214mV CM_error_max=0.104mV"
+      },
+      {
+        "name": "closed_loop_settling",
+        "status": "passed",
+        "message": "last_entry=8.120ns final_10ns_error=0.0228mV (0.0228% of step)"
+      },
+      {
+        "name": "common_mode_recovery",
+        "status": "passed",
+        "message": "last_entry=19.275ns final_20ns_error=1.2433mV"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 30,
+    "runs_source": "run-summary"
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nplanned=30 executed=30 blocked=0 rows=30 workers=1 wall_clock_s=15.682\nPASSED complete_signoff: rows=30/30 PVT=27/27 executed=30 blocked=0\nPASSED pvt_gain_bandwidth: gain_min=62.58dB at ff/1.62V/+125C; UGB_min=77.54MHz at ss/1.62V/+125C\nPASSED pvt_phase_margin: PM_min=87.95deg at ss/1.62V/+125C; falling_crossings=1 post_first_max=-0.000dB\nPASSED pvt_output_common_mode: CM_error_max=0.145mV at ss/1.62V/-40C\nPASSED pvt_power: power_min=394.1uW; power_max=516.1uW at ff/1.98V/+125C\nPASSED closed_loop_range: range=0.900Vpp points=181/181 tracking_max=0.214mV CM_error_max=0.104mV\nPASSED closed_loop_settling: last_entry=8.120ns final_10ns_error=0.0228mV (0.0228% of step)\nPASSED common_mode_recovery: last_entry=19.275ns final_20ns_error=1.2433mV"
+}

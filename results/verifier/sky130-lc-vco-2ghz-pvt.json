@@ -1,0 +1,70 @@
+{
+  "task_id": "sky130-lc-vco-2ghz-pvt",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 53.565,
+  "reason": "",
+  "image": "adb-verifier:sky130-lc-vco-2ghz-pvt-7592d1e428bc",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 9,
+    "tests_total": 9,
+    "partial": 1.0,
+    "ngspice_runs": 27,
+    "wall_clock_s": 0.0,
+    "summed_run_time_s": 0.0,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "complete_signoff",
+        "status": "passed",
+        "message": "PVT rows=27/27"
+      },
+      {
+        "name": "pvt_2ghz_coverage",
+        "status": "passed",
+        "message": "f(0V)_min=2.1128GHz at ff/1.98V/+125C; f(1.8V)_max=1.6702GHz at ss/1.98V/-40C"
+      },
+      {
+        "name": "pvt_tuning",
+        "status": "passed",
+        "message": "ratio_min=1.2910 segment_drop_min=10.55MHz"
+      },
+      {
+        "name": "pvt_differential_swing",
+        "status": "passed",
+        "message": "Vdiff_pp_min=0.356V"
+      },
+      {
+        "name": "pvt_startup",
+        "status": "passed",
+        "message": "startup_max=13.01ns at tt/1.62V/-40C"
+      },
+      {
+        "name": "pvt_output_operating_range",
+        "status": "passed",
+        "message": "output_min=-0.008V output_max=0.635*VDD VCM=0.217..0.411*VDD"
+      },
+      {
+        "name": "pvt_supply_pushing",
+        "status": "passed",
+        "message": "pushing_max=0.471%/V"
+      },
+      {
+        "name": "pvt_reference_compliance",
+        "status": "passed",
+        "message": "Viref_min=0.283V headroom_min=1.071V"
+      },
+      {
+        "name": "pvt_power",
+        "status": "passed",
+        "message": "power_max=2.125mW at ff/1.98V/+125C"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 0,
+    "runs_source": "stdout"
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED complete_signoff: PVT rows=27/27\nPASSED pvt_2ghz_coverage: f(0V)_min=2.1128GHz at ff/1.98V/+125C; f(1.8V)_max=1.6702GHz at ss/1.98V/-40C\nPASSED pvt_tuning: ratio_min=1.2910 segment_drop_min=10.55MHz\nPASSED pvt_differential_swing: Vdiff_pp_min=0.356V\nPASSED pvt_startup: startup_max=13.01ns at tt/1.62V/-40C\nPASSED pvt_output_operating_range: output_min=-0.008V output_max=0.635*VDD VCM=0.217..0.411*VDD\nPASSED pvt_supply_pushing: pushing_max=0.471%/V\nPASSED pvt_reference_compliance: Viref_min=0.283V headroom_min=1.071V\nPASSED pvt_power: power_max=2.125mW at ff/1.98V/+125C\nanalysis_points=27 ngspice_processes=27"
+}

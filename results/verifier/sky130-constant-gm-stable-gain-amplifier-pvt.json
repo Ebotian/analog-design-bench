@@ -1,0 +1,70 @@
+{
+  "task_id": "sky130-constant-gm-stable-gain-amplifier-pvt",
+  "status": "passed",
+  "exit_code": 0,
+  "wall_s": 29.846,
+  "reason": "",
+  "image": "adb-verifier:sky130-constant-gm-stable-gain-amplifier-pvt-e4cdc326da07",
+  "artifacts": {
+    "reward": 1.0,
+    "tests_passed": 9,
+    "tests_total": 9,
+    "partial": 1.0,
+    "ngspice_runs": 81,
+    "wall_clock_s": 29.544,
+    "summed_run_time_s": 0.0,
+    "workers": 1,
+    "failed_runs": [],
+    "gates": [
+      {
+        "name": "complete_signoff",
+        "status": "passed",
+        "message": "pvt=27/27 startup=27/27 linearity=27/27"
+      },
+      {
+        "name": "absolute_gain_window",
+        "status": "passed",
+        "message": "gain=3.4084..3.6369 V/V"
+      },
+      {
+        "name": "bandwidth",
+        "status": "passed",
+        "message": "BW_min=40.00 MHz"
+      },
+      {
+        "name": "load_drop_window",
+        "status": "passed",
+        "message": "load_drop=195.81..333.48 mV"
+      },
+      {
+        "name": "deterministic_output_imbalance",
+        "status": "passed",
+        "message": "imbalance_max=0.0000 mV"
+      },
+      {
+        "name": "linearity",
+        "status": "passed",
+        "message": "linearity_error_max=5.99%"
+      },
+      {
+        "name": "pvt_power",
+        "status": "passed",
+        "message": "power_max=439.92 uW"
+      },
+      {
+        "name": "gain_spread",
+        "status": "passed",
+        "message": "gain_spread_ratio=1.06703"
+      },
+      {
+        "name": "startup_power_on",
+        "status": "passed",
+        "message": "gain=3.3871..3.6295 V/V zero_imbalance_max=0.0000 mV load_drop=195.81..333.52 mV"
+      }
+    ],
+    "measurements": {},
+    "metrics_rows": 0,
+    "runs_source": "stdout"
+  },
+  "stdout_tail": "/app/circuit.spi: netlist check passed\nPASSED complete_signoff: pvt=27/27 startup=27/27 linearity=27/27\nPASSED absolute_gain_window: gain=3.4084..3.6369 V/V\nPASSED bandwidth: BW_min=40.00 MHz\nPASSED load_drop_window: load_drop=195.81..333.48 mV\nPASSED deterministic_output_imbalance: imbalance_max=0.0000 mV\nPASSED linearity: linearity_error_max=5.99%\nPASSED pvt_power: power_max=439.92 uW\nPASSED gain_spread: gain_spread_ratio=1.06703\nPASSED startup_power_on: gain=3.3871..3.6295 V/V zero_imbalance_max=0.0000 mV load_drop=195.81..333.52 mV\nngspice_runs=81 wall_clock_s=29.544"
+}
