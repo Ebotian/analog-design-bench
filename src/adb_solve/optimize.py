@@ -50,13 +50,15 @@ class SolveOptions(TypedDict, total=False):
     polish: bool
     polish_passes: int
     polish_dims: int
+    stall_generations: int
 
 
 @dataclass(frozen=True)
 class Settings:
     dims: tuple[str, ...] = ()
     population: int = 12
-    generations: int = 20
+    # The budget bounds the search; a small generation cap only hides that.
+    generations: int = 100
     f: float = 0.6
     cr: float = 0.7
     seed: int = 0
@@ -76,6 +78,7 @@ class Settings:
     polish: bool = True
     polish_passes: int = 3
     polish_dims: int = 6
+    stall_generations: int = 15
 
     @classmethod
     def from_options(cls, options: SolveOptions | None) -> "Settings":
@@ -103,6 +106,7 @@ class Settings:
             polish=bool(raw.get("polish", True)),
             polish_passes=int(raw.get("polish_passes", 3)),
             polish_dims=int(raw.get("polish_dims", 6)),
+            stall_generations=int(raw.get("stall_generations", 15)),
         )
 
 
@@ -305,6 +309,9 @@ def solve(
     )
     used = 0
     blocked = False
+    last_stalled = False
+    stall_best: float | None = None
+    stall_counter = 0
     sims_to_feasible: int | None = None
     notes: list[str] = []
 
@@ -378,6 +385,20 @@ def solve(
             )
         return population
 
+    def note_progress(best_loss: float, phase_index: int, generation: int) -> bool:
+        """True when the last ``stall_generations`` bought nothing measurable."""
+        nonlocal last_stalled, stall_counter, stall_best
+        if stall_best is None or best_loss < stall_best - 1e-4:
+            stall_best = best_loss
+            stall_counter = 0
+            return False
+        stall_counter += 1
+        if stall_counter < settings.stall_generations:
+            return False
+        notes.append(f"phase {phase_index}: no progress for {stall_counter} generations after {generation}")
+        last_stalled = True
+        return True
+
     def evolve(
         population: list[_Candidate],
         phase_corners: Sequence[Corner],
@@ -385,7 +406,9 @@ def solve(
         phase_index: int,
         final_phase: bool = False,
     ) -> list[_Candidate]:
-        nonlocal gate_set, sims_to_feasible, blocked
+        nonlocal gate_set, sims_to_feasible, blocked, stall_best, stall_counter
+        stall_best, stall_counter = None, 0
+        last_stalled = False
         if settings.algorithm == "cma":
             return evolve_cma(population, phase_corners, cap, phase_index, final_phase)
         cases = max(1, len(decks) * len(phase_corners))
@@ -447,6 +470,8 @@ def solve(
             history.append(_generation_row(len(history), population, used, phase_index))
             if final_phase and sims_to_feasible is None and best.feasible:
                 sims_to_feasible = used
+            if note_progress(best.loss, phase_index, generation):
+                break
             if spent == 0 and cap is not None and used >= cap:
                 break
         return population
@@ -458,7 +483,9 @@ def solve(
         phase_index: int,
         final_phase: bool = False,
     ) -> list[_Candidate]:
-        nonlocal gate_set, sims_to_feasible, blocked
+        nonlocal gate_set, sims_to_feasible, blocked, stall_best, stall_counter
+        stall_best, stall_counter = None, 0
+        last_stalled = False
         cases = max(1, len(decks) * len(phase_corners))
         for candidate in population:
             candidate.loss = math.inf
@@ -518,6 +545,8 @@ def solve(
             history.append(_generation_row(len(history), elite, used, phase_index))
             if final_phase and sims_to_feasible is None and best.feasible:
                 sims_to_feasible = used
+            if note_progress(best.loss, phase_index, generation):
+                break
             if spent == 0 and cap is not None and used >= cap:
                 break
         return elite
@@ -548,6 +577,7 @@ def solve(
         coarse = {name: max(cma_scales.get(name, settings.sigma * 0.3), 1e-4) for name in settings.dims}
         ranked = sorted(settings.dims, key=lambda name: -coarse[name])[: settings.polish_dims]
         steps = {name: coarse[name] for name in ranked}
+        effect: dict[str, float] = {}
 
         if cap is None or used + cases * 2 * len(settings.dims) <= cap:
             passes += 1
@@ -558,7 +588,6 @@ def solve(
             ]
             report, labelled, _ = run_batch([candidate for _, _, candidate in trials], phase_corners)
             _score_batch(report, labelled, gate_set, reference, settings, used)
-            effect: dict[str, float] = {}
             best_of: dict[str, _Candidate] = {}
             for name, _, candidate in trials:
                 gain = incumbent.loss - candidate.loss
@@ -609,7 +638,7 @@ def solve(
             "reserve": cap,
             "improved": improved,
             "dims": ranked,
-            "effort": {name: round(value, 6) for name, value in sorted(effect.items(), key=lambda item: -item[1])[:6]} if passes else {},
+            "effort": {name: round(value, 6) for name, value in sorted(effect.items(), key=lambda item: -item[1])[:6]},
             "steps": {name: round(value, 6) for name, value in steps.items()},
         }
 
@@ -660,7 +689,31 @@ def solve(
 
     validation: dict[str, object] = {"skipped": True, "reason": "not run"}
     validation_rounds: list[dict[str, object]] = []
+    polish_runs: list[dict[str, object]] = []
     feedback: list[Corner] = []
+
+    def maybe_polish(
+        population: list[_Candidate], phase_corners: Sequence[Corner], phase_index: int
+    ) -> list[_Candidate]:
+        """Stagnation is the trigger, not a fixed schedule.
+
+        A phase that stops buying improvement is spending budget on a flat
+        region: refine locally instead of continuing the global search.  After
+        polishing, the next phase (or round) resumes global search from the
+        improved incumbent.
+        """
+        if not (settings.polish and last_stalled):
+            return population
+        best = min(population, key=lambda candidate: candidate.loss)
+        polished, report = polish(best, phase_corners, polish_cap, phase_index)
+        if report.get("sims"):
+            polish_runs.append(report)
+            notes.append(
+                f"polish triggered after stagnation in phase {phase_index}: {report['sims']} sims"
+            )
+        if polished.loss < best.loss:
+            population = [polished, *[c for c in population if c is not polished]]
+        return population
 
     for round_index in range(max(1, settings.rounds)):
         if round_index == 0:
@@ -670,6 +723,7 @@ def solve(
                     population, phase_corners, cap, phase_index,
                     final_phase=phase_index == len(phases) - 1,
                 )
+                population = maybe_polish(population, phase_corners, phase_index)
         else:
             if not feedback:
                 break
@@ -690,6 +744,7 @@ def solve(
             ]
             cap = None if search_budget is None else search_budget - used
             population = evolve(population, [*search_corners, *feedback], cap, 10 + round_index, final_phase=True)
+            population = maybe_polish(population, [*search_corners, *feedback], 10 + round_index)
         best = min(population, key=lambda candidate: candidate.loss)
         validation = validate(best)
         validation_rounds.append(
@@ -712,17 +767,31 @@ def solve(
         raise ValueError("no gate could be resolved from the task's public specs")
     polish_report: dict[str, object] = {}
     if settings.polish and not validation.get("skipped") and not validation.get("feasible"):
+        # Fallback: if stagnation never triggered inside a phase, one last
+        # refinement before the final verdict.
         best = min(population, key=lambda candidate: candidate.loss)
         corners_now = [*search_corners, *feedback]
-        polished, polish_report = polish(best, corners_now, polish_cap, 20)
+        polished, report = polish(best, corners_now, polish_cap, 20)
+        if report.get("sims"):
+            polish_runs.append(report)
         if polished.loss < best.loss:
             population = [polished, *[c for c in population if c is not polished]]
-        if polish_report.get("sims"):
+        if polish_runs:
             best = min(population, key=lambda candidate: candidate.loss)
             validation = validate(best)
             validation_rounds.append(
                 {"round": "polish", "sims": used, **{key: value for key, value in validation.items() if key != "margins"}}
             )
+    if polish_runs:
+        polish_report = {
+            "runs": len(polish_runs),
+            "passes": sum(int(cast(int, run.get("passes") or 0)) for run in polish_runs),
+            "sims": sum(int(cast(int, run.get("sims") or 0)) for run in polish_runs),
+            "improved": any(bool(run.get("improved")) for run in polish_runs),
+            "dims": polish_runs[-1].get("dims"),
+            "effort": polish_runs[-1].get("effort"),
+            "steps": polish_runs[-1].get("steps"),
+        }
     limit = settings.budget
     return {
         "schema_version": SCHEMA_VERSION,

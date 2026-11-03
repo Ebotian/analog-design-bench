@@ -374,6 +374,7 @@ def cmd_solve(args: argparse.Namespace) -> int:
         polish=args.polish == "auto",
         polish_passes=args.polish_passes,
         polish_dims=args.polish_dims,
+        stall_generations=args.stall_generations,
     )
     try:
         report = optimize.solve(
@@ -525,7 +526,7 @@ def build_parser() -> argparse.ArgumentParser:
     solve_parser.add_argument("--screen", type=Path, help="screen report; supplies the dimensions")
     solve_parser.add_argument("--max-dims", type=int, default=15)
     solve_parser.add_argument("--population", type=int, default=12)
-    solve_parser.add_argument("--generations", type=int, default=20)
+    solve_parser.add_argument("--generations", type=int, default=100, help="cap; the budget usually binds first")
     solve_parser.add_argument("--f", type=float, default=0.6)
     solve_parser.add_argument("--cr", type=float, default=0.7)
     solve_parser.add_argument("--seed", type=int, default=0)
@@ -546,6 +547,8 @@ def build_parser() -> argparse.ArgumentParser:
                               help="coordinate polish over the dimensions the search moved most")
     solve_parser.add_argument("--polish-passes", type=int, default=3)
     solve_parser.add_argument("--polish-dims", type=int, default=6)
+    solve_parser.add_argument("--stall-generations", type=int, default=15,
+                              help="generations without measurable progress before polishing")
     solve_parser.add_argument("--rounds", type=int, default=2, help="validation passes; failing corners are fed back")
     solve_parser.add_argument("--feed-corners", type=int, default=2, help="worst validation corners added per round")
     solve_parser.add_argument("--validate", choices=["all", "none"], default="all",

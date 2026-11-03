@@ -1,0 +1,572 @@
+{
+  "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+  "seed": 7,
+  "params": 18,
+  "dims": 12,
+  "sims": 2452,
+  "sims_to_feasible": null,
+  "validation_feasible": false,
+  "polish_runs": 2,
+  "official": {
+    "skipped": true
+  },
+  "wall_s": 180.7,
+  "report": {
+    "schema_version": "adb-solve-1",
+    "design_hash": "020dfe6efe85bc45596edce001872fac006322fa9d6d79aafb3545e84584a28c",
+    "dims": [
+      "ota_5t/XM3.l",
+      "ota_5t/XM4.l",
+      "ota_5t/XM1.w",
+      "ota_5t/XM4.w",
+      "ota_5t/XM2.w",
+      "ota_5t/XM3.w",
+      "ota_5t/XM2.l",
+      "ota_5t/XM1.l",
+      "ota_5t/XM4.nf",
+      "ota_5t/XM3.nf",
+      "ota_5t/XM1.nf",
+      "ota_5t/XM2.nf"
+    ],
+    "gates": {
+      "gates": [
+        {
+          "id": "gain_40db",
+          "measure": "dc_gain_db",
+          "threshold": 40.0,
+          "higher_is_better": true,
+          "unit": "dB"
+        },
+        {
+          "id": "ugb_100mhz",
+          "measure": "ugb_hz",
+          "threshold": 100000000.0,
+          "higher_is_better": true,
+          "unit": "Hz"
+        },
+        {
+          "id": "phase_margin_60deg",
+          "measure": "phase_margin_deg",
+          "threshold": 60.0,
+          "higher_is_better": true,
+          "unit": "deg"
+        },
+        {
+          "id": "power_0p5mw",
+          "measure": "power_w",
+          "threshold": 0.0005,
+          "higher_is_better": false,
+          "unit": "W"
+        },
+        {
+          "id": "noise_50uvrms",
+          "measure": "input_noise_vrms",
+          "threshold": 4.9999999999999996e-05,
+          "higher_is_better": false,
+          "unit": "V"
+        },
+        {
+          "id": "cmrr_50db",
+          "measure": "cmrr_db_1khz",
+          "threshold": 50.0,
+          "higher_is_better": true,
+          "unit": ""
+        },
+        {
+          "id": "psrr_30db",
+          "measure": "psrr_db_1khz",
+          "threshold": 30.0,
+          "higher_is_better": true,
+          "unit": ""
+        }
+      ],
+      "unresolved": [],
+      "source": "referenceResult.metrics"
+    },
+    "reference": {
+      "values": {
+        "ota_5t/XM3.l": 8.379469968439999e-07,
+        "ota_5t/XM4.l": 9.73807409379e-07,
+        "ota_5t/XM1.w": 8.348674368899998e-05,
+        "ota_5t/XM4.w": 4.754311084082e-05,
+        "ota_5t/XM2.w": 7.960623075538e-05,
+        "ota_5t/XM3.w": 4.654175907017e-05,
+        "ota_5t/XM2.l": 8.428000941569999e-07,
+        "ota_5t/XM1.l": 9.31958592374e-07,
+        "ota_5t/XM4.nf": 6.79187297726,
+        "ota_5t/XM3.nf": 6.64882272431,
+        "ota_5t/XM1.nf": 12.7468022854,
+        "ota_5t/XM2.nf": 11.37231867934
+      },
+      "margins": {
+        "gain_40db": 0.023859999999999992,
+        "ugb_100mhz": 0.18653,
+        "phase_margin_60deg": 0.19504166666666667,
+        "power_0p5mw": 0.146201,
+        "noise_50uvrms": 0.1951919999999999,
+        "cmrr_50db": -0.680112,
+        "psrr_30db": -0.034829999999999944
+      },
+      "loss": 689.002391,
+      "feasible": false,
+      "failures": 0,
+      "regularization": 0.013307
+    },
+    "best": {
+      "values": {
+        "ota_5t/XM3.l": 7.66231137145896e-07,
+        "ota_5t/XM4.l": 8.041864053163016e-07,
+        "ota_5t/XM1.w": 7.523148290717788e-05,
+        "ota_5t/XM4.w": 4.754311084082e-05,
+        "ota_5t/XM2.w": 6.772823001606819e-05,
+        "ota_5t/XM3.w": 4.654175907017e-05,
+        "ota_5t/XM2.l": 7.571899005081557e-07,
+        "ota_5t/XM1.l": 6.918296521796899e-07,
+        "ota_5t/XM4.nf": 6.858039533314078,
+        "ota_5t/XM3.nf": 12.365692989729762,
+        "ota_5t/XM1.nf": 8.519926159356029,
+        "ota_5t/XM2.nf": 8.77193834590414
+      },
+      "margins": {
+        "gain_40db": -0.0020250000000000767,
+        "ugb_100mhz": 0.28991,
+        "phase_margin_60deg": 0.21793499999999993,
+        "power_0p5mw": 0.14601719999999999,
+        "noise_50uvrms": 0.14991579999999993,
+        "cmrr_50db": 0.08553399999999996,
+        "psrr_30db": 0.10967333333333329
+      },
+      "loss": 3.984444,
+      "feasible": false,
+      "failures": 0,
+      "regularization": 0.085123
+    },
+    "sims": 2452,
+    "sims_run": 2452,
+    "sims_to_feasible": null,
+    "budget": {
+      "limit": 3200,
+      "used": 2452,
+      "remaining": 748,
+      "exhausted": true
+    },
+    "search_corners": [
+      {
+        "process": "ff",
+        "supply": 1.62,
+        "temperature": 125.0
+      },
+      {
+        "process": "ss",
+        "supply": 1.62,
+        "temperature": -40.0
+      },
+      {
+        "process": "ff",
+        "supply": 1.62,
+        "temperature": -40.0
+      },
+      {
+        "process": "tt",
+        "supply": 1.62,
+        "temperature": -40.0
+      }
+    ],
+    "validation": {
+      "skipped": false,
+      "corners": 27,
+      "sims": 0,
+      "margins": {
+        "gain_40db": -0.0020250000000000767,
+        "ugb_100mhz": 0.28991,
+        "phase_margin_60deg": 0.21793499999999993,
+        "power_0p5mw": 0.14601719999999999,
+        "noise_50uvrms": 0.14991579999999993,
+        "cmrr_50db": -0.008581999999999965,
+        "psrr_30db": 0.10967333333333329
+      },
+      "failures": 0,
+      "feasible": false,
+      "worst": [
+        {
+          "process": "ss",
+          "supply": 1.62,
+          "temperature": 27.0
+        },
+        {
+          "process": "ff",
+          "supply": 1.62,
+          "temperature": -40.0
+        }
+      ]
+    },
+    "validation_rounds": [
+      {
+        "round": 0,
+        "sims": 92,
+        "skipped": false,
+        "corners": 27,
+        "failures": 0,
+        "feasible": false,
+        "worst": [
+          {
+            "process": "ss",
+            "supply": 1.98,
+            "temperature": -40.0
+          },
+          {
+            "process": "ff",
+            "supply": 1.62,
+            "temperature": -40.0
+          }
+        ]
+      },
+      {
+        "round": 1,
+        "sims": 88,
+        "skipped": false,
+        "corners": 27,
+        "failures": 0,
+        "feasible": false,
+        "worst": [
+          {
+            "process": "ss",
+            "supply": 1.62,
+            "temperature": 27.0
+          },
+          {
+            "process": "ff",
+            "supply": 1.62,
+            "temperature": -40.0
+          }
+        ]
+      },
+      {
+        "round": "polish",
+        "sims": 0,
+        "skipped": false,
+        "corners": 27,
+        "failures": 0,
+        "feasible": false,
+        "worst": [
+          {
+            "process": "ss",
+            "supply": 1.62,
+            "temperature": 27.0
+          },
+          {
+            "process": "ff",
+            "supply": 1.62,
+            "temperature": -40.0
+          }
+        ]
+      }
+    ],
+    "polish": {
+      "runs": 2,
+      "passes": 6,
+      "sims": 1592,
+      "improved": true,
+      "dims": [
+        "ota_5t/XM3.nf",
+        "ota_5t/XM4.nf",
+        "ota_5t/XM2.nf",
+        "ota_5t/XM1.nf",
+        "ota_5t/XM4.w",
+        "ota_5t/XM2.l"
+      ],
+      "effort": {
+        "ota_5t/XM3.nf": 24.835659,
+        "ota_5t/XM4.nf": 11.864738,
+        "ota_5t/XM2.nf": 4.910346,
+        "ota_5t/XM1.nf": 3.296401,
+        "ota_5t/XM4.w": 0.0,
+        "ota_5t/XM2.l": -33.803464
+      },
+      "steps": {
+        "ota_5t/XM3.nf": 0.077595,
+        "ota_5t/XM4.nf": 0.067206,
+        "ota_5t/XM2.nf": 0.187493,
+        "ota_5t/XM1.nf": 0.072053,
+        "ota_5t/XM4.w": 0.02219,
+        "ota_5t/XM2.l": 0.150794
+      }
+    },
+    "wall_seconds": 180.661,
+    "history": [
+      {
+        "generation": 0,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.656362,
+        "best_margin": 0.01549,
+        "feasible": 1
+      },
+      {
+        "generation": 1,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.656362,
+        "best_margin": 0.01549,
+        "feasible": 2
+      },
+      {
+        "generation": 2,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.656362,
+        "best_margin": 0.01549,
+        "feasible": 2
+      },
+      {
+        "generation": 3,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.656362,
+        "best_margin": 0.01549,
+        "feasible": 2
+      },
+      {
+        "generation": 4,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.656362,
+        "best_margin": 0.01549,
+        "feasible": 2
+      },
+      {
+        "generation": 5,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.656362,
+        "best_margin": 0.01549,
+        "feasible": 2
+      },
+      {
+        "generation": 6,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.656362,
+        "best_margin": 0.01549,
+        "feasible": 3
+      },
+      {
+        "generation": 7,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 4
+      },
+      {
+        "generation": 8,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 6
+      },
+      {
+        "generation": 9,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 6
+      },
+      {
+        "generation": 10,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 6
+      },
+      {
+        "generation": 11,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 7
+      },
+      {
+        "generation": 12,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 8
+      },
+      {
+        "generation": 13,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 8
+      },
+      {
+        "generation": 14,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 10
+      },
+      {
+        "generation": 15,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 12
+      },
+      {
+        "generation": 16,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 12
+      },
+      {
+        "generation": 17,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 12
+      },
+      {
+        "generation": 18,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 11
+      },
+      {
+        "generation": 19,
+        "phase": 0,
+        "sims": 0,
+        "best_loss": 1.2681,
+        "best_margin": 0.018715,
+        "feasible": 12
+      },
+      {
+        "generation": 20,
+        "phase": 1,
+        "sims": 0,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      },
+      {
+        "generation": 21,
+        "phase": 1,
+        "sims": 0,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      },
+      {
+        "generation": 22,
+        "phase": 1,
+        "sims": 0,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      },
+      {
+        "generation": 23,
+        "phase": 1,
+        "sims": 0,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      },
+      {
+        "generation": 24,
+        "phase": 1,
+        "sims": 0,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      },
+      {
+        "generation": 25,
+        "phase": 1,
+        "sims": 0,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      },
+      {
+        "generation": 26,
+        "phase": 1,
+        "sims": 0,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      },
+      {
+        "generation": 27,
+        "phase": 1,
+        "sims": 0,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      },
+      {
+        "generation": 28,
+        "phase": 1,
+        "sims": 0,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      },
+      {
+        "generation": 29,
+        "phase": 1,
+        "sims": 0,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      },
+      {
+        "generation": 30,
+        "phase": 1,
+        "sims": 176,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      },
+      {
+        "generation": 31,
+        "phase": 1,
+        "sims": 352,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      },
+      {
+        "generation": 32,
+        "phase": 1,
+        "sims": 528,
+        "best_loss": 139.586915,
+        "best_margin": -0.135173,
+        "feasible": 0
+      }
+    ],
+    "notes": [
+      "phase 0: no progress for 12 generations after 20",
+      "phase 1: no progress for 12 generations after 13",
+      "polish triggered after stagnation in phase 1: 512 sims",
+      "round 0: fed 1 validation corner(s) back into the search",
+      "phase 11: budget reached after 1284 simulations",
+      "polish triggered after stagnation in phase 11: 1080 sims",
+      "round 1: fed 1 validation corner(s) back into the search"
+    ]
+  }
+}

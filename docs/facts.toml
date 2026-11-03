@@ -423,3 +423,27 @@ path = "summary.tests"
 kind = "json"
 file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json"
 path = "validation.corners"
+
+# --------------------------------------------------------------- gym pilot
+
+[facts."gym.runs"]
+kind = "json"
+file = "results/gym/summary.json"
+path = "runs"
+
+[facts."gym.recovered"]
+kind = "json"
+file = "results/gym/summary.json"
+path = "recovered"
+
+[facts."gym.best_worst_margin"]
+kind = "json"
+file = "results/gym/summary.json"
+path = "best_worst_margin"
+format = "{:+.4f}"
+
+[facts."gym.median_worst_margin"]
+kind = "json"
+file = "results/gym/summary.json"
+path = "median_worst_margin"
+format = "{:+.4f}"

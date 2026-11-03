@@ -97,13 +97,16 @@
   只夹到搜索盒并回落到合法值。三档精度共享预算：探针扫全角点 → nominal 与绑定角点分阶段搜索
   → 全部 {{fact:solve.ota.validation_corners}} 个角点验证；验证失败时把**违反 gate 的**角点回灌
   搜索集再优化（cutting plane）。
-- **实测（OTA，±20% 扰动 → 官方 7/7）**：{{fact:solve.ota.search_sims}} 次仿真把损失从 13.2 降到 2.0，
-  CMRR 补正，但 gain 停在 {{fact:solve.ota.validation_gain}}（39.88 dB）。随后 **polish** 用
-  {{fact:solve.ota.final_sims}} 次仿真（其中 {{fact:solve.ota.polish_sims}} 次坐标扫描）收口：先对**所有**维度
-  做一次粗步长扫描、按实测损失下降排序，再对前几名做变步长坐标搜索——选哪些维度、步长多大全部由测量决定，
-  没有任何按任务写死的先验。最终全 {{fact:solve.ota.validation_corners}} 角点余量转正（gain
-  {{fact:solve.ota.validation_gain}}、CMRR {{fact:solve.ota.validation_cmrr}}），官方 `test.sh`
-  {{fact:solve.ota.verifier_passed}} / {{fact:solve.ota.verifier_total}}、reward 1.0。
+- **实测（OTA，±20% 扰动）**：单次演示（seed 11，线性扰动）从 {{fact:solve.ota.search_sims}} 次搜索 +
+  {{fact:solve.ota.final_sims}} 次收口（其中 {{fact:solve.ota.polish_sims}} 次 polish 坐标扫描）到达全角点正余量
+  （gain {{fact:solve.ota.validation_gain}}、CMRR {{fact:solve.ota.validation_cmrr}}），
+  官方 {{fact:solve.ota.verifier_passed}}/{{fact:solve.ota.verifier_total}}、reward 1.0（`results/solve/`）。但**这不是稳定现象**：小样本 gym（{{fact:gym.runs}} 个对数扰动）里
+  {{fact:gym.recovered}} 个通过官方判分，最接近的一例整体最差余量 {{fact:gym.best_worst_margin}}
+  （只差 0.9%），中位 {{fact:gym.median_worst_margin}}——失败模式是“总差最后一两个 gate 一点点”，
+  不是“完全没动”。报告见 `results/gym/`，`scripts/gym.py` 可重跑。
+- **polish 的时机是自适应的**：搜索进入平台期（连续若干代无实质改进）才触发；触发后先对**所有**维度
+  做粗扫并按实测收益排序，再对前几名做变步长坐标搜索，也就是说“细化哪些维度、步长多大”由测量决定。
+  失败样本显示它确实会触发（1–2 次/run），但还不足以把 1–4% 的缺口全部关掉。
 - **待做**：把验证角点回灌搜索（cutting plane，角点集随设计移动）、相关性分组合并、
   层次参数化、CMA-ES/抛光、离散量取整、top-5 全 PVT 收口。
 - **完成标准**：sizing gym 上简单任务 ≥ 90% 恢复、困难任务 ≥ 30%，中位 sims-to-pass ≤ 1,500；

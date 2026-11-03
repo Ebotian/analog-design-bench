@@ -75,8 +75,9 @@ make legality                      # 全部 T0 电路回放 → results/legality
 搜索建议，不是合法性。筛选实测：18 参数任务 {{fact:screen.ota.sims}} 次仿真压到
 {{fact:screen.ota.dims}} 维；{{fact:screen.rcp.params}} 参数任务 {{fact:screen.rcp.sims}} 次仿真压到 {{fact:screen.rcp.dims}} 维
 （预算优先：先粗组、后参数）。求解器把搜索与**全 PVT 验证**分开报告，验证失败时把最差角点回灌搜索集。
-OTA 在 ±20% 扰动后：搜索 {{fact:solve.ota.search_sims}} 次仿真停在 gain −0.003，polish（按实测效应选维度）
-再 {{fact:solve.ota.final_sims}} 次收口，官方判分 {{fact:solve.ota.verifier_passed}}/{{fact:solve.ota.verifier_total}}、reward 1.0。
+OTA 单次演示（seed 11 线性扰动）能收到官方 7/7；但对数扰动小样本
+{{fact:gym.runs}} 例中 {{fact:gym.recovered}} 例通过，最接近的一例仅差 {{fact:gym.best_worst_margin}}。
+失败模式是“最后一两个 gate 差一点”，`results/gym/` 有逐例报告。
 
 评测跑在 `ghcr.io/arcadia-1/analog-arena-sky130-tools`（ngspice-46 + Sky130 PDK）里，
 每个 worker 一个常驻容器，deck 挂在 `/app`；缓存键是 `netlist + 渲染后的 deck + image id`。
