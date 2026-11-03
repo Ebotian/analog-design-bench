@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 from typing import cast
 
-from . import bench, check as checker, corners as corner_asset, evaluate, legality, params, screen
+from . import bench, check as checker, corners as corner_asset, evaluate, legality, optimize, params, screen
 from .docker_backend import DEFAULT_IMAGE, SimulationError
 from .sim import CornerValue
 from . import netlist as spice
@@ -299,12 +299,132 @@ def cmd_screen(args: argparse.Namespace) -> int:
     return 0
 
 
+def _task_payload(task: str) -> dict[str, object]:
+    for root in (Path.cwd(), Path(__file__).resolve().parents[2]):
+        path = root / "data" / "tasks" / f"{task}.json"
+        if path.exists():
+            raw = json.loads(path.read_text())
+            if isinstance(raw, dict):
+                return cast(dict[str, object], raw)
+    raise SystemExit(f"no data/tasks/{task}.json; solve needs the task's public gate specs")
+
+
 def cmd_solve(args: argparse.Namespace) -> int:
-    print(
-        "solve is P3 (docs/PLAN.md): the evaluator works, the optimiser does not exist yet.",
-        file=sys.stderr,
+    text = Path(args.netlist).read_text()
+    design = params.load_text(text, path=str(args.netlist))
+    if args.legality != "off":
+        verdict = legality.guard(text, design, checker=args.legality == "checker", image=args.image)
+        if not verdict.ok:
+            print(json.dumps(verdict.to_json(), indent=2), file=sys.stderr)
+            print(f"illegal design: {verdict.summary()}", file=sys.stderr)
+            return ILLEGAL
+
+    dims: list[str] = []
+    if args.screen is not None:
+        screened = json.loads(Path(args.screen).read_text())
+        dims = [str(name) for name in screened.get("dims", [])]
+    if not dims:
+        writable = [param.id for param in design.writable()]
+        if len(writable) > args.max_dims:
+            print(
+                f"{len(writable)} writable parameters exceed --max-dims {args.max_dims}; "
+                "run `adb-solve screen` and pass --screen",
+                file=sys.stderr,
+            )
+            return MISSING
+        dims = writable
+    dims = dims[: args.max_dims]
+
+    decks = _decks(args)
+    all_corners = _matrix(args)
+    keys = None
+    if args.corners is not None and args.task is not None:
+        keys = corner_asset.for_task(corner_asset.load(args.corners), args.task).keys
+    corners = _stage_corners(all_corners, args.corners_mode, args.corners_count)
+
+    eval_options = evaluate.EvalOptions(
+        image=args.image,
+        jobs=args.jobs,
+        timeout=args.timeout,
+        cache_root=Path(args.cache_dir),
+        use_cache=not args.no_cache,
+        work_root=Path(args.work_dir),
+        oneshot=args.oneshot,
+        memory=None if args.memory == "unlimited" else args.memory,
     )
-    return MISSING
+    options = optimize.SolveOptions(
+        dims=dims,
+        population=args.population,
+        generations=args.generations,
+        f=args.f,
+        cr=args.cr,
+        seed=args.seed,
+        tau=args.tau,
+        budget=args.budget,
+        bound=args.bound,
+        quantize=args.quantize,
+        lambda_reg=args.lambda_reg,
+        corner_mode=args.corners_mode,
+        corners_count=args.corners_count,
+    )
+    try:
+        report = optimize.solve(
+            text,
+            decks,
+            [dict(corner) for corner in corners],
+            _task_payload(args.task) if args.task else {},
+            options,
+            backend=None,
+            eval_options=eval_options,
+            validation_corners=(
+                [dict(corner) for corner in all_corners]
+                if args.validate == "all" else None
+            ),
+        )
+    except bench.MissingValues as exc:
+        print(f"missing deck values: {', '.join(exc.names)}", file=sys.stderr)
+        return MISSING
+    except SimulationError as exc:
+        print(f"simulation backend error: {exc}", file=sys.stderr)
+        return MISSING
+    except ValueError as exc:
+        print(f"solve: {exc}", file=sys.stderr)
+        return MISSING
+
+    if args.out:
+        optimize.write_report(report, Path(args.out))
+        print(f"wrote {args.out}")
+    print(optimize.summarise(report))
+    best = report["best"]
+    validation = report["validation"]
+    validated = isinstance(validation, dict) and not validation.get("skipped")
+    accepted = bool(validation.get("feasible")) if validated else bool(best["feasible"])
+    if accepted:
+        changed = {
+            name: value
+            for name, value in best["values"].items()
+            if abs(value - design.by_id()[name].value) > 0
+        }
+        out_text = design.apply(changed) if changed else design.text
+        Path(args.candidate_out).write_text(out_text)
+        print(f"wrote {args.candidate_out} ({len(changed)} parameter(s) changed)")
+        return 0
+    return 2 if report["sims"] else 3
+
+
+def _stage_corners(
+    corners: list[dict[str, CornerValue]], mode: str, count: int
+) -> list[dict[str, CornerValue]]:
+    """Stage the optimiser on a corner subset; full PVT stays the final judge."""
+    if mode in {"all", "worst"} or len(corners) <= count:
+        return corners
+    nominal = screen.nominal_index([dict(corner) for corner in corners])
+    if mode == "nominal":
+        return [corners[nominal]]
+    chosen = [nominal] + screen.stress_indices(
+        [dict(corner) for corner in corners], nominal, max(0, count - 1)
+    )
+    return [corners[index] for index in chosen]
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -385,8 +505,43 @@ def build_parser() -> argparse.ArgumentParser:
     schema_parser.add_argument("--out", type=Path)
     schema_parser.set_defaults(func=cmd_schema)
 
-    solve_parser = sub.add_parser("solve", parents=[common_netlist], help="not implemented (P3)")
+    solve_parser = sub.add_parser("solve", parents=[common_netlist], help="DE sizing over screened dimensions")
+    solve_parser.add_argument("--bench", nargs="+", required=True, help="deck files or directories")
+    solve_parser.add_argument("--corners", type=Path, help="corner asset, e.g. configs/corners.toml")
+    solve_parser.add_argument("--task", required=True, help="task id (public gate specs + task policy)")
+    solve_parser.add_argument("--values", help="JSON file or inline object of deck values")
+    solve_parser.add_argument("--process", nargs="*", default=None)
+    solve_parser.add_argument("--temperature", nargs="*", type=float, default=None)
+    solve_parser.add_argument("--screen", type=Path, help="screen report; supplies the dimensions")
+    solve_parser.add_argument("--max-dims", type=int, default=15)
+    solve_parser.add_argument("--population", type=int, default=12)
+    solve_parser.add_argument("--generations", type=int, default=20)
+    solve_parser.add_argument("--f", type=float, default=0.6)
+    solve_parser.add_argument("--cr", type=float, default=0.7)
+    solve_parser.add_argument("--seed", type=int, default=0)
+    solve_parser.add_argument("--tau", type=float, default=0.1)
+    solve_parser.add_argument("--bound", type=float, default=0.5, help="initial log spread around the input")
+    solve_parser.add_argument("--lambda-reg", type=float, default=0.05)
+    solve_parser.add_argument("--quantize", action="store_true", help="snap grid parameters to integers")
     solve_parser.add_argument("--budget", type=int, default=1500)
+    solve_parser.add_argument(
+        "--corners-mode", choices=["worst", "all", "stress", "nominal"], default="worst",
+        help="worst = one probe sweep, then the binding corners",
+    )
+    solve_parser.add_argument("--corners-count", type=int, default=3)
+    solve_parser.add_argument("--validate", choices=["all", "none"], default="all",
+                              help="final full-PVT check of the best candidate")
+    solve_parser.add_argument("--legality", choices=["precheck", "checker", "off"], default="precheck")
+    solve_parser.add_argument("--jobs", type=int, default=12)
+    solve_parser.add_argument("--timeout", type=float, default=120.0)
+    solve_parser.add_argument("--memory", default="4g")
+    solve_parser.add_argument("--out", type=Path)
+    solve_parser.add_argument("--candidate-out", type=Path, default=Path("circuit.solved.spi"))
+    solve_parser.add_argument("--image", default=DEFAULT_IMAGE)
+    solve_parser.add_argument("--cache-dir", default=".adb-cache")
+    solve_parser.add_argument("--work-dir", default=".work/sim")
+    solve_parser.add_argument("--no-cache", action="store_true")
+    solve_parser.add_argument("--oneshot", action="store_true")
     solve_parser.set_defaults(func=cmd_solve)
 
     return parser

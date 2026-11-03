@@ -1,0 +1,528 @@
+{
+  "schema_version": "adb-solve-1",
+  "design_hash": "852c800a8f98a330fbfd74df0ef58e0fd23bd13f1ff2b33ef70300066e9fa04f",
+  "dims": [
+    "ota_5t/XM3.l",
+    "ota_5t/XM4.l",
+    "ota_5t/XM1.w",
+    "ota_5t/XM4.w",
+    "ota_5t/XM2.w",
+    "ota_5t/XM3.w",
+    "ota_5t/XM2.l",
+    "ota_5t/XM1.l",
+    "ota_5t/XM4.nf",
+    "ota_5t/XM3.nf",
+    "ota_5t/XM1.nf",
+    "ota_5t/XM2.nf"
+  ],
+  "gates": {
+    "gates": [
+      {
+        "id": "gain_40db",
+        "measure": "dc_gain_db",
+        "threshold": 40.0,
+        "higher_is_better": true,
+        "unit": "dB"
+      },
+      {
+        "id": "ugb_100mhz",
+        "measure": "ugb_hz",
+        "threshold": 100000000.0,
+        "higher_is_better": true,
+        "unit": "Hz"
+      },
+      {
+        "id": "phase_margin_60deg",
+        "measure": "phase_margin_deg",
+        "threshold": 60.0,
+        "higher_is_better": true,
+        "unit": "deg"
+      },
+      {
+        "id": "power_0p5mw",
+        "measure": "power_w",
+        "threshold": 0.0005,
+        "higher_is_better": false,
+        "unit": "W"
+      },
+      {
+        "id": "noise_50uvrms",
+        "measure": "input_noise_vrms",
+        "threshold": 4.9999999999999996e-05,
+        "higher_is_better": false,
+        "unit": "V"
+      },
+      {
+        "id": "cmrr_50db",
+        "measure": "cmrr_db_1khz",
+        "threshold": 50.0,
+        "higher_is_better": true,
+        "unit": ""
+      },
+      {
+        "id": "psrr_30db",
+        "measure": "psrr_db_1khz",
+        "threshold": 30.0,
+        "higher_is_better": true,
+        "unit": ""
+      }
+    ],
+    "unresolved": [],
+    "source": "referenceResult.metrics"
+  },
+  "reference": {
+    "values": {
+      "ota_5t/XM3.l": 6.568865143013565e-07,
+      "ota_5t/XM4.l": 8.034873410718787e-07,
+      "ota_5t/XM1.w": 8.21809667008498e-05,
+      "ota_5t/XM4.w": 5.15961882828e-05,
+      "ota_5t/XM2.w": 7.292610272008081e-05,
+      "ota_5t/XM3.w": 4.548405522472243e-05,
+      "ota_5t/XM2.l": 1.1081860944479474e-06,
+      "ota_5t/XM1.l": 1.4918788085242713e-06,
+      "ota_5t/XM4.nf": 22.24113584241935,
+      "ota_5t/XM3.nf": 5.470607651969185,
+      "ota_5t/XM1.nf": 3.375039930307567,
+      "ota_5t/XM2.nf": 8.078356094338645
+    },
+    "margins": {
+      "gain_40db": 0.019950000000000044,
+      "ugb_100mhz": 0.06958,
+      "phase_margin_60deg": 0.18173833333333345,
+      "power_0p5mw": 0.20638580000000006,
+      "noise_50uvrms": 0.15991599999999992,
+      "cmrr_50db": 0.026226000000000055,
+      "psrr_30db": 0.36402666666666667
+    },
+    "loss": 2.071173,
+    "feasible": true,
+    "failures": 0,
+    "regularization": 0.35264
+  },
+  "best": {
+    "values": {
+      "ota_5t/XM3.l": 7.475432396721493e-07,
+      "ota_5t/XM4.l": 6.952285892633599e-07,
+      "ota_5t/XM1.w": 7.745409349438051e-05,
+      "ota_5t/XM4.w": 5.15961882828e-05,
+      "ota_5t/XM2.w": 8.693613024936e-05,
+      "ota_5t/XM3.w": 5.89093729329e-05,
+      "ota_5t/XM2.l": 1.0074979219627583e-06,
+      "ota_5t/XM1.l": 8.829032735523133e-07,
+      "ota_5t/XM4.nf": 14.390467483536053,
+      "ota_5t/XM3.nf": 6.182552586998667,
+      "ota_5t/XM1.nf": 5.827136574878978,
+      "ota_5t/XM2.nf": 16.93174393016567
+    },
+    "margins": {
+      "gain_40db": 0.007007499999999922,
+      "ugb_100mhz": 0.19345,
+      "phase_margin_60deg": 0.1965516666666666,
+      "power_0p5mw": 0.20561020000000002,
+      "noise_50uvrms": 0.17713399999999987,
+      "cmrr_50db": 0.387422,
+      "psrr_30db": 0.3333000000000001
+    },
+    "loss": 1.265195,
+    "feasible": true,
+    "failures": 0,
+    "regularization": 0.145741
+  },
+  "sims": 891,
+  "sims_run": 891,
+  "sims_to_feasible": 891,
+  "budget": {
+    "limit": 3200,
+    "used": 891,
+    "remaining": 2309,
+    "exhausted": false
+  },
+  "search_corners": [
+    {
+      "process": "ff",
+      "supply": 1.62,
+      "temperature": -40.0
+    },
+    {
+      "process": "ss",
+      "supply": 1.62,
+      "temperature": -40.0
+    },
+    {
+      "process": "ff",
+      "supply": 1.62,
+      "temperature": 27.0
+    },
+    {
+      "process": "ff",
+      "supply": 1.62,
+      "temperature": 125.0
+    },
+    {
+      "process": "tt",
+      "supply": 1.62,
+      "temperature": -40.0
+    },
+    {
+      "process": "tt",
+      "supply": 1.62,
+      "temperature": 27.0
+    }
+  ],
+  "validation": {
+    "skipped": false,
+    "corners": 27,
+    "sims": 0,
+    "margins": {
+      "gain_40db": 0.002907500000000063,
+      "ugb_100mhz": 0.16545,
+      "phase_margin_60deg": 0.19365833333333338,
+      "power_0p5mw": 0.20456240000000006,
+      "noise_50uvrms": 0.17307019999999992,
+      "cmrr_50db": -0.06196399999999997,
+      "psrr_30db": 0.18950000000000009
+    },
+    "failures": 0,
+    "feasible": false
+  },
+  "wall_seconds": 64.525,
+  "history": [
+    {
+      "generation": 0,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 3.875057,
+      "best_margin": -0.24219,
+      "feasible": 0
+    },
+    {
+      "generation": 1,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 3.875057,
+      "best_margin": -0.24219,
+      "feasible": 0
+    },
+    {
+      "generation": 2,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 3.875057,
+      "best_margin": -0.24219,
+      "feasible": 0
+    },
+    {
+      "generation": 3,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 2.49817,
+      "best_margin": -0.076262,
+      "feasible": 0
+    },
+    {
+      "generation": 4,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 1
+    },
+    {
+      "generation": 5,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 1
+    },
+    {
+      "generation": 6,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 1
+    },
+    {
+      "generation": 7,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 2
+    },
+    {
+      "generation": 8,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 4
+    },
+    {
+      "generation": 9,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 5
+    },
+    {
+      "generation": 10,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 5
+    },
+    {
+      "generation": 11,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 6
+    },
+    {
+      "generation": 12,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 6
+    },
+    {
+      "generation": 13,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 6
+    },
+    {
+      "generation": 14,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 6
+    },
+    {
+      "generation": 15,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 7
+    },
+    {
+      "generation": 16,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 7
+    },
+    {
+      "generation": 17,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 7
+    },
+    {
+      "generation": 18,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 7
+    },
+    {
+      "generation": 19,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 20,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 21,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 22,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 23,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 24,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 25,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 26,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 27,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 28,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 29,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 30,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 31,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 32,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 33,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 34,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 35,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 36,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 37,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 38,
+      "phase": 1,
+      "sims": 27,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 39,
+      "phase": 1,
+      "sims": 315,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 40,
+      "phase": 1,
+      "sims": 603,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    },
+    {
+      "generation": 41,
+      "phase": 1,
+      "sims": 891,
+      "best_loss": 1.265195,
+      "best_margin": 0.007007,
+      "feasible": 8
+    }
+  ],
+  "notes": []
+}

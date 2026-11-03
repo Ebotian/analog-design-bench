@@ -128,7 +128,7 @@
     {
       "block": "plan/p3",
       "doc": "plan",
-      "end": 101,
+      "end": 109,
       "facts": [
         "p1.knobs_median",
         "screen.ota.dims",
@@ -136,7 +136,11 @@
         "screen.ota.sims",
         "screen.rcp.dims",
         "screen.rcp.params",
-        "screen.rcp.sims"
+        "screen.rcp.sims",
+        "solve.ota.sims",
+        "solve.ota.sims_to_feasible",
+        "solve.ota.validation_cmrr",
+        "solve.ota.validation_corners"
       ],
       "heading": "P3 — 筛选与求解（进行中：筛选已落地）",
       "line": 86,
@@ -151,10 +155,10 @@
     {
       "block": "plan/p4",
       "doc": "plan",
-      "end": 110,
+      "end": 118,
       "facts": [],
       "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
-      "line": 102,
+      "line": 110,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P4",
@@ -166,13 +170,13 @@
     {
       "block": "plan/p5",
       "doc": "plan",
-      "end": 133,
+      "end": 141,
       "facts": [
         "corpus.runs",
         "p1.netlists"
       ],
       "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
-      "line": 111,
+      "line": 119,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P5",
@@ -407,7 +411,7 @@
     {
       "block": "readme/p1-usage",
       "doc": "readme",
-      "end": 79,
+      "end": 83,
       "facts": [
         "legality.checker_false_positive",
         "legality.checker_stricter_failing",
@@ -418,7 +422,10 @@
         "screen.ota.sims",
         "screen.rcp.dims",
         "screen.rcp.params",
-        "screen.rcp.sims"
+        "screen.rcp.sims",
+        "solve.ota.sims",
+        "solve.ota.sims_to_feasible",
+        "solve.ota.validation_cmrr"
       ],
       "heading": "求解基建（P1–P3 筛选）",
       "line": 50,
@@ -433,7 +440,7 @@
     {
       "block": "readme/corners",
       "doc": "readme",
-      "end": 102,
+      "end": 106,
       "facts": [
         "corners.coverage_subsets",
         "corners.coverage_tasks",
@@ -451,7 +458,7 @@
         "corners.unresolved"
       ],
       "heading": "Corner 矩阵（IaC）",
-      "line": 80,
+      "line": 84,
       "path": "README.md",
       "tags": [
         "phase:P1",
@@ -463,10 +470,10 @@
     {
       "block": "readme/docs",
       "doc": "readme",
-      "end": 125,
+      "end": 129,
       "facts": [],
       "heading": "文档系统",
-      "line": 103,
+      "line": 107,
       "path": "README.md",
       "tags": [
         "kind:usage",
@@ -476,10 +483,10 @@
     {
       "block": "readme/reproduce",
       "doc": "readme",
-      "end": 137,
+      "end": 141,
       "facts": [],
       "heading": "复现",
-      "line": 126,
+      "line": 130,
       "path": "README.md",
       "tags": [
         "kind:usage",
@@ -489,7 +496,7 @@
     {
       "block": "readme/data-gaps",
       "doc": "readme",
-      "end": 150,
+      "end": 154,
       "facts": [
         "corpus.no_gates",
         "corpus.no_gates_median_min",
@@ -498,7 +505,7 @@
         "corpus.runs"
       ],
       "heading": "已知数据质量问题",
-      "line": 138,
+      "line": 142,
       "path": "README.md",
       "tags": [
         "kind:gap",
@@ -508,10 +515,10 @@
     {
       "block": "readme/absent",
       "doc": "readme",
-      "end": 160,
+      "end": 164,
       "facts": [],
       "heading": "不在这里的东西",
-      "line": 151,
+      "line": 155,
       "path": "README.md",
       "tags": [
         "kind:gap",
@@ -521,10 +528,10 @@
     {
       "block": "readme/license",
       "doc": "readme",
-      "end": 177,
+      "end": 181,
       "facts": [],
       "heading": "许可",
-      "line": 161,
+      "line": 165,
       "path": "README.md",
       "tags": [
         "kind:policy",
@@ -697,7 +704,7 @@
     {
       "generated_by": null,
       "id": "plan",
-      "lines": 133,
+      "lines": 141,
       "path": "docs/PLAN.md",
       "source": "docs/src/plan.md",
       "tags": [
@@ -723,7 +730,7 @@
     {
       "generated_by": null,
       "id": "readme",
-      "lines": 177,
+      "lines": 181,
       "path": "README.md",
       "source": "docs/src/readme.md",
       "tags": [
@@ -1335,6 +1342,60 @@
         "readme/p1-usage"
       ],
       "value": 602
+    },
+    "solve.ota.sims": {
+      "display": "891",
+      "extract": {
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "sims"
+      },
+      "used_in": [
+        "plan/p3",
+        "readme/p1-usage"
+      ],
+      "value": 891
+    },
+    "solve.ota.sims_to_feasible": {
+      "display": "891",
+      "extract": {
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "sims_to_feasible"
+      },
+      "used_in": [
+        "plan/p3",
+        "readme/p1-usage"
+      ],
+      "value": 891
+    },
+    "solve.ota.validation_cmrr": {
+      "display": "-0.062",
+      "extract": {
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
+        "format": "{:+.3f}",
+        "kind": "json",
+        "path": "validation.margins.cmrr_50db"
+      },
+      "used_in": [
+        "plan/p3",
+        "readme/p1-usage"
+      ],
+      "value": -0.06196399999999997
+    },
+    "solve.ota.validation_corners": {
+      "display": "27",
+      "extract": {
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
+        "kind": "json",
+        "path": "validation.corners"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": 27
     },
     "t1.commit": {
       "display": "972f7cd",

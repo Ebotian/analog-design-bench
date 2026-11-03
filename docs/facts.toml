@@ -376,3 +376,28 @@ kind = "json"
 file = "results/screen/sky130-regulated-charge-pump-10mhz-pvt.json"
 path = "sims"
 format = "{:,}"
+
+# ------------------------------------------------------------ P3 solving
+
+[facts."solve.ota.sims"]
+kind = "json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json"
+path = "sims"
+format = "{:,}"
+
+[facts."solve.ota.sims_to_feasible"]
+kind = "json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json"
+path = "sims_to_feasible"
+format = "{:,}"
+
+[facts."solve.ota.validation_cmrr"]
+kind = "json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json"
+path = "validation.margins.cmrr_50db"
+format = "{:+.3f}"
+
+[facts."solve.ota.validation_corners"]
+kind = "json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json"
+path = "validation.corners"

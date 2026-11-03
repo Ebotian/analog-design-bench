@@ -92,8 +92,16 @@
   {{fact:screen.ota.dims}} 维；`sky130-regulated-charge-pump-*` {{fact:screen.rcp.params}} 个参数 /
   {{fact:screen.rcp.sims}} 次仿真 → {{fact:screen.rcp.dims}} 维（预算耗尽，结果部分且可续跑）。
   报告在 `results/screen/`。
-- **待做**：相关性分组合并、层次参数化、DE/CMA-ES/局部抛光、离散量取整修复、分阶段预算
-  （廉价筛选 → 前 5 名全 PVT）。
+- **求解器（已落地，验证有缺口）**：`adb-solve solve` 用 DE 在筛选维度上优化公开 spec 的
+  归一化 worst-case 余量；损失 = `Σ softplus(-margin/τ)` + 失败惩罚 + 原设计正则；repair 只
+  夹到搜索盒并回落到合法值。三档精度共享一个预算：探针扫全角点 → 在 nominal 与绑定角点上
+  分阶段搜索 → 用全部 {{fact:solve.ota.validation_corners}} 个角点验证。
+- **实测缺口**：把 OTA 参考解随机扰动 ±20% 后，{{fact:solve.ota.sims}} 次仿真在搜索角点上
+  可行（`sims_to_feasible` = {{fact:solve.ota.sims_to_feasible}}），但全 PVT 验证 CMRR 仍差
+  {{fact:solve.ota.validation_cmrr}}（相对阈值）——报告如实返回 `validation.feasible=false`，
+  不把“搜索可行”当作成功。同一设计的官方 `test.sh` 也确认了该 gate 失败（6/7）。
+- **待做**：把验证角点回灌搜索（cutting plane，角点集随设计移动）、相关性分组合并、
+  层次参数化、CMA-ES/抛光、离散量取整、top-5 全 PVT 收口。
 - **完成标准**：sizing gym 上简单任务 ≥ 90% 恢复、困难任务 ≥ 30%，中位 sims-to-pass ≤ 1,500；
   消融（去筛选/去分组/去缓存）各掉多少 pp 有数。
 - **风险**：对公开 bench 过拟合；必须用留出种子/角落验证。

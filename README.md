@@ -61,6 +61,9 @@ PYTHONPATH=src python3 -m adb_solve apply --netlist circuit.spi --cand cand.json
 ... eval --budget 600 --out report.json            # 硬上限
 ... eval --budget 1500 --resume report.json        # 只花剩余预算
 make legality                      # 全部 T0 电路回放 → results/legality.json
+# P3 求解：screen 出维度，solve 做 DE（探针 → 分阶段 → 全 PVT 验证）
+... solve --bench benches/ --corners configs/corners.toml --task <id> \
+    --screen results/screen/<id>.json --budget 3200 --jobs 12 --out result.json
 # P3 筛选：OAT ±20%，交叉角点，输出 ≤15 维
 ... screen --bench benches/ --corners configs/corners.toml --task <id> \
     --budget 600 --jobs 12 --compact --out results/screen/<id>.json
@@ -72,7 +75,8 @@ make legality                      # 全部 T0 电路回放 → results/legality
 0 条**。checker 实测接受 `m=0.5`，因此整数倍率只是
 搜索建议，不是合法性。筛选实测：18 参数任务 444 次仿真压到
 12 维；232 参数任务 602 次仿真压到 15 维
-（预算优先：先粗组、后参数）。
+（预算优先：先粗组、后参数）。求解器把搜索是否可行与**全 PVT 验证**分开报告：
+OTA 在 ±20% 扰动后 891 次仿真搜索可行（`sims_to_feasible` 891），但全角点验证 CMRR 仍差 -0.062，因此不判为通过。
 
 评测跑在 `ghcr.io/arcadia-1/analog-arena-sky130-tools`（ngspice-46 + Sky130 PDK）里，
 每个 worker 一个常驻容器，deck 挂在 `/app`；缓存键是 `netlist + 渲染后的 deck + image id`。

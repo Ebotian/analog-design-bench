@@ -266,6 +266,8 @@ def write_violation(param: Param, value: float) -> str | None:
     outside the checker's modelled range, and rewriting it to itself is not a
     new proposal.
     """
+    if not math.isfinite(value):
+        return "value must be finite"
     if param.text_for(value) == param.raw:
         return None
     return legality_violation(param, value)
