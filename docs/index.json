@@ -138,7 +138,6 @@
         "screen.rcp.params",
         "screen.rcp.sims",
         "solve.ota.sims",
-        "solve.ota.sims_to_feasible",
         "solve.ota.validation_cmrr",
         "solve.ota.validation_corners"
       ],
@@ -411,7 +410,7 @@
     {
       "block": "readme/p1-usage",
       "doc": "readme",
-      "end": 83,
+      "end": 84,
       "facts": [
         "legality.checker_false_positive",
         "legality.checker_stricter_failing",
@@ -424,7 +423,6 @@
         "screen.rcp.params",
         "screen.rcp.sims",
         "solve.ota.sims",
-        "solve.ota.sims_to_feasible",
         "solve.ota.validation_cmrr"
       ],
       "heading": "求解基建（P1–P3 筛选）",
@@ -440,7 +438,7 @@
     {
       "block": "readme/corners",
       "doc": "readme",
-      "end": 106,
+      "end": 107,
       "facts": [
         "corners.coverage_subsets",
         "corners.coverage_tasks",
@@ -458,7 +456,7 @@
         "corners.unresolved"
       ],
       "heading": "Corner 矩阵（IaC）",
-      "line": 84,
+      "line": 85,
       "path": "README.md",
       "tags": [
         "phase:P1",
@@ -470,10 +468,10 @@
     {
       "block": "readme/docs",
       "doc": "readme",
-      "end": 129,
+      "end": 130,
       "facts": [],
       "heading": "文档系统",
-      "line": 107,
+      "line": 108,
       "path": "README.md",
       "tags": [
         "kind:usage",
@@ -483,10 +481,10 @@
     {
       "block": "readme/reproduce",
       "doc": "readme",
-      "end": 141,
+      "end": 142,
       "facts": [],
       "heading": "复现",
-      "line": 130,
+      "line": 131,
       "path": "README.md",
       "tags": [
         "kind:usage",
@@ -496,7 +494,7 @@
     {
       "block": "readme/data-gaps",
       "doc": "readme",
-      "end": 154,
+      "end": 155,
       "facts": [
         "corpus.no_gates",
         "corpus.no_gates_median_min",
@@ -505,7 +503,7 @@
         "corpus.runs"
       ],
       "heading": "已知数据质量问题",
-      "line": 142,
+      "line": 143,
       "path": "README.md",
       "tags": [
         "kind:gap",
@@ -515,10 +513,10 @@
     {
       "block": "readme/absent",
       "doc": "readme",
-      "end": 164,
+      "end": 165,
       "facts": [],
       "heading": "不在这里的东西",
-      "line": 155,
+      "line": 156,
       "path": "README.md",
       "tags": [
         "kind:gap",
@@ -528,10 +526,10 @@
     {
       "block": "readme/license",
       "doc": "readme",
-      "end": 181,
+      "end": 182,
       "facts": [],
       "heading": "许可",
-      "line": 165,
+      "line": 166,
       "path": "README.md",
       "tags": [
         "kind:policy",
@@ -730,7 +728,7 @@
     {
       "generated_by": null,
       "id": "readme",
-      "lines": 181,
+      "lines": 182,
       "path": "README.md",
       "source": "docs/src/readme.md",
       "tags": [
@@ -1344,7 +1342,7 @@
       "value": 602
     },
     "solve.ota.sims": {
-      "display": "891",
+      "display": "3,276",
       "extract": {
         "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
         "format": "{:,}",
@@ -1355,21 +1353,7 @@
         "plan/p3",
         "readme/p1-usage"
       ],
-      "value": 891
-    },
-    "solve.ota.sims_to_feasible": {
-      "display": "891",
-      "extract": {
-        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
-        "format": "{:,}",
-        "kind": "json",
-        "path": "sims_to_feasible"
-      },
-      "used_in": [
-        "plan/p3",
-        "readme/p1-usage"
-      ],
-      "value": 891
+      "value": 3276
     },
     "solve.ota.validation_cmrr": {
       "display": "-0.062",

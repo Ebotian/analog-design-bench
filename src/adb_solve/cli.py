@@ -366,6 +366,8 @@ def cmd_solve(args: argparse.Namespace) -> int:
         lambda_reg=args.lambda_reg,
         corner_mode=args.corners_mode,
         corners_count=args.corners_count,
+        rounds=args.rounds,
+        feed_corners=args.feed_corners,
     )
     try:
         report = optimize.solve(
@@ -529,6 +531,8 @@ def build_parser() -> argparse.ArgumentParser:
         help="worst = one probe sweep, then the binding corners",
     )
     solve_parser.add_argument("--corners-count", type=int, default=3)
+    solve_parser.add_argument("--rounds", type=int, default=2, help="validation passes; failing corners are fed back")
+    solve_parser.add_argument("--feed-corners", type=int, default=2, help="worst validation corners added per round")
     solve_parser.add_argument("--validate", choices=["all", "none"], default="all",
                               help="final full-PVT check of the best candidate")
     solve_parser.add_argument("--legality", choices=["precheck", "checker", "off"], default="precheck")

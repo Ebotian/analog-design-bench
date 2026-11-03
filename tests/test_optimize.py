@@ -127,3 +127,69 @@ def test_solve_requires_a_resolvable_gate(tmp_path: Path) -> None:
         optimize.solve(
             NETLIST, _deck(), CORNERS, {}, {"dims": ["amp/XM1.w"]}, GainFake(), _options(tmp_path)
         )
+
+
+CORNERS_TWO = [
+    {"process": "tt", "temperature": 27.0, "supply": 1.8},
+    {"process": "ss", "temperature": 125.0, "supply": 1.62},
+]
+
+
+class CornerGainFake:
+    """gain drops 2x at the hot corner; only w can compensate."""
+
+    def simulate(self, cases: Sequence[SimCase]) -> list[SimResult]:
+        out = []
+        for case in cases:
+            match = WIDTH.search(case.netlist)
+            width = float(match.group(1)) if match else 0.7
+            hot = float(case.corner.get("temperature", 27.0)) > 100
+            gain = 40.0 * width / 0.7 * (0.5 if hot else 1.0)
+            out.append(
+                SimResult(
+                    case_id=case.case_id,
+                    status="ok",
+                    measures={"m0_dc_gain_db": gain},
+                    seconds=0.01,
+                    returncode=0,
+                    corner=case.corner,
+                )
+            )
+        return out
+
+
+def test_validation_corners_are_fed_back_and_the_loop_closes(tmp_path: Path) -> None:
+    """Search on the cold corner passes; the hot corner only appears in
+    validation.  The cutter must feed it back and re-optimise, not accept."""
+    report = optimize.solve(
+        NETLIST,
+        _deck(),
+        [CORNERS_TWO[0]],
+        PAYLOAD,
+        {
+            "dims": ["amp/XM1.w"], "population": 10, "generations": 40, "seed": 5,
+            "budget": 1600, "rounds": 3, "feed_corners": 1, "bound": 0.8,
+        },
+        CornerGainFake(),
+        _options(tmp_path),
+        validation_corners=CORNERS_TWO,
+    )
+    assert len(report["validation_rounds"]) >= 2
+    assert any("fed" in note for note in report["notes"])
+    assert report["validation"]["feasible"] is True
+    assert report["validation"]["margins"]["gain_40db"] >= 0
+
+
+def test_validation_that_passes_immediately_stops_after_one_round(tmp_path: Path) -> None:
+    report = optimize.solve(
+        NETLIST,
+        _deck(),
+        CORNERS_TWO,
+        PAYLOAD,
+        {"dims": ["amp/XM1.w"], "population": 8, "generations": 6, "seed": 2, "budget": 400, "bound": 0.8},
+        GainFake(),
+        _options(tmp_path),
+        validation_corners=CORNERS_TWO,
+    )
+    assert len(report["validation_rounds"]) == 1
+    assert report["validation_rounds"][0]["feasible"] in {True, False}

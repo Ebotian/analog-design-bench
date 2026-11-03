@@ -74,8 +74,9 @@ make legality                      # 全部 T0 电路回放 → results/legality
 {{fact:legality.checker_false_positive}} 条**。checker 实测接受 `m=0.5`，因此整数倍率只是
 搜索建议，不是合法性。筛选实测：18 参数任务 {{fact:screen.ota.sims}} 次仿真压到
 {{fact:screen.ota.dims}} 维；{{fact:screen.rcp.params}} 参数任务 {{fact:screen.rcp.sims}} 次仿真压到 {{fact:screen.rcp.dims}} 维
-（预算优先：先粗组、后参数）。求解器把搜索是否可行与**全 PVT 验证**分开报告：
-OTA 在 ±20% 扰动后 {{fact:solve.ota.sims}} 次仿真搜索可行（`sims_to_feasible` {{fact:solve.ota.sims_to_feasible}}），但全角点验证 CMRR 仍差 {{fact:solve.ota.validation_cmrr}}，因此不判为通过。
+（预算优先：先粗组、后参数）。求解器把搜索与**全 PVT 验证**分开报告，验证失败时把最差角点回灌搜索集。
+OTA 在 ±20% 扰动后 {{fact:solve.ota.sims}} 次仿真仍差 CMRR {{fact:solve.ota.validation_cmrr}}：
+角点已对上，缺的是搜索能力，因此不判为通过。
 
 评测跑在 `ghcr.io/arcadia-1/analog-arena-sky130-tools`（ngspice-46 + Sky130 PDK）里，
 每个 worker 一个常驻容器，deck 挂在 `/app`；缓存键是 `netlist + 渲染后的 deck + image id`。

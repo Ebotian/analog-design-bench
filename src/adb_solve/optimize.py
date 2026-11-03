@@ -42,6 +42,8 @@ class SolveOptions(TypedDict, total=False):
     lambda_reg: float
     corner_mode: str
     corners_count: int
+    rounds: int
+    feed_corners: int
 
 
 @dataclass(frozen=True)
@@ -60,6 +62,8 @@ class Settings:
     lambda_reg: float = 0.05
     corner_mode: str = "worst"
     corners_count: int = 4
+    rounds: int = 2
+    feed_corners: int = 2
 
     @classmethod
     def from_options(cls, options: SolveOptions | None) -> "Settings":
@@ -79,6 +83,8 @@ class Settings:
             lambda_reg=float(raw.get("lambda_reg", 0.05)),
             corner_mode=str(raw.get("corner_mode", "worst")),
             corners_count=int(raw.get("corners_count", 4)),
+            rounds=int(raw.get("rounds", 2)),
+            feed_corners=int(raw.get("feed_corners", 2)),
         )
 
 
@@ -105,6 +111,7 @@ class SolveReport(TypedDict):
     wall_seconds: float
     search_corners: list[dict[str, float | int | str]]
     validation: dict[str, object]
+    validation_rounds: list[dict[str, object]]
     history: list[dict[str, object]]
     notes: list[str]
 
@@ -261,9 +268,11 @@ def solve(
     reference = _reference_values(design, settings.dims)
     base = eval_options or evaluate.EvalOptions()
 
-    reserve = len(validation_corners) * max(1, len(decks)) if validation_corners else 0
+    rounds = max(1, settings.rounds)
+    reserve = rounds * len(validation_corners) * max(1, len(decks)) if validation_corners else 0
     search_budget = None if settings.budget is None else max(0, settings.budget - reserve)
     used = 0
+    sims_to_feasible: int | None = None
     notes: list[str] = []
 
     gate_set: gate_lib.GateSet | None = None
@@ -333,31 +342,40 @@ def solve(
             )
         return population
 
-    history: list[dict[str, object]] = []
-    sims_to_feasible: int | None = None
-    population: list[_Candidate] = []
-
-    for phase_index, (phase_corners, share) in enumerate(phases):
+    def evolve(
+        population: list[_Candidate],
+        phase_corners: Sequence[Corner],
+        cap: int | None,
+        phase_index: int,
+        final_phase: bool = False,
+    ) -> list[_Candidate]:
+        nonlocal gate_set, sims_to_feasible
         cases = max(1, len(decks) * len(phase_corners))
-        cap = None if search_budget is None else int(search_budget * share)
         size = max(2, settings.population)
         if cap is not None:
             size = max(2, min(size, max(1, (cap - used) // cases)))
         if not population:
             population = init_population(size)
+        # A phase with a different corner set makes every stored loss stale;
+        # comparing a one-corner loss with a two-corner loss would keep the
+        # cheaper candidate forever.  Re-score the population first.
+        for candidate in population:
+            candidate.loss = math.inf
+            candidate.margins = {}
+            candidate.feasible = False
         if gate_set is None:
             report, labelled, _ = run_batch(population, phase_corners)
-            gate_set = gate_lib.from_task(payload, _measure_names(report))
-            if not gate_set.gates:
+            resolved = gate_lib.from_task(payload, _measure_names(report))
+            if not resolved.gates:
                 raise ValueError("no gate could be resolved from the task's public specs")
-            notes.extend(f"unresolved gate: {gate}" for gate in gate_set.unresolved)
-            _score_batch(report, labelled, gate_set, reference, settings, used)
+            gate_set = resolved
+            notes.extend(f"unresolved gate: {gate}" for gate in resolved.unresolved)
+            _score_batch(report, labelled, resolved, reference, settings, used)
         else:
             pending = [candidate for candidate in population if candidate.loss == math.inf]
             if pending:
                 report, labelled, _ = run_batch(pending, phase_corners)
                 _score_batch(report, labelled, gate_set, reference, settings, used)
-        best = min(population, key=lambda candidate: candidate.loss)
         history.append(_generation_row(len(history), population, used, phase_index))
         generation = 0
         while generation < settings.generations:
@@ -388,51 +406,109 @@ def solve(
                     population[position] = trial
             best = min(population, key=lambda candidate: candidate.loss)
             history.append(_generation_row(len(history), population, used, phase_index))
+            if final_phase and sims_to_feasible is None and best.feasible:
+                sims_to_feasible = used
             if spent == 0 and cap is not None and used >= cap:
                 break
-        if phase_index == len(phases) - 1 and best.feasible:
-            sims_to_feasible = used
+        return population
 
-    best = min(population, key=lambda candidate: candidate.loss)
-    if gate_set is None:
-        raise ValueError("no gate could be resolved from the task's public specs")
-    validation: dict[str, object] = {"skipped": True, "reason": "no validation corners"}
-    if validation_corners:
+    def validate(candidate: _Candidate) -> dict[str, object]:
+        nonlocal used, gate_set
+        if not validation_corners:
+            return {"skipped": True, "reason": "no validation corners"}
         cost = len(validation_corners) * max(1, len(decks))
         remaining = None if settings.budget is None else settings.budget - used
         if remaining is not None and remaining < cost:
-            validation = {
+            notes.append(f"validation skipped: needs {cost} sims, {remaining} left")
+            return {
                 "skipped": True,
                 "reason": f"needs {cost} sims, {remaining} left",
                 "corners": len(validation_corners),
             }
-            notes.append(f"validation skipped: needs {cost} sims, {remaining} left")
-        else:
-            report = evaluate.evaluate_many(
-                {"validate": best.text},
-                decks,
-                validation_corners,
-                replace(base, budget=settings.budget, prior_used=used),
-                backend,
-            )
-            spent = int(report["sims_run"])
-            used += spent
-            rows = [
-                row
-                for row in cast(Sequence[Mapping[str, Any]], report.get("results") or [])
-                if row.get("variant") == "validate"
-            ]
-            margins = gate_lib.margins(gate_set, rows)
-            failures = gate_lib.failed_cases(rows)
-            validation = {
-                "skipped": False,
-                "corners": len(validation_corners),
-                "sims": spent,
-                "margins": margins,
-                "failures": failures,
-                "feasible": gate_lib.feasible(margins) and failures == 0,
-            }
+        if gate_set is None:
+            raise ValueError("no gate could be resolved from the task's public specs")
+        report = evaluate.evaluate_many(
+            {"validate": candidate.text},
+            decks,
+            validation_corners,
+            replace(base, budget=settings.budget, prior_used=used),
+            backend,
+        )
+        spent = int(report["sims_run"])
+        used += spent
+        rows = [
+            row
+            for row in cast(Sequence[Mapping[str, Any]], report.get("results") or [])
+            if row.get("variant") == "validate"
+        ]
+        margins = gate_lib.margins(gate_set, rows)
+        failures = gate_lib.failed_cases(rows)
+        worst = _worst_corners(report, gate_set, settings.feed_corners, validation_corners)
+        return {
+            "skipped": False,
+            "corners": len(validation_corners),
+            "sims": spent,
+            "margins": margins,
+            "failures": failures,
+            "feasible": gate_lib.feasible(margins) and failures == 0,
+            "worst": worst,
+        }
 
+    history: list[dict[str, object]] = []
+    population: list[_Candidate] = []
+
+    validation: dict[str, object] = {"skipped": True, "reason": "not run"}
+    validation_rounds: list[dict[str, object]] = []
+    feedback: list[Corner] = []
+
+    for round_index in range(max(1, settings.rounds)):
+        if round_index == 0:
+            for phase_index, (phase_corners, share) in enumerate(phases):
+                cap = None if search_budget is None else int(search_budget * share)
+                population = evolve(
+                    population, phase_corners, cap, phase_index,
+                    final_phase=phase_index == len(phases) - 1,
+                )
+        else:
+            if not feedback:
+                break
+            # The corner set changed, so the old optimum is probably no longer
+            # the right basin.  Keep the best half and respawn the rest around
+            # it with a wider spread; without this, DE cannot cross a 2x gap.
+            ranked = sorted(population, key=lambda candidate: candidate.loss)
+            half = max(1, len(ranked) // 2)
+            width = settings.bound * 1.5
+            population = ranked[:half] + [
+                spawn(
+                    {
+                        name: ranked[0].values[name] * math.exp(rng.uniform(-width, width))
+                        for name in settings.dims
+                    }
+                )
+                for _ in range(len(ranked) - half)
+            ]
+            cap = None if search_budget is None else search_budget - used
+            population = evolve(population, [*search_corners, *feedback], cap, 10 + round_index, final_phase=True)
+        best = min(population, key=lambda candidate: candidate.loss)
+        validation = validate(best)
+        validation_rounds.append(
+            {"round": round_index, "sims": used, **{key: value for key, value in validation.items() if key != "margins"}}
+        )
+        if validation.get("skipped") or validation.get("feasible"):
+            break
+        fresh = [
+            corner
+            for corner in cast(Sequence[Corner], validation.get("worst") or [])
+            if corner not in search_corners and corner not in feedback
+        ]
+        if not fresh:
+            notes.append("validation failed on corners already being searched")
+            break
+        feedback.extend(fresh)
+        notes.append(f"round {round_index}: fed {len(fresh)} validation corner(s) back into the search")
+
+    if gate_set is None:
+        raise ValueError("no gate could be resolved from the task's public specs")
     limit = settings.budget
     return {
         "schema_version": SCHEMA_VERSION,
@@ -452,6 +528,7 @@ def solve(
         },
         "search_corners": [dict(corner) for corner in search_corners],
         "validation": validation,
+        "validation_rounds": validation_rounds,
         "wall_seconds": round(time.perf_counter() - started, 3),
         "history": history,
         "notes": notes,

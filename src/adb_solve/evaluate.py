@@ -170,7 +170,12 @@ def _execute(
         if hit is None:
             pending.append(case)
         else:
-            cached[case.case_id] = _cache_payload(hit)
+            # A hit is keyed by netlist+deck, not by case id: the stored row may
+            # come from another batch (screening labels, validation).  Re-label
+            # it, otherwise callers filtering by case/variant drop the row.
+            payload = _cache_payload(hit)
+            payload["case"] = case.case_id
+            cached[case.case_id] = payload
 
     # Budget counts simulations that actually run, not cache hits: re-reading a
     # cached result spends nothing.  ``prior_used`` comes from a resumed report,
