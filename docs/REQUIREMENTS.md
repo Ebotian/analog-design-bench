@@ -1,25 +1,25 @@
+<!-- generated from docs/src/requirements.md by scripts/build_docs.py; do not edit -->
 # 通用尺寸求解基建 — 需求规格
 
-状态：草案 v0.1（2026-11-02）
-范围：Analog Design Bench V2 的“数值闭合”环节；不涉及拓扑生成、版图、PDK。
+状态：草案 v0.2 · 范围：Analog Design Bench V2 的“数值闭合”环节；不涉及拓扑生成、版图、PDK。
 
 ---
 
+<!-- block: background | tags: status:draft,kind:scope,topic:solver -->
 ## 0. 背景与假设
 
-已测事实（来源见 `README.md` 与轨迹分析）：
+已测事实（数字由 `docs/facts.toml` 从 artifacts 解析，正文不手写）：
 
-- 50 个参考解中 49 个是字面量网表，没有 `.param`；数值旋钮中位 **63**，
-  p90 135，最大 226。
-- 强模型在硬任务上做 **11 版**手工修改、4 次 120-corner 全量复测，
-  约 **563 次 ngspice**；判分器只需 **143 次**。
-- 同一任务上，模型从 19.6 分钟到 119 分钟不等；失败者多顶到 2h 上限。
-- 受控曲线：harness 的 spread 从 2h 的 16 pp 收缩到 6h 的 6 pp；
-  模型/effort 的 spread 为 60–76 pp。强模型 6h 曲线在 4h 后已平。
+- 50 个参考解中 49 个是字面量网表（没有 `.param`）；
+  可写数值参数中位 75.5、p90 160、最大 536
+  （`adb_solve.params` 口径）。
+- 官方判分基线：50 题全部通过，430 个 gate、
+  2,429 次 ngspice（逐任务见 `docs/VERIFIER_RESULTS.md`）。
+- 强模型在硬任务上反复手工改网表并做全量 corner 复测；判分器一次签核所需的仿真量才是成本下限。
 
 **核心假设 H1**：在这些任务上，剩余失败的主要成分是“给定拓扑后的数值闭合”，
-而不是拓扑选择或工具速度。若 H1 成立，一个拓扑无关的求解基建应显著提高
-通过率，且增益在 2h 大于 6h、对弱模型大于强模型。
+而不是拓扑选择或工具速度。若 H1 成立，一个拓扑无关的求解基建应显著提高通过率，
+且增益在 2h 大于 6h、对弱模型大于强模型。
 
 **反证条件**（任一成立即需修正 H1）：
 
@@ -29,6 +29,7 @@
 
 ---
 
+<!-- block: scope-in | tags: kind:scope,topic:solver -->
 ## 1. 范围
 
 ### 在范围内
@@ -43,12 +44,11 @@
 - 拓扑生成/替换（由 skill 8 一类“参考拓扑”覆盖）。
 - 版图、寄生提取、PDK 修改。
 - 读取或推断隐藏阈值；工具只使用公开 spec 与公开 bench。
-  （2026-11-03 注：各任务的判分器源码其实是公开的，可用于**校准与官方判分**；
-  但仍不得作为优化目标，也不得修改。）
-- 修改判分器或环境镜像。
+- 修改判分器或环境镜像。判分器源码可用于**校准与官方判分**，但不得作为优化目标。
 
 ---
 
+<!-- block: model | tags: kind:model,topic:solver -->
 ## 2. 数据模型
 
 ```text
@@ -72,18 +72,19 @@ Report   = { design_hash, params, gates[], margins[], sims, budget,
 
 ---
 
+<!-- block: fr | tags: kind:acceptance,topic:solver -->
 ## 3. 功能需求
 
 | ID | 需求 | 验收 |
 |---|---|---|
-| **FR-1** | 解析 SPICE 网表：器件、端口、子电路、参数、注释；保留原始行与列 | 50/50 参考解可解析，零异常 |
+| **FR-1** | 解析 SPICE 网表：器件、端口、子电路、参数、注释；保留原始行与列 | 50 个参考解全部可解析，零异常 |
 | **FR-2** | 无损回写：只改参数位 | 回写后 `diff` 仅落在参数 token；重解析参数值一致 |
 | **FR-3** | 参数抽取：`w/l/m/nf`、`R/C/L value`、源 `dc`；单位与量级规范化 | 与人工抽查 3 个任务一致 |
 | **FR-4** | 自动分组：按 `(subckt_path, device_type)` 初分；用敏感度相关性合并共线组 | 组数落在 5–20；镜像对同组 |
 | **FR-5** | 评测：bench × corner 并行；每 sim 超时；失败分类为 `nc/missing/illegal` | 与 `reference.json` 的 gate 结果逐项一致 |
-| **FR-6** | 指标抽取：从 `.meas` 输出解析；缺失即失败（不得当作通过） | 缺失场景有单测 |
-| **FR-7** | Gate 计算：worst-case 跨 corner；区间/有效性条件；权重可配 | 与 `verify.py` 在 50 个参考解上一致 |
-| **FR-8** | 筛选：OAT ±20%，nominal + 2 corner；输出敏感度排序与推荐维度 | 63 维 → ≤15 维，且保留所有失败 gate 相关组 |
+| **FR-6** | 指标抽取：从 `.meas`/`.control` 输出解析；缺失即失败（不得当作通过） | 缺失场景有单测 |
+| **FR-7** | Gate 计算：worst-case 跨 corner；区间/有效性条件；权重可配 | 与 `verify.py` 在参考解上一致 |
+| **FR-8** | 筛选：OAT ±20%，nominal + 2 corner；输出敏感度排序与推荐维度 | 中位 75.5 维 → ≤15 维，且保留失败 gate 相关组 |
 | **FR-9** | 优化：DE（粗层）、CMA-ES（≤30 维）、局部抛光；离散量取整+修复 | 固定 seed 可复现；预算内返回最优 |
 | **FR-10** | 合法性：调用 `check_circuit.py`；几何/模型范围/nf/m 整数；拒绝并修复 | 3,600 条 T0 回放，非法提案率 < 1% |
 | **FR-11** | 预算：`--budget N` 硬上限；记账；耗尽时返回部分结果 | 超限不越界；报告含 `sims` |
@@ -91,6 +92,7 @@ Report   = { design_hash, params, gates[], margins[], sims, budget,
 | **FR-13** | 报告：JSON，含每候选的 gates/margins/sims；stdout 只放摘要 | schema 校验通过 |
 | **FR-14** | 接口：CLI 与 MCP 同语义；`schema` 自描述 | 两个 harness 各跑通 1 题 |
 
+<!-- block: objective | tags: kind:model,topic:solver -->
 ### 目标函数（FR-9 细化）
 
 对每个 gate `g` 与 corner `c`，定义归一化余量
@@ -112,6 +114,7 @@ L(x) = Σ_g softplus(-w_g(x)/τ)                      # 违反惩罚
 - 若全部 `w_g ≥ 0`：最小化 `Σ_g exp(-w_g/τ)`（最大化最坏余量）。
 - `τ`、`λ_*`、`scale_g` 写入配置，不硬编码。
 
+<!-- block: budget | tags: kind:policy,topic:solver -->
 ### 分阶段预算（FR-11 细化）
 
 | 阶段 | bench 范围 | 预算 | 目的 |
@@ -125,6 +128,7 @@ L(x) = Σ_g softplus(-w_g(x)/τ)                      # 违反惩罚
 
 ---
 
+<!-- block: interface | tags: kind:scope,topic:cli -->
 ## 4. 接口
 
 ### CLI
@@ -152,6 +156,7 @@ adb-solve solve   --netlist circuit.spi --budget 1500 --seed 7 --out report.json
 
 ---
 
+<!-- block: nonfunctional | tags: kind:acceptance,topic:solver -->
 ## 5. 非功能需求
 
 | 类别 | 要求 |
@@ -166,11 +171,12 @@ adb-solve solve   --netlist circuit.spi --budget 1500 --seed 7 --out report.json
 
 ---
 
+<!-- block: validation | tags: kind:acceptance,topic:validation -->
 ## 6. 验证
 
 ### 6.1 sizing gym（不依赖 LLM）
 
-- **起点**：50 个参考解 + T0 的 3,600 个电路（含 1,679 个通过）。
+- **起点**：50 个参考解 + 3,600 个 T0 电路（含 1,679 个通过）。
 - **扰动**：对 `writable` 参数做 20–50% 对数均匀缩放；保证合法。
 - **任务**：从扰动点恢复到全 gate 通过。
 - **指标**：恢复率、`sims-to-pass` 中位数、非法率、失败模式分布。
@@ -193,6 +199,7 @@ adb-solve solve   --netlist circuit.spi --budget 1500 --seed 7 --out report.json
 
 ---
 
+<!-- block: risks | tags: kind:gap,topic:solver -->
 ## 7. 风险与对策
 
 | 风险 | 表现 | 对策 |
@@ -207,6 +214,7 @@ adb-solve solve   --netlist circuit.spi --budget 1500 --seed 7 --out report.json
 
 ---
 
+<!-- block: open-questions | tags: kind:gap,topic:solver -->
 ## 8. 开放问题
 
 1. **gate 权重**：等权还是按 spec 重要性？先等权，报告里给敏感性。
@@ -217,6 +225,7 @@ adb-solve solve   --netlist circuit.spi --budget 1500 --seed 7 --out report.json
 
 ---
 
+<!-- block: deliverables | tags: kind:goal,topic:solver -->
 ## 9. 交付物
 
 - `adb-solve` CLI（P1–P3）

@@ -1,0 +1,27 @@
+# Closed vocabulary for documentation block tags.
+#
+# A tag is always ``namespace:value``.  Namespaces listed with ``values`` are
+# closed: adding a value is a diff to this file, reviewed like code.  A
+# namespace with ``free = true`` accepts any lowercase slug.
+#
+# Why closed: a free-form tag vocabulary rots into synonyms and stops being a
+# useful index within a week.  If a tag does not exist, that is a decision to
+# make here, not a string to invent in a heading.
+
+schema_version = "adb-tags-1"
+
+[namespaces.phase]
+values = ["T0", "T1", "T2", "P1", "P2", "P3", "P4", "P5"]
+
+[namespaces.status]
+values = ["open", "done", "blocked", "debt", "draft"]
+
+[namespaces.kind]
+values = ["goal", "scope", "acceptance", "evidence", "gap", "policy", "usage", "model", "data"]
+
+[namespaces.doc]
+values = ["plan", "requirements", "readme", "data", "verifier"]
+
+# Topics are open-ended on purpose: they are search keys, not states.
+[namespaces.topic]
+free = true

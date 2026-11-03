@@ -1,6 +1,6 @@
 PY ?= python3
 
-.PHONY: fetch-t0 check manifest test types corners p1 results ci clean
+.PHONY: fetch-t0 check manifest test types corners p1 results docs docs-check hooks ci clean
 
 fetch-t0:
 	$(PY) scripts/fetch_t0.py --tasks-only
@@ -26,9 +26,21 @@ p1:
 
 results:
 	$(PY) scripts/reconcile_verifiers.py
-	$(PY) scripts/build_results_md.py --check
 
-ci: test types corners results
+docs:
+	$(PY) scripts/build_results_md.py
+	$(PY) scripts/build_docs.py
+
+docs-check:
+	$(PY) scripts/build_results_md.py --check
+	$(PY) scripts/build_docs.py --check
+
+hooks:
+	git config core.hooksPath .githooks
+	chmod +x .githooks/pre-commit
+	@echo "git hooks installed: core.hooksPath=.githooks"
+
+ci: test types corners results docs-check
 
 clean:
 	rm -rf .pytest_cache __pycache__ src/*/__pycache__ scripts/__pycache__

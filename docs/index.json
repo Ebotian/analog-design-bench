@@ -1,0 +1,1425 @@
+{
+  "blocks": [
+    {
+      "block": "plan/t0",
+      "doc": "plan",
+      "end": 17,
+      "facts": [
+        "corpus.passes",
+        "corpus.runs"
+      ],
+      "heading": "T0 — run 级语料（已完成）",
+      "line": 9,
+      "path": "docs/PLAN.md",
+      "tags": [
+        "phase:T0",
+        "status:done",
+        "kind:goal",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "plan/t1",
+      "doc": "plan",
+      "end": 26,
+      "facts": [
+        "t1.commit",
+        "t1.files",
+        "t1.size_mb",
+        "t1.tasks"
+      ],
+      "heading": "T1 — 判分器语料（已完成）",
+      "line": 18,
+      "path": "docs/PLAN.md",
+      "tags": [
+        "phase:T1",
+        "status:done",
+        "kind:goal",
+        "topic:verifier"
+      ]
+    },
+    {
+      "block": "plan/t2",
+      "doc": "plan",
+      "end": 37,
+      "facts": [],
+      "heading": "T2 — 分层轨迹（可选，未开始）",
+      "line": 27,
+      "path": "docs/PLAN.md",
+      "tags": [
+        "phase:T2",
+        "status:open",
+        "kind:goal",
+        "topic:trajectory"
+      ]
+    },
+    {
+      "block": "plan/p1",
+      "doc": "plan",
+      "end": 49,
+      "facts": [
+        "p1.netlists",
+        "verifier.gates",
+        "verifier.sims",
+        "verifier.tasks"
+      ],
+      "heading": "P1 — 参数层与评测层（已完成）",
+      "line": 38,
+      "path": "docs/PLAN.md",
+      "tags": [
+        "phase:P1",
+        "status:done",
+        "kind:goal",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "plan/corners",
+      "doc": "plan",
+      "end": 64,
+      "facts": [
+        "corners.coverage_subsets",
+        "corners.coverage_tasks",
+        "corners.kind_cartesian",
+        "corners.kind_none",
+        "corners.kind_pairs",
+        "corners.kind_rows",
+        "corners.needs_review",
+        "corners.points",
+        "corners.prov_assumption",
+        "corners.prov_deck",
+        "corners.prov_instruction",
+        "corners.prov_verifier",
+        "corners.tasks",
+        "corners.unresolved"
+      ],
+      "heading": "Corner 矩阵（IaC）",
+      "line": 50,
+      "path": "docs/PLAN.md",
+      "tags": [
+        "phase:P1",
+        "status:debt",
+        "kind:evidence",
+        "topic:corner"
+      ]
+    },
+    {
+      "block": "plan/p2",
+      "doc": "plan",
+      "end": 78,
+      "facts": [
+        "corpus.runs"
+      ],
+      "heading": "P2 — 合法性护栏与预算（下一步，≈2 天）",
+      "line": 65,
+      "path": "docs/PLAN.md",
+      "tags": [
+        "phase:P2",
+        "status:open",
+        "kind:goal",
+        "topic:guardrail"
+      ]
+    },
+    {
+      "block": "plan/p3",
+      "doc": "plan",
+      "end": 88,
+      "facts": [
+        "p1.knobs_median"
+      ],
+      "heading": "P3 — 筛选与求解（≈5–8 天）",
+      "line": 79,
+      "path": "docs/PLAN.md",
+      "tags": [
+        "phase:P3",
+        "status:open",
+        "kind:goal",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "plan/p4",
+      "doc": "plan",
+      "end": 97,
+      "facts": [],
+      "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
+      "line": 89,
+      "path": "docs/PLAN.md",
+      "tags": [
+        "phase:P4",
+        "status:open",
+        "kind:goal",
+        "topic:cli"
+      ]
+    },
+    {
+      "block": "plan/p5",
+      "doc": "plan",
+      "end": 120,
+      "facts": [
+        "corpus.runs",
+        "p1.netlists"
+      ],
+      "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
+      "line": 98,
+      "path": "docs/PLAN.md",
+      "tags": [
+        "phase:P5",
+        "status:open",
+        "kind:goal",
+        "topic:validation"
+      ]
+    },
+    {
+      "block": "requirements/background",
+      "doc": "requirements",
+      "end": 31,
+      "facts": [
+        "p1.knobs_max",
+        "p1.knobs_median",
+        "p1.knobs_p90",
+        "p1.literal",
+        "p1.netlists",
+        "verifier.gates",
+        "verifier.sims",
+        "verifier.tasks"
+      ],
+      "heading": "0. 背景与假设",
+      "line": 8,
+      "path": "docs/REQUIREMENTS.md",
+      "tags": [
+        "status:draft",
+        "kind:scope",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "requirements/scope-in",
+      "doc": "requirements",
+      "end": 50,
+      "facts": [],
+      "heading": "1. 范围",
+      "line": 32,
+      "path": "docs/REQUIREMENTS.md",
+      "tags": [
+        "kind:scope",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "requirements/model",
+      "doc": "requirements",
+      "end": 74,
+      "facts": [],
+      "heading": "2. 数据模型",
+      "line": 51,
+      "path": "docs/REQUIREMENTS.md",
+      "tags": [
+        "kind:model",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "requirements/fr",
+      "doc": "requirements",
+      "end": 94,
+      "facts": [
+        "corpus.runs",
+        "p1.knobs_median",
+        "p1.netlists"
+      ],
+      "heading": "3. 功能需求",
+      "line": 75,
+      "path": "docs/REQUIREMENTS.md",
+      "tags": [
+        "kind:acceptance",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "requirements/objective",
+      "doc": "requirements",
+      "end": 116,
+      "facts": [],
+      "heading": "目标函数（FR-9 细化）",
+      "line": 95,
+      "path": "docs/REQUIREMENTS.md",
+      "tags": [
+        "kind:model",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "requirements/budget",
+      "doc": "requirements",
+      "end": 130,
+      "facts": [],
+      "heading": "分阶段预算（FR-11 细化）",
+      "line": 117,
+      "path": "docs/REQUIREMENTS.md",
+      "tags": [
+        "kind:policy",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "requirements/interface",
+      "doc": "requirements",
+      "end": 158,
+      "facts": [],
+      "heading": "4. 接口",
+      "line": 131,
+      "path": "docs/REQUIREMENTS.md",
+      "tags": [
+        "kind:scope",
+        "topic:cli"
+      ]
+    },
+    {
+      "block": "requirements/nonfunctional",
+      "doc": "requirements",
+      "end": 173,
+      "facts": [],
+      "heading": "5. 非功能需求",
+      "line": 159,
+      "path": "docs/REQUIREMENTS.md",
+      "tags": [
+        "kind:acceptance",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "requirements/validation",
+      "doc": "requirements",
+      "end": 201,
+      "facts": [
+        "corpus.passes",
+        "corpus.runs",
+        "p1.netlists"
+      ],
+      "heading": "6. 验证",
+      "line": 174,
+      "path": "docs/REQUIREMENTS.md",
+      "tags": [
+        "kind:acceptance",
+        "topic:validation"
+      ]
+    },
+    {
+      "block": "requirements/risks",
+      "doc": "requirements",
+      "end": 216,
+      "facts": [],
+      "heading": "7. 风险与对策",
+      "line": 202,
+      "path": "docs/REQUIREMENTS.md",
+      "tags": [
+        "kind:gap",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "requirements/open-questions",
+      "doc": "requirements",
+      "end": 227,
+      "facts": [],
+      "heading": "8. 开放问题",
+      "line": 217,
+      "path": "docs/REQUIREMENTS.md",
+      "tags": [
+        "kind:gap",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "requirements/deliverables",
+      "doc": "requirements",
+      "end": 235,
+      "facts": [],
+      "heading": "9. 交付物",
+      "line": 228,
+      "path": "docs/REQUIREMENTS.md",
+      "tags": [
+        "kind:goal",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "readme/layout",
+      "doc": "readme",
+      "end": 28,
+      "facts": [],
+      "heading": "目录",
+      "line": 10,
+      "path": "README.md",
+      "tags": [
+        "kind:usage",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "readme/origin",
+      "doc": "readme",
+      "end": 37,
+      "facts": [],
+      "heading": "来源与口径",
+      "line": 29,
+      "path": "README.md",
+      "tags": [
+        "kind:data",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "readme/t0-check",
+      "doc": "readme",
+      "end": 49,
+      "facts": [
+        "corpus.files",
+        "corpus.models",
+        "corpus.passes",
+        "corpus.runs",
+        "corpus.size_mb",
+        "corpus.tasks"
+      ],
+      "heading": "T0 完整性校验（已通过）",
+      "line": 38,
+      "path": "README.md",
+      "tags": [
+        "phase:T0",
+        "status:done",
+        "kind:evidence",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "readme/p1-usage",
+      "doc": "readme",
+      "end": 63,
+      "facts": [],
+      "heading": "求解基建（P1）",
+      "line": 50,
+      "path": "README.md",
+      "tags": [
+        "phase:P1",
+        "status:done",
+        "kind:usage",
+        "topic:solver"
+      ]
+    },
+    {
+      "block": "readme/corners",
+      "doc": "readme",
+      "end": 86,
+      "facts": [
+        "corners.coverage_subsets",
+        "corners.coverage_tasks",
+        "corners.kind_cartesian",
+        "corners.kind_none",
+        "corners.kind_pairs",
+        "corners.kind_rows",
+        "corners.needs_review",
+        "corners.points",
+        "corners.prov_assumption",
+        "corners.prov_deck",
+        "corners.prov_instruction",
+        "corners.prov_verifier",
+        "corners.tasks",
+        "corners.unresolved"
+      ],
+      "heading": "Corner 矩阵（IaC）",
+      "line": 64,
+      "path": "README.md",
+      "tags": [
+        "phase:P1",
+        "status:debt",
+        "kind:usage",
+        "topic:corner"
+      ]
+    },
+    {
+      "block": "readme/docs",
+      "doc": "readme",
+      "end": 109,
+      "facts": [],
+      "heading": "文档系统",
+      "line": 87,
+      "path": "README.md",
+      "tags": [
+        "kind:usage",
+        "topic:docs"
+      ]
+    },
+    {
+      "block": "readme/reproduce",
+      "doc": "readme",
+      "end": 121,
+      "facts": [],
+      "heading": "复现",
+      "line": 110,
+      "path": "README.md",
+      "tags": [
+        "kind:usage",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "readme/data-gaps",
+      "doc": "readme",
+      "end": 134,
+      "facts": [
+        "corpus.no_gates",
+        "corpus.no_gates_median_min",
+        "corpus.no_gates_passed",
+        "corpus.reward_one",
+        "corpus.runs"
+      ],
+      "heading": "已知数据质量问题",
+      "line": 122,
+      "path": "README.md",
+      "tags": [
+        "kind:gap",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "readme/absent",
+      "doc": "readme",
+      "end": 144,
+      "facts": [],
+      "heading": "不在这里的东西",
+      "line": 135,
+      "path": "README.md",
+      "tags": [
+        "kind:gap",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "readme/license",
+      "doc": "readme",
+      "end": 161,
+      "facts": [],
+      "heading": "许可",
+      "line": 145,
+      "path": "README.md",
+      "tags": [
+        "kind:policy",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "data/origin",
+      "doc": "data",
+      "end": 17,
+      "facts": [],
+      "heading": "来源",
+      "line": 7,
+      "path": "DATA.md",
+      "tags": [
+        "kind:data",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "data/t1",
+      "doc": "data",
+      "end": 39,
+      "facts": [
+        "t1.commit",
+        "t1.files",
+        "t1.size_mb",
+        "t1.tasks"
+      ],
+      "heading": "T1：判分器语料（`data/t1/`）",
+      "line": 18,
+      "path": "DATA.md",
+      "tags": [
+        "phase:T1",
+        "status:done",
+        "kind:data",
+        "topic:verifier"
+      ]
+    },
+    {
+      "block": "data/verifier-run",
+      "doc": "data",
+      "end": 65,
+      "facts": [
+        "corners.needs_review",
+        "corners.unresolved",
+        "verifier.by_status",
+        "verifier.cpu_mean",
+        "verifier.cpu_peak",
+        "verifier.mismatches",
+        "verifier.passed",
+        "verifier.printed",
+        "verifier.ref_metrics",
+        "verifier.ref_sims",
+        "verifier.sims",
+        "verifier.status_matches",
+        "verifier.sweep_wall",
+        "verifier.task_wall_sum",
+        "verifier.tasks",
+        "verifier.wall_rel",
+        "verifier.wall_sum",
+        "verifier.within_tol"
+      ],
+      "heading": "判分实测",
+      "line": 40,
+      "path": "DATA.md",
+      "tags": [
+        "phase:P1",
+        "status:done",
+        "kind:evidence",
+        "topic:verifier"
+      ]
+    },
+    {
+      "block": "data/missing",
+      "doc": "data",
+      "end": 82,
+      "facts": [],
+      "heading": "T0 未包含、由 T1 补齐的部分",
+      "line": 66,
+      "path": "DATA.md",
+      "tags": [
+        "kind:gap",
+        "topic:verifier"
+      ]
+    },
+    {
+      "block": "data/contents",
+      "doc": "data",
+      "end": 94,
+      "facts": [
+        "corpus.models",
+        "corpus.runs",
+        "corpus.tasks"
+      ],
+      "heading": "内容",
+      "line": 83,
+      "path": "DATA.md",
+      "tags": [
+        "kind:data",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "data/integrity",
+      "doc": "data",
+      "end": 104,
+      "facts": [
+        "corpus.files",
+        "corpus.passes",
+        "corpus.runs",
+        "corpus.size_mb",
+        "corpus.tasks"
+      ],
+      "heading": "完整性（`make check` 可复验）",
+      "line": 95,
+      "path": "DATA.md",
+      "tags": [
+        "kind:evidence",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "data/defects",
+      "doc": "data",
+      "end": 116,
+      "facts": [
+        "corpus.no_gates",
+        "corpus.no_gates_median_min",
+        "corpus.no_gates_passed",
+        "corpus.reward_one",
+        "corpus.runs"
+      ],
+      "heading": "已知缺陷（原样保留，不修补）",
+      "line": 105,
+      "path": "DATA.md",
+      "tags": [
+        "kind:gap",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "data/refresh",
+      "doc": "data",
+      "end": 127,
+      "facts": [],
+      "heading": "刷新",
+      "line": 117,
+      "path": "DATA.md",
+      "tags": [
+        "kind:usage",
+        "topic:corpus"
+      ]
+    },
+    {
+      "block": "data/limits",
+      "doc": "data",
+      "end": 134,
+      "facts": [],
+      "heading": "限制",
+      "line": 128,
+      "path": "DATA.md",
+      "tags": [
+        "kind:policy",
+        "topic:corpus"
+      ]
+    }
+  ],
+  "docs": [
+    {
+      "generated_by": null,
+      "id": "plan",
+      "lines": 120,
+      "path": "docs/PLAN.md",
+      "source": "docs/src/plan.md",
+      "tags": [
+        "doc:plan",
+        "kind:goal",
+        "topic:roadmap"
+      ],
+      "title": "阶段计划"
+    },
+    {
+      "generated_by": null,
+      "id": "requirements",
+      "lines": 235,
+      "path": "docs/REQUIREMENTS.md",
+      "source": "docs/src/requirements.md",
+      "tags": [
+        "doc:requirements",
+        "kind:scope",
+        "topic:solver"
+      ],
+      "title": "通用尺寸求解基建 — 需求规格"
+    },
+    {
+      "generated_by": null,
+      "id": "readme",
+      "lines": 161,
+      "path": "README.md",
+      "source": "docs/src/readme.md",
+      "tags": [
+        "doc:readme",
+        "kind:usage",
+        "topic:corpus"
+      ],
+      "title": "Analog Design Bench — 本地数据与求解基建"
+    },
+    {
+      "generated_by": null,
+      "id": "data",
+      "lines": 134,
+      "path": "DATA.md",
+      "source": "docs/src/data.md",
+      "tags": [
+        "doc:data",
+        "kind:data",
+        "topic:corpus"
+      ],
+      "title": "数据卡：T0 语料"
+    },
+    {
+      "generated_by": "scripts/build_results_md.py",
+      "id": "verifier",
+      "lines": 223,
+      "path": "docs/VERIFIER_RESULTS.md",
+      "source": null,
+      "tags": [
+        "doc:verifier",
+        "kind:evidence",
+        "topic:verifier"
+      ],
+      "title": "参考解官方判分实测"
+    }
+  ],
+  "facts": {
+    "corners.coverage_subsets": {
+      "display": "22",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "coverage_subsets",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 22
+    },
+    "corners.coverage_tasks": {
+      "display": "14",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "coverage_tasks",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 14
+    },
+    "corners.kind_cartesian": {
+      "display": "19",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "kind.cartesian",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 19
+    },
+    "corners.kind_none": {
+      "display": "12",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "kind.none",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 12
+    },
+    "corners.kind_pairs": {
+      "display": "5",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "kind.pairs",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 5
+    },
+    "corners.kind_rows": {
+      "display": "14",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "kind.rows",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 14
+    },
+    "corners.needs_review": {
+      "display": "33",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "needs_review",
+        "kind": "call"
+      },
+      "used_in": [
+        "data/verifier-run",
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 33
+    },
+    "corners.points": {
+      "display": "1,218",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "format": "{:,}",
+        "key": "points",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 1218
+    },
+    "corners.prov_assumption": {
+      "display": "9",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "provenance.assumption",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 9
+    },
+    "corners.prov_deck": {
+      "display": "3",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "provenance.deck",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 3
+    },
+    "corners.prov_instruction": {
+      "display": "7",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "provenance.instruction",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 7
+    },
+    "corners.prov_verifier": {
+      "display": "31",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "provenance.verifier",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 31
+    },
+    "corners.tasks": {
+      "display": "50",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "tasks",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 50
+    },
+    "corners.unresolved": {
+      "display": "33",
+      "extract": {
+        "call": "adb_docs.metrics:corners_stats",
+        "key": "unresolved",
+        "kind": "call"
+      },
+      "used_in": [
+        "data/verifier-run",
+        "plan/corners",
+        "readme/corners"
+      ],
+      "value": 33
+    },
+    "corpus.files": {
+      "display": "104",
+      "extract": {
+        "file": "manifests/t0.meta.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "files"
+      },
+      "used_in": [
+        "data/integrity",
+        "readme/t0-check"
+      ],
+      "value": 104
+    },
+    "corpus.models": {
+      "display": "24",
+      "extract": {
+        "file": "data/leaderboard.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "stats.models"
+      },
+      "used_in": [
+        "data/contents",
+        "readme/t0-check"
+      ],
+      "value": 24
+    },
+    "corpus.no_gates": {
+      "display": "285",
+      "extract": {
+        "file": "manifests/t0.meta.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "quality.runs_without_gates"
+      },
+      "used_in": [
+        "data/defects",
+        "readme/data-gaps"
+      ],
+      "value": 285
+    },
+    "corpus.no_gates_median_min": {
+      "display": "117.8",
+      "extract": {
+        "file": "manifests/t0.meta.json",
+        "format": "{:.1f}",
+        "kind": "json",
+        "path": "quality.median_minutes_without_gates"
+      },
+      "used_in": [
+        "data/defects",
+        "readme/data-gaps"
+      ],
+      "value": 117.8
+    },
+    "corpus.no_gates_passed": {
+      "display": "4",
+      "extract": {
+        "file": "manifests/t0.meta.json",
+        "kind": "json",
+        "path": "quality.runs_without_gates_passed"
+      },
+      "used_in": [
+        "data/defects",
+        "readme/data-gaps"
+      ],
+      "value": 4
+    },
+    "corpus.passes": {
+      "display": "1,679",
+      "extract": {
+        "file": "data/leaderboard.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "stats.binaryPasses"
+      },
+      "used_in": [
+        "data/integrity",
+        "plan/t0",
+        "readme/t0-check",
+        "requirements/validation"
+      ],
+      "value": 1679
+    },
+    "corpus.reward_one": {
+      "display": "1,679",
+      "extract": {
+        "file": "manifests/t0.meta.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "quality.reward_one_runs"
+      },
+      "used_in": [
+        "data/defects",
+        "readme/data-gaps"
+      ],
+      "value": 1679
+    },
+    "corpus.runs": {
+      "display": "3,600",
+      "extract": {
+        "file": "data/leaderboard.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "stats.rollouts"
+      },
+      "used_in": [
+        "data/contents",
+        "data/defects",
+        "data/integrity",
+        "plan/p2",
+        "plan/p5",
+        "plan/t0",
+        "readme/data-gaps",
+        "readme/t0-check",
+        "requirements/fr",
+        "requirements/validation"
+      ],
+      "value": 3600
+    },
+    "corpus.size_mb": {
+      "display": "21.9",
+      "extract": {
+        "file": "manifests/t0.meta.json",
+        "format": "{:.1f}",
+        "kind": "json",
+        "path": "bytes",
+        "scale": 1e-06
+      },
+      "used_in": [
+        "data/integrity",
+        "readme/t0-check"
+      ],
+      "value": 21913728
+    },
+    "corpus.tasks": {
+      "display": "50",
+      "extract": {
+        "file": "data/leaderboard.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "stats.tasks"
+      },
+      "used_in": [
+        "data/contents",
+        "data/integrity",
+        "readme/t0-check"
+      ],
+      "value": 50
+    },
+    "p1.knobs_max": {
+      "display": "536",
+      "extract": {
+        "call": "adb_docs.metrics:netlist_stats",
+        "format": "{:.0f}",
+        "key": "knobs_max",
+        "kind": "call"
+      },
+      "used_in": [
+        "requirements/background"
+      ],
+      "value": 536
+    },
+    "p1.knobs_median": {
+      "display": "75.5",
+      "extract": {
+        "call": "adb_docs.metrics:netlist_stats",
+        "format": "{:.1f}",
+        "key": "knobs_median",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/p3",
+        "requirements/background",
+        "requirements/fr"
+      ],
+      "value": 75.5
+    },
+    "p1.knobs_p90": {
+      "display": "160",
+      "extract": {
+        "call": "adb_docs.metrics:netlist_stats",
+        "format": "{:.0f}",
+        "key": "knobs_p90",
+        "kind": "call"
+      },
+      "used_in": [
+        "requirements/background"
+      ],
+      "value": 160.0
+    },
+    "p1.literal": {
+      "display": "49",
+      "extract": {
+        "call": "adb_docs.metrics:netlist_stats",
+        "key": "literal",
+        "kind": "call"
+      },
+      "used_in": [
+        "requirements/background"
+      ],
+      "value": 49
+    },
+    "p1.netlists": {
+      "display": "50",
+      "extract": {
+        "call": "adb_docs.metrics:netlist_stats",
+        "key": "netlists",
+        "kind": "call"
+      },
+      "used_in": [
+        "plan/p1",
+        "plan/p5",
+        "requirements/background",
+        "requirements/fr",
+        "requirements/validation"
+      ],
+      "value": 50
+    },
+    "t1.commit": {
+      "display": "972f7cd",
+      "extract": {
+        "file": "manifests/t1.meta.json",
+        "guard": false,
+        "kind": "json",
+        "path": "commit",
+        "truncate": 7
+      },
+      "used_in": [
+        "data/t1",
+        "plan/t1"
+      ],
+      "value": "972f7cd7c95381134387b250edf18f3bd23bdd25"
+    },
+    "t1.files": {
+      "display": "889",
+      "extract": {
+        "file": "manifests/t1.meta.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "files"
+      },
+      "used_in": [
+        "data/t1",
+        "plan/t1"
+      ],
+      "value": 889
+    },
+    "t1.size_mb": {
+      "display": "2.58",
+      "extract": {
+        "file": "manifests/t1.meta.json",
+        "format": "{:.2f}",
+        "kind": "json",
+        "path": "bytes",
+        "scale": 1e-06
+      },
+      "used_in": [
+        "data/t1",
+        "plan/t1"
+      ],
+      "value": 2579889
+    },
+    "t1.tasks": {
+      "display": "50",
+      "extract": {
+        "file": "manifests/t1.meta.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "tasks"
+      },
+      "used_in": [
+        "data/t1",
+        "plan/t1"
+      ],
+      "value": 50
+    },
+    "verifier.by_status": {
+      "display": "14",
+      "extract": {
+        "file": "results/reconcile.json",
+        "kind": "json",
+        "path": "summary.values_matched_by_gate_status"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 14
+    },
+    "verifier.cpu_mean": {
+      "display": "39.8",
+      "extract": {
+        "file": "results/verifier/summary.json",
+        "format": "{:.1f}",
+        "kind": "json",
+        "path": "cpu_busy_percent.mean"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 39.8
+    },
+    "verifier.cpu_peak": {
+      "display": "68.3",
+      "extract": {
+        "file": "results/verifier/summary.json",
+        "format": "{:.1f}",
+        "kind": "json",
+        "path": "cpu_busy_percent.peak"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 68.3
+    },
+    "verifier.gates": {
+      "display": "430",
+      "extract": {
+        "file": "results/reconcile.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "summary.run_gates"
+      },
+      "used_in": [
+        "plan/p1",
+        "requirements/background"
+      ],
+      "value": 430
+    },
+    "verifier.mismatches": {
+      "display": "0",
+      "extract": {
+        "file": "results/reconcile.json",
+        "kind": "json",
+        "path": "summary.mismatch_count"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 0
+    },
+    "verifier.passed": {
+      "display": "50",
+      "extract": {
+        "file": "results/verifier/summary.json",
+        "kind": "json",
+        "path": "status_counts.passed"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 50
+    },
+    "verifier.printed": {
+      "display": "1",
+      "extract": {
+        "file": "results/reconcile.json",
+        "kind": "json",
+        "path": "summary.values_matched_by_printed_precision"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 1
+    },
+    "verifier.ref_metrics": {
+      "display": "452",
+      "extract": {
+        "file": "results/reconcile.json",
+        "kind": "json",
+        "path": "summary.reference_metrics"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 452
+    },
+    "verifier.ref_sims": {
+      "display": "2,297",
+      "extract": {
+        "file": "results/reconcile.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "summary.reference_ngspice_runs"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 2297
+    },
+    "verifier.sims": {
+      "display": "2,429",
+      "extract": {
+        "file": "results/verifier/summary.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "ngspice_runs"
+      },
+      "used_in": [
+        "data/verifier-run",
+        "plan/p1",
+        "requirements/background"
+      ],
+      "value": 2429
+    },
+    "verifier.status_matches": {
+      "display": "452",
+      "extract": {
+        "file": "results/reconcile.json",
+        "kind": "json",
+        "path": "summary.status_matches"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 452
+    },
+    "verifier.sweep_wall": {
+      "display": "730.0",
+      "extract": {
+        "file": "results/verifier/summary.json",
+        "format": "{:.1f}",
+        "kind": "json",
+        "path": "sweep_wall_s"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 730.0
+    },
+    "verifier.task_wall_sum": {
+      "display": "2,718.5",
+      "extract": {
+        "file": "results/verifier/summary.json",
+        "format": "{:,.1f}",
+        "kind": "json",
+        "path": "task_wall_sum_s"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 2718.5
+    },
+    "verifier.tasks": {
+      "display": "50",
+      "extract": {
+        "file": "results/verifier/summary.json",
+        "kind": "json",
+        "path": "tasks"
+      },
+      "used_in": [
+        "data/verifier-run",
+        "plan/p1",
+        "requirements/background"
+      ],
+      "value": 50
+    },
+    "verifier.wall_rel": {
+      "display": "30.4%",
+      "extract": {
+        "file": "results/reconcile.json",
+        "format": "{:.1%}",
+        "kind": "json",
+        "path": "summary.wall_mean_relative_difference"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 0.304066
+    },
+    "verifier.wall_sum": {
+      "display": "2,705.8",
+      "extract": {
+        "file": "results/verifier/summary.json",
+        "format": "{:,.1f}",
+        "kind": "json",
+        "path": "wall_clock_sum_s"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 2705.8
+    },
+    "verifier.within_tol": {
+      "display": "437",
+      "extract": {
+        "file": "results/reconcile.json",
+        "kind": "json",
+        "path": "summary.values_within_tolerance"
+      },
+      "used_in": [
+        "data/verifier-run"
+      ],
+      "value": 437
+    }
+  },
+  "generator": "scripts/build_docs.py",
+  "schema": 1
+}

@@ -1,0 +1,304 @@
+# Facts used in prose.  A fact stores a *selector*, never a value.
+#
+#   kind = "json"  file + optional dotted path (int segments index lists)
+#   kind = "toml"  file + optional dotted path
+#   kind = "lines" file               count of non-empty lines
+#   kind = "call"  call = "module:function", optional key into its dict
+#
+# Render-time extras: scale, format (str.format), truncate (string prefix),
+# guard = false (opt out of the literal-number scan).
+#
+# Rule: if a measured number has no artifact to read it from, it does not go in
+# a document.  Add the artifact first, then the fact.
+
+schema_version = "adb-facts-1"
+
+# ---------------------------------------------------------------- T0 corpus
+
+[facts."corpus.tasks"]
+kind = "json"
+file = "data/leaderboard.json"
+path = "stats.tasks"
+format = "{:,}"
+
+[facts."corpus.models"]
+kind = "json"
+file = "data/leaderboard.json"
+path = "stats.models"
+format = "{:,}"
+
+[facts."corpus.runs"]
+kind = "json"
+file = "data/leaderboard.json"
+path = "stats.rollouts"
+format = "{:,}"
+
+[facts."corpus.passes"]
+kind = "json"
+file = "data/leaderboard.json"
+path = "stats.binaryPasses"
+format = "{:,}"
+
+[facts."corpus.files"]
+kind = "json"
+file = "manifests/t0.meta.json"
+path = "files"
+format = "{:,}"
+
+[facts."corpus.size_mb"]
+kind = "json"
+file = "manifests/t0.meta.json"
+path = "bytes"
+scale = 1e-6
+format = "{:.1f}"
+
+# Data-quality counts live in the manifest, computed by scripts/check_t0.py.
+[facts."corpus.no_gates"]
+kind = "json"
+file = "manifests/t0.meta.json"
+path = "quality.runs_without_gates"
+format = "{:,}"
+
+[facts."corpus.no_gates_passed"]
+kind = "json"
+file = "manifests/t0.meta.json"
+path = "quality.runs_without_gates_passed"
+
+[facts."corpus.no_gates_median_min"]
+kind = "json"
+file = "manifests/t0.meta.json"
+path = "quality.median_minutes_without_gates"
+format = "{:.1f}"
+
+[facts."corpus.reward_one"]
+kind = "json"
+file = "manifests/t0.meta.json"
+path = "quality.reward_one_runs"
+format = "{:,}"
+
+# ---------------------------------------------------------------- T1 corpus
+
+[facts."t1.commit"]
+kind = "json"
+file = "manifests/t1.meta.json"
+path = "commit"
+truncate = 7
+guard = false
+
+[facts."t1.tasks"]
+kind = "json"
+file = "manifests/t1.meta.json"
+path = "tasks"
+format = "{:,}"
+
+[facts."t1.files"]
+kind = "json"
+file = "manifests/t1.meta.json"
+path = "files"
+format = "{:,}"
+
+[facts."t1.size_mb"]
+kind = "json"
+file = "manifests/t1.meta.json"
+path = "bytes"
+scale = 1e-6
+format = "{:.2f}"
+
+# ------------------------------------------------------ reference netlists
+
+[facts."p1.netlists"]
+kind = "call"
+call = "adb_docs.metrics:netlist_stats"
+key = "netlists"
+
+[facts."p1.literal"]
+kind = "call"
+call = "adb_docs.metrics:netlist_stats"
+key = "literal"
+
+[facts."p1.knobs_median"]
+kind = "call"
+call = "adb_docs.metrics:netlist_stats"
+key = "knobs_median"
+format = "{:.1f}"
+
+[facts."p1.knobs_p90"]
+kind = "call"
+call = "adb_docs.metrics:netlist_stats"
+key = "knobs_p90"
+format = "{:.0f}"
+
+[facts."p1.knobs_max"]
+kind = "call"
+call = "adb_docs.metrics:netlist_stats"
+key = "knobs_max"
+format = "{:.0f}"
+
+# ------------------------------------------------------------ corner asset
+
+[facts."corners.tasks"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "tasks"
+
+[facts."corners.points"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "points"
+format = "{:,}"
+
+[facts."corners.needs_review"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "needs_review"
+
+[facts."corners.unresolved"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "unresolved"
+
+[facts."corners.coverage_tasks"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "coverage_tasks"
+
+[facts."corners.coverage_subsets"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "coverage_subsets"
+
+[facts."corners.prov_verifier"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "provenance.verifier"
+
+[facts."corners.prov_instruction"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "provenance.instruction"
+
+[facts."corners.prov_deck"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "provenance.deck"
+
+[facts."corners.prov_assumption"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "provenance.assumption"
+
+[facts."corners.kind_cartesian"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "kind.cartesian"
+
+[facts."corners.kind_rows"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "kind.rows"
+
+[facts."corners.kind_pairs"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "kind.pairs"
+
+[facts."corners.kind_none"]
+kind = "call"
+call = "adb_docs.metrics:corners_stats"
+key = "kind.none"
+
+# -------------------------------------------------------- official verifier
+
+[facts."verifier.tasks"]
+kind = "json"
+file = "results/verifier/summary.json"
+path = "tasks"
+
+[facts."verifier.passed"]
+kind = "json"
+file = "results/verifier/summary.json"
+path = "status_counts.passed"
+
+[facts."verifier.sims"]
+kind = "json"
+file = "results/verifier/summary.json"
+path = "ngspice_runs"
+format = "{:,}"
+
+[facts."verifier.sweep_wall"]
+kind = "json"
+file = "results/verifier/summary.json"
+path = "sweep_wall_s"
+format = "{:.1f}"
+
+[facts."verifier.wall_sum"]
+kind = "json"
+file = "results/verifier/summary.json"
+path = "wall_clock_sum_s"
+format = "{:,.1f}"
+
+[facts."verifier.task_wall_sum"]
+kind = "json"
+file = "results/verifier/summary.json"
+path = "task_wall_sum_s"
+format = "{:,.1f}"
+
+[facts."verifier.cpu_mean"]
+kind = "json"
+file = "results/verifier/summary.json"
+path = "cpu_busy_percent.mean"
+format = "{:.1f}"
+
+[facts."verifier.cpu_peak"]
+kind = "json"
+file = "results/verifier/summary.json"
+path = "cpu_busy_percent.peak"
+format = "{:.1f}"
+
+[facts."verifier.gates"]
+kind = "json"
+file = "results/reconcile.json"
+path = "summary.run_gates"
+format = "{:,}"
+
+[facts."verifier.ref_metrics"]
+kind = "json"
+file = "results/reconcile.json"
+path = "summary.reference_metrics"
+
+[facts."verifier.ref_sims"]
+kind = "json"
+file = "results/reconcile.json"
+path = "summary.reference_ngspice_runs"
+format = "{:,}"
+
+[facts."verifier.within_tol"]
+kind = "json"
+file = "results/reconcile.json"
+path = "summary.values_within_tolerance"
+
+[facts."verifier.printed"]
+kind = "json"
+file = "results/reconcile.json"
+path = "summary.values_matched_by_printed_precision"
+
+[facts."verifier.by_status"]
+kind = "json"
+file = "results/reconcile.json"
+path = "summary.values_matched_by_gate_status"
+
+[facts."verifier.status_matches"]
+kind = "json"
+file = "results/reconcile.json"
+path = "summary.status_matches"
+
+[facts."verifier.mismatches"]
+kind = "json"
+file = "results/reconcile.json"
+path = "summary.mismatch_count"
+
+[facts."verifier.wall_rel"]
+kind = "json"
+file = "results/reconcile.json"
+path = "summary.wall_mean_relative_difference"
+format = "{:.1%}"

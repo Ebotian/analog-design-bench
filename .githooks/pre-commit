@@ -1,0 +1,10 @@
+#!/bin/sh
+# Documentation gate.
+#
+# Every document in this repository is a rendered artifact: prose from
+# docs/src/, numbers resolved from committed JSON/TOML.  A stale document is a
+# claim the artifacts no longer support, so the commit stops here and prints
+# the one command that fixes it (`make docs`).
+set -e
+cd "$(git rev-parse --show-toplevel)"
+exec make -s docs-check
