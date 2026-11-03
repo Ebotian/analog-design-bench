@@ -76,8 +76,8 @@ make legality                      # 全部 T0 电路回放 → results/legality
 搜索建议，不是合法性。筛选实测：18 参数任务 444 次仿真压到
 12 维；232 参数任务 602 次仿真压到 15 维
 （预算优先：先粗组、后参数）。求解器把搜索与**全 PVT 验证**分开报告，验证失败时把最差角点回灌搜索集。
-OTA 在 ±20% 扰动后 3,276 次仿真仍差 CMRR -0.062：
-角点已对上，缺的是搜索能力，因此不判为通过。
+OTA 在 ±20% 扰动后 5,740 次仿真把 CMRR 补正（+0.047），
+但 gain 仍差 -0.003（39.88 dB vs 40），官方判分 4/7。
 
 评测跑在 `ghcr.io/arcadia-1/analog-arena-sky130-tools`（ngspice-46 + Sky130 PDK）里，
 每个 worker 一个常驻容器，deck 挂在 `/app`；缓存键是 `netlist + 渲染后的 deck + image id`。

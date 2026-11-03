@@ -21,7 +21,7 @@ from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any, Mapping, Sequence, TypedDict, cast
 
-from . import bench, evaluate, gates as gate_lib, params, screen
+from . import bench, cmaes, evaluate, gates as gate_lib, params, screen
 from .sim import Corner, SimBackend
 
 SCHEMA_VERSION = "adb-solve-1"
@@ -44,6 +44,9 @@ class SolveOptions(TypedDict, total=False):
     corners_count: int
     rounds: int
     feed_corners: int
+    algorithm: str
+    sigma: float
+    phase_split: float
 
 
 @dataclass(frozen=True)
@@ -64,6 +67,9 @@ class Settings:
     corners_count: int = 4
     rounds: int = 2
     feed_corners: int = 2
+    algorithm: str = "cma"
+    sigma: float = 0.35
+    phase_split: float = 0.3
 
     @classmethod
     def from_options(cls, options: SolveOptions | None) -> "Settings":
@@ -85,6 +91,9 @@ class Settings:
             corners_count=int(raw.get("corners_count", 4)),
             rounds=int(raw.get("rounds", 2)),
             feed_corners=int(raw.get("feed_corners", 2)),
+            algorithm=str(raw.get("algorithm", "cma")),
+            sigma=float(raw.get("sigma", 0.35)),
+            phase_split=float(raw.get("phase_split", 0.3)),
         )
 
 
@@ -272,6 +281,7 @@ def solve(
     reserve = rounds * len(validation_corners) * max(1, len(decks)) if validation_corners else 0
     search_budget = None if settings.budget is None else max(0, settings.budget - reserve)
     used = 0
+    blocked = False
     sims_to_feasible: int | None = None
     notes: list[str] = []
 
@@ -295,7 +305,7 @@ def solve(
         nominal = [nominal_corner] if nominal_corner is not None else search_corners
         # 40% of the search goes to cheap nominal work; the rest to the corners
         # that actually bind, seeded by whatever the cheap phase found.
-        phases = [(nominal, 0.4), (worst, 1.0)]
+        phases = [(nominal, settings.phase_split), (worst, 1.0)]
         search_corners = worst
     else:
         phases = [(search_corners, 1.0)]
@@ -329,6 +339,8 @@ def solve(
         used += spent
         return report, labelled, spent
 
+    baseline = spawn(reference)
+
     def init_population(size: int) -> list[_Candidate]:
         population = [spawn(reference)]
         for _ in range(size - 1):
@@ -349,7 +361,9 @@ def solve(
         phase_index: int,
         final_phase: bool = False,
     ) -> list[_Candidate]:
-        nonlocal gate_set, sims_to_feasible
+        nonlocal gate_set, sims_to_feasible, blocked
+        if settings.algorithm == "cma":
+            return evolve_cma(population, phase_corners, cap, phase_index, final_phase)
         cases = max(1, len(decks) * len(phase_corners))
         size = max(2, settings.population)
         if cap is not None:
@@ -381,6 +395,7 @@ def solve(
         while generation < settings.generations:
             generation += 1
             if cap is not None and used + cases > cap:
+                blocked = True
                 notes.append(f"phase {phase_index}: budget reached after {used} simulations")
                 break
             trials: list[_Candidate] = []
@@ -411,6 +426,73 @@ def solve(
             if spent == 0 and cap is not None and used >= cap:
                 break
         return population
+
+    def evolve_cma(
+        population: list[_Candidate],
+        phase_corners: Sequence[Corner],
+        cap: int | None,
+        phase_index: int,
+        final_phase: bool = False,
+    ) -> list[_Candidate]:
+        nonlocal gate_set, sims_to_feasible, blocked
+        cases = max(1, len(decks) * len(phase_corners))
+        for candidate in population:
+            candidate.loss = math.inf
+            candidate.margins = {}
+            candidate.feasible = False
+        if population:
+            report, labelled, _ = run_batch(population, phase_corners)
+            if gate_set is None:
+                gate_set = gate_lib.from_task(payload, _measure_names(report))
+                if not gate_set.gates:
+                    raise ValueError("no gate could be resolved from the task's public specs")
+                notes.extend(f"unresolved gate: {gate}" for gate in gate_set.unresolved)
+            _score_batch(report, labelled, gate_set, reference, settings, used)
+        scored = [candidate for candidate in population if candidate.loss < math.inf]
+        start = min(scored, key=lambda candidate: candidate.loss) if scored else baseline
+        if start.loss == math.inf:
+            report, labelled, _ = run_batch([start], phase_corners)
+            if gate_set is None:
+                gate_set = gate_lib.from_task(payload, _measure_names(report))
+                if not gate_set.gates:
+                    raise ValueError("no gate could be resolved from the task's public specs")
+            _score_batch(report, labelled, gate_set, reference, settings, used)
+        if gate_set is None:
+            raise ValueError("no gate could be resolved from the task's public specs")
+        mean = [math.log(start.values[name] / reference[name]) for name in settings.dims]
+        state = cmaes.CMA(dimension=len(settings.dims), sigma=settings.sigma, mean=mean)
+        elite = [start]
+        generation = 0
+        while generation < settings.generations:
+            generation += 1
+            lam = state.lam or 1
+            if cap is not None and used + cases * lam > cap:
+                blocked = True
+                notes.append(f"phase {phase_index}: budget reached after {used} simulations")
+                break
+            samples = state.ask(rng)
+            candidates = [
+                spawn(
+                    {
+                        name: reference[name] * math.exp(sample[index])
+                        for index, name in enumerate(settings.dims)
+                    }
+                )
+                for sample in samples
+            ]
+            report, labelled, spent = run_batch(candidates, phase_corners)
+            _score_batch(report, labelled, gate_set, reference, settings, used)
+            state.tell(samples, [candidate.loss for candidate in candidates])
+            elite.extend(candidates)
+            elite.sort(key=lambda candidate: candidate.loss)
+            elite = elite[: max(4, settings.population)]
+            best = elite[0]
+            history.append(_generation_row(len(history), elite, used, phase_index))
+            if final_phase and sims_to_feasible is None and best.feasible:
+                sims_to_feasible = used
+            if spent == 0 and cap is not None and used >= cap:
+                break
+        return elite
 
     def validate(candidate: _Candidate) -> dict[str, object]:
         nonlocal used, gate_set
@@ -515,16 +597,16 @@ def solve(
         "design_hash": evaluate.design_hash(netlist_text),
         "dims": list(settings.dims),
         "gates": gate_set.to_json(),
-        "reference": population[0].report(),
+        "reference": baseline.report(),
         "best": best.report(),
         "sims": used,
         "sims_run": used,
-        "sims_to_feasible": sims_to_feasible,
+        "sims_to_feasible": sims_to_feasible if best.feasible else None,
         "budget": {
             "limit": limit,
             "used": used,
             "remaining": None if limit is None else max(0, limit - used),
-            "exhausted": bool(limit is not None and used >= limit),
+            "exhausted": bool(blocked or (limit is not None and used >= limit)),
         },
         "search_corners": [dict(corner) for corner in search_corners],
         "validation": validation,
@@ -558,7 +640,7 @@ def _worst_corners(
     per_corner = {
         key: gate_lib.margins(gate_set, rows) for key, rows in grouped.items()
     }
-    chosen: list[str] = []
+    ranked_gates: list[tuple[float, str, str]] = []
     for gate in gate_set.gates:
         candidates = [
             (margins[gate.id], key)
@@ -567,7 +649,15 @@ def _worst_corners(
         ]
         if not candidates:
             continue
-        _, key = min(candidates)
+        margin, key = min(candidates)
+        if margin is None:
+            continue
+        ranked_gates.append((margin, gate.id, key))
+    # The corner that binds a *violated* gate is the one worth adding; a corner
+    # that merely holds the worst gain while gain already passes is not.
+    ranked_gates.sort(key=lambda item: (item[0], item[1]))
+    chosen: list[str] = []
+    for _, _, key in ranked_gates:
         if key not in chosen:
             chosen.append(key)
     remaining = sorted(

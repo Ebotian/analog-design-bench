@@ -128,7 +128,7 @@
     {
       "block": "plan/p3",
       "doc": "plan",
-      "end": 109,
+      "end": 112,
       "facts": [
         "p1.knobs_median",
         "screen.ota.dims",
@@ -139,7 +139,10 @@
         "screen.rcp.sims",
         "solve.ota.sims",
         "solve.ota.validation_cmrr",
-        "solve.ota.validation_corners"
+        "solve.ota.validation_corners",
+        "solve.ota.validation_gain",
+        "solve.ota.verifier_passed",
+        "solve.ota.verifier_total"
       ],
       "heading": "P3 — 筛选与求解（进行中：筛选已落地）",
       "line": 86,
@@ -154,10 +157,10 @@
     {
       "block": "plan/p4",
       "doc": "plan",
-      "end": 118,
+      "end": 121,
       "facts": [],
       "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
-      "line": 110,
+      "line": 113,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P4",
@@ -169,13 +172,13 @@
     {
       "block": "plan/p5",
       "doc": "plan",
-      "end": 141,
+      "end": 144,
       "facts": [
         "corpus.runs",
         "p1.netlists"
       ],
       "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
-      "line": 119,
+      "line": 122,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P5",
@@ -423,7 +426,10 @@
         "screen.rcp.params",
         "screen.rcp.sims",
         "solve.ota.sims",
-        "solve.ota.validation_cmrr"
+        "solve.ota.validation_cmrr",
+        "solve.ota.validation_gain",
+        "solve.ota.verifier_passed",
+        "solve.ota.verifier_total"
       ],
       "heading": "求解基建（P1–P3 筛选）",
       "line": 50,
@@ -702,7 +708,7 @@
     {
       "generated_by": null,
       "id": "plan",
-      "lines": 141,
+      "lines": 144,
       "path": "docs/PLAN.md",
       "source": "docs/src/plan.md",
       "tags": [
@@ -1342,7 +1348,7 @@
       "value": 602
     },
     "solve.ota.sims": {
-      "display": "3,276",
+      "display": "5,740",
       "extract": {
         "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
         "format": "{:,}",
@@ -1353,10 +1359,10 @@
         "plan/p3",
         "readme/p1-usage"
       ],
-      "value": 3276
+      "value": 5740
     },
     "solve.ota.validation_cmrr": {
-      "display": "-0.062",
+      "display": "+0.047",
       "extract": {
         "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
         "format": "{:+.3f}",
@@ -1367,7 +1373,7 @@
         "plan/p3",
         "readme/p1-usage"
       ],
-      "value": -0.06196399999999997
+      "value": 0.04662599999999997
     },
     "solve.ota.validation_corners": {
       "display": "27",
@@ -1380,6 +1386,46 @@
         "plan/p3"
       ],
       "value": 27
+    },
+    "solve.ota.validation_gain": {
+      "display": "-0.003",
+      "extract": {
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
+        "format": "{:+.3f}",
+        "kind": "json",
+        "path": "validation.margins.gain_40db"
+      },
+      "used_in": [
+        "plan/p3",
+        "readme/p1-usage"
+      ],
+      "value": -0.003015000000000079
+    },
+    "solve.ota.verifier_passed": {
+      "display": "4",
+      "extract": {
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-official.json",
+        "kind": "json",
+        "path": "summary.passed"
+      },
+      "used_in": [
+        "plan/p3",
+        "readme/p1-usage"
+      ],
+      "value": 4
+    },
+    "solve.ota.verifier_total": {
+      "display": "7",
+      "extract": {
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-official.json",
+        "kind": "json",
+        "path": "summary.tests"
+      },
+      "used_in": [
+        "plan/p3",
+        "readme/p1-usage"
+      ],
+      "value": 7
     },
     "t1.commit": {
       "display": "972f7cd",

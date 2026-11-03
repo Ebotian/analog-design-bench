@@ -368,6 +368,9 @@ def cmd_solve(args: argparse.Namespace) -> int:
         corners_count=args.corners_count,
         rounds=args.rounds,
         feed_corners=args.feed_corners,
+        algorithm=args.algorithm,
+        sigma=args.sigma,
+        phase_split=args.phase_split,
     )
     try:
         report = optimize.solve(
@@ -401,15 +404,17 @@ def cmd_solve(args: argparse.Namespace) -> int:
     validation = report["validation"]
     validated = isinstance(validation, dict) and not validation.get("skipped")
     accepted = bool(validation.get("feasible")) if validated else bool(best["feasible"])
+    # Write the best candidate even when it fails validation: refining from it
+    # (or handing it to the official verifier) is the normal next move.
+    changed = {
+        name: value
+        for name, value in best["values"].items()
+        if abs(value - design.by_id()[name].value) > 0
+    }
+    out_text = design.apply(changed) if changed else design.text
+    Path(args.candidate_out).write_text(out_text)
+    print(f"wrote {args.candidate_out} ({len(changed)} parameter(s) changed, accepted={accepted})")
     if accepted:
-        changed = {
-            name: value
-            for name, value in best["values"].items()
-            if abs(value - design.by_id()[name].value) > 0
-        }
-        out_text = design.apply(changed) if changed else design.text
-        Path(args.candidate_out).write_text(out_text)
-        print(f"wrote {args.candidate_out} ({len(changed)} parameter(s) changed)")
         return 0
     return 2 if report["sims"] else 3
 
@@ -531,6 +536,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="worst = one probe sweep, then the binding corners",
     )
     solve_parser.add_argument("--corners-count", type=int, default=3)
+    solve_parser.add_argument("--algorithm", choices=["cma", "de"], default="cma")
+    solve_parser.add_argument("--sigma", type=float, default=0.35, help="CMA initial step in log space")
+    solve_parser.add_argument("--phase-split", type=float, default=0.3, help="budget share for the nominal-corner phase")
     solve_parser.add_argument("--rounds", type=int, default=2, help="validation passes; failing corners are fed back")
     solve_parser.add_argument("--feed-corners", type=int, default=2, help="worst validation corners added per round")
     solve_parser.add_argument("--validate", choices=["all", "none"], default="all",

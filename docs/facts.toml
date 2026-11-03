@@ -391,6 +391,22 @@ file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json"
 path = "validation.margins.cmrr_50db"
 format = "{:+.3f}"
 
+[facts."solve.ota.validation_gain"]
+kind = "json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json"
+path = "validation.margins.gain_40db"
+format = "{:+.3f}"
+
+[facts."solve.ota.verifier_passed"]
+kind = "json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-official.json"
+path = "summary.passed"
+
+[facts."solve.ota.verifier_total"]
+kind = "json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-official.json"
+path = "summary.tests"
+
 [facts."solve.ota.validation_corners"]
 kind = "json"
 file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json"

@@ -92,14 +92,17 @@
   {{fact:screen.ota.dims}} 维；`sky130-regulated-charge-pump-*` {{fact:screen.rcp.params}} 个参数 /
   {{fact:screen.rcp.sims}} 次仿真 → {{fact:screen.rcp.dims}} 维（预算耗尽，结果部分且可续跑）。
   报告在 `results/screen/`。
-- **求解器（已落地）**：`adb-solve solve` 用 DE 在筛选维度上优化公开 spec 的归一化 worst-case
-  余量；损失 = `Σ softplus(-margin/τ)` + 失败惩罚 + 原设计正则；repair 只夹到搜索盒并回落到
-  合法值。三档精度共享一个预算：探针扫全角点 → 在 nominal 与绑定角点上分阶段搜索 → 用全部
-  {{fact:solve.ota.validation_corners}} 个角点验证；验证失败时把最差角点回灌搜索集再优化（cutting plane）。
-- **实测缺口**：OTA 参考解随机扰动 ±20% 后跑了 {{fact:solve.ota.sims}} 次仿真；搜索集与全 PVT
-  验证的 CMRR 余量已经一致（都是 {{fact:solve.ota.validation_cmrr}}，约 47 dB vs 50 dB），说明
-  **角点采样不再是瓶颈**，缺的是搜索能力——DE 在剩余预算内没补上这 3 dB。报告返回
-  `validation.feasible=false`；官方 `test.sh` 对同类结果也判 6/7。
+- **求解器（已落地）**：`adb-solve solve` 用 CMA-ES（`--algorithm cma|de`）在筛选维度上优化公开
+  spec 的归一化 worst-case 余量；损失 = `Σ softplus(-margin/τ)` + 失败惩罚 + 原设计正则；repair
+  只夹到搜索盒并回落到合法值。三档精度共享预算：探针扫全角点 → nominal 与绑定角点分阶段搜索
+  → 全部 {{fact:solve.ota.validation_corners}} 个角点验证；验证失败时把**违反 gate 的**角点回灌
+  搜索集再优化（cutting plane）。
+- **实测（OTA，±20% 扰动）**：{{fact:solve.ota.sims}} 次仿真把损失从 13.2 降到 2.0；CMRR 从
+  −0.095 补到 {{fact:solve.ota.validation_cmrr}}，但 gain 停在 {{fact:solve.ota.validation_gain}}
+  （39.88 dB vs 40 dB）。搜索集与验证余量此时完全一致，说明角点已不是瓶颈。官方 `test.sh` 在
+  该候选上 {{fact:solve.ota.verifier_passed}} / {{fact:solve.ota.verifier_total}}：gain 39.88 dB
+  失败（与本工具测量一致），cmrr/psrr 因 verifier 自己的 PVT 失败被标 blocked——代理量在那种
+  情况下不可靠，不能当作通过。
 - **待做**：把验证角点回灌搜索（cutting plane，角点集随设计移动）、相关性分组合并、
   层次参数化、CMA-ES/抛光、离散量取整、top-5 全 PVT 收口。
 - **完成标准**：sizing gym 上简单任务 ≥ 90% 恢复、困难任务 ≥ 30%，中位 sims-to-pass ≤ 1,500；

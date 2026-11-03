@@ -285,7 +285,9 @@ def _literal_problems(
             continue
         for name, spellings in guards.items():
             for spelling in spellings:
-                if spelling in line:
+                # Digit boundaries: "39.8" inside "39.88" is a different number.
+                pattern = re.compile(r"(?<![\d.])" + re.escape(spelling) + r"(?!\d)")
+                if pattern.search(line):
                     problems.append(
                         f"{source}:{index}: literal {spelling!r} should be {{{{fact:{name}}}}}"
                     )

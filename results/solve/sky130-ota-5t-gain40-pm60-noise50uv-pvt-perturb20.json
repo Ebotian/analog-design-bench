@@ -72,70 +72,70 @@
   },
   "reference": {
     "values": {
-      "ota_5t/XM3.l": 8.101802497830843e-07,
-      "ota_5t/XM4.l": 8.034873410718787e-07,
-      "ota_5t/XM1.w": 9.643031089985277e-05,
+      "ota_5t/XM3.l": 8.738641375419999e-07,
+      "ota_5t/XM4.l": 1.1171907490079999e-06,
+      "ota_5t/XM1.w": 9.82534756231e-05,
       "ota_5t/XM4.w": 5.15961882828e-05,
       "ota_5t/XM2.w": 8.693613024936e-05,
       "ota_5t/XM3.w": 5.89093729329e-05,
-      "ota_5t/XM2.l": 1.1081860944479474e-06,
-      "ota_5t/XM1.l": 1.4918788085242713e-06,
-      "ota_5t/XM4.nf": 16.266789741310493,
-      "ota_5t/XM3.nf": 6.780717702317591,
-      "ota_5t/XM1.nf": 9.454349579659512,
-      "ota_5t/XM2.nf": 7.699264839930288
+      "ota_5t/XM2.l": 9.8626002804e-07,
+      "ota_5t/XM1.l": 9.809518214039998e-07,
+      "ota_5t/XM4.nf": 7.3708840404,
+      "ota_5t/XM3.nf": 8.4156247047,
+      "ota_5t/XM1.nf": 14.0362108033,
+      "ota_5t/XM2.nf": 12.41944717848
     },
     "margins": {
-      "gain_40db": 0.01881749999999993,
-      "ugb_100mhz": 0.04206,
-      "phase_margin_60deg": 0.1611566666666666,
-      "power_0p5mw": 0.20462280000000005,
-      "noise_50uvrms": 0.19508459999999997,
-      "cmrr_50db": -0.056678,
-      "psrr_30db": 0.18486666666666665
+      "gain_40db": 0.046387499999999984,
+      "ugb_100mhz": -0.05957,
+      "phase_margin_60deg": 0.2279299999999999,
+      "power_0p5mw": 0.205896,
+      "noise_50uvrms": 0.20106239999999992,
+      "cmrr_50db": -0.8417404,
+      "psrr_30db": -0.2905366666666667
     },
-    "loss": 2.71283,
+    "loss": 13.242872,
     "feasible": false,
     "failures": 0,
-    "regularization": 0.115147
+    "regularization": 0.001634
   },
   "best": {
     "values": {
-      "ota_5t/XM3.l": 7.475432396721493e-07,
-      "ota_5t/XM4.l": 6.952285892633599e-07,
-      "ota_5t/XM1.w": 7.745409349438051e-05,
-      "ota_5t/XM4.w": 5.15961882828e-05,
+      "ota_5t/XM3.l": 7.264635314869752e-07,
+      "ota_5t/XM4.l": 7.95761167435275e-07,
+      "ota_5t/XM1.w": 9.82534756231e-05,
+      "ota_5t/XM4.w": 5.134672457937524e-05,
       "ota_5t/XM2.w": 8.693613024936e-05,
-      "ota_5t/XM3.w": 5.89093729329e-05,
-      "ota_5t/XM2.l": 1.0074979219627583e-06,
-      "ota_5t/XM1.l": 8.829032735523133e-07,
-      "ota_5t/XM4.nf": 14.390467483536053,
-      "ota_5t/XM3.nf": 6.182552586998667,
-      "ota_5t/XM1.nf": 5.827136574878978,
-      "ota_5t/XM2.nf": 16.93174393016567
+      "ota_5t/XM3.w": 4.024170951495914e-05,
+      "ota_5t/XM2.l": 7.295778393223104e-07,
+      "ota_5t/XM1.l": 7.770258878003036e-07,
+      "ota_5t/XM4.nf": 6.135875806798354,
+      "ota_5t/XM3.nf": 16.364286521944447,
+      "ota_5t/XM1.nf": 43.188557695848544,
+      "ota_5t/XM2.nf": 11.833879387421993
     },
     "margins": {
-      "gain_40db": 0.002907500000000063,
-      "ugb_100mhz": 0.16545,
-      "phase_margin_60deg": 0.19365833333333338,
-      "power_0p5mw": 0.20456240000000006,
-      "noise_50uvrms": 0.17307019999999992,
-      "cmrr_50db": -0.06196399999999997,
-      "psrr_30db": 0.18950000000000009
+      "gain_40db": -0.003015000000000079,
+      "ugb_100mhz": 0.2784,
+      "phase_margin_60deg": 0.1681250000000001,
+      "power_0p5mw": 0.20388700000000004,
+      "noise_50uvrms": 0.1958462,
+      "cmrr_50db": 0.04662599999999997,
+      "psrr_30db": 0.1563633333333333
     },
-    "loss": 2.470609,
+    "loss": 1.96489,
     "feasible": false,
     "failures": 0,
-    "regularization": 0.145741
+    "regularization": 0.188991
   },
-  "sims": 3276,
-  "sims_run": 3276,
+  "sims": 5740,
+  "sims_run": 5740,
   "sims_to_feasible": null,
   "budget": {
-    "limit": 3600,
-    "used": 3276,
-    "remaining": 324,
-    "exhausted": false
+    "limit": 6000,
+    "used": 5740,
+    "remaining": 260,
+    "exhausted": true
   },
   "search_corners": [
     {
@@ -157,16 +157,6 @@
       "process": "ff",
       "supply": 1.62,
       "temperature": 125.0
-    },
-    {
-      "process": "tt",
-      "supply": 1.62,
-      "temperature": -40.0
-    },
-    {
-      "process": "tt",
-      "supply": 1.62,
-      "temperature": 27.0
     }
   ],
   "validation": {
@@ -174,13 +164,13 @@
     "corners": 27,
     "sims": 0,
     "margins": {
-      "gain_40db": 0.002907500000000063,
-      "ugb_100mhz": 0.16545,
-      "phase_margin_60deg": 0.19365833333333338,
-      "power_0p5mw": 0.20456240000000006,
-      "noise_50uvrms": 0.17307019999999992,
-      "cmrr_50db": -0.06196399999999997,
-      "psrr_30db": 0.18950000000000009
+      "gain_40db": -0.003015000000000079,
+      "ugb_100mhz": 0.2784,
+      "phase_margin_60deg": 0.1681250000000001,
+      "power_0p5mw": 0.20388700000000004,
+      "noise_50uvrms": 0.1958462,
+      "cmrr_50db": 0.04662599999999997,
+      "psrr_30db": 0.1563633333333333
     },
     "failures": 0,
     "feasible": false,
@@ -193,13 +183,33 @@
       {
         "process": "ss",
         "supply": 1.62,
-        "temperature": -40.0
+        "temperature": 125.0
       }
     ]
   },
   "validation_rounds": [
     {
       "round": 0,
+      "sims": 92,
+      "skipped": false,
+      "corners": 27,
+      "failures": 0,
+      "feasible": false,
+      "worst": [
+        {
+          "process": "ff",
+          "supply": 1.62,
+          "temperature": -40.0
+        },
+        {
+          "process": "ss",
+          "supply": 1.62,
+          "temperature": 125.0
+        }
+      ]
+    },
+    {
+      "round": 1,
       "sims": 0,
       "skipped": false,
       "corners": 27,
@@ -214,312 +224,850 @@
         {
           "process": "ss",
           "supply": 1.62,
-          "temperature": -40.0
+          "temperature": 125.0
         }
       ]
     }
   ],
-  "wall_seconds": 242.247,
+  "wall_seconds": 456.225,
   "history": [
     {
       "generation": 0,
       "phase": 0,
       "sims": 0,
-      "best_loss": 3.875057,
-      "best_margin": -0.24219,
+      "best_loss": 2.595036,
+      "best_margin": -0.003264,
       "feasible": 0
     },
     {
       "generation": 1,
       "phase": 0,
       "sims": 0,
-      "best_loss": 3.875057,
-      "best_margin": -0.24219,
+      "best_loss": 2.595036,
+      "best_margin": -0.003264,
       "feasible": 0
     },
     {
       "generation": 2,
       "phase": 0,
       "sims": 0,
-      "best_loss": 3.875057,
-      "best_margin": -0.24219,
-      "feasible": 0
+      "best_loss": 2.114491,
+      "best_margin": 0.0092,
+      "feasible": 1
     },
     {
       "generation": 3,
       "phase": 0,
       "sims": 0,
-      "best_loss": 2.49817,
-      "best_margin": -0.076262,
-      "feasible": 0
+      "best_loss": 1.887281,
+      "best_margin": 0.00118,
+      "feasible": 2
     },
     {
       "generation": 4,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 1
+      "best_loss": 1.871312,
+      "best_margin": -0.000505,
+      "feasible": 2
     },
     {
       "generation": 5,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 1
+      "best_loss": 1.871312,
+      "best_margin": -0.000505,
+      "feasible": 2
     },
     {
       "generation": 6,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 1
+      "best_loss": 1.636801,
+      "best_margin": 0.01144,
+      "feasible": 4
     },
     {
       "generation": 7,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 2
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 5
     },
     {
       "generation": 8,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 4
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 6
     },
     {
       "generation": 9,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 5
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 6
     },
     {
       "generation": 10,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 5
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 7
     },
     {
       "generation": 11,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 6
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 7
     },
     {
       "generation": 12,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 6
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 7
     },
     {
       "generation": 13,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 6
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 8
     },
     {
       "generation": 14,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 6
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 9
     },
     {
       "generation": 15,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 7
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 9
     },
     {
       "generation": 16,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 7
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 10
     },
     {
       "generation": 17,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 7
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 10
     },
     {
       "generation": 18,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 7
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 10
     },
     {
       "generation": 19,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 8
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 11
     },
     {
       "generation": 20,
       "phase": 0,
       "sims": 0,
-      "best_loss": 1.265195,
-      "best_margin": 0.007007,
-      "feasible": 8
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 11
     },
     {
       "generation": 21,
-      "phase": 1,
-      "sims": 264,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 11
     },
     {
       "generation": 22,
-      "phase": 1,
-      "sims": 264,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 11
     },
     {
       "generation": 23,
-      "phase": 1,
-      "sims": 264,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.322184,
+      "best_margin": 0.023365,
+      "feasible": 11
     },
     {
       "generation": 24,
-      "phase": 1,
-      "sims": 432,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.300427,
+      "best_margin": 0.027605,
+      "feasible": 10
     },
     {
       "generation": 25,
-      "phase": 1,
-      "sims": 528,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.300427,
+      "best_margin": 0.027605,
+      "feasible": 10
     },
     {
       "generation": 26,
-      "phase": 1,
-      "sims": 768,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.300427,
+      "best_margin": 0.027605,
+      "feasible": 11
     },
     {
       "generation": 27,
-      "phase": 1,
-      "sims": 1008,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.300427,
+      "best_margin": 0.027605,
+      "feasible": 11
     },
     {
       "generation": 28,
-      "phase": 1,
-      "sims": 1296,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.300427,
+      "best_margin": 0.027605,
+      "feasible": 12
     },
     {
       "generation": 29,
-      "phase": 1,
-      "sims": 1512,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.300427,
+      "best_margin": 0.027605,
+      "feasible": 11
     },
     {
       "generation": 30,
-      "phase": 1,
-      "sims": 1752,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.300427,
+      "best_margin": 0.027605,
+      "feasible": 11
     },
     {
       "generation": 31,
-      "phase": 1,
-      "sims": 1968,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.300427,
+      "best_margin": 0.027605,
+      "feasible": 11
     },
     {
       "generation": 32,
-      "phase": 1,
-      "sims": 2232,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.279364,
+      "best_margin": 0.008427,
+      "feasible": 11
     },
     {
       "generation": 33,
-      "phase": 1,
-      "sims": 2520,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.279364,
+      "best_margin": 0.008427,
+      "feasible": 11
     },
     {
       "generation": 34,
-      "phase": 1,
-      "sims": 2784,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.273592,
+      "best_margin": 0.015747,
+      "feasible": 12
     },
     {
       "generation": 35,
-      "phase": 1,
-      "sims": 3048,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
-      "feasible": 0
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249623,
+      "best_margin": 0.02139,
+      "feasible": 12
     },
     {
       "generation": 36,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249623,
+      "best_margin": 0.02139,
+      "feasible": 12
+    },
+    {
+      "generation": 37,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249623,
+      "best_margin": 0.02139,
+      "feasible": 12
+    },
+    {
+      "generation": 38,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 39,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 40,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 41,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 42,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 43,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 44,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 45,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 46,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 47,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 48,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 49,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 50,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 51,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 52,
+      "phase": 0,
+      "sims": 44,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 53,
+      "phase": 0,
+      "sims": 88,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 54,
+      "phase": 0,
+      "sims": 132,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 55,
+      "phase": 0,
+      "sims": 176,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 56,
+      "phase": 0,
+      "sims": 220,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 57,
+      "phase": 0,
+      "sims": 264,
+      "best_loss": 1.249222,
+      "best_margin": 0.015725,
+      "feasible": 12
+    },
+    {
+      "generation": 58,
+      "phase": 0,
+      "sims": 308,
+      "best_loss": 1.239326,
+      "best_margin": 0.0146,
+      "feasible": 12
+    },
+    {
+      "generation": 59,
+      "phase": 0,
+      "sims": 352,
+      "best_loss": 1.239326,
+      "best_margin": 0.0146,
+      "feasible": 12
+    },
+    {
+      "generation": 60,
+      "phase": 0,
+      "sims": 396,
+      "best_loss": 1.238189,
+      "best_margin": 0.011715,
+      "feasible": 12
+    },
+    {
+      "generation": 61,
+      "phase": 0,
+      "sims": 440,
+      "best_loss": 1.235536,
+      "best_margin": 0.011365,
+      "feasible": 12
+    },
+    {
+      "generation": 62,
+      "phase": 0,
+      "sims": 484,
+      "best_loss": 1.228178,
+      "best_margin": 0.014605,
+      "feasible": 12
+    },
+    {
+      "generation": 63,
+      "phase": 0,
+      "sims": 528,
+      "best_loss": 1.228178,
+      "best_margin": 0.014605,
+      "feasible": 12
+    },
+    {
+      "generation": 64,
+      "phase": 0,
+      "sims": 572,
+      "best_loss": 1.220967,
+      "best_margin": 0.014837,
+      "feasible": 12
+    },
+    {
+      "generation": 65,
+      "phase": 0,
+      "sims": 616,
+      "best_loss": 1.220967,
+      "best_margin": 0.014837,
+      "feasible": 12
+    },
+    {
+      "generation": 66,
+      "phase": 0,
+      "sims": 660,
+      "best_loss": 1.220967,
+      "best_margin": 0.014837,
+      "feasible": 12
+    },
+    {
+      "generation": 67,
+      "phase": 0,
+      "sims": 704,
+      "best_loss": 1.220967,
+      "best_margin": 0.014837,
+      "feasible": 12
+    },
+    {
+      "generation": 68,
+      "phase": 0,
+      "sims": 748,
+      "best_loss": 1.2182,
+      "best_margin": 0.01581,
+      "feasible": 12
+    },
+    {
+      "generation": 69,
+      "phase": 0,
+      "sims": 792,
+      "best_loss": 1.2182,
+      "best_margin": 0.01581,
+      "feasible": 12
+    },
+    {
+      "generation": 70,
+      "phase": 0,
+      "sims": 836,
+      "best_loss": 1.216551,
+      "best_margin": 0.01326,
+      "feasible": 12
+    },
+    {
+      "generation": 71,
+      "phase": 0,
+      "sims": 880,
+      "best_loss": 1.216551,
+      "best_margin": 0.01326,
+      "feasible": 12
+    },
+    {
+      "generation": 72,
+      "phase": 0,
+      "sims": 924,
+      "best_loss": 1.216551,
+      "best_margin": 0.01326,
+      "feasible": 12
+    },
+    {
+      "generation": 73,
+      "phase": 0,
+      "sims": 968,
+      "best_loss": 1.216551,
+      "best_margin": 0.01326,
+      "feasible": 12
+    },
+    {
+      "generation": 74,
+      "phase": 0,
+      "sims": 1012,
+      "best_loss": 1.216551,
+      "best_margin": 0.01326,
+      "feasible": 12
+    },
+    {
+      "generation": 75,
+      "phase": 0,
+      "sims": 1056,
+      "best_loss": 1.215421,
+      "best_margin": 0.01315,
+      "feasible": 12
+    },
+    {
+      "generation": 76,
+      "phase": 0,
+      "sims": 1100,
+      "best_loss": 1.214035,
+      "best_margin": 0.010848,
+      "feasible": 12
+    },
+    {
+      "generation": 77,
+      "phase": 0,
+      "sims": 1144,
+      "best_loss": 1.213559,
+      "best_margin": 0.014488,
+      "feasible": 12
+    },
+    {
+      "generation": 78,
+      "phase": 0,
+      "sims": 1188,
+      "best_loss": 1.213559,
+      "best_margin": 0.014488,
+      "feasible": 12
+    },
+    {
+      "generation": 79,
+      "phase": 0,
+      "sims": 1232,
+      "best_loss": 1.213559,
+      "best_margin": 0.014488,
+      "feasible": 12
+    },
+    {
+      "generation": 80,
       "phase": 1,
-      "sims": 3276,
-      "best_loss": 2.470609,
-      "best_margin": -0.061964,
+      "sims": 1600,
+      "best_loss": 2.311498,
+      "best_margin": -0.035802,
+      "feasible": 0
+    },
+    {
+      "generation": 81,
+      "phase": 1,
+      "sims": 1776,
+      "best_loss": 2.311498,
+      "best_margin": -0.035802,
+      "feasible": 0
+    },
+    {
+      "generation": 82,
+      "phase": 1,
+      "sims": 1952,
+      "best_loss": 2.311498,
+      "best_margin": -0.035802,
+      "feasible": 0
+    },
+    {
+      "generation": 83,
+      "phase": 1,
+      "sims": 2128,
+      "best_loss": 2.311498,
+      "best_margin": -0.035802,
+      "feasible": 0
+    },
+    {
+      "generation": 84,
+      "phase": 1,
+      "sims": 2304,
+      "best_loss": 2.311498,
+      "best_margin": -0.035802,
+      "feasible": 0
+    },
+    {
+      "generation": 85,
+      "phase": 1,
+      "sims": 2480,
+      "best_loss": 2.311498,
+      "best_margin": -0.035802,
+      "feasible": 0
+    },
+    {
+      "generation": 86,
+      "phase": 1,
+      "sims": 2656,
+      "best_loss": 2.311498,
+      "best_margin": -0.035802,
+      "feasible": 0
+    },
+    {
+      "generation": 87,
+      "phase": 1,
+      "sims": 2832,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 88,
+      "phase": 1,
+      "sims": 3008,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 89,
+      "phase": 1,
+      "sims": 3184,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 90,
+      "phase": 1,
+      "sims": 3360,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 91,
+      "phase": 1,
+      "sims": 3536,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 92,
+      "phase": 1,
+      "sims": 3712,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 93,
+      "phase": 1,
+      "sims": 3888,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 94,
+      "phase": 1,
+      "sims": 4064,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 95,
+      "phase": 1,
+      "sims": 4240,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 96,
+      "phase": 1,
+      "sims": 4416,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 97,
+      "phase": 1,
+      "sims": 4592,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 98,
+      "phase": 1,
+      "sims": 4768,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 99,
+      "phase": 1,
+      "sims": 4944,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 100,
+      "phase": 1,
+      "sims": 5120,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 101,
+      "phase": 1,
+      "sims": 5296,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 102,
+      "phase": 1,
+      "sims": 5472,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
+      "feasible": 0
+    },
+    {
+      "generation": 103,
+      "phase": 1,
+      "sims": 5648,
+      "best_loss": 1.898057,
+      "best_margin": -0.003015,
       "feasible": 0
     }
   ],
   "notes": [
-    "phase 1: budget reached after 3276 simulations",
+    "phase 1: budget reached after 5648 simulations",
+    "round 0: fed 1 validation corner(s) back into the search",
+    "phase 11: budget reached after 5740 simulations",
     "validation failed on corners already being searched"
   ]
 }
