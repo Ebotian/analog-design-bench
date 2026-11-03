@@ -114,6 +114,11 @@
   XM3/XM4，并排除 3.3:1 的偏置镜像 XM5/XM6。但 seed 3 上官方仍是 4/7：gain 落在 39.9 dB（差 0.1 dB），
   前置 gate 失败把 CMRR/PSRR 一起 block 掉。也就是说**还没轮到检验对称假设**——候选正好贴在 gain 的
   测量边界上（我们测刚刚过线，官方 39.9 dB）。这说明残差已经进入“代理量精度”级别，不是搜索能力问题。
+- **安全垫（safety band）**：校准不再只用一个点——参考解 + 若干扰动设计 + 已有 gym 候选，每个都由官方判分给出
+  真实 worst 值，逐 gate 取 |我们−官方| 的最大值作为带，目标函数改为 `margin ≥ band`。OTA 上 5 个可信 gate 的带
+  只有 {{fact:calib.band_gain}} 量级（proxy 在这些设计上确实一致），CMRR 的带是 {{fact:calib.band_cmrr}}。
+  **但这套带只和它的样本一样好**：在另一个候选上 gain 仍有 0.35% 的偏差（官方 39.9 dB vs 我们刚过线），
+  所以正确的积累方式是让每次 gym 运行的官方判分都回灌成观测，而不是一次性估一个数。
 - **单次演示仍能全过**：seed 11 线性扰动 → 官方 {{fact:solve.ota.verifier_passed}}/{{fact:solve.ota.verifier_total}}、
   reward 1.0（{{fact:solve.ota.final_sims}} 次仿真，gain 余量 {{fact:solve.ota.validation_gain}}、CMRR
   {{fact:solve.ota.validation_cmrr}}，`results/solve/`），说明链路完整，只是不稳健。

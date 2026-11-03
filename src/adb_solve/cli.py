@@ -299,6 +299,18 @@ def cmd_screen(args: argparse.Namespace) -> int:
     return 0
 
 
+def _calibration(task: str | None) -> dict[str, object]:
+    if not task:
+        return {}
+    for root in (Path.cwd(), Path(__file__).resolve().parents[2]):
+        path = root / "results" / "calibration" / f"{task}.json"
+        if path.exists():
+            payload = json.loads(path.read_text())
+            if isinstance(payload, dict):
+                return cast(dict[str, object], payload)
+    return {}
+
+
 def _trusted_gates(task: str | None) -> list[str]:
     """Gates whose proxy matches the oracle, from results/calibration/<task>.json."""
     if not task:
@@ -368,6 +380,9 @@ def cmd_solve(args: argparse.Namespace) -> int:
         memory=None if args.memory == "unlimited" else args.memory,
     )
     trusted = _trusted_gates(args.task)
+    calibration = _calibration(args.task)
+    raw_bands = cast(dict[str, object], calibration.get("bands") or {})
+    bands = {str(key): float(cast(float, value)) for key, value in raw_bands.items()}
     options = optimize.SolveOptions(
         dims=dims,
         population=args.population,
@@ -389,6 +404,7 @@ def cmd_solve(args: argparse.Namespace) -> int:
         phase_split=args.phase_split,
         polish=args.polish == "auto",
         trusted_gates=trusted,
+        bands=bands,
         symmetry=args.symmetry == "auto",
     )
     try:

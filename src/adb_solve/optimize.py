@@ -47,6 +47,7 @@ class SolveOptions(TypedDict, total=False):
     algorithm: str
     sigma: float
     trusted_gates: list[str]
+    bands: dict[str, float]
     symmetry: bool
     phase_split: float
     polish: bool
@@ -74,6 +75,7 @@ class Settings:
     algorithm: str = "cma"
     sigma: float = 0.35
     trusted_gates: tuple[str, ...] = ()
+    bands: Mapping[str, float] = field(default_factory=dict)
     symmetry: bool = True
     phase_split: float = 0.3
     polish: bool = True
@@ -101,6 +103,7 @@ class Settings:
             algorithm=str(raw.get("algorithm", "cma")),
             sigma=float(raw.get("sigma", 0.35)),
             trusted_gates=tuple(raw.get("trusted_gates", ())),
+            bands=dict(raw.get("bands", {})),
             symmetry=bool(raw.get("symmetry", True)),
             phase_split=float(raw.get("phase_split", 0.3)),
             polish=bool(raw.get("polish", True)),
@@ -216,6 +219,14 @@ def _score(
     settings: Settings,
 ) -> tuple[dict[str, float | None], int, float, gate_lib.Score, bool]:
     margins = gate_lib.margins(gate_set, rows)
+    if settings.bands:
+        # Require margin >= band, not margin >= 0: the band is the measured
+        # disagreement between this proxy and the oracle, so a candidate that
+        # only just clears zero here is not a candidate that passes there.
+        margins = {
+            gate: (None if value is None else value - float(settings.bands.get(gate, 0.0)))
+            for gate, value in margins.items()
+        }
     failures = gate_lib.failed_cases(rows)
     regularization = _regularization(values, reference)
     value = gate_lib.score(

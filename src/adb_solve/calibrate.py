@@ -15,6 +15,7 @@ reported rather than optimised.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -77,6 +78,37 @@ def compare(payload: Mapping[str, Any], gate_set: gate_lib.GateSet, rows: Sequen
         verdict = "ok" if abs(difference) <= PUBLICATION_RELATIVE_PRECISION else "proxy-mismatch"
         checks.append(GateCheck(gate.id, mine, theirs, difference, verdict))
     return checks
+
+
+OFFICIAL_VALUE = None  # parsed lazily below
+
+
+def parse_official(message: str) -> tuple[float, str] | None:
+    """``worst=41.42dB at ff/...`` -> (41.42, 'dB'); None when blocked/absent."""
+    match = re.search(r"worst=([-+]?[0-9]*\.?[0-9]+)\s*([A-Za-zµ°%/]+)\s+at", message)
+    if match is None:
+        return None
+    unit = match.group(2)
+    if unit.startswith("u") and len(unit) > 1:
+        unit = "u" + unit[1:]
+    return float(match.group(1)), unit
+
+
+def band_from(pairs: Sequence[tuple[str, float]], thresholds: Mapping[str, float]) -> dict[str, float]:
+    """Per-gate safety band: the largest relative disagreement with the oracle.
+
+    ``pairs`` are (gate id, |ours - official|) observations across designs.  The
+    band is expressed in the same normalised units as the margins, so the
+    objective can require ``margin >= band`` instead of ``margin >= 0``.
+    """
+    worst: dict[str, float] = {}
+    for gate, difference in pairs:
+        worst[gate] = max(worst.get(gate, 0.0), difference)
+    return {
+        gate: worst[gate] / abs(float(thresholds[gate]) or 1.0)
+        for gate in worst
+        if gate in thresholds
+    }
 
 
 def mismatched(checks: Sequence[GateCheck]) -> list[str]:

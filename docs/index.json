@@ -128,8 +128,10 @@
     {
       "block": "plan/p3",
       "doc": "plan",
-      "end": 133,
+      "end": 138,
       "facts": [
+        "calib.band_cmrr",
+        "calib.band_gain",
         "calib.cmrr_rel",
         "calib.psrr_rel",
         "gym.3200_best_worst_margin",
@@ -166,10 +168,10 @@
     {
       "block": "plan/p4",
       "doc": "plan",
-      "end": 142,
+      "end": 147,
       "facts": [],
       "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
-      "line": 134,
+      "line": 139,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P4",
@@ -181,13 +183,13 @@
     {
       "block": "plan/p5",
       "doc": "plan",
-      "end": 165,
+      "end": 170,
       "facts": [
         "corpus.runs",
         "p1.netlists"
       ],
       "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
-      "line": 143,
+      "line": 148,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P5",
@@ -715,7 +717,7 @@
     {
       "generated_by": null,
       "id": "plan",
-      "lines": 165,
+      "lines": 170,
       "path": "docs/PLAN.md",
       "source": "docs/src/plan.md",
       "tags": [
@@ -779,6 +781,32 @@
     }
   ],
   "facts": {
+    "calib.band_cmrr": {
+      "display": "0.323",
+      "extract": {
+        "file": "results/calibration/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json",
+        "format": "{:.3f}",
+        "kind": "json",
+        "path": "bands.cmrr_50db"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": 0.323108
+    },
+    "calib.band_gain": {
+      "display": "0.000123",
+      "extract": {
+        "file": "results/calibration/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json",
+        "format": "{:.6f}",
+        "kind": "json",
+        "path": "bands.gain_40db"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": 0.000123
+    },
     "calib.cmrr_rel": {
       "display": "+0.112",
       "extract": {

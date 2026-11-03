@@ -472,3 +472,17 @@ file = "results/calibration/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json"
 path = "gates.6.relative_difference"
 format = "{:+.3f}"
 
+
+# --------------------------------------------------------- safety bands
+
+[facts."calib.band_gain"]
+kind = "json"
+file = "results/calibration/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json"
+path = "bands.gain_40db"
+format = "{:.6f}"
+
+[facts."calib.band_cmrr"]
+kind = "json"
+file = "results/calibration/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json"
+path = "bands.cmrr_50db"
+format = "{:.3f}"

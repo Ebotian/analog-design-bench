@@ -63,5 +63,15 @@
   "proxy_mismatch": [
     "cmrr_50db",
     "psrr_30db"
-  ]
+  ],
+  "bands": {
+    "cmrr_50db": 0.323108,
+    "gain_40db": 0.000123,
+    "noise_50uvrms": 7.9e-05,
+    "phase_margin_60deg": 7.3e-05,
+    "power_0p5mw": 9.9e-05,
+    "psrr_30db": 0.199813,
+    "ugb_100mhz": 0.00045
+  },
+  "band_observations": 45
 }
