@@ -260,3 +260,15 @@ def test_evaluate_many_shares_one_budget_and_tags_variants(tmp_path):
     assert len(report["design_hashes"]) == 2
     assert report["results"][0]["variant"] == "base"
     assert report["results"][0]["case"].startswith("base|")
+
+
+def test_cache_relabels_rows_for_a_new_batch(tmp_path):
+    """A cached row belongs to the netlist+deck, not to the batch that first
+    wrote it; re-using it under a new label must not lose it."""
+    deck = bench.Deck("tb.spi", bench.render(DECK, {"cl": "5p"}))
+    first = evaluate.evaluate_many({"base": "netlist"}, [deck], [{}], _options(tmp_path), FakeBackend())
+    second = evaluate.evaluate_many({"validate": "netlist"}, [deck], [{}], _options(tmp_path), FakeBackend())
+    assert first["results"][0]["case"].startswith("base|")
+    assert second["results"][0]["case"].startswith("validate|")
+    assert second["results"][0]["variant"] == "validate"
+    assert second["cache"]["hits"] == 1

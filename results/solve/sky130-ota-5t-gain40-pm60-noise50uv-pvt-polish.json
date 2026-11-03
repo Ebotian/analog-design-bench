@@ -1,0 +1,332 @@
+{
+  "schema_version": "adb-solve-1",
+  "design_hash": "1193af7ab89e5ac5e1ce8f12c43e2cece8fc70227e41de07f0ae816dd141d402",
+  "dims": [
+    "ota_5t/XM3.l",
+    "ota_5t/XM4.l",
+    "ota_5t/XM1.w",
+    "ota_5t/XM4.w",
+    "ota_5t/XM2.w",
+    "ota_5t/XM3.w",
+    "ota_5t/XM2.l",
+    "ota_5t/XM1.l",
+    "ota_5t/XM4.nf",
+    "ota_5t/XM3.nf",
+    "ota_5t/XM1.nf",
+    "ota_5t/XM2.nf"
+  ],
+  "gates": {
+    "gates": [
+      {
+        "id": "gain_40db",
+        "measure": "dc_gain_db",
+        "threshold": 40.0,
+        "higher_is_better": true,
+        "unit": "dB"
+      },
+      {
+        "id": "ugb_100mhz",
+        "measure": "ugb_hz",
+        "threshold": 100000000.0,
+        "higher_is_better": true,
+        "unit": "Hz"
+      },
+      {
+        "id": "phase_margin_60deg",
+        "measure": "phase_margin_deg",
+        "threshold": 60.0,
+        "higher_is_better": true,
+        "unit": "deg"
+      },
+      {
+        "id": "power_0p5mw",
+        "measure": "power_w",
+        "threshold": 0.0005,
+        "higher_is_better": false,
+        "unit": "W"
+      },
+      {
+        "id": "noise_50uvrms",
+        "measure": "input_noise_vrms",
+        "threshold": 4.9999999999999996e-05,
+        "higher_is_better": false,
+        "unit": "V"
+      },
+      {
+        "id": "cmrr_50db",
+        "measure": "cmrr_db_1khz",
+        "threshold": 50.0,
+        "higher_is_better": true,
+        "unit": ""
+      },
+      {
+        "id": "psrr_30db",
+        "measure": "psrr_db_1khz",
+        "threshold": 30.0,
+        "higher_is_better": true,
+        "unit": ""
+      }
+    ],
+    "unresolved": [],
+    "source": "referenceResult.metrics"
+  },
+  "reference": {
+    "values": {
+      "ota_5t/XM3.l": 7.26463531487e-07,
+      "ota_5t/XM4.l": 7.95761167435e-07,
+      "ota_5t/XM1.w": 9.82534756231e-05,
+      "ota_5t/XM4.w": 4.29511306476e-05,
+      "ota_5t/XM2.w": 8.283715571194e-05,
+      "ota_5t/XM3.w": 4.024170951496e-05,
+      "ota_5t/XM2.l": 7.29577839322e-07,
+      "ota_5t/XM1.l": 7.770258878e-07,
+      "ota_5t/XM4.nf": 6.1358758068,
+      "ota_5t/XM3.nf": 16.36428652194,
+      "ota_5t/XM1.nf": 43.18855769585,
+      "ota_5t/XM2.nf": 11.83387938742
+    },
+    "margins": {
+      "gain_40db": 0.0005950000000000344,
+      "ugb_100mhz": 0.23095,
+      "phase_margin_60deg": 0.2280266666666667,
+      "power_0p5mw": 0.20519419999999997,
+      "noise_50uvrms": 0.1926985999999999,
+      "cmrr_50db": -0.43513199999999996,
+      "psrr_30db": 0.3424833333333334
+    },
+    "loss": 440.667319,
+    "feasible": false,
+    "failures": 0,
+    "regularization": 0.002851
+  },
+  "best": {
+    "values": {
+      "ota_5t/XM3.l": 7.420992083175413e-07,
+      "ota_5t/XM4.l": 8.010213672690752e-07,
+      "ota_5t/XM1.w": 0.00010157809552180842,
+      "ota_5t/XM4.w": 4.29511306476e-05,
+      "ota_5t/XM2.w": 8.283715571194e-05,
+      "ota_5t/XM3.w": 3.715819032445981e-05,
+      "ota_5t/XM2.l": 7.610874211616378e-07,
+      "ota_5t/XM1.l": 7.909926428594103e-07,
+      "ota_5t/XM4.nf": 6.0138899289749865,
+      "ota_5t/XM3.nf": 16.671054141188893,
+      "ota_5t/XM1.nf": 46.37998000369319,
+      "ota_5t/XM2.nf": 11.243820849080285
+    },
+    "margins": {
+      "gain_40db": 0.0012950000000000017,
+      "ugb_100mhz": 0.2466,
+      "phase_margin_60deg": 0.19638666666666657,
+      "power_0p5mw": 0.20393340000000001,
+      "noise_50uvrms": 0.19652199999999997,
+      "cmrr_50db": 0.0038939999999999487,
+      "psrr_30db": 0.1288499999999999
+    },
+    "loss": 2.070534,
+    "feasible": true,
+    "failures": 0,
+    "regularization": 0.004393
+  },
+  "sims": 808,
+  "sims_run": 808,
+  "sims_to_feasible": null,
+  "budget": {
+    "limit": 2600,
+    "used": 808,
+    "remaining": 1792,
+    "exhausted": false
+  },
+  "search_corners": [
+    {
+      "process": "ff",
+      "supply": 1.62,
+      "temperature": -40.0
+    },
+    {
+      "process": "ss",
+      "supply": 1.62,
+      "temperature": 125.0
+    },
+    {
+      "process": "ss",
+      "supply": 1.62,
+      "temperature": -40.0
+    },
+    {
+      "process": "ff",
+      "supply": 1.62,
+      "temperature": 27.0
+    }
+  ],
+  "validation": {
+    "skipped": false,
+    "corners": 27,
+    "sims": 88,
+    "margins": {
+      "gain_40db": 0.0012950000000000017,
+      "ugb_100mhz": 0.2466,
+      "phase_margin_60deg": 0.19638666666666657,
+      "power_0p5mw": 0.20393340000000001,
+      "noise_50uvrms": 0.19652199999999997,
+      "cmrr_50db": 0.0038939999999999487,
+      "psrr_30db": 0.1288499999999999
+    },
+    "failures": 0,
+    "feasible": true,
+    "worst": [
+      {
+        "process": "ff",
+        "supply": 1.62,
+        "temperature": -40.0
+      },
+      {
+        "process": "ss",
+        "supply": 1.62,
+        "temperature": 27.0
+      }
+    ]
+  },
+  "validation_rounds": [
+    {
+      "round": 0,
+      "sims": 0,
+      "skipped": false,
+      "corners": 27,
+      "failures": 0,
+      "feasible": false,
+      "worst": [
+        {
+          "process": "ss",
+          "supply": 1.62,
+          "temperature": 27.0
+        },
+        {
+          "process": "ff",
+          "supply": 1.62,
+          "temperature": -40.0
+        }
+      ]
+    },
+    {
+      "round": "polish",
+      "sims": 88,
+      "skipped": false,
+      "corners": 27,
+      "failures": 0,
+      "feasible": true,
+      "worst": [
+        {
+          "process": "ff",
+          "supply": 1.62,
+          "temperature": -40.0
+        },
+        {
+          "process": "ss",
+          "supply": 1.62,
+          "temperature": 27.0
+        }
+      ]
+    }
+  ],
+  "polish": {
+    "passes": 3,
+    "sims": 720,
+    "reserve": 2492,
+    "improved": true,
+    "dims": [
+      "ota_5t/XM3.nf",
+      "ota_5t/XM1.nf",
+      "ota_5t/XM1.l",
+      "ota_5t/XM4.nf",
+      "ota_5t/XM2.nf",
+      "ota_5t/XM2.l"
+    ],
+    "effort": {
+      "ota_5t/XM3.nf": 0.104087,
+      "ota_5t/XM1.nf": 0.032515,
+      "ota_5t/XM1.l": 0.019445,
+      "ota_5t/XM4.nf": 0.012657,
+      "ota_5t/XM2.nf": -0.02744,
+      "ota_5t/XM2.l": -1.938415
+    },
+    "steps": {
+      "ota_5t/XM3.nf": 0.011204,
+      "ota_5t/XM1.nf": 0.011453,
+      "ota_5t/XM1.l": 0.011174,
+      "ota_5t/XM4.nf": 0.011494,
+      "ota_5t/XM2.nf": 0.003542,
+      "ota_5t/XM2.l": 0.024584
+    }
+  },
+  "wall_seconds": 57.913,
+  "history": [
+    {
+      "generation": 0,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.172484,
+      "best_margin": 0.00151,
+      "feasible": 2
+    },
+    {
+      "generation": 1,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.159615,
+      "best_margin": 0.000943,
+      "feasible": 5
+    },
+    {
+      "generation": 2,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.159615,
+      "best_margin": 0.000943,
+      "feasible": 11
+    },
+    {
+      "generation": 3,
+      "phase": 0,
+      "sims": 0,
+      "best_loss": 1.159507,
+      "best_margin": 0.003518,
+      "feasible": 12
+    },
+    {
+      "generation": 4,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 9.655203,
+      "best_margin": -0.00752,
+      "feasible": 0
+    },
+    {
+      "generation": 5,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 9.655203,
+      "best_margin": -0.00752,
+      "feasible": 0
+    },
+    {
+      "generation": 6,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 9.655203,
+      "best_margin": -0.00752,
+      "feasible": 0
+    },
+    {
+      "generation": 7,
+      "phase": 1,
+      "sims": 0,
+      "best_loss": 3.285276,
+      "best_margin": -0.001207,
+      "feasible": 0
+    }
+  ],
+  "notes": [
+    "round 0: fed 1 validation corner(s) back into the search"
+  ]
+}

@@ -128,7 +128,7 @@
     {
       "block": "plan/p3",
       "doc": "plan",
-      "end": 112,
+      "end": 113,
       "facts": [
         "p1.knobs_median",
         "screen.ota.dims",
@@ -137,7 +137,9 @@
         "screen.rcp.dims",
         "screen.rcp.params",
         "screen.rcp.sims",
-        "solve.ota.sims",
+        "solve.ota.final_sims",
+        "solve.ota.polish_sims",
+        "solve.ota.search_sims",
         "solve.ota.validation_cmrr",
         "solve.ota.validation_corners",
         "solve.ota.validation_gain",
@@ -157,10 +159,10 @@
     {
       "block": "plan/p4",
       "doc": "plan",
-      "end": 121,
+      "end": 122,
       "facts": [],
       "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
-      "line": 113,
+      "line": 114,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P4",
@@ -172,13 +174,13 @@
     {
       "block": "plan/p5",
       "doc": "plan",
-      "end": 144,
+      "end": 145,
       "facts": [
         "corpus.runs",
         "p1.netlists"
       ],
       "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
-      "line": 122,
+      "line": 123,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P5",
@@ -425,9 +427,8 @@
         "screen.rcp.dims",
         "screen.rcp.params",
         "screen.rcp.sims",
-        "solve.ota.sims",
-        "solve.ota.validation_cmrr",
-        "solve.ota.validation_gain",
+        "solve.ota.final_sims",
+        "solve.ota.search_sims",
         "solve.ota.verifier_passed",
         "solve.ota.verifier_total"
       ],
@@ -708,7 +709,7 @@
     {
       "generated_by": null,
       "id": "plan",
-      "lines": 144,
+      "lines": 145,
       "path": "docs/PLAN.md",
       "source": "docs/src/plan.md",
       "tags": [
@@ -1347,7 +1348,34 @@
       ],
       "value": 602
     },
-    "solve.ota.sims": {
+    "solve.ota.final_sims": {
+      "display": "808",
+      "extract": {
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "sims"
+      },
+      "used_in": [
+        "plan/p3",
+        "readme/p1-usage"
+      ],
+      "value": 808
+    },
+    "solve.ota.polish_sims": {
+      "display": "720",
+      "extract": {
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "polish.sims"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": 720
+    },
+    "solve.ota.search_sims": {
       "display": "5,740",
       "extract": {
         "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
@@ -1362,23 +1390,22 @@
       "value": 5740
     },
     "solve.ota.validation_cmrr": {
-      "display": "+0.047",
+      "display": "+0.004",
       "extract": {
-        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json",
         "format": "{:+.3f}",
         "kind": "json",
         "path": "validation.margins.cmrr_50db"
       },
       "used_in": [
-        "plan/p3",
-        "readme/p1-usage"
+        "plan/p3"
       ],
-      "value": 0.04662599999999997
+      "value": 0.0038939999999999487
     },
     "solve.ota.validation_corners": {
       "display": "27",
       "extract": {
-        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json",
         "kind": "json",
         "path": "validation.corners"
       },
@@ -1388,21 +1415,20 @@
       "value": 27
     },
     "solve.ota.validation_gain": {
-      "display": "-0.003",
+      "display": "+0.001",
       "extract": {
-        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json",
         "format": "{:+.3f}",
         "kind": "json",
         "path": "validation.margins.gain_40db"
       },
       "used_in": [
-        "plan/p3",
-        "readme/p1-usage"
+        "plan/p3"
       ],
-      "value": -0.003015000000000079
+      "value": 0.0012950000000000017
     },
     "solve.ota.verifier_passed": {
-      "display": "4",
+      "display": "7",
       "extract": {
         "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-official.json",
         "kind": "json",
@@ -1412,7 +1438,7 @@
         "plan/p3",
         "readme/p1-usage"
       ],
-      "value": 4
+      "value": 7
     },
     "solve.ota.verifier_total": {
       "display": "7",

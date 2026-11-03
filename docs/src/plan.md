@@ -97,12 +97,13 @@
   只夹到搜索盒并回落到合法值。三档精度共享预算：探针扫全角点 → nominal 与绑定角点分阶段搜索
   → 全部 {{fact:solve.ota.validation_corners}} 个角点验证；验证失败时把**违反 gate 的**角点回灌
   搜索集再优化（cutting plane）。
-- **实测（OTA，±20% 扰动）**：{{fact:solve.ota.sims}} 次仿真把损失从 13.2 降到 2.0；CMRR 从
-  −0.095 补到 {{fact:solve.ota.validation_cmrr}}，但 gain 停在 {{fact:solve.ota.validation_gain}}
-  （39.88 dB vs 40 dB）。搜索集与验证余量此时完全一致，说明角点已不是瓶颈。官方 `test.sh` 在
-  该候选上 {{fact:solve.ota.verifier_passed}} / {{fact:solve.ota.verifier_total}}：gain 39.88 dB
-  失败（与本工具测量一致），cmrr/psrr 因 verifier 自己的 PVT 失败被标 blocked——代理量在那种
-  情况下不可靠，不能当作通过。
+- **实测（OTA，±20% 扰动 → 官方 7/7）**：{{fact:solve.ota.search_sims}} 次仿真把损失从 13.2 降到 2.0，
+  CMRR 补正，但 gain 停在 {{fact:solve.ota.validation_gain}}（39.88 dB）。随后 **polish** 用
+  {{fact:solve.ota.final_sims}} 次仿真（其中 {{fact:solve.ota.polish_sims}} 次坐标扫描）收口：先对**所有**维度
+  做一次粗步长扫描、按实测损失下降排序，再对前几名做变步长坐标搜索——选哪些维度、步长多大全部由测量决定，
+  没有任何按任务写死的先验。最终全 {{fact:solve.ota.validation_corners}} 角点余量转正（gain
+  {{fact:solve.ota.validation_gain}}、CMRR {{fact:solve.ota.validation_cmrr}}），官方 `test.sh`
+  {{fact:solve.ota.verifier_passed}} / {{fact:solve.ota.verifier_total}}、reward 1.0。
 - **待做**：把验证角点回灌搜索（cutting plane，角点集随设计移动）、相关性分组合并、
   层次参数化、CMA-ES/抛光、离散量取整、top-5 全 PVT 收口。
 - **完成标准**：sizing gym 上简单任务 ≥ 90% 恢复、困难任务 ≥ 30%，中位 sims-to-pass ≤ 1,500；

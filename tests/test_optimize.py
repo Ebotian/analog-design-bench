@@ -193,3 +193,33 @@ def test_validation_that_passes_immediately_stops_after_one_round(tmp_path: Path
     )
     assert len(report["validation_rounds"]) == 1
     assert report["validation_rounds"][0]["feasible"] in {True, False}
+
+
+TWO_GATES = {
+    "referenceResult": {
+        "metrics": [
+            {"id": "gain_40db", "specification": "gain 40 dB ≥ 40 dB"},
+            {"id": "cmrr_50db", "specification": "cmrr 50 dB ≥ 50 dB"},
+        ]
+    }
+}
+
+
+def test_worst_corner_prefers_the_violated_gate() -> None:
+    """Corner X holds the worst gain (but gain passes); corner Y violates CMRR.
+    Y must come first, or the cutter adds a corner that decides nothing."""
+    from adb_solve import gates
+
+    corner_x = {"process": "tt", "temperature": 27.0}
+    corner_y = {"process": "ss", "temperature": 125.0}
+    report = {
+        "results": [
+            {"variant": "v", "corner": corner_x, "status": "ok",
+             "measures": {"m0_dc_gain_db": 41.0, "m0_cmrr_db_1khz": 60.0}},
+            {"variant": "v", "corner": corner_y, "status": "ok",
+             "measures": {"m0_dc_gain_db": 48.0, "m0_cmrr_db_1khz": 45.0}},
+        ]
+    }
+    gate_set = gates.from_task(TWO_GATES, {"m0_dc_gain_db", "m0_cmrr_db_1khz"})
+    worst = optimize._worst_corners(report, gate_set, 1, [corner_x, corner_y])
+    assert worst == [corner_y]

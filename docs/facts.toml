@@ -379,21 +379,33 @@ format = "{:,}"
 
 # ------------------------------------------------------------ P3 solving
 
-[facts."solve.ota.sims"]
+[facts."solve.ota.search_sims"]
 kind = "json"
 file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json"
 path = "sims"
 format = "{:,}"
 
+[facts."solve.ota.polish_sims"]
+kind = "json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json"
+path = "polish.sims"
+format = "{:,}"
+
+[facts."solve.ota.final_sims"]
+kind = "json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json"
+path = "sims"
+format = "{:,}"
+
 [facts."solve.ota.validation_cmrr"]
 kind = "json"
-file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json"
 path = "validation.margins.cmrr_50db"
 format = "{:+.3f}"
 
 [facts."solve.ota.validation_gain"]
 kind = "json"
-file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json"
 path = "validation.margins.gain_40db"
 format = "{:+.3f}"
 
@@ -409,5 +421,5 @@ path = "summary.tests"
 
 [facts."solve.ota.validation_corners"]
 kind = "json"
-file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json"
 path = "validation.corners"

@@ -1,45 +1,45 @@
 {
-  "source": "official test.sh on results/solve/sky130-ota-5t-...-perturb20.json best candidate",
+  "source": "official test.sh on results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json best candidate",
   "summary": {
     "tests": 7,
-    "passed": 4,
-    "failed": 3
+    "passed": 7,
+    "failed": 0
   },
   "tests": [
     {
       "name": "gain_40db",
-      "status": "failed",
-      "message": "worst=39.88dB at ff/1.62V/+125C (min 40dB)"
+      "status": "passed",
+      "message": "worst=40.05dB at ff/1.62V/+125C (min 40dB)"
     },
     {
       "name": "ugb_100mhz",
       "status": "passed",
-      "message": "worst=127.8MHz at ss/1.62V/+125C (min 100MHz)"
+      "message": "worst=124.7MHz at ss/1.62V/+125C (min 100MHz)"
     },
     {
       "name": "phase_margin_60deg",
       "status": "passed",
-      "message": "worst=70.09deg at ss/1.98V/-40C (min 60deg)"
+      "message": "worst=71.78deg at ss/1.98V/-40C (min 60deg)"
     },
     {
       "name": "power_0p5mw",
       "status": "passed",
-      "message": "worst=0.3981mW at ff/1.98V/+125C (max 0.5mW)"
+      "message": "worst=0.398mW at ff/1.98V/+125C (max 0.5mW)"
     },
     {
       "name": "noise_50uvrms",
       "status": "passed",
-      "message": "worst=40.21uVrms at ss/1.62V/+125C (max 50uVrms)"
+      "message": "worst=40.17uVrms at ss/1.62V/+125C (max 50uVrms)"
     },
     {
       "name": "cmrr_50db",
-      "status": "failed",
-      "message": "blocked: OP+AC/noise PVT failed"
+      "status": "passed",
+      "message": "worst=68.69dB at tt/1.80V/+27C (min 50dB)"
     },
     {
       "name": "psrr_30db",
-      "status": "failed",
-      "message": "blocked: OP+AC/noise PVT failed"
+      "status": "passed",
+      "message": "worst=38.41dB at ss/1.62V/+125C (min 30dB)"
     }
   ]
 }

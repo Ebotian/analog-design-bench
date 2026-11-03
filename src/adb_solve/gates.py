@@ -205,14 +205,24 @@ def loss(
     lambda_fail: float = 2.0,
     regularization: float = 0.0,
     lambda_reg: float = 0.05,
+    violation_weight: float = 1000.0,
 ) -> float:
-    """Scalar objective: violated margins, failed simulations, distance from x0."""
+    """Scalar objective: worst violation first, then softplus, failures, distance.
+
+    The worst violated margin is weighted so heavily that comparing two
+    infeasible candidates is lexicographic in it.  Without that term, a sum of
+    softplus makes -0.003 and -0.007 look almost equal and the last gate never
+    gets the search's attention.
+    """
     total = 0.0
+    worst_violation = 0.0
     for margin in gate_margins.values():
         if margin is None:
             total += 1.0  # unmeasured is not a pass
             continue
+        worst_violation = max(worst_violation, -margin)
         total += _softplus(-margin / tau)
+    total += violation_weight * worst_violation
     total += lambda_fail * failures
     total += lambda_reg * regularization
     return total
