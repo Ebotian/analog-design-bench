@@ -46,6 +46,7 @@ def main() -> int:
     recovered = [r for r in runs if r["official_passed"] and r["official_passed"] == r["official_total"]]
     verified = [r for r in runs if r["official_total"]]
     worst = [r["worst_margin"] for r in runs if r["worst_margin"] is not None]
+    feasible_sims = [r["sims_to_feasible"] for r in recovered if r["sims_to_feasible"]]
     summary = {
         "schema": 2,
         "runs": len(runs),
@@ -53,11 +54,8 @@ def main() -> int:
         "verified": len(verified),
         "search_feasible": sum(1 for r in runs if r["validation_feasible"]),
         "tasks": sorted({r["task"] for r in runs}),
-        "median_sims_to_feasible": statistics.median(
-            [r["sims_to_feasible"] for r in recovered if r["sims_to_feasible"]]
-        )
-        if recovered
-        else None,
+        "median_sims_to_feasible": statistics.median(feasible_sims) if feasible_sims else None,
+        "median_sims_of_recovered": statistics.median([r["sims"] for r in recovered]) if recovered else None,
         "best_worst_margin": round(max(worst), 4) if worst else None,
         "median_worst_margin": round(statistics.median(worst), 4) if worst else None,
         "runs_detail": runs,

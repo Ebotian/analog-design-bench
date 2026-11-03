@@ -132,7 +132,8 @@
       "facts": [
         "gym.3200_best_worst_margin",
         "gym.3200_median_worst_margin",
-        "gym.best_worst_margin",
+        "gym.3200_recovered",
+        "gym.3200_runs",
         "gym.median_worst_margin",
         "gym.old_median_worst_margin",
         "gym.recovered",
@@ -1140,6 +1141,30 @@
       ],
       "value": -0.1276
     },
+    "gym.3200_recovered": {
+      "display": "1",
+      "extract": {
+        "file": "results/gym/ladder-3200/summary.json",
+        "kind": "json",
+        "path": "recovered"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": 1
+    },
+    "gym.3200_runs": {
+      "display": "4",
+      "extract": {
+        "file": "results/gym/ladder-3200/summary.json",
+        "kind": "json",
+        "path": "runs"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": 4
+    },
     "gym.best_worst_margin": {
       "display": "-0.0165",
       "extract": {
@@ -1149,7 +1174,6 @@
         "path": "best_worst_margin"
       },
       "used_in": [
-        "plan/p3",
         "readme/p1-usage"
       ],
       "value": -0.0165

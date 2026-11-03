@@ -124,7 +124,10 @@ def main() -> int:
             candidate = args.out / f"{task}-s{seed}.spi"
             candidate.write_text(best)
             official: dict[str, Any] = {"skipped": True}
-            if not args.no_verifier and bool(report["validation"].get("feasible")):
+            # The verifier is the judge, so it scores *every* candidate.  Using
+            # our own proxy to decide whether to ask would have hidden a 7/7
+            # candidate that our CMRR proxy wrongly rejected.
+            if not args.no_verifier:
                 run = verifier.run(packages[task], candidate, workdir=ROOT / ".work" / "gym-verify", timeout=900)
                 artifacts = run.artifacts
                 official = {

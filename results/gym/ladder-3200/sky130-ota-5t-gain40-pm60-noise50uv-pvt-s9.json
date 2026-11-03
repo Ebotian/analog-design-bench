@@ -8,7 +8,11 @@
   "validation_feasible": false,
   "polish_runs": 2,
   "official": {
-    "skipped": true
+    "skipped": false,
+    "status": "failed",
+    "passed": 6,
+    "total": 7,
+    "reward": 0.857142857143
   },
   "wall_s": 225.9,
   "report": {
