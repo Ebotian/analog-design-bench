@@ -239,6 +239,38 @@ class Score:
         }
 
 
+def expected_counts(gate_set: GateSet, rows: Sequence[Mapping[str, Any]]) -> dict[str, int]:
+    """How many measurements each gate produced in a *complete* evaluation.
+
+    Taken from the baseline run: it defines which decks emit which measure, so
+    a candidate that loses a whole deck (or a corner) is detected instead of
+    silently scoring on the surviving subset.
+    """
+    counts: dict[str, int] = {}
+    for row in rows:
+        for name in (row.get("measures") or {}):
+            base = base_of(str(name))
+            counts[base] = counts.get(base, 0) + 1
+    return {gate.id: counts.get(gate.measure, 0) for gate in gate_set.gates}
+
+
+def coverage_complete(
+    gate_set: GateSet,
+    rows: Sequence[Mapping[str, Any]],
+    expected: Mapping[str, int],
+) -> bool:
+    counts: dict[str, int] = {}
+    for row in rows:
+        for name in (row.get("measures") or {}):
+            base = base_of(str(name))
+            counts[base] = counts.get(base, 0) + 1
+    for gate in gate_set.gates:
+        want = expected.get(gate.id, 0)
+        if want and counts.get(gate.measure, 0) < want:
+            return False
+    return True
+
+
 def score(
     gate_margins: Mapping[str, float | None],
     failures: int,
@@ -246,6 +278,7 @@ def score(
     lambda_fail: float = 2.0,
     regularization: float = 0.0,
     lambda_reg: float = 0.05,
+    incomplete: bool = False,
 ) -> Score:
     """Lexicographic score; ``tau`` is the margin scale at which a violation hurts.
 
@@ -263,9 +296,12 @@ def score(
         total += _softplus(-margin / tau)
     total += lambda_fail * failures
     total += lambda_reg * regularization
-    if unmeasured:
-        # Treat a missing measurement as a violation larger than any real one:
-        # it compares worse than any measured candidate, by construction.
+    # A failed simulation means unmeasured gates; incomplete coverage means some
+    # gates were measured over fewer cases than the baseline.  Neither is a
+    # pass, and both belong in the first (lexicographic) field -- otherwise a
+    # candidate with positive margins and a dead deck outranks a fully measured
+    # candidate that misses one gate.
+    if unmeasured or incomplete or failures:
         return Score(violated=True, worst_violation=math.inf, total=total)
     return Score(violated=worst > 0.0, worst_violation=worst, total=total)
 

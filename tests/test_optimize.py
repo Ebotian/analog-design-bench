@@ -92,7 +92,7 @@ def test_solve_reaches_a_feasible_point_and_reports_sims(tmp_path: Path) -> None
         GainFake(),
         _options(tmp_path),
     )
-    assert report["best"]["feasible"] is True
+    assert report["best"]["proxy_feasible"] is True
     assert report["sims_to_feasible"] is not None
     assert report["sims_to_feasible"] <= 200
     assert report["dims"] == ["amp/XM1.w"]
@@ -112,7 +112,7 @@ def test_solve_degrades_gracefully_when_the_budget_is_tiny(tmp_path: Path) -> No
     )
     assert report["budget"]["exhausted"] is True
     assert report["sims"] <= 3
-    assert report["best"]["feasible"] in {True, False}
+    assert report["best"]["proxy_feasible"] in {True, False}
 
 
 def test_solve_rejects_unknown_dimensions(tmp_path: Path) -> None:
@@ -176,8 +176,33 @@ def test_validation_corners_are_fed_back_and_the_loop_closes(tmp_path: Path) -> 
     )
     assert len(report["validation_rounds"]) >= 2
     assert any("fed" in note for note in report["notes"])
-    assert report["validation"]["feasible"] is True
+    assert report["validation"]["proxy_feasible"] is True
     assert report["validation"]["margins"]["gain_40db"] >= 0
+
+
+def test_feed_back_round_gets_its_own_budget_slice(tmp_path: Path) -> None:
+    """Round 0 spends its share; round 1 must still get a slice of its own.
+
+    Passing a remainder as an absolute cap used to starve the feed-back round
+    (it compares against the cumulative spend), so this asserts the round
+    actually ran generations rather than breaking at the first budget check.
+    """
+    report = optimize.solve(
+        NETLIST,
+        _deck(),
+        [CORNERS_TWO[0]],
+        PAYLOAD,
+        {
+            "dims": ["amp/XM1.w"], "population": 8, "generations": 12, "seed": 5,
+            "budget": 900, "rounds": 2, "feed_corners": 1, "bound": 0.8,
+        },
+        CornerGainFake(),
+        _options(tmp_path),
+        validation_corners=CORNERS_TWO,
+    )
+    assert len(report["validation_rounds"]) >= 2
+    phases = {int(row["phase"]) for row in report["history"]}
+    assert any(phase >= 10 for phase in phases), phases
 
 
 def test_validation_that_passes_immediately_stops_after_one_round(tmp_path: Path) -> None:
@@ -192,7 +217,7 @@ def test_validation_that_passes_immediately_stops_after_one_round(tmp_path: Path
         validation_corners=CORNERS_TWO,
     )
     assert len(report["validation_rounds"]) == 1
-    assert report["validation_rounds"][0]["feasible"] in {True, False}
+    assert report["validation_rounds"][0]["proxy_feasible"] in {True, False}
 
 
 TWO_GATES = {
@@ -259,7 +284,7 @@ XM4 vout nleft vdd vdd sky130_fd_pr__pfet_01v8 l=1 w=64 nf=8
         _deck(),
         CORNERS,
         PAYLOAD,
-        {"dims": ["amp/XM1.w", "amp/XM2.w"], "population": 6, "generations": 2, "seed": 1, "budget": 40},
+        {"dims": ["amp/XM1.w", "amp/XM2.w"], "population": 6, "generations": 2, "seed": 1, "budget": 40, "symmetry": True},
         GainFake(),
         _options(tmp_path),
     )

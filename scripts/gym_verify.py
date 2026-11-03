@@ -38,7 +38,7 @@ def main() -> int:
                 "total": artifacts.tests_total if artifacts else 0,
                 "reward": artifacts.reward if artifacts else 0.0,
             }
-            payload["validation_feasible"] = bool(payload.get("validation_feasible"))
+            payload["proxy_feasible"] = bool(payload.get("proxy_feasible", payload.get("validation_feasible")))
             record.write_text(json.dumps(payload, indent=2) + "\n")
             print(candidate.name, payload["official"])
     return 0

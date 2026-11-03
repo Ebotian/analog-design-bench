@@ -14,7 +14,6 @@ Writes/updates results/calibration/<task>.json with a "bands" section.
 from __future__ import annotations
 
 import argparse
-import glob
 import json
 import random
 import sys
@@ -24,6 +23,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from adb_solve import bench, calibrate, corners as corner_asset, evaluate, gates, params, verifier  # noqa: E402
+
+
+def ctrf_of(task: str) -> Path:
+    return ROOT / ".work" / "calib-verify" / task / "logs" / "verifier" / "new-ctrf.json"
 
 
 def our_values(task: str, text: str, decks, corners, jobs: int) -> dict[str, float]:
@@ -37,9 +40,11 @@ def our_values(task: str, text: str, decks, corners, jobs: int) -> dict[str, flo
     return {gate: value for gate, value in calibrate.worst_values(gate_set, report["results"]).items() if value is not None}
 
 
-def official_values(logs_glob: str) -> dict[str, tuple[float, str]]:
-    path = sorted(glob.glob(logs_glob))[-1]
-    ctrf = json.loads(Path(path).read_text())
+def official_values(ctrf_path: Path) -> dict[str, tuple[float, str]]:
+    """Read the CTRF of *this* run; never glob a shared work directory."""
+    if not ctrf_path.exists():
+        return {}
+    ctrf = json.loads(ctrf_path.read_text())
     out = {}
     for test in ctrf["results"]["tests"]:
         parsed = calibrate.parse_official(str(test.get("message") or ""))
@@ -84,8 +89,9 @@ def main() -> int:
         path = ROOT / ".work" / "calib-designs" / f"{task}-{index}.spi"
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text)
+        ctrf_of(task).unlink(missing_ok=True)
         run = verifier.run(packages[task], path, workdir=ROOT / ".work" / "calib-verify", timeout=900)
-        official = official_values(str(ROOT / ".work" / "calib-verify" / "*" / "logs" / "verifier" / "new-ctrf.json"))
+        official = official_values(ctrf_of(task))
         mine = our_values(task, text, decks, corners, args.jobs)
         for gate, (value, unit) in official.items():
             if mine.get(gate) is None:
@@ -99,8 +105,9 @@ def main() -> int:
             if not candidate.exists():
                 continue
             text = candidate.read_text()
+            ctrf_of(task).unlink(missing_ok=True)
             run = verifier.run(packages[task], candidate, workdir=ROOT / ".work" / "calib-verify", timeout=900)
-            official = official_values(str(ROOT / ".work" / "calib-verify" / "*" / "logs" / "verifier" / "new-ctrf.json"))
+            official = official_values(ctrf_of(task))
             mine = our_values(task, text, decks, corners, args.jobs)
             for gate, (value, unit) in official.items():
                 if mine.get(gate) is not None:

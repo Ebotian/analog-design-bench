@@ -486,3 +486,15 @@ kind = "json"
 file = "results/calibration/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json"
 path = "bands.cmrr_50db"
 format = "{:.3f}"
+
+[facts."solve.ota.search_sims"]
+kind = "json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json"
+path = "sims"
+format = "{:,}"
+
+[facts."solve.ota.polish_sims"]
+kind = "json"
+file = "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json"
+path = "polish.sims"
+format = "{:,}"

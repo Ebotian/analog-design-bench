@@ -438,7 +438,7 @@ def cmd_solve(args: argparse.Namespace) -> int:
     best = report["best"]
     validation = report["validation"]
     validated = isinstance(validation, dict) and not validation.get("skipped")
-    accepted = bool(validation.get("feasible")) if validated else bool(best["feasible"])
+    accepted = bool(validation.get("proxy_feasible")) if validated else bool(best["proxy_feasible"])
     # Write the best candidate even when it fails validation: refining from it
     # (or handing it to the official verifier) is the normal next move.
     changed = {
@@ -572,8 +572,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     solve_parser.add_argument("--corners-count", type=int, default=3)
     solve_parser.add_argument("--algorithm", choices=["cma", "de"], default="cma")
-    solve_parser.add_argument("--symmetry", choices=["auto", "off"], default="auto",
-                              help="matched devices share one size (differential pairs, mirrors)")
+    solve_parser.add_argument("--symmetry", choices=["auto", "off"], default="off",
+                              help="matched devices share one size; off by default (heuristic has false positives)")
     solve_parser.add_argument("--sigma", type=float, default=0.35, help="CMA initial step in log space")
     solve_parser.add_argument("--phase-split", type=float, default=0.3, help="budget share for the nominal-corner phase")
     solve_parser.add_argument("--polish", choices=["auto", "off"], default="auto",

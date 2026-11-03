@@ -128,7 +128,7 @@
     {
       "block": "plan/p3",
       "doc": "plan",
-      "end": 138,
+      "end": 148,
       "facts": [
         "calib.band_cmrr",
         "calib.band_gain",
@@ -149,6 +149,8 @@
         "screen.rcp.params",
         "screen.rcp.sims",
         "solve.ota.final_sims",
+        "solve.ota.polish_sims",
+        "solve.ota.search_sims",
         "solve.ota.validation_cmrr",
         "solve.ota.validation_corners",
         "solve.ota.validation_gain",
@@ -168,10 +170,10 @@
     {
       "block": "plan/p4",
       "doc": "plan",
-      "end": 147,
+      "end": 157,
       "facts": [],
       "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
-      "line": 139,
+      "line": 149,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P4",
@@ -183,13 +185,13 @@
     {
       "block": "plan/p5",
       "doc": "plan",
-      "end": 170,
+      "end": 180,
       "facts": [
         "corpus.runs",
         "p1.netlists"
       ],
       "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
-      "line": 148,
+      "line": 158,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P5",
@@ -717,7 +719,7 @@
     {
       "generated_by": null,
       "id": "plan",
-      "lines": 170,
+      "lines": 180,
       "path": "docs/PLAN.md",
       "source": "docs/src/plan.md",
       "tags": [
@@ -1522,6 +1524,32 @@
         "plan/p3"
       ],
       "value": 808
+    },
+    "solve.ota.polish_sims": {
+      "display": "720",
+      "extract": {
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "polish.sims"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": 720
+    },
+    "solve.ota.search_sims": {
+      "display": "5,740",
+      "extract": {
+        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "sims"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": 5740
     },
     "solve.ota.validation_cmrr": {
       "display": "+0.004",

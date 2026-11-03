@@ -94,6 +94,7 @@ def main() -> int:
             values = {p.id: p.value * math.exp(rng.uniform(-args.perturb, args.perturb)) for p in design.writable()}
             perturbed = design.apply(values)
             case = args.out / f"{task}-s{seed}.json"
+            screen_sims = int((json.loads((ROOT / "results" / "screen" / f"{task}.json").read_text()).get("sims") or 0)) if (ROOT / "results" / "screen" / f"{task}.json").exists() else 0
             calib = ROOT / "results" / "calibration" / f"{task}.json"
             trusted: list[str] = []
             bands: dict[str, float] = {}
@@ -151,9 +152,11 @@ def main() -> int:
                 "seed": seed,
                 "params": len(design.writable()),
                 "dims": len(dims),
-                "sims": report["sims"],
+                "sims": int(report["sims"]) + screen_sims,
+                "sims_solve": report["sims"],
+                "sims_screen": screen_sims,
                 "sims_to_feasible": report["sims_to_feasible"],
-                "validation_feasible": bool(report["validation"].get("feasible")),
+                "proxy_feasible": bool(report["validation"].get("proxy_feasible")),
                 "polish_runs": report["polish"].get("runs", 0) if report.get("polish") else 0,
                 "official": official,
                 "wall_s": round(time.perf_counter() - started, 1),
@@ -163,7 +166,7 @@ def main() -> int:
             print(json.dumps(row, ensure_ascii=False))
 
     recovered = [row for row in runs if row["official"].get("passed") == row["official"].get("total") and not row["official"].get("skipped")]
-    search_ok = [row for row in runs if row["validation_feasible"]]
+    proxy_ok = [row for row in runs if row["proxy_feasible"]]
     sims = [row["sims_to_feasible"] for row in recovered if row["sims_to_feasible"]]
     summary = {
         "schema": 1,
@@ -172,7 +175,7 @@ def main() -> int:
         "perturb": args.perturb,
         "budget": args.budget,
         "runs": len(runs),
-        "search_feasible": len(search_ok),
+        "proxy_feasible": len(proxy_ok),
         "recovered": len(recovered),
         "verified": sum(1 for row in runs if not row["official"].get("skipped")),
         "median_sims_to_feasible": statistics.median(sims) if sims else None,

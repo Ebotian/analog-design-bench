@@ -76,7 +76,7 @@ class Settings:
     sigma: float = 0.35
     trusted_gates: tuple[str, ...] = ()
     bands: Mapping[str, float] = field(default_factory=dict)
-    symmetry: bool = True
+    symmetry: bool = False
     phase_split: float = 0.3
     polish: bool = True
 
@@ -104,7 +104,7 @@ class Settings:
             sigma=float(raw.get("sigma", 0.35)),
             trusted_gates=tuple(raw.get("trusted_gates", ())),
             bands=dict(raw.get("bands", {})),
-            symmetry=bool(raw.get("symmetry", True)),
+            symmetry=bool(raw.get("symmetry", False)),
             phase_split=float(raw.get("phase_split", 0.3)),
             polish=bool(raw.get("polish", True)),
         )
@@ -114,7 +114,7 @@ class CandidateReport(TypedDict, total=False):
     values: dict[str, float]
     margins: dict[str, float | None]
     score: dict[str, float | bool]
-    feasible: bool
+    proxy_feasible: bool
     failures: int
     regularization: float
 
@@ -155,7 +155,7 @@ class _Candidate:
             "values": {key: float(value) for key, value in self.values.items()},
             "margins": dict(self.margins),
             "score": self.score.to_json(),
-            "feasible": self.feasible,
+            "proxy_feasible": self.feasible,
             "failures": self.failures,
             "regularization": round(self.regularization, 6),
         }
@@ -217,8 +217,10 @@ def _score(
     values: Mapping[str, float],
     reference: Mapping[str, float],
     settings: Settings,
+    expected: Mapping[str, int],
 ) -> tuple[dict[str, float | None], int, float, gate_lib.Score, bool]:
     margins = gate_lib.margins(gate_set, rows)
+    complete = gate_lib.coverage_complete(gate_set, rows, expected)
     if settings.bands:
         # Require margin >= band, not margin >= 0: the band is the measured
         # disagreement between this proxy and the oracle, so a candidate that
@@ -236,8 +238,9 @@ def _score(
         lambda_fail=settings.lambda_fail,
         regularization=regularization,
         lambda_reg=settings.lambda_reg,
+        incomplete=not complete,
     )
-    return margins, failures, regularization, value, gate_lib.feasible(margins) and failures == 0
+    return margins, failures, regularization, value, gate_lib.feasible(margins) and failures == 0 and complete
 
 
 def _score_batch(
@@ -247,6 +250,7 @@ def _score_batch(
     reference: Mapping[str, float],
     settings: Settings,
     used_before: int,
+    expected: Mapping[str, int],
 ) -> None:
     by_variant: dict[str, list[Mapping[str, Any]]] = {}
     for row in cast(Sequence[Mapping[str, Any]], report.get("results") or []):
@@ -256,7 +260,7 @@ def _score_batch(
         if not rows:
             continue
         margins, failures, regularization, value, feasible = _score(
-            rows, gate_set, candidate.values, reference, settings
+            rows, gate_set, candidate.values, reference, settings, expected
         )
         candidate.margins = margins
         candidate.failures = failures
@@ -456,12 +460,12 @@ def solve(
                 raise ValueError("no gate could be resolved from the task's public specs")
             gate_set = resolved
             notes.extend(f"unresolved gate: {gate}" for gate in resolved.unresolved)
-            _score_batch(report, labelled, resolved, reference, settings, used)
+            _score_batch(report, labelled, resolved, reference, settings, used, expected)
         else:
             pending = [candidate for candidate in population if candidate.score.total == math.inf]
             if pending:
                 report, labelled, _ = run_batch(pending, phase_corners)
-                _score_batch(report, labelled, gate_set, reference, settings, used)
+                _score_batch(report, labelled, gate_set, reference, settings, used, expected)
         history.append(_generation_row(len(history), population, used, phase_index))
         generation = 0
         while generation < settings.generations:
@@ -487,7 +491,7 @@ def solve(
             if not trials:
                 break
             report, labelled, spent = run_batch(trials, phase_corners)
-            _score_batch(report, labelled, gate_set, reference, settings, used)
+            _score_batch(report, labelled, gate_set, reference, settings, used, expected)
             for position, trial in enumerate(trials):
                 if trial.score < population[position].score:
                     population[position] = trial
@@ -516,14 +520,14 @@ def solve(
             report, labelled, _ = run_batch(population, phase_corners)
             if gate_set is None:
                 gate_set = resolve_gates(_measure_names(report))
-            _score_batch(report, labelled, gate_set, reference, settings, used)
+            _score_batch(report, labelled, gate_set, reference, settings, used, expected)
         scored = [candidate for candidate in population if candidate.score.total < math.inf]
         start = min(scored, key=lambda candidate: candidate.score) if scored else baseline
         if start.score.total == math.inf:
             report, labelled, _ = run_batch([start], phase_corners)
             if gate_set is None:
                 gate_set = resolve_gates(_measure_names(report))
-            _score_batch(report, labelled, gate_set, reference, settings, used)
+            _score_batch(report, labelled, gate_set, reference, settings, used, expected)
         if gate_set is None:
             raise ValueError("no gate could be resolved from the task's public specs")
         mean = [math.log(start.values[name] / reference[name]) for name in settings.dims]
@@ -548,7 +552,7 @@ def solve(
                 for sample in samples
             ]
             report, labelled, spent = run_batch(candidates, phase_corners)
-            _score_batch(report, labelled, gate_set, reference, settings, used)
+            _score_batch(report, labelled, gate_set, reference, settings, used, expected)
             rank_of = [0.0] * len(candidates)
             for rank, index in enumerate(sorted(range(len(candidates)), key=lambda i: candidates[i].score)):
                 rank_of[index] = float(rank)
@@ -599,7 +603,7 @@ def solve(
             for sign in (1.0, -1.0)
         ]
         report, labelled, _ = run_batch([candidate for _, candidate in trials], phase_corners)
-        _score_batch(report, labelled, gate_set, reference, settings, used)
+        _score_batch(report, labelled, gate_set, reference, settings, used, expected)
         effect: dict[str, float] = {}
         for name, candidate in trials:
             gain = start_score.total - candidate.score.total
@@ -663,7 +667,7 @@ def solve(
             "sims": spent,
             "margins": margins,
             "failures": failures,
-            "feasible": gate_lib.feasible(margins) and failures == 0,
+            "proxy_feasible": gate_lib.feasible(margins) and failures == 0,
             "worst": worst,
         }
 
@@ -682,7 +686,10 @@ def solve(
     report, labelled, _ = run_batch([baseline], search_corners[:1] or [dict(corners[0])])
     if gate_set is None:
         gate_set = resolve_gates(_measure_names(report))
-    _score_batch(report, labelled, gate_set, reference, settings, used)
+    expected = gate_lib.expected_counts(
+        gate_set, cast(Sequence[Mapping[str, Any]], report.get("results") or [])
+    )
+    _score_batch(report, labelled, gate_set, reference, settings, used, expected)
 
     def maybe_polish(
         population: list[_Candidate],
@@ -718,10 +725,12 @@ def solve(
             population = [candidate, *[c for c in population if c is not candidate]]
         return population
 
+    round_budget = None if search_budget is None else search_budget / max(1, rounds)
     for round_index in range(max(1, settings.rounds)):
+        round_floor = used
         if round_index == 0:
             for phase_index, (phase_corners, share) in enumerate(phases):
-                cap = None if search_budget is None else int(search_budget * share)
+                cap = None if round_budget is None else int(round_floor + round_budget * share)
                 before = min(population, key=lambda c: c.score).score if population else baseline.score
                 before_used = used
                 population = evolve(
@@ -749,7 +758,9 @@ def solve(
                 )
                 for _ in range(len(ranked) - half)
             ]
-            cap = None if search_budget is None else search_budget - used
+            # Absolute cap: evolve() compares against the cumulative ``used``, so
+            # passing a remainder here silently starved the feed-back rounds.
+            cap = None if round_budget is None else int(round_floor + round_budget)
             before = min(population, key=lambda c: c.score).score
             before_used = used
             population = evolve(population, [*search_corners, *feedback], cap, 10 + round_index, final_phase=True)
@@ -761,7 +772,7 @@ def solve(
         validation_rounds.append(
             {"round": round_index, "sims": used, **{key: value for key, value in validation.items() if key != "margins"}}
         )
-        if validation.get("skipped") or validation.get("feasible"):
+        if validation.get("skipped") or validation.get("proxy_feasible"):
             break
         fresh = [
             corner
@@ -777,7 +788,7 @@ def solve(
     if gate_set is None:
         raise ValueError("no gate could be resolved from the task's public specs")
     polish_report: dict[str, object] = {}
-    if settings.polish and not validation.get("skipped") and not validation.get("feasible") and not polish_runs:
+    if settings.polish and not validation.get("skipped") and not validation.get("proxy_feasible") and not polish_runs:
         # The rate comparison may never have favoured polish (search was the
         # better buyer); measure it once before the final verdict so the choice
         # is at least based on evidence.
@@ -901,7 +912,7 @@ def _generation_row(
         "sims": used,
         "best_score": min(candidate.score for candidate in population).to_json(),
         "best_margin": _min_margin(min(population, key=lambda candidate: candidate.score)),
-        "feasible": sum(1 for candidate in population if candidate.feasible),
+        "proxy_feasible": sum(1 for candidate in population if candidate.feasible),
     }
 
 
@@ -920,7 +931,7 @@ def summarise(report: SolveReport) -> str:
     best = report["best"]
     lines = [
         f"dims={len(report['dims'])} sims={report['sims']} "
-        f"feasible={best['feasible']} sims_to_feasible={report['sims_to_feasible']} "
+        f"proxy_feasible={best['proxy_feasible']} sims_to_feasible={report['sims_to_feasible']} "
         f"budget={report['budget']['used']}/{report['budget']['limit']}",
         f"reference score={ref['score']}  best score={best['score']}",
     ]
@@ -929,7 +940,10 @@ def summarise(report: SolveReport) -> str:
         lines.append(f"  {gate_id:<24} {shown}")
     validation = report["validation"]
     if isinstance(validation, dict) and not validation.get("skipped"):
-        lines.append(f"validation: corners={validation['corners']} sims={validation['sims']} feasible={validation['feasible']}")
+        lines.append(
+            f"validation: corners={validation['corners']} sims={validation['sims']} "
+            f"proxy_feasible={validation['proxy_feasible']}"
+        )
         for gate_id, margin in cast(Mapping[str, float | None], validation["margins"]).items():
             shown = "n/a" if margin is None else f"{margin:+.3f}"
             lines.append(f"  {gate_id:<24} {shown}")

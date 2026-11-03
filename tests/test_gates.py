@@ -95,3 +95,30 @@ def test_regularization_enters_the_score() -> None:
     passing = {gate.id: 0.2 for gate in gate_set().gates}
     base = gates.score(passing, 0)
     assert gates.score(passing, 0, regularization=1.0, lambda_reg=0.5).total - base.total == pytest.approx(0.5)
+
+
+def test_score_treats_failed_simulations_as_infeasible() -> None:
+    """Positive margins + a dead deck must not outrank a measured violation."""
+    margins = {gate.id: 0.2 for gate in gate_set().gates}
+    clean = gates.score(margins, 0)
+    dead_deck = gates.score(margins, 1)
+    assert clean.violated is False
+    assert dead_deck.violated is True
+    assert dead_deck > clean
+
+
+def test_score_treats_incomplete_coverage_as_infeasible() -> None:
+    margins = {gate.id: 0.2 for gate in gate_set().gates}
+    assert gates.score(margins, 0, incomplete=True).violated is True
+
+
+def test_coverage_complete_detects_a_missing_corner() -> None:
+    rows = [
+        {"status": "ok", "measures": {"m0_dc_gain_db": 41.0, "m0_cmrr_db_1khz": 60.0}},
+        {"status": "ok", "measures": {"m1_dc_gain_db": 42.0, "m1_cmrr_db_1khz": 61.0}},
+    ]
+    spec = gates.from_task(PAYLOAD, {"m0_dc_gain_db", "m1_dc_gain_db", "m0_cmrr_db_1khz"})
+    expected = gates.expected_counts(spec, rows)
+    trimmed = rows[:1]  # second corner lost
+    assert gates.coverage_complete(spec, rows, expected) is True
+    assert gates.coverage_complete(spec, trimmed, expected) is False
