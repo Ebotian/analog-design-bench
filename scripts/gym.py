@@ -94,6 +94,8 @@ def main() -> int:
             values = {p.id: p.value * math.exp(rng.uniform(-args.perturb, args.perturb)) for p in design.writable()}
             perturbed = design.apply(values)
             case = args.out / f"{task}-s{seed}.json"
+            calib = ROOT / "results" / "calibration" / f"{task}.json"
+            trusted = json.loads(calib.read_text())["trusted"] if calib.exists() else []
             # Each run pays for its own simulations: a shared cache would make
             # repeated budgets free and "sims-to-recover" incomparable.
             cache_root = ROOT / ".work" / "gym-cache" / f"{task}-s{seed}-b{args.budget}"
@@ -112,6 +114,7 @@ def main() -> int:
                     "algorithm": "cma",
                     "sigma": args.sigma,
                     "lambda_reg": args.lambda_reg,
+                    "trusted_gates": trusted,
                 },
                 eval_options=evaluate.EvalOptions(
                     jobs=args.jobs, cache_root=cache_root, work_root=ROOT / ".work/sim"

@@ -1,0 +1,64 @@
+{
+  "schema": 2,
+  "runs": 4,
+  "recovered": 0,
+  "verified": 4,
+  "search_feasible": 4,
+  "tasks": [
+    "sky130-ota-5t-gain40-pm60-noise50uv-pvt"
+  ],
+  "median_sims_to_feasible": null,
+  "median_sims_of_recovered": null,
+  "best_worst_margin": 0.0286,
+  "median_worst_margin": 0.0151,
+  "runs_detail": [
+    {
+      "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+      "seed": 3,
+      "sims": 2692,
+      "sims_to_feasible": 1224,
+      "validation_feasible": true,
+      "polish_runs": 2,
+      "official_passed": 5,
+      "official_total": 7,
+      "worst_margin": 0.003842500000000015,
+      "short_gates": []
+    },
+    {
+      "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+      "seed": 5,
+      "sims": 2688,
+      "sims_to_feasible": 1220,
+      "validation_feasible": true,
+      "polish_runs": 2,
+      "official_passed": 6,
+      "official_total": 7,
+      "worst_margin": 0.02855249999999998,
+      "short_gates": []
+    },
+    {
+      "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+      "seed": 7,
+      "sims": 2692,
+      "sims_to_feasible": 1216,
+      "validation_feasible": true,
+      "polish_runs": 2,
+      "official_passed": 5,
+      "official_total": 7,
+      "worst_margin": 0.0206175,
+      "short_gates": []
+    },
+    {
+      "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+      "seed": 9,
+      "sims": 2692,
+      "sims_to_feasible": 1212,
+      "validation_feasible": true,
+      "polish_runs": 2,
+      "official_passed": 6,
+      "official_total": 7,
+      "worst_margin": 0.00968,
+      "short_gates": []
+    }
+  ]
+}

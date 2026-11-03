@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+  "tolerance": 0.0005,
+  "gates": [
+    {
+      "gate": "gain_40db",
+      "ours": 41.4169,
+      "published": 41.42,
+      "relative_difference": -7.484307098028568e-05,
+      "verdict": "ok"
+    },
+    {
+      "gate": "ugb_100mhz",
+      "ours": 111315000.0,
+      "published": 111300000.0,
+      "relative_difference": 0.00013477088948787063,
+      "verdict": "ok"
+    },
+    {
+      "gate": "phase_margin_60deg",
+      "ours": 66.5156,
+      "published": 66.52,
+      "relative_difference": -6.614552014416335e-05,
+      "verdict": "ok"
+    },
+    {
+      "gate": "power_0p5mw",
+      "ours": 0.0004223496,
+      "published": 0.0004223,
+      "relative_difference": 0.00011745204830689164,
+      "verdict": "ok"
+    },
+    {
+      "gate": "noise_50uvrms",
+      "ours": 3.859842e-05,
+      "published": 3.8599999999999996e-05,
+      "relative_difference": -4.093264248692573e-05,
+      "verdict": "ok"
+    },
+    {
+      "gate": "cmrr_50db",
+      "ours": 63.2191,
+      "published": 56.85,
+      "relative_difference": 0.11203342128408084,
+      "verdict": "proxy-mismatch"
+    },
+    {
+      "gate": "psrr_30db",
+      "ours": 34.0056,
+      "published": 40.0,
+      "relative_difference": -0.14985999999999997,
+      "verdict": "proxy-mismatch"
+    }
+  ],
+  "trusted": [
+    "gain_40db",
+    "ugb_100mhz",
+    "phase_margin_60deg",
+    "power_0p5mw",
+    "noise_50uvrms"
+  ],
+  "proxy_mismatch": [
+    "cmrr_50db",
+    "psrr_30db"
+  ]
+}

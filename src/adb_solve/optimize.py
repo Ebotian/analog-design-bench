@@ -46,6 +46,7 @@ class SolveOptions(TypedDict, total=False):
     feed_corners: int
     algorithm: str
     sigma: float
+    trusted_gates: list[str]
     phase_split: float
     polish: bool
 
@@ -71,6 +72,7 @@ class Settings:
     feed_corners: int = 2
     algorithm: str = "cma"
     sigma: float = 0.35
+    trusted_gates: tuple[str, ...] = ()
     phase_split: float = 0.3
     polish: bool = True
 
@@ -96,6 +98,7 @@ class Settings:
             feed_corners=int(raw.get("feed_corners", 2)),
             algorithm=str(raw.get("algorithm", "cma")),
             sigma=float(raw.get("sigma", 0.35)),
+            trusted_gates=tuple(raw.get("trusted_gates", ())),
             phase_split=float(raw.get("phase_split", 0.3)),
             polish=bool(raw.get("polish", True)),
         )
@@ -304,6 +307,21 @@ def solve(
     notes: list[str] = []
 
     gate_set: gate_lib.GateSet | None = None
+
+    def resolve_gates(names: set[str]) -> gate_lib.GateSet:
+        resolved = gate_lib.from_task(payload, names)
+        if not resolved.gates:
+            raise ValueError("no gate could be resolved from the task's public specs")
+        if settings.trusted_gates:
+            keep = [gate for gate in resolved.gates if gate.id in settings.trusted_gates]
+            dropped = [gate.id for gate in resolved.gates if gate.id not in settings.trusted_gates]
+            if not keep:
+                raise ValueError("calibration left no trusted gate")
+            notes.extend(f"excluded by calibration: {gate}" for gate in dropped)
+            resolved = gate_lib.GateSet(gates=tuple(keep), unresolved=resolved.unresolved, source=resolved.source)
+        notes.extend(f"unresolved gate: {gate}" for gate in resolved.unresolved)
+        return resolved
+
     search_corners: list[Corner] = [dict(corner) for corner in corners]
     phases: list[tuple[Sequence[Corner], float]] = []
     nominal_corner = dict(corners[screen.nominal_index(corners)]) if len(corners) > 1 else None
@@ -316,9 +334,7 @@ def solve(
             backend,
         )
         used += int(probe["sims_run"])
-        gate_set = gate_lib.from_task(payload, _measure_names(probe))
-        if not gate_set.gates:
-            raise ValueError("no gate could be resolved from the task's public specs")
+        gate_set = resolve_gates(_measure_names(probe))
         worst = _worst_corners(probe, gate_set, settings.corners_count, corners)
         nominal = [nominal_corner] if nominal_corner is not None else search_corners
         # 40% of the search goes to cheap nominal work; the rest to the corners
@@ -462,19 +478,14 @@ def solve(
         if population:
             report, labelled, _ = run_batch(population, phase_corners)
             if gate_set is None:
-                gate_set = gate_lib.from_task(payload, _measure_names(report))
-                if not gate_set.gates:
-                    raise ValueError("no gate could be resolved from the task's public specs")
-                notes.extend(f"unresolved gate: {gate}" for gate in gate_set.unresolved)
+                gate_set = resolve_gates(_measure_names(report))
             _score_batch(report, labelled, gate_set, reference, settings, used)
         scored = [candidate for candidate in population if candidate.score.total < math.inf]
         start = min(scored, key=lambda candidate: candidate.score) if scored else baseline
         if start.score.total == math.inf:
             report, labelled, _ = run_batch([start], phase_corners)
             if gate_set is None:
-                gate_set = gate_lib.from_task(payload, _measure_names(report))
-                if not gate_set.gates:
-                    raise ValueError("no gate could be resolved from the task's public specs")
+                gate_set = resolve_gates(_measure_names(report))
             _score_batch(report, labelled, gate_set, reference, settings, used)
         if gate_set is None:
             raise ValueError("no gate could be resolved from the task's public specs")
@@ -633,10 +644,7 @@ def solve(
     # block's rate is measured against, and resolves the gate set up front.
     report, labelled, _ = run_batch([baseline], search_corners[:1] or [dict(corners[0])])
     if gate_set is None:
-        gate_set = gate_lib.from_task(payload, _measure_names(report))
-        if not gate_set.gates:
-            raise ValueError("no gate could be resolved from the task's public specs")
-        notes.extend(f"unresolved gate: {gate}" for gate in gate_set.unresolved)
+        gate_set = resolve_gates(_measure_names(report))
     _score_batch(report, labelled, gate_set, reference, settings, used)
 
     def maybe_polish(

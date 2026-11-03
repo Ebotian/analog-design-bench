@@ -97,19 +97,21 @@
   只夹到搜索盒并回落到合法值。三档精度共享预算：探针扫全角点 → nominal 与绑定角点分阶段搜索
   → 全部 {{fact:solve.ota.validation_corners}} 个角点验证；验证失败时把**违反 gate 的**角点回灌
   搜索集再优化（cutting plane）。
-- **实测（OTA，±20% 扰动，预算阶梯）**：单次演示（seed 11，线性扰动）能到官方
-  {{fact:solve.ota.verifier_passed}}/{{fact:solve.ota.verifier_total}}、reward 1.0（搜索 {{fact:solve.ota.search_sims}} 次
-  + polish（{{fact:solve.ota.polish_sims}} 次坐标扫描）收口到 {{fact:solve.ota.final_sims}} 次；gain 余量 {{fact:solve.ota.validation_gain}}、CMRR
-  {{fact:solve.ota.validation_cmrr}}；`results/solve/`）。同一批 4 个对数扰动、每次运行独立缓存
-  （否则重跑不花钱、成本不可比）的阶梯：3,200 sims → **{{fact:gym.3200_recovered}}/{{fact:gym.3200_runs}}**
-  通过官方判分（最好一例整体最差余量 {{fact:gym.3200_best_worst_margin}}，中位 {{fact:gym.3200_median_worst_margin}}）；
-  6,400 sims → {{fact:gym.recovered}}/{{fact:gym.runs}}（中位 {{fact:gym.median_worst_margin}}；共享缓存那版
-  中位 {{fact:gym.old_median_worst_margin}} 不计成本，仅作历史记录）。
-  也就是说：**更多预算没有换来更多通过**，其中三例是 verifier 自己的 `OP+AC/noise` 内部 PVT 失败导致
-  gate 被标 blocked，而我们的 27 角点验证在同一设计上报告 0 次失败。
-- **代理量偏差，必须让 oracle 判分**：3.2k 的 seed 5 官方 **7/7**，而我们的验证说 CMRR 余量 −0.099
-  （官方 CMRR 实测 64.48 dB）。此前的 gym 只在“本工具认为可行”时才去问 verifier，等于让有偏的代理
-  决定了 oracle 是否被咨询——已改为**每个候选都跑官方判分**（`scripts/gym_verify.py` 可回填历史运行）。
+- **先把判据对齐，再谈预算**：`scripts/calibrate_gates.py` 用参考解自身的官方公开值做校准——
+  把我们的 worst 与 `referenceResult.metrics[].value` 比，容差取发布精度（四位有效数字 → 5e-4 相对）。
+  OTA 上 7 个 gate 里 5 个吻合（gain/UGB/PM/power/noise，相对差 <1e-4），CMRR 差 {{fact:calib.cmrr_rel}}、
+  PSRR 差 {{fact:calib.psrr_rel}}：**我们测的不是官方那个量**。校准结果落到
+  `results/calibration/<task>.json`，`solve` 只优化可信 gate，其余只报告。
+- **对齐后同一批扰动的结果**：4 个种子里搜索都能在 27 角点满足全部 5 个可信 gate，官方判分从
+  （校准前）4/7 提升到 5–6/7；**没有一例全过，而失败项恰好是未纳入优化的 CMRR（4/4）与 PSRR（2/4）**。
+  这证明目标函数对“它优化的东西”是可信的，剩下的失败来自没有可信测量的量。
+- **预算阶梯（对齐前测的，仅作成本参考）**：3,200 sims → {{fact:gym.3200_recovered}}/{{fact:gym.3200_runs}}
+  通过官方判分（最好/中位最差余量 {{fact:gym.3200_best_worst_margin}} / {{fact:gym.3200_median_worst_margin}}）；
+  6,400 sims → {{fact:gym.recovered}}/{{fact:gym.runs}}（中位 {{fact:gym.median_worst_margin}}）。
+  更多预算让余量变好却没有多通过——这也是“先对齐再谈预算”的原因。
+- **单次演示仍能全过**：seed 11 线性扰动 → 官方 {{fact:solve.ota.verifier_passed}}/{{fact:solve.ota.verifier_total}}、
+  reward 1.0（{{fact:solve.ota.final_sims}} 次仿真，gain 余量 {{fact:solve.ota.validation_gain}}、CMRR
+  {{fact:solve.ota.validation_cmrr}}，`results/solve/`），说明链路完整，只是不稳健。
 - **polish 的时机由实测费率决定，不是拍出来的阈值**：每个阶段结束都算一次“每仿真一次的损失下降率”，
   与上一次 polish 实测的费率比较——搜索更划算就继续搜索，否则花一次 polish（**所有**维度、正负两向）
   再比一次。没有“连续 N 代无改进”“步长小于 1e-4”“只细化前 6 维”这类常数；维度排名来自这次扫描的

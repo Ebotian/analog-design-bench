@@ -128,14 +128,15 @@
     {
       "block": "plan/p3",
       "doc": "plan",
-      "end": 126,
+      "end": 128,
       "facts": [
+        "calib.cmrr_rel",
+        "calib.psrr_rel",
         "gym.3200_best_worst_margin",
         "gym.3200_median_worst_margin",
         "gym.3200_recovered",
         "gym.3200_runs",
         "gym.median_worst_margin",
-        "gym.old_median_worst_margin",
         "gym.recovered",
         "gym.runs",
         "p1.knobs_median",
@@ -146,8 +147,6 @@
         "screen.rcp.params",
         "screen.rcp.sims",
         "solve.ota.final_sims",
-        "solve.ota.polish_sims",
-        "solve.ota.search_sims",
         "solve.ota.validation_cmrr",
         "solve.ota.validation_corners",
         "solve.ota.validation_gain",
@@ -167,10 +166,10 @@
     {
       "block": "plan/p4",
       "doc": "plan",
-      "end": 135,
+      "end": 137,
       "facts": [],
       "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
-      "line": 127,
+      "line": 129,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P4",
@@ -182,13 +181,13 @@
     {
       "block": "plan/p5",
       "doc": "plan",
-      "end": 158,
+      "end": 160,
       "facts": [
         "corpus.runs",
         "p1.netlists"
       ],
       "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
-      "line": 136,
+      "line": 138,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P5",
@@ -716,7 +715,7 @@
     {
       "generated_by": null,
       "id": "plan",
-      "lines": 158,
+      "lines": 160,
       "path": "docs/PLAN.md",
       "source": "docs/src/plan.md",
       "tags": [
@@ -780,6 +779,32 @@
     }
   ],
   "facts": {
+    "calib.cmrr_rel": {
+      "display": "+0.112",
+      "extract": {
+        "file": "results/calibration/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json",
+        "format": "{:+.3f}",
+        "kind": "json",
+        "path": "gates.5.relative_difference"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": 0.11203342128408084
+    },
+    "calib.psrr_rel": {
+      "display": "-0.150",
+      "extract": {
+        "file": "results/calibration/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json",
+        "format": "{:+.3f}",
+        "kind": "json",
+        "path": "gates.6.relative_difference"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": -0.14985999999999997
+    },
     "corners.coverage_subsets": {
       "display": "22",
       "extract": {
@@ -1191,19 +1216,6 @@
       ],
       "value": -0.0297
     },
-    "gym.old_median_worst_margin": {
-      "display": "-0.0403",
-      "extract": {
-        "file": "results/gym/summary-weighted-thresholds.json",
-        "format": "{:+.4f}",
-        "kind": "json",
-        "path": "median_worst_margin"
-      },
-      "used_in": [
-        "plan/p3"
-      ],
-      "value": -0.0403
-    },
     "gym.recovered": {
       "display": "0",
       "extract": {
@@ -1482,32 +1494,6 @@
         "plan/p3"
       ],
       "value": 808
-    },
-    "solve.ota.polish_sims": {
-      "display": "720",
-      "extract": {
-        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-polish.json",
-        "format": "{:,}",
-        "kind": "json",
-        "path": "polish.sims"
-      },
-      "used_in": [
-        "plan/p3"
-      ],
-      "value": 720
-    },
-    "solve.ota.search_sims": {
-      "display": "5,740",
-      "extract": {
-        "file": "results/solve/sky130-ota-5t-gain40-pm60-noise50uv-pvt-perturb20.json",
-        "format": "{:,}",
-        "kind": "json",
-        "path": "sims"
-      },
-      "used_in": [
-        "plan/p3"
-      ],
-      "value": 5740
     },
     "solve.ota.validation_cmrr": {
       "display": "+0.004",

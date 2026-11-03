@@ -103,6 +103,25 @@ def to_base(value: float, unit: str) -> float:
     return value
 
 
+def base_value(metric: Mapping[str, Any]) -> float | None:
+    """A published metric value converted into the measure's base units.
+
+    ``referenceResult.metrics[].value`` is printed in display units (111.3 MHz,
+    0.4223 mW); the spec string carries that unit, so the same conversion used
+    for thresholds applies here.  Reference *values* are read only to check our
+    proxy, never to steer it.
+    """
+    raw = metric.get("value")
+    if not isinstance(raw, (int, float)):
+        return None
+    spec = str(metric.get("spec") or metric.get("specification") or "")
+    spec = spec.replace("≥", ">=").replace("≤", "<=")
+    match = SPEC_RE.search(spec)
+    if match is None:
+        return None
+    return to_base(float(raw), match.group(3))
+
+
 def base_of(measure: str) -> str:
     """``m3_dc_gain_db`` → ``dc_gain_db``: the in-deck sweep index is not a name."""
     return INDEX_RE.sub("", measure)

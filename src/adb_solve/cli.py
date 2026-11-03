@@ -299,6 +299,21 @@ def cmd_screen(args: argparse.Namespace) -> int:
     return 0
 
 
+def _trusted_gates(task: str | None) -> list[str]:
+    """Gates whose proxy matches the oracle, from results/calibration/<task>.json."""
+    if not task:
+        return []
+    for root in (Path.cwd(), Path(__file__).resolve().parents[2]):
+        path = root / "results" / "calibration" / f"{task}.json"
+        if path.exists():
+            payload = json.loads(path.read_text())
+            trusted = payload.get("trusted") or []
+            if isinstance(trusted, list) and trusted:
+                print(f"calibration: optimising {len(trusted)} trusted gate(s) from {path}", file=sys.stderr)
+                return [str(name) for name in trusted]
+    return []
+
+
 def _task_payload(task: str) -> dict[str, object]:
     for root in (Path.cwd(), Path(__file__).resolve().parents[2]):
         path = root / "data" / "tasks" / f"{task}.json"
@@ -352,6 +367,7 @@ def cmd_solve(args: argparse.Namespace) -> int:
         oneshot=args.oneshot,
         memory=None if args.memory == "unlimited" else args.memory,
     )
+    trusted = _trusted_gates(args.task)
     options = optimize.SolveOptions(
         dims=dims,
         population=args.population,
@@ -372,6 +388,7 @@ def cmd_solve(args: argparse.Namespace) -> int:
         sigma=args.sigma,
         phase_split=args.phase_split,
         polish=args.polish == "auto",
+        trusted_gates=trusted,
     )
     try:
         report = optimize.solve(
