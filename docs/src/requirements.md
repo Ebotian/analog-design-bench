@@ -166,7 +166,7 @@ adb-solve solve   --netlist circuit.spi --budget 1500 --seed 7 --out report.json
 | 可恢复 | 中断后可从 `report.json` 续跑；不丢已花预算 |
 | 可观测 | 每次 sim 记 `(bench, corner, status, seconds)`；可导出 |
 | 安全 | 不修改 PDK/测试文件；只写 `circuit.spi` 与输出目录 |
-| 许可 | 不打包 benchmark 内容；只依赖本地镜像与用户提供的网表 |
+| 许可 | 工具分发包不含 benchmark 内容（仓库内的公开语料按 CC BY-NC 4.0 单独发布）；只依赖本地镜像与用户提供的网表 |
 
 ---
 

@@ -56,7 +56,7 @@
     {
       "block": "plan/p1",
       "doc": "plan",
-      "end": 49,
+      "end": 50,
       "facts": [
         "p1.netlists",
         "verifier.gates",
@@ -76,7 +76,7 @@
     {
       "block": "plan/corners",
       "doc": "plan",
-      "end": 64,
+      "end": 65,
       "facts": [
         "corners.coverage_subsets",
         "corners.coverage_tasks",
@@ -94,7 +94,7 @@
         "corners.unresolved"
       ],
       "heading": "Corner 矩阵（IaC）",
-      "line": 50,
+      "line": 51,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P1",
@@ -106,7 +106,7 @@
     {
       "block": "plan/p2",
       "doc": "plan",
-      "end": 85,
+      "end": 86,
       "facts": [
         "legality.checker_checked",
         "legality.checker_false_positive",
@@ -116,7 +116,7 @@
         "legality.skipped_preprocessed"
       ],
       "heading": "P2 — 合法性护栏与预算（已完成）",
-      "line": 65,
+      "line": 66,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P2",
@@ -128,7 +128,7 @@
     {
       "block": "plan/p3",
       "doc": "plan",
-      "end": 148,
+      "end": 149,
       "facts": [
         "calib.band_cmrr",
         "calib.band_gain",
@@ -158,7 +158,7 @@
         "solve.ota.verifier_total"
       ],
       "heading": "P3 — 筛选与求解（进行中：筛选已落地）",
-      "line": 86,
+      "line": 87,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P3",
@@ -170,10 +170,10 @@
     {
       "block": "plan/p4",
       "doc": "plan",
-      "end": 157,
+      "end": 158,
       "facts": [],
       "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
-      "line": 149,
+      "line": 150,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P4",
@@ -185,13 +185,13 @@
     {
       "block": "plan/p5",
       "doc": "plan",
-      "end": 180,
+      "end": 181,
       "facts": [
         "corpus.runs",
         "p1.netlists"
       ],
       "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
-      "line": 158,
+      "line": 159,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P5",
@@ -569,7 +569,7 @@
     {
       "block": "data/t1",
       "doc": "data",
-      "end": 39,
+      "end": 40,
       "facts": [
         "t1.commit",
         "t1.files",
@@ -589,7 +589,7 @@
     {
       "block": "data/verifier-run",
       "doc": "data",
-      "end": 66,
+      "end": 67,
       "facts": [
         "corners.needs_review",
         "corners.unresolved",
@@ -611,7 +611,7 @@
         "verifier.within_tol"
       ],
       "heading": "判分实测",
-      "line": 40,
+      "line": 41,
       "path": "DATA.md",
       "tags": [
         "phase:P1",
@@ -623,10 +623,10 @@
     {
       "block": "data/missing",
       "doc": "data",
-      "end": 83,
+      "end": 84,
       "facts": [],
       "heading": "T0 未包含、由 T1 补齐的部分",
-      "line": 67,
+      "line": 68,
       "path": "DATA.md",
       "tags": [
         "kind:gap",
@@ -636,14 +636,14 @@
     {
       "block": "data/contents",
       "doc": "data",
-      "end": 95,
+      "end": 96,
       "facts": [
         "corpus.models",
         "corpus.runs",
         "corpus.tasks"
       ],
       "heading": "内容",
-      "line": 84,
+      "line": 85,
       "path": "DATA.md",
       "tags": [
         "kind:data",
@@ -653,7 +653,7 @@
     {
       "block": "data/integrity",
       "doc": "data",
-      "end": 105,
+      "end": 106,
       "facts": [
         "corpus.files",
         "corpus.passes",
@@ -662,7 +662,7 @@
         "corpus.tasks"
       ],
       "heading": "完整性（`make check` 可复验）",
-      "line": 96,
+      "line": 97,
       "path": "DATA.md",
       "tags": [
         "kind:evidence",
@@ -672,7 +672,7 @@
     {
       "block": "data/defects",
       "doc": "data",
-      "end": 117,
+      "end": 118,
       "facts": [
         "corpus.no_gates",
         "corpus.no_gates_median_min",
@@ -681,7 +681,7 @@
         "corpus.runs"
       ],
       "heading": "已知缺陷（原样保留，不修补）",
-      "line": 106,
+      "line": 107,
       "path": "DATA.md",
       "tags": [
         "kind:gap",
@@ -691,10 +691,10 @@
     {
       "block": "data/refresh",
       "doc": "data",
-      "end": 128,
+      "end": 129,
       "facts": [],
       "heading": "刷新",
-      "line": 118,
+      "line": 119,
       "path": "DATA.md",
       "tags": [
         "kind:usage",
@@ -704,10 +704,10 @@
     {
       "block": "data/limits",
       "doc": "data",
-      "end": 135,
+      "end": 136,
       "facts": [],
       "heading": "限制",
-      "line": 129,
+      "line": 130,
       "path": "DATA.md",
       "tags": [
         "kind:policy",
@@ -719,7 +719,7 @@
     {
       "generated_by": null,
       "id": "plan",
-      "lines": 180,
+      "lines": 181,
       "path": "docs/PLAN.md",
       "source": "docs/src/plan.md",
       "tags": [
@@ -758,7 +758,7 @@
     {
       "generated_by": null,
       "id": "data",
-      "lines": 135,
+      "lines": 136,
       "path": "DATA.md",
       "source": "docs/src/data.md",
       "tags": [

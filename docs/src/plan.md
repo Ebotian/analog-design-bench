@@ -44,7 +44,8 @@
   官方 `test.sh` 全过（{{fact:verifier.tasks}} 题 / {{fact:verifier.gates}} gate /
   {{fact:verifier.sims}} 次 ngspice），与 `referenceResult` 逐 gate 对账见
   `docs/VERIFIER_RESULTS.md`。
-- **边界**：verifier 只作校准与 A/B 官方判分，不作优化目标；不改、不外发。
+- **边界**：verifier 只作校准与 A/B 官方判分，不作优化目标；不改一行；仓库内的公开副本按
+  CC BY-NC 4.0 署名发布，工具分发包不包含它。
 
 <!-- block: corners | tags: phase:P1,status:debt,kind:evidence,topic:corner -->
 #### Corner 矩阵（IaC）
