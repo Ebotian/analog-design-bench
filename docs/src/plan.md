@@ -109,6 +109,11 @@
   通过官方判分（最好/中位最差余量 {{fact:gym.3200_best_worst_margin}} / {{fact:gym.3200_median_worst_margin}}）；
   6,400 sims → {{fact:gym.recovered}}/{{fact:gym.runs}}（中位 {{fact:gym.median_worst_margin}}）。
   更多预算让余量变好却没有多通过——这也是“先对齐再谈预算”的原因。
+- **配对对称（已落地，效果未证实）**：`params.matching_pairs` 按“同型号、共享 ≥2 个端子、尺寸比 ≤1.5”
+  识别匹配对（差分对、镜像对），把它们的尺寸约束成同一值后再搜索——在 OTA 上正确识别出 XM1/XM2 与
+  XM3/XM4，并排除 3.3:1 的偏置镜像 XM5/XM6。但 seed 3 上官方仍是 4/7：gain 落在 39.9 dB（差 0.1 dB），
+  前置 gate 失败把 CMRR/PSRR 一起 block 掉。也就是说**还没轮到检验对称假设**——候选正好贴在 gain 的
+  测量边界上（我们测刚刚过线，官方 39.9 dB）。这说明残差已经进入“代理量精度”级别，不是搜索能力问题。
 - **单次演示仍能全过**：seed 11 线性扰动 → 官方 {{fact:solve.ota.verifier_passed}}/{{fact:solve.ota.verifier_total}}、
   reward 1.0（{{fact:solve.ota.final_sims}} 次仿真，gain 余量 {{fact:solve.ota.validation_gain}}、CMRR
   {{fact:solve.ota.validation_cmrr}}，`results/solve/`），说明链路完整，只是不稳健。

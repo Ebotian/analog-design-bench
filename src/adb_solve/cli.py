@@ -389,6 +389,7 @@ def cmd_solve(args: argparse.Namespace) -> int:
         phase_split=args.phase_split,
         polish=args.polish == "auto",
         trusted_gates=trusted,
+        symmetry=args.symmetry == "auto",
     )
     try:
         report = optimize.solve(
@@ -555,6 +556,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     solve_parser.add_argument("--corners-count", type=int, default=3)
     solve_parser.add_argument("--algorithm", choices=["cma", "de"], default="cma")
+    solve_parser.add_argument("--symmetry", choices=["auto", "off"], default="auto",
+                              help="matched devices share one size (differential pairs, mirrors)")
     solve_parser.add_argument("--sigma", type=float, default=0.35, help="CMA initial step in log space")
     solve_parser.add_argument("--phase-split", type=float, default=0.3, help="budget share for the nominal-corner phase")
     solve_parser.add_argument("--polish", choices=["auto", "off"], default="auto",

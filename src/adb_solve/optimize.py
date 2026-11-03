@@ -47,6 +47,7 @@ class SolveOptions(TypedDict, total=False):
     algorithm: str
     sigma: float
     trusted_gates: list[str]
+    symmetry: bool
     phase_split: float
     polish: bool
 
@@ -73,6 +74,7 @@ class Settings:
     algorithm: str = "cma"
     sigma: float = 0.35
     trusted_gates: tuple[str, ...] = ()
+    symmetry: bool = True
     phase_split: float = 0.3
     polish: bool = True
 
@@ -99,6 +101,7 @@ class Settings:
             algorithm=str(raw.get("algorithm", "cma")),
             sigma=float(raw.get("sigma", 0.35)),
             trusted_gates=tuple(raw.get("trusted_gates", ())),
+            symmetry=bool(raw.get("symmetry", True)),
             phase_split=float(raw.get("phase_split", 0.3)),
             polish=bool(raw.get("polish", True)),
         )
@@ -346,10 +349,33 @@ def solve(
 
     rng = random.Random(settings.seed)
 
+    # Structurally matched devices share one size: the asymmetry a random
+    # perturbation introduces is what destroys matching-dependent gates, and it
+    # is not observable in the decks we trust.  Constraining the search to the
+    # symmetric subspace removes that failure mode by construction.
+    pair_ids: list[tuple[str, str]] = []
+    if settings.symmetry:
+        for first, second in params.matching_pairs(design):
+            for suffix in ("w", "l", "nf"):
+                left, right = f"{first}.{suffix}", f"{second}.{suffix}"
+                if left in design.by_id() and right in design.by_id():
+                    pair_ids.append((left, right))
+        if pair_ids:
+            notes.append(f"symmetry: {len(pair_ids)} paired parameter(s) move together")
+
+    def symmetrise(values: Mapping[str, float]) -> dict[str, float]:
+        out = dict(values)
+        for left, right in pair_ids:
+            if left in out and right in out:
+                mean = 0.5 * (out[left] + out[right])
+                out[left] = out[right] = mean
+        return out
+
     def spawn(values: Mapping[str, float]) -> _Candidate:
         repaired = repair(design, values, reference, quantize=settings.quantize)
-        text = _render(design, repaired, reference)
-        return _Candidate(values=repaired, text=text)
+        symmetric = symmetrise(repaired)
+        text = _render(design, symmetric, reference)
+        return _Candidate(values=symmetric, text=text)
 
     batch = 0
     cma_scales: dict[str, float] = {}

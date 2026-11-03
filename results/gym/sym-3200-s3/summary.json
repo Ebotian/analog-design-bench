@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "tasks": [
+    "sky130-ota-5t-gain40-pm60-noise50uv-pvt"
+  ],
+  "seeds": [
+    3
+  ],
+  "perturb": 0.2,
+  "budget": 3200,
+  "runs": 1,
+  "search_feasible": 1,
+  "recovered": 0,
+  "verified": 1,
+  "median_sims_to_feasible": null,
+  "max_sims_to_feasible": null,
+  "by_task": {
+    "sky130-ota-5t-gain40-pm60-noise50uv-pvt": {
+      "runs": 1,
+      "recovered": 0
+    }
+  },
+  "results": [
+    {
+      "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+      "seed": 3,
+      "params": 18,
+      "dims": 12,
+      "sims": 2692,
+      "sims_to_feasible": 1212,
+      "validation_feasible": true,
+      "polish_runs": 2,
+      "official": {
+        "skipped": false,
+        "status": "failed",
+        "passed": 4,
+        "total": 7,
+        "reward": 0.571428571429
+      },
+      "wall_s": 228.5
+    }
+  ]
+}

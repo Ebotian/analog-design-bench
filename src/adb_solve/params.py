@@ -447,6 +447,49 @@ def extract(netlist: spice.Netlist) -> Design:
     return Design(netlist=netlist, params=params)
 
 
+def matching_pairs(design: Design, max_ratio: float = 1.5) -> list[tuple[str, str]]:
+    """Structurally matched devices: same model, >=2 shared terminals, similar size.
+
+    Two devices that share at least two of drain/gate/source/bulk are one of the
+    classic matched structures (differential pair, current mirror).  The size
+    guard keeps intentional ratios apart: a 3:1 mirror is not a matched pair,
+    while two devices perturbed independently by +/-20% can differ by up to
+    (1+d)/(1-d) = 1.5 and still be the same nominal device.
+
+    Returns device prefixes (``ota_5t/XM1``), one entry per matched pair.
+    """
+    prefix_of = {param.device: param.subckt_path for param in design.params}
+    entries: list[tuple[str, str, tuple[str, ...], dict[str, float]]] = []
+    for statement in design.netlist.statements:
+        tokens = statement.positional()
+        if len(tokens) < 5 or not statement.name.startswith("X"):
+            continue
+        name = statement.name
+        nets = tuple(token.text.lower() for token in tokens[0:4])
+        model = tokens[4].text.lower()
+        sizes = {p.kind: p.value for p in design.params if p.device == name and p.kind in {"w", "l"}}
+        prefix = prefix_of.get(name)
+        if prefix is None:
+            continue
+        entries.append((f"{prefix}/{name}", model, nets, sizes))
+
+    pairs: list[tuple[str, str]] = []
+    for index, (name_a, model_a, nets_a, size_a) in enumerate(entries):
+        for name_b, model_b, nets_b, size_b in entries[index + 1 :]:
+            if model_a != model_b:
+                continue
+            if len(set(nets_a) & set(nets_b)) < 2:
+                continue
+            comparable = [kind for kind in ("w", "l") if kind in size_a and kind in size_b and size_a[kind] > 0 and size_b[kind] > 0]
+            if not comparable:
+                continue
+            ratios = [max(size_a[kind], size_b[kind]) / min(size_a[kind], size_b[kind]) for kind in comparable]
+            if max(ratios) > max_ratio:
+                continue
+            pairs.append((name_a, name_b))
+    return pairs
+
+
 def load(path: str | Path) -> Design:
     """Read ``path`` and extract its parameters."""
     return extract(spice.read(path))
