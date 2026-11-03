@@ -161,3 +161,84 @@ def test_corner_fields_also_fill_deck_placeholders():
     rendered = [case.deck_text for case in cases]
     assert any("DC 1.62" in text for text in rendered)
     assert all(".temp 125" in text for text in rendered)
+
+
+# --------------------------------------------------------------- P2: budget
+
+
+def _budget_fixture(tmp_path: Path) -> tuple[list[bench.Deck], list[dict[str, object]]]:
+    deck = bench.Deck("tb.spi", DECK)
+    corners = evaluate.corner_matrix(temperatures=[27.0, 125.0], values={"cl": "5p"})
+    return [deck], [dict(c) for c in corners]
+
+
+def test_budget_truncates_deterministically_and_reports_skipped(tmp_path):
+    decks, corners = _budget_fixture(tmp_path)
+    backend = FakeBackend()
+    report = evaluate.evaluate("netlist", decks, corners, _options(tmp_path, budget=1), backend)
+    assert report["sims"] == 1
+    assert report["sims_run"] == 1
+    assert report["budget"] == {
+        "limit": 1,
+        "prior_used": 0,
+        "used": 1,
+        "returned": 1,
+        "cached": 0,
+        "exhausted": True,
+        "skipped": ["tb.spi[1]"],
+    }
+    assert len(backend.calls[0]) == 1
+
+
+def test_zero_budget_runs_nothing(tmp_path):
+    decks, corners = _budget_fixture(tmp_path)
+    backend = FakeBackend()
+    report = evaluate.evaluate("netlist", decks, corners, _options(tmp_path, budget=0), backend)
+    assert backend.calls == []
+    assert report["results"] == []
+    assert report["budget"]["exhausted"] is True
+    assert len(report["budget"]["skipped"]) == 2
+
+
+def test_cache_hits_do_not_consume_budget(tmp_path):
+    decks, corners = _budget_fixture(tmp_path)
+    evaluate.evaluate("netlist", decks, corners, _options(tmp_path), FakeBackend())
+    backend = FakeBackend()
+    report = evaluate.evaluate("netlist", decks, corners, _options(tmp_path, budget=0), backend)
+    assert backend.calls == []
+    assert report["sims"] == 2
+    assert report["budget"]["used"] == 0
+    assert report["budget"]["exhausted"] is False
+
+
+def test_resume_spends_only_the_remaining_budget(tmp_path):
+    decks, corners = _budget_fixture(tmp_path)
+    first = evaluate.evaluate("netlist", decks, corners, _options(tmp_path, budget=1), FakeBackend())
+    assert first["budget"]["used"] == 1
+    second = evaluate.evaluate(
+        "netlist", decks, corners,
+        _options(tmp_path, budget=2, prior_used=first["budget"]["used"]), FakeBackend(),
+    )
+    assert second["sims"] == 2
+    assert second["sims_run"] == 1
+    assert second["budget"]["limit"] == 2
+    assert second["budget"]["prior_used"] == 1
+    assert second["budget"]["used"] == 1
+    assert second["budget"]["cached"] == 1
+    assert second["budget"]["exhausted"] is False
+
+
+def test_negative_budget_is_rejected(tmp_path):
+    decks, corners = _budget_fixture(tmp_path)
+    with pytest.raises(ValueError):
+        evaluate.evaluate("netlist", decks, corners, _options(tmp_path, budget=-1), FakeBackend())
+
+
+def test_worker_sets_single_thread_ngspice_and_memory_limit(tmp_path):
+    from adb_solve.docker_backend import _Worker
+
+    worker = _Worker("img", tmp_path, 0, 10.0, False, "2g")
+    assert (tmp_path / "worker-0" / ".spiceinit").read_text() == "set num_threads=1\n"
+    assert worker._limits() == ["--memory", "2g"]
+    unlimited = _Worker("img", tmp_path, 1, 10.0, False, None)
+    assert unlimited._limits() == []

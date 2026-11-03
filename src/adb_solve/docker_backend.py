@@ -51,14 +51,30 @@ def image_id(image: str = DEFAULT_IMAGE) -> str:
 class _Worker:
     """One container plus the host directory mounted at ``/app``."""
 
-    def __init__(self, image: str, root: Path, index: int, timeout: float, oneshot: bool):
+    def __init__(
+        self,
+        image: str,
+        root: Path,
+        index: int,
+        timeout: float,
+        oneshot: bool,
+        memory: str | None = None,
+    ):
         self.image = image
         self.dir = root / f"worker-{index}"
         self.dir.mkdir(parents=True, exist_ok=True)
+        # ngspice reads .spiceinit from the working directory.  One thread per
+        # simulation is what the official verifier uses; letting each worker
+        # spawn a full OMP pool behind --cpus 1 only adds context switching.
+        (self.dir / ".spiceinit").write_text("set num_threads=1\n")
         self.timeout = timeout
         self.oneshot = oneshot
+        self.memory = memory
         self.name = f"adb-sim-{uuid.uuid4().hex[:10]}"
         self._started = False
+
+    def _limits(self) -> list[str]:
+        return ["--memory", self.memory] if self.memory else []
 
     def start(self) -> None:
         if self.oneshot:
@@ -68,6 +84,7 @@ class _Worker:
                 "docker", "run", "-d", "--rm", "--name", self.name,
                 "--network", "none",
                 "--cpus", "1",
+                *self._limits(),
                 "-v", f"{self.dir}:/app",
                 "-w", "/app",
                 "--entrypoint", "sleep",
@@ -102,6 +119,7 @@ class _Worker:
         if self.oneshot:
             command = [
                 "docker", "run", "--rm", "--network", "none",
+                *self._limits(),
                 "-v", f"{self.dir}:/app", "-w", "/app", self.image,
             ]
         command += ["timeout", str(self.timeout), NGSPICE, "-b", f"/app/{case.deck_name}"]
@@ -154,12 +172,14 @@ class DockerBackend:
         timeout: float = 120.0,
         root: Path = Path(".work/sim"),
         oneshot: bool = False,
+        memory: str | None = "4g",
     ):
         self.image = image
         self.jobs = jobs
         self.timeout = timeout
         self.root = root
         self.oneshot = oneshot
+        self.memory = memory
 
     def simulate(self, cases: Sequence[SimCase]) -> list[SimResult]:
         if not cases:
@@ -169,7 +189,7 @@ class DockerBackend:
         self.root.mkdir(parents=True, exist_ok=True)
         jobs = max(1, min(self.jobs, len(cases)))
         workers = [
-            _Worker(self.image, self.root, index, self.timeout, self.oneshot)
+            _Worker(self.image, self.root, index, self.timeout, self.oneshot, self.memory)
             for index in range(jobs)
         ]
         for worker in workers:

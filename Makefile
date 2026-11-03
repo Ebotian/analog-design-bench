@@ -1,6 +1,6 @@
 PY ?= python3
 
-.PHONY: fetch-t0 check manifest test types corners p1 results docs docs-check hooks ci clean
+.PHONY: fetch-t0 check manifest test types corners p1 results legality docs docs-check hooks ci clean
 
 fetch-t0:
 	$(PY) scripts/fetch_t0.py --tasks-only
@@ -26,6 +26,9 @@ p1:
 
 results:
 	$(PY) scripts/reconcile_verifiers.py
+
+legality:
+	$(PY) scripts/replay_legality.py --checker-sample 3600 --jobs 12
 
 docs:
 	$(PY) scripts/build_results_md.py

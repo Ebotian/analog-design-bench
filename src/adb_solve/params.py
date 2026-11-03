@@ -63,11 +63,13 @@ class Bounds:
     ``source`` says how far the box can be trusted:
 
     * ``checker``    -- legality the official checker enforces unconditionally
-                        (positive geometry, integer multiplicities);
+                        (positive geometry, non-negative areas);
     * ``pdk-modeled``-- the checker's modelled ranges, only enforced with
                         ``--enforce-sky130-geometry``, which the task verifiers
                         do not use (many frozen references sit outside it);
-    * ``heuristic``  -- a working range invented here, useful for search only;
+    * ``heuristic``  -- a working range invented here, useful for search only
+                        (e.g. integer multiplicities: the checker accepts
+                        ``m=0.5``, so the grid is advice, not legality);
     * ``none``       -- unknown.
     """
 
@@ -200,7 +202,7 @@ class Design:
                 # even when the reference design sits outside the checker's
                 # modelled range (some frozen references do).
                 continue
-            violation = _legality_violation(param, value)
+            violation = write_violation(param, value)
             if violation is not None:
                 raise ValueError(f"{param_id}={value!r}: {violation}")
             replacements.append(
@@ -225,7 +227,9 @@ def _checker_bounds(kind: str, target: str, native_value: float) -> Bounds:
     """Search box for ``kind`` on a device of family ``target``."""
     geometry = MOS_GEOMETRY_UM.get(target)
     if kind in INTEGER_KINDS:
-        return Bounds(minimum=1.0, maximum=None, grid=1.0, source="checker")
+        # Measured: check_circuit.py accepts m=0.5 and nf=1.5, so integer
+        # multiplicity is a search hint, never a legality gate.
+        return Bounds(minimum=1.0, maximum=None, grid=1.0, source="heuristic")
     if kind in NONNEGATIVE_KINDS:
         return Bounds(minimum=0.0, maximum=None, grid=None, source="checker")
     if geometry is not None and kind == "l":
@@ -255,25 +259,32 @@ def _checker_bounds(kind: str, target: str, native_value: float) -> Bounds:
     return Bounds()
 
 
-def _legality_violation(param: Param, value: float) -> str | None:
+def write_violation(param: Param, value: float) -> str | None:
+    """Why ``value`` cannot be written for ``param``; ``None`` when it can.
+
+    Landing on the same literal is always allowed: a frozen reference may sit
+    outside the checker's modelled range, and rewriting it to itself is not a
+    new proposal.
+    """
+    if param.text_for(value) == param.raw:
+        return None
+    return legality_violation(param, value)
+
+
+def legality_violation(param: Param, value: float) -> str | None:
     """What ``check_circuit.py`` rejects unconditionally, or ``None``.
 
-    Search bounds are *not* validated here: the modelled w/l ranges need an
-    optional checker flag that the task verifiers do not pass, so enforcing
-    them at write-back would reject designs the corpus itself contains.
+    Measured against the checker, not assumed: it requires positivity
+    (``m=0``, ``w=-1`` fail) but accepts fractional multiplicities
+    (``m=0.5``, ``nf=1.5`` pass).  Integer grids and the modelled w/l ranges
+    stay in :class:`Bounds` as search advice; only the unconditional rules are
+    enforced when writing back.
     """
     if not math.isfinite(value):
         return "value must be finite"
-    if param.bounds.grid is not None:
-        steps = value / param.bounds.grid
-        if abs(steps - round(steps)) > 1e-9:
-            return f"value must be a multiple of {param.bounds.grid:g}"
-        if value <= 0:
-            return "value must be positive"
-        return None
     if param.kind in NONNEGATIVE_KINDS:
         return None if value >= 0 else "value must be non-negative"
-    if param.kind in {"w", "l", "value", "dc"}:
+    if param.kind in {"w", "l", "value", "dc"} or param.kind in INTEGER_KINDS:
         return None if value > 0 else "value must be positive"
     return None
 

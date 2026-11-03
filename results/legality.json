@@ -1,0 +1,335 @@
+{
+  "by_task": {
+    "sky130-ahuja-compensated-two-stage-load-range-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-analog-input-mux-8to1-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-bandgap-reference-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-beta-multiplier-reference-pvt-mc": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-bootstrap-driver-pt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-bootstrap-sampler-fft": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-bottom-plate-sampler-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-buf-ppsf-bs-gain1-sfdr90": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-capless-ldo-1v0-20ma-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-class-d-halfbridge-eff95-tt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-cml-divider-div2-range1gto10g": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-cml-tx-driver-28g-nrz-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-cmos-switched-resistor-dac-5bit-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-complementary-folded-cascode-ab-opamp-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-constant-gm-stable-gain-amplifier-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-current-starved-ring-vco-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-fct-residue-amplifier-900msps": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-flash-adc-3bit-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-flash-adc-4bit-50msps": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt": {
+      "circuits": 72,
+      "rejected": 2,
+      "rejected_passing": 0
+    },
+    "sky130-fully-differential-ota-c-biquad-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-gmr-degen-amp-constant-gm-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-high-psrr-bandgap-reference-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-inductive-lna-2p4ghz-gain12-nf2-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-lc-vco-2ghz-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-ldo-ota5-robust-pvt-mc": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-low-power-line-driver-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-low-power-oscillator-2mhz-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-nmos-pass-ldo-0p4v-pvt-mc": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-ota-5t-gain40-pm60-noise50uv-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-pll-charge-pump-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-programmable-icc-iptat-current-mirror-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-regulated-charge-pump-10mhz-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-ring-amp-3stage-gain8-400uw": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-sar-adc-4bit-async": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-sar-adc-6bit-async": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-switched-capacitor-2to1-converter-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-telescopic-cascode-ota-pvt-fix": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-three-stage-nested-miller-ota-pvt": {
+      "circuits": 72,
+      "rejected": 1,
+      "rejected_passing": 0
+    },
+    "sky130-tia-zt8k-bw750m-noise5p-sfdr70-power5m-pt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-transistor-divide-by-2": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-two-stage-miller-opamp-gain60-ugb200-pm60-noise50uv-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    },
+    "sky130-unregulated-charge-pump-10mhz-pvt": {
+      "circuits": 72,
+      "rejected": 0,
+      "rejected_passing": 0
+    }
+  },
+  "checker_sample": {
+    "agreements": 3309,
+    "checker_stricter_failing": 219,
+    "checker_stricter_passing": [],
+    "checker_stricter_passing_count": 0,
+    "precheck_stricter": [],
+    "precheck_stricter_count": 0,
+    "size": 3600,
+    "skipped_preprocessed": 72
+  },
+  "circuits": 3600,
+  "elapsed_s": 99.22,
+  "parse_error_count": 0,
+  "parse_errors": [],
+  "passing": 1679,
+  "reasons": {
+    "value must be positive": 11
+  },
+  "rejected": 3,
+  "rejected_examples": [
+    {
+      "index": 1685,
+      "pass": false,
+      "run": "sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt/deepseek-v4-1-flash/run-3",
+      "violations": [
+        {
+          "param": "folded_cascode_ota/Cvmb.value",
+          "reason": "value must be positive",
+          "stage": "values"
+        },
+        {
+          "param": "folded_cascode_ota/Cnt.value",
+          "reason": "value must be positive",
+          "stage": "values"
+        },
+        {
+          "param": "folded_cascode_ota/Cpt.value",
+          "reason": "value must be positive",
+          "stage": "values"
+        },
+        {
+          "param": "folded_cascode_ota/Cna.value",
+          "reason": "value must be positive",
+          "stage": "values"
+        },
+        {
+          "param": "folded_cascode_ota/Cnb2.value",
+          "reason": "value must be positive",
+          "stage": "values"
+        }
+      ]
+    },
+    {
+      "index": 1717,
+      "pass": false,
+      "run": "sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt/mimo-v2-5-pro/run-2",
+      "violations": [
+        {
+          "param": "folded_cascode_ota/R_out.value",
+          "reason": "value must be positive",
+          "stage": "values"
+        }
+      ]
+    },
+    {
+      "index": 3213,
+      "pass": false,
+      "run": "sky130-three-stage-nested-miller-ota-pvt/deepseek-v4-pro/run-2",
+      "violations": [
+        {
+          "param": "three_stage_nmc_ota/Rz2.value",
+          "reason": "value must be positive",
+          "stage": "values"
+        }
+      ]
+    }
+  ],
+  "rejected_passing": 0,
+  "rejected_ratio": 0.0008,
+  "schema": 1,
+  "source": "data/runs/*.jsonl"
+}

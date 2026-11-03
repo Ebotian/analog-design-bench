@@ -106,16 +106,21 @@
     {
       "block": "plan/p2",
       "doc": "plan",
-      "end": 78,
+      "end": 85,
       "facts": [
-        "corpus.runs"
+        "legality.checker_checked",
+        "legality.checker_false_positive",
+        "legality.checker_stricter_failing",
+        "legality.circuits",
+        "legality.rejected",
+        "legality.skipped_preprocessed"
       ],
-      "heading": "P2 — 合法性护栏与预算（下一步，≈2 天）",
+      "heading": "P2 — 合法性护栏与预算（已完成）",
       "line": 65,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P2",
-        "status:open",
+        "status:done",
         "kind:goal",
         "topic:guardrail"
       ]
@@ -123,12 +128,12 @@
     {
       "block": "plan/p3",
       "doc": "plan",
-      "end": 88,
+      "end": 95,
       "facts": [
         "p1.knobs_median"
       ],
       "heading": "P3 — 筛选与求解（≈5–8 天）",
-      "line": 79,
+      "line": 86,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P3",
@@ -140,10 +145,10 @@
     {
       "block": "plan/p4",
       "doc": "plan",
-      "end": 97,
+      "end": 104,
       "facts": [],
       "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
-      "line": 89,
+      "line": 96,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P4",
@@ -155,13 +160,13 @@
     {
       "block": "plan/p5",
       "doc": "plan",
-      "end": 120,
+      "end": 127,
       "facts": [
         "corpus.runs",
         "p1.netlists"
       ],
       "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
-      "line": 98,
+      "line": 105,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P5",
@@ -225,6 +230,7 @@
       "end": 94,
       "facts": [
         "corpus.runs",
+        "legality.checker_false_positive",
         "p1.knobs_median",
         "p1.netlists"
       ],
@@ -395,9 +401,15 @@
     {
       "block": "readme/p1-usage",
       "doc": "readme",
-      "end": 63,
-      "facts": [],
-      "heading": "求解基建（P1）",
+      "end": 74,
+      "facts": [
+        "legality.checker_false_positive",
+        "legality.checker_stricter_failing",
+        "legality.circuits",
+        "legality.rejected",
+        "legality.rejected_passing"
+      ],
+      "heading": "求解基建（P1–P2）",
       "line": 50,
       "path": "README.md",
       "tags": [
@@ -410,7 +422,7 @@
     {
       "block": "readme/corners",
       "doc": "readme",
-      "end": 86,
+      "end": 97,
       "facts": [
         "corners.coverage_subsets",
         "corners.coverage_tasks",
@@ -428,7 +440,7 @@
         "corners.unresolved"
       ],
       "heading": "Corner 矩阵（IaC）",
-      "line": 64,
+      "line": 75,
       "path": "README.md",
       "tags": [
         "phase:P1",
@@ -440,10 +452,10 @@
     {
       "block": "readme/docs",
       "doc": "readme",
-      "end": 109,
+      "end": 120,
       "facts": [],
       "heading": "文档系统",
-      "line": 87,
+      "line": 98,
       "path": "README.md",
       "tags": [
         "kind:usage",
@@ -453,10 +465,10 @@
     {
       "block": "readme/reproduce",
       "doc": "readme",
-      "end": 121,
+      "end": 132,
       "facts": [],
       "heading": "复现",
-      "line": 110,
+      "line": 121,
       "path": "README.md",
       "tags": [
         "kind:usage",
@@ -466,7 +478,7 @@
     {
       "block": "readme/data-gaps",
       "doc": "readme",
-      "end": 134,
+      "end": 145,
       "facts": [
         "corpus.no_gates",
         "corpus.no_gates_median_min",
@@ -475,7 +487,7 @@
         "corpus.runs"
       ],
       "heading": "已知数据质量问题",
-      "line": 122,
+      "line": 133,
       "path": "README.md",
       "tags": [
         "kind:gap",
@@ -485,10 +497,10 @@
     {
       "block": "readme/absent",
       "doc": "readme",
-      "end": 144,
+      "end": 155,
       "facts": [],
       "heading": "不在这里的东西",
-      "line": 135,
+      "line": 146,
       "path": "README.md",
       "tags": [
         "kind:gap",
@@ -498,10 +510,10 @@
     {
       "block": "readme/license",
       "doc": "readme",
-      "end": 161,
+      "end": 172,
       "facts": [],
       "heading": "许可",
-      "line": 145,
+      "line": 156,
       "path": "README.md",
       "tags": [
         "kind:policy",
@@ -544,7 +556,7 @@
     {
       "block": "data/verifier-run",
       "doc": "data",
-      "end": 65,
+      "end": 66,
       "facts": [
         "corners.needs_review",
         "corners.unresolved",
@@ -578,10 +590,10 @@
     {
       "block": "data/missing",
       "doc": "data",
-      "end": 82,
+      "end": 83,
       "facts": [],
       "heading": "T0 未包含、由 T1 补齐的部分",
-      "line": 66,
+      "line": 67,
       "path": "DATA.md",
       "tags": [
         "kind:gap",
@@ -591,14 +603,14 @@
     {
       "block": "data/contents",
       "doc": "data",
-      "end": 94,
+      "end": 95,
       "facts": [
         "corpus.models",
         "corpus.runs",
         "corpus.tasks"
       ],
       "heading": "内容",
-      "line": 83,
+      "line": 84,
       "path": "DATA.md",
       "tags": [
         "kind:data",
@@ -608,7 +620,7 @@
     {
       "block": "data/integrity",
       "doc": "data",
-      "end": 104,
+      "end": 105,
       "facts": [
         "corpus.files",
         "corpus.passes",
@@ -617,7 +629,7 @@
         "corpus.tasks"
       ],
       "heading": "完整性（`make check` 可复验）",
-      "line": 95,
+      "line": 96,
       "path": "DATA.md",
       "tags": [
         "kind:evidence",
@@ -627,7 +639,7 @@
     {
       "block": "data/defects",
       "doc": "data",
-      "end": 116,
+      "end": 117,
       "facts": [
         "corpus.no_gates",
         "corpus.no_gates_median_min",
@@ -636,7 +648,7 @@
         "corpus.runs"
       ],
       "heading": "已知缺陷（原样保留，不修补）",
-      "line": 105,
+      "line": 106,
       "path": "DATA.md",
       "tags": [
         "kind:gap",
@@ -646,10 +658,10 @@
     {
       "block": "data/refresh",
       "doc": "data",
-      "end": 127,
+      "end": 128,
       "facts": [],
       "heading": "刷新",
-      "line": 117,
+      "line": 118,
       "path": "DATA.md",
       "tags": [
         "kind:usage",
@@ -659,10 +671,10 @@
     {
       "block": "data/limits",
       "doc": "data",
-      "end": 134,
+      "end": 135,
       "facts": [],
       "heading": "限制",
-      "line": 128,
+      "line": 129,
       "path": "DATA.md",
       "tags": [
         "kind:policy",
@@ -674,7 +686,7 @@
     {
       "generated_by": null,
       "id": "plan",
-      "lines": 120,
+      "lines": 127,
       "path": "docs/PLAN.md",
       "source": "docs/src/plan.md",
       "tags": [
@@ -700,7 +712,7 @@
     {
       "generated_by": null,
       "id": "readme",
-      "lines": 161,
+      "lines": 172,
       "path": "README.md",
       "source": "docs/src/readme.md",
       "tags": [
@@ -713,7 +725,7 @@
     {
       "generated_by": null,
       "id": "data",
-      "lines": 134,
+      "lines": 135,
       "path": "DATA.md",
       "source": "docs/src/data.md",
       "tags": [
@@ -1034,7 +1046,6 @@
         "data/contents",
         "data/defects",
         "data/integrity",
-        "plan/p2",
         "plan/p5",
         "plan/t0",
         "readme/data-gaps",
@@ -1073,6 +1084,97 @@
         "readme/t0-check"
       ],
       "value": 50
+    },
+    "legality.checker_checked": {
+      "display": "3,600",
+      "extract": {
+        "file": "results/legality.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "checker_sample.size"
+      },
+      "used_in": [
+        "plan/p2"
+      ],
+      "value": 3600
+    },
+    "legality.checker_false_positive": {
+      "display": "0",
+      "extract": {
+        "file": "results/legality.json",
+        "kind": "json",
+        "path": "checker_sample.checker_stricter_passing_count"
+      },
+      "used_in": [
+        "plan/p2",
+        "readme/p1-usage",
+        "requirements/fr"
+      ],
+      "value": 0
+    },
+    "legality.checker_stricter_failing": {
+      "display": "219",
+      "extract": {
+        "file": "results/legality.json",
+        "kind": "json",
+        "path": "checker_sample.checker_stricter_failing"
+      },
+      "used_in": [
+        "plan/p2",
+        "readme/p1-usage"
+      ],
+      "value": 219
+    },
+    "legality.circuits": {
+      "display": "3,600",
+      "extract": {
+        "file": "results/legality.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "circuits"
+      },
+      "used_in": [
+        "plan/p2",
+        "readme/p1-usage"
+      ],
+      "value": 3600
+    },
+    "legality.rejected": {
+      "display": "3",
+      "extract": {
+        "file": "results/legality.json",
+        "kind": "json",
+        "path": "rejected"
+      },
+      "used_in": [
+        "plan/p2",
+        "readme/p1-usage"
+      ],
+      "value": 3
+    },
+    "legality.rejected_passing": {
+      "display": "0",
+      "extract": {
+        "file": "results/legality.json",
+        "kind": "json",
+        "path": "rejected_passing"
+      },
+      "used_in": [
+        "readme/p1-usage"
+      ],
+      "value": 0
+    },
+    "legality.skipped_preprocessed": {
+      "display": "72",
+      "extract": {
+        "file": "results/legality.json",
+        "kind": "json",
+        "path": "checker_sample.skipped_preprocessed"
+      },
+      "used_in": [
+        "plan/p2"
+      ],
+      "value": 72
     },
     "p1.knobs_max": {
       "display": "536",

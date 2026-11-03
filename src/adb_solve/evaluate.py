@@ -40,8 +40,10 @@ class EvalReport(TypedDict):
     schema_version: str
     design_hash: str
     sims: int
+    sims_run: int
     wall_seconds: float
     cache: dict[str, object]
+    budget: dict[str, object]
     status_counts: dict[str, int]
     results: list[CaseReport]
 
@@ -55,6 +57,9 @@ class EvalOptions:
     use_cache: bool = True
     work_root: Path = Path(".work/sim")
     oneshot: bool = False
+    budget: int | None = None
+    prior_used: int = 0
+    memory: str | None = "4g"
 
 
 def design_hash(text: str) -> str:
@@ -126,6 +131,7 @@ def _backend(options: EvalOptions) -> DockerBackend:
         timeout=options.timeout,
         root=options.work_root,
         oneshot=options.oneshot,
+        memory=options.memory,
     )
 
 
@@ -143,6 +149,10 @@ def evaluate(
 ) -> EvalReport:
     """Simulate ``netlist_text`` over ``decks × corners`` and return a report."""
     options = options or EvalOptions()
+    if options.budget is not None and options.budget < 0:
+        raise ValueError("budget must be >= 0")
+    if options.prior_used < 0:
+        raise ValueError("prior_used must be >= 0")
     started = time.perf_counter()
     cases = build_cases(netlist_text, decks, corners, keys)
     cache = Cache(options.cache_root, namespace="sim", enabled=options.use_cache)
@@ -165,9 +175,20 @@ def evaluate(
         else:
             cached[case.case_id] = _cache_payload(hit)
 
+    # Budget counts simulations that actually run, not cache hits: re-reading a
+    # cached result spends nothing.  ``prior_used`` comes from a resumed report,
+    # so the cap is a total across invocations.  Truncation is deterministic
+    # (deck × corner order), so a resumed run continues where this one stopped.
+    if options.budget is None:
+        allowed = pending
+    else:
+        remaining = max(0, options.budget - options.prior_used)
+        allowed = pending[:remaining]
+    skipped = pending[len(allowed) :]
+
     fresh: list[SimResult] = []
-    if pending:
-        fresh = (backend or _backend(options)).simulate(pending)
+    if allowed:
+        fresh = (backend or _backend(options)).simulate(allowed)
     for result in fresh:
         cache.put(cache_keys[result.case_id], dict(result.to_payload()))
 
@@ -194,8 +215,18 @@ def evaluate(
         "schema_version": SCHEMA_VERSION,
         "design_hash": design_hash(netlist_text),
         "sims": len(rows),
+        "sims_run": len(fresh),
         "wall_seconds": round(time.perf_counter() - started, 3),
         "cache": cache.stats(),
+        "budget": {
+            "limit": options.budget,
+            "prior_used": options.prior_used,
+            "used": len(fresh),
+            "returned": len(rows),
+            "cached": len(cached),
+            "exhausted": bool(skipped),
+            "skipped": [case.case_id for case in skipped],
+        },
         "status_counts": dict(sorted(counts.items())),
         "results": rows,
     }

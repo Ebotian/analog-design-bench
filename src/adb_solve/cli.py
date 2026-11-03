@@ -13,12 +13,13 @@ import sys
 from pathlib import Path
 from typing import cast
 
-from . import bench, check as legality, corners as corner_asset, evaluate, params
+from . import bench, check as checker, corners as corner_asset, evaluate, legality, params
 from .docker_backend import DEFAULT_IMAGE, SimulationError
 from .sim import CornerValue
 from . import netlist as spice
 
 MISSING = 2
+ILLEGAL = 3
 
 
 def _read_json(value: str | None) -> dict[str, object]:
@@ -66,7 +67,7 @@ def cmd_vars(args: argparse.Namespace) -> int:
 def cmd_check(args: argparse.Namespace) -> int:
     text = Path(args.netlist).read_text()
     allow = tuple(args.allow_ideal or ())
-    result = legality.check_text(
+    result = checker.check_text(
         text,
         image=args.image,
         allow_ideal=allow,
@@ -114,11 +115,58 @@ def _matrix(args: argparse.Namespace) -> list[dict[str, CornerValue]]:
 
 def cmd_eval(args: argparse.Namespace) -> int:
     text = Path(args.netlist).read_text()
+    design = params.load_text(text, path=str(args.netlist))
+    policy = args.legality
+    allow_ideal = tuple(args.allow_ideal or ())
+    require_subcircuit: tuple[str, ...] = ()
+    if args.task:
+        declared = legality.task_policy(args.task)
+        if args.allow_ideal is None:
+            allow_ideal = declared.allow_ideal
+        require_subcircuit = declared.require_subcircuit
+        if policy == "checker" and declared.preprocessed:
+            print(
+                f"checker skipped: {args.task} preprocesses the netlist with check_area.py "
+                "inside its own image (see TaskPolicy.preprocessed)",
+                file=sys.stderr,
+            )
+            policy = "precheck"
+    if policy != "off":
+        verdict = legality.guard(
+            text,
+            design,
+            checker=policy == "checker",
+            image=args.image,
+            allow_ideal=allow_ideal,
+            require_subcircuit=require_subcircuit,
+        )
+        if not verdict.ok:
+            print(json.dumps(verdict.to_json(), indent=2), file=sys.stderr)
+            print(f"illegal design: {verdict.summary()}", file=sys.stderr)
+            return ILLEGAL
+
     decks = _decks(args)
     corners = _matrix(args)
     keys = None
     if args.corners is not None and args.task is not None:
         keys = corner_asset.for_task(corner_asset.load(args.corners), args.task).keys
+
+    budget = args.budget
+    if args.resume is not None:
+        if args.no_cache:
+            print("--resume needs the cache; drop --no-cache", file=sys.stderr)
+            return MISSING
+        previous = json.loads(args.resume.read_text())
+        if previous.get("design_hash") != evaluate.design_hash(text):
+            print(f"{args.resume}: different design; refusing to resume", file=sys.stderr)
+            return MISSING
+        spent = int((previous.get("budget") or {}).get("used") or 0)
+        prior_used = spent
+        if budget is not None:
+            print(f"resume: {spent} sims already spent, {max(0, budget - spent)} of {budget} left", file=sys.stderr)
+    else:
+        prior_used = 0
+
     options = evaluate.EvalOptions(
         image=args.image,
         jobs=args.jobs,
@@ -127,6 +175,9 @@ def cmd_eval(args: argparse.Namespace) -> int:
         use_cache=not args.no_cache,
         work_root=Path(args.work_dir),
         oneshot=args.oneshot,
+        budget=budget,
+        prior_used=prior_used,
+        memory=None if args.memory == "unlimited" else args.memory,
     )
     try:
         report = evaluate.evaluate(text, decks, corners, options, keys=keys)
@@ -139,10 +190,14 @@ def cmd_eval(args: argparse.Namespace) -> int:
     if args.out:
         evaluate.write_report(report, Path(args.out))
     print(evaluate.summarise(report))
+    budget_report = report["budget"]
+    skipped = budget_report["skipped"]
+    skipped_count = len(skipped) if isinstance(skipped, list) else 0
     print(
-        f"sims={report['sims']} status={report['status_counts']} "
+        f"sims={report['sims']} run={report['sims_run']} status={report['status_counts']} "
         f"cache={report['cache']['hits']}/{report['cache']['misses']} "
-        f"wall={report['wall_seconds']}s"
+        f"budget={budget_report['used']}/{budget_report['limit']} "
+        f"skipped={skipped_count} wall={report['wall_seconds']}s"
     )
     return 0
 
@@ -220,6 +275,14 @@ def build_parser() -> argparse.ArgumentParser:
     eval_parser.add_argument("--temperature", nargs="*", type=float, default=None)
     eval_parser.add_argument("--jobs", type=int, default=1)
     eval_parser.add_argument("--timeout", type=float, default=120.0)
+    eval_parser.add_argument(
+        "--legality", choices=["precheck", "checker", "off"], default="precheck",
+        help="precheck (pure), checker (also run check_circuit.py), or off",
+    )
+    eval_parser.add_argument("--allow-ideal", nargs="*", default=None, choices=["R", "C", "L", "K"])
+    eval_parser.add_argument("--budget", type=int, default=None, help="hard cap on simulations this run")
+    eval_parser.add_argument("--resume", type=Path, help="previous report.json; its sims count against --budget")
+    eval_parser.add_argument("--memory", default="4g", help="container memory limit (e.g. 4g, unlimited)")
     eval_parser.add_argument("--out", type=Path)
     eval_parser.add_argument("--image", default=DEFAULT_IMAGE)
     eval_parser.add_argument("--cache-dir", default=".adb-cache")

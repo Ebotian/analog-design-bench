@@ -61,19 +61,26 @@
   {{fact:corners.coverage_tasks}} 个任务带 {{fact:corners.coverage_subsets}} 组 per-bench coverage 子集。
 - 纪律：不静默猜测；deck 渲染失败的占位符集合必须恰好等于声明的 `unresolved`。
 
-<!-- block: p2 | tags: phase:P2,status:open,kind:goal,topic:guardrail -->
-### P2 — 合法性护栏与预算（下一步，≈2 天）
+<!-- block: p2 | tags: phase:P2,status:done,kind:goal,topic:guardrail -->
+### P2 — 合法性护栏与预算（已完成）
 
 - **目标**：不让优化器提出非法或越界的设计，不让一次调用烧掉全部预算。
-- **内容**：
-  - 复用镜像内 `/opt/analog-arena/check_circuit.py`，在**跑仿真前**拒绝非法提案；
-  - 边界来自 PDK 与 checker，**不来自参考解**；
-  - 每次 eval 记 sims，`--budget` 硬上限，超限返回部分结果；
-  - 容器加 `--memory` 上限（大 `tran` 会吃满内存）。
-- **完成标准**：在 {{fact:corpus.runs}} 条 T0 电路上回放，非法提案率 < 1%；预算耗尽时可恢复、报告完整。
-- **已定口径**：合法性 ≠ 搜索盒。`apply` 只硬校验正值/整数倍率/非负面积
-  （`Bounds.source` 取 `checker`/`pdk-modeled`/`heuristic`）；几何范围是可选开关，
-  参考解中多数超出它（例如 `w=50 m=16`），不能当硬约束。
+- **合法性**：`precheck` 是纯函数，校验未知参数、不可写参数与 checker 无条件拒绝的规则；
+  `--legality checker` 再跑镜像内的 `check_circuit.py`。任务自己的 `task.toml` 决定
+  `checker_allow_ideal` / `require_subcircuit`，不靠猜。
+- **预算**：每次 eval 记 sims（缓存命中不计），`--budget` 是跨调用的硬上限，超限返回
+  部分结果并列出 `skipped`；`--resume report.json` 只花剩余预算。
+- **资源**：容器 `--memory`（默认 4g，与 task.toml 的 `memory_mb` 一致），每个 worker 写
+  `.spiceinit` 固定 `num_threads=1`。
+- **回放证据**（`results/legality.json`）：{{fact:legality.circuits}} 条 T0 电路中，纯校验拒绝
+  {{fact:legality.rejected}} 条；全部跑 checker（{{fact:legality.checker_checked}} 条）后另有
+  {{fact:legality.checker_stricter_failing}} 条只被 checker 拦下；**通过的电路误杀
+  {{fact:legality.checker_false_positive}} 条**；{{fact:legality.skipped_preprocessed}} 条属于自带
+  `check_area.py` 预处理的任务，跳过 checker 并记录在报告里。
+- **已定口径（实测修正）**：合法性 ≠ 搜索盒。checker 实测接受 `m=0.5`、`nf=1.5`，
+  所以整数倍率降级为**搜索建议**，`apply` 只硬校验正值与非负面积；几何范围是可选开关
+  （参考解中多数超出它，例如 `w=50 m=16`）。
+- **未做**：拒绝后的自动修复（取整/夹取）归 P3；本轮只拒绝，并给出可定位的违规项。
 
 <!-- block: p3 | tags: phase:P3,status:open,kind:goal,topic:solver -->
 ### P3 — 筛选与求解（≈5–8 天）

@@ -302,3 +302,42 @@ kind = "json"
 file = "results/reconcile.json"
 path = "summary.wall_mean_relative_difference"
 format = "{:.1%}"
+
+# ------------------------------------------------------- legality replay
+
+[facts."legality.circuits"]
+kind = "json"
+file = "results/legality.json"
+path = "circuits"
+format = "{:,}"
+
+[facts."legality.rejected"]
+kind = "json"
+file = "results/legality.json"
+path = "rejected"
+
+[facts."legality.rejected_passing"]
+kind = "json"
+file = "results/legality.json"
+path = "rejected_passing"
+
+[facts."legality.checker_checked"]
+kind = "json"
+file = "results/legality.json"
+path = "checker_sample.size"
+format = "{:,}"
+
+[facts."legality.checker_stricter_failing"]
+kind = "json"
+file = "results/legality.json"
+path = "checker_sample.checker_stricter_failing"
+
+[facts."legality.checker_false_positive"]
+kind = "json"
+file = "results/legality.json"
+path = "checker_sample.checker_stricter_passing_count"
+
+[facts."legality.skipped_preprocessed"]
+kind = "json"
+file = "results/legality.json"
+path = "checker_sample.skipped_preprocessed"

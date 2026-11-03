@@ -47,7 +47,7 @@ tests/                pytest 单测 + docker 端到端 smoke
 | 榜单复算 | 前 4 名 pass@1 与 avgMinutes 与站点逐位一致 |
 
 <!-- block: p1-usage | tags: phase:P1,status:done,kind:usage,topic:solver -->
-## 求解基建（P1）
+## 求解基建（P1–P2）
 
 ```bash
 make test        # 单测（无 docker 也能跑）；make types = mypy --strict；make p1 = 参考解验收
@@ -55,7 +55,18 @@ PYTHONPATH=src python3 -m adb_solve vars  --netlist circuit.spi
 PYTHONPATH=src python3 -m adb_solve eval  --netlist circuit.spi --bench benches/ \
     --values '{"supply": 1.8, "temperature": 27}' --process tt --jobs 4 --out report.json
 PYTHONPATH=src python3 -m adb_solve apply --netlist circuit.spi --cand cand.json --out new.spi
+# P2：护栏与预算
+... eval --legality checker        # 跑镜像里的 check_circuit.py（策略取自 task.toml）
+... eval --budget 600 --out report.json            # 硬上限
+... eval --budget 1500 --resume report.json        # 只花剩余预算
+make legality                      # 全部 T0 电路回放 → results/legality.json
 ```
+
+回放基线：{{fact:legality.circuits}} 条电路中纯校验拒绝 {{fact:legality.rejected}} 条
+（其中通过的设计 {{fact:legality.rejected_passing}} 条），checker 另外拦下
+{{fact:legality.checker_stricter_failing}} 条；**通过的设计被误杀
+{{fact:legality.checker_false_positive}} 条**。checker 实测接受 `m=0.5`，因此整数倍率只是
+搜索建议，不是合法性。
 
 评测跑在 `ghcr.io/arcadia-1/analog-arena-sky130-tools`（ngspice-46 + Sky130 PDK）里，
 每个 worker 一个常驻容器，deck 挂在 `/app`；缓存键是 `netlist + 渲染后的 deck + image id`。

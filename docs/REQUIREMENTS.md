@@ -86,8 +86,8 @@ Report   = { design_hash, params, gates[], margins[], sims, budget,
 | **FR-7** | Gate 计算：worst-case 跨 corner；区间/有效性条件；权重可配 | 与 `verify.py` 在参考解上一致 |
 | **FR-8** | 筛选：OAT ±20%，nominal + 2 corner；输出敏感度排序与推荐维度 | 中位 75.5 维 → ≤15 维，且保留失败 gate 相关组 |
 | **FR-9** | 优化：DE（粗层）、CMA-ES（≤30 维）、局部抛光；离散量取整+修复 | 固定 seed 可复现；预算内返回最优 |
-| **FR-10** | 合法性：调用 `check_circuit.py`；几何/模型范围/nf/m 整数；拒绝并修复 | 3,600 条 T0 回放，非法提案率 < 1% |
-| **FR-11** | 预算：`--budget N` 硬上限；记账；耗尽时返回部分结果 | 超限不越界；报告含 `sims` |
+| **FR-10** | 合法性：`precheck`（正值/非负面积）+ 可选 `check_circuit.py`；整数与几何范围只作搜索建议；任务策略取自 `task.toml`；拒绝并给出可定位违规（修复归 P3） | 3,600 条 T0 回放，通过设计被误杀 0 条 |
+| **FR-11** | 预算：`--budget N` 跨调用硬上限；记账；耗尽时返回部分结果；`--resume` 续跑 | 超限不越界；报告 `budget` 块含 limit/prior_used/used/skipped |
 | **FR-12** | 缓存：`sha256(netlist, bench, corner, seed)` → metrics | 重复评测命中率 > 80% |
 | **FR-13** | 报告：JSON，含每候选的 gates/margins/sims；stdout 只放摘要 | schema 校验通过 |
 | **FR-14** | 接口：CLI 与 MCP 同语义；`schema` 自描述 | 两个 harness 各跑通 1 题 |

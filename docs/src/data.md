@@ -46,6 +46,7 @@ T0 只抓站点 API，站点不暴露判分器；T1 从公开仓库补齐。脚�
 | `results/verifier/<task_id>.json` | 单任务：status、exit code、reward、tests_passed/total、逐 gate、sims、墙钟、失败原因 |
 | `results/verifier/summary.json` | 状态分布、sims 合计、sweep 墙钟、CPU、残留容器与 ngspice 线程 |
 | `results/reconcile.json` | 与 T0 `referenceResult.metrics` 的逐 gate 对账：参考值、本次值、相对误差、状态一致性 |
+| `results/legality.json` | 合法性回放：拒绝数、通过设计的误杀数、checker 一致性 |
 | `docs/VERIFIER_RESULTS.md` | 只由上述 JSON 生成的说明，不手写数字 |
 
 本次实测 {{fact:verifier.passed}} / {{fact:verifier.tasks}} 通过，{{fact:verifier.sims}} 次 ngspice，

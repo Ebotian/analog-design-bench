@@ -17,7 +17,7 @@ title = "阶段计划"
 source = "docs/src/plan.md"
 output = "docs/PLAN.md"
 tags = ["doc:plan", "kind:goal", "topic:roadmap"]
-max_lines = 125
+max_lines = 132
 
 [[doc]]
 id = "requirements"
@@ -33,7 +33,7 @@ title = "Analog Design Bench — 本地数据与求解基建"
 source = "docs/src/readme.md"
 output = "README.md"
 tags = ["doc:readme", "kind:usage", "topic:corpus"]
-max_lines = 170
+max_lines = 176
 
 [[doc]]
 id = "data"

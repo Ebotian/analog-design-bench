@@ -125,13 +125,24 @@ def test_apply_rejects_values_the_checker_calls_illegal():
     """Hard legality = what check_circuit.py rejects without extra flags."""
     design = params.extract(spice.parse(NETLIST))
     with pytest.raises(ValueError):
-        design.apply({"outer/XM0.nf": 1.5})  # not an integer
-    with pytest.raises(ValueError):
         design.apply({"outer/XM0.l": 0.0})  # not positive
+    with pytest.raises(ValueError):
+        design.apply({"outer/XM0.l": -1e-6})  # not positive
     with pytest.raises(ValueError):
         design.apply({"outer/CC1.value": -1e-12})  # not positive
     with pytest.raises(KeyError):
         design.apply({"nope.w": 1.0})
+
+
+def test_apply_allows_fractional_multiplicity_the_checker_accepts():
+    """Measured against check_circuit.py: ``m=0.5`` and ``nf=1.5`` pass.
+
+    Integer grids stay search advice; calling them illegal would refuse
+    designs the official gate accepts.
+    """
+    design = params.extract(spice.parse(NETLIST))
+    text = design.apply({"outer/XM0.nf": 1.5})
+    assert "nf=1.5" in text
 
 
 def test_apply_allows_off_model_geometry_the_reference_itself_uses():
@@ -153,7 +164,7 @@ def test_search_box_carries_the_modelled_ranges_separately():
     assert box["outer/XM0.l"].maximum == pytest.approx(8e-6)
     assert box["outer/XM0.l"].source == "pdk-modeled"
     assert box["outer/XM0.nf"].grid == 1.0
-    assert box["outer/XM0.nf"].source == "checker"
+    assert box["outer/XM0.nf"].source == "heuristic"
     assert box["outer/CC1.value"].source == "heuristic"
 
 
