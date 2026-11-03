@@ -1,0 +1,1496 @@
+{
+  "schema_version": "adb-screen-1",
+  "design_hash": "920e8bdba614debc664a454cc7e4c110fd1641d7a72ea5fe9621d6863a4add0b",
+  "mode": "coarse-then-param",
+  "delta": 0.2,
+  "corners": {
+    "nominal": {
+      "load": "25u",
+      "process": "tt",
+      "supply": 1.8,
+      "temperature": 40.0
+    },
+    "stress": [
+      {
+        "load": "25u",
+        "process": "ff",
+        "supply": 1.98,
+        "temperature": 125.0
+      },
+      {
+        "load": "25u",
+        "process": "fs",
+        "supply": 1.62,
+        "temperature": 125.0
+      }
+    ],
+    "all": 30
+  },
+  "params": 232,
+  "sims": 602,
+  "sims_run": 300,
+  "budget": {
+    "limit": 300,
+    "prior_used": 0,
+    "used": 300,
+    "total_used": 300,
+    "remaining": 0,
+    "exhausted": true
+  },
+  "wall_seconds": 414.329,
+  "ranking": [
+    {
+      "param": "IVD4A/Xmp0.l",
+      "score": 0.811976,
+      "up": 0.016365,
+      "down": 0.811976,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00041961856672282125,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.8119759828126636
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM10.l",
+      "score": 0.063846,
+      "up": 0.063846,
+      "down": 0.047143,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 2.987967029918706e-05,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.04714268161289108
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM11.l",
+      "score": 0.060751,
+      "up": 0.060751,
+      "down": 0.045053,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 3.4146445568465765e-05,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.045053164779922446
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM10.m",
+      "score": 0.02635,
+      "up": 0.025677,
+      "down": 0.02635,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 4.268214605839388e-05,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.02634978739059693
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM11.m",
+      "score": 0.025149,
+      "up": 0.024418,
+      "down": 0.025149,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 5.1222291941409366e-05,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.02514948710245382
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM10.w",
+      "score": 0.021586,
+      "up": 0.021136,
+      "down": 0.021586,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 4.268214605839388e-05,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0215862287914397
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM11.w",
+      "score": 0.020562,
+      "up": 0.020058,
+      "down": 0.020562,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 5.1222291941409366e-05,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.020562067243805132
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM7.m",
+      "score": 0.018398,
+      "up": 0.018002,
+      "down": 0.018398,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.011172217602890432,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.018397975540863205
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM8.m",
+      "score": 0.015194,
+      "up": 0.014927,
+      "down": 0.015194,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.011311589470404173,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.015194097079435124
+      }
+    },
+    {
+      "param": "IVD4A/Xmp0.m",
+      "score": 0.013938,
+      "up": 0.013754,
+      "down": 0.013938,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0012509882667374637,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.013937688079597674
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM3.m",
+      "score": 0.010763,
+      "up": 0.010502,
+      "down": 0.010763,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0017995200347029935,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.01076292932930216
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM4.m",
+      "score": 0.010763,
+      "up": 0.01051,
+      "down": 0.010763,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0018652878742295145,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.01076292932930216
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM1.m",
+      "score": 0.010103,
+      "up": 0.009961,
+      "down": 0.010103,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0004141974574432702,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.010103119289251786
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM0.m",
+      "score": 0.010099,
+      "up": 0.009964,
+      "down": 0.010099,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0003288391976324151,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.01009885786811056
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM7.w",
+      "score": 0.009762,
+      "up": 0.009762,
+      "down": 0.00901,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.009009885494084395,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0001583828190863372
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM8.w",
+      "score": 0.009605,
+      "up": 0.009605,
+      "down": 0.009199,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.009198669927819236,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.491475154152718e-05
+      }
+    },
+    {
+      "param": "IVD4A/Xmp0.w",
+      "score": 0.008643,
+      "up": 0.000812,
+      "down": 0.008643,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.001113855324746176,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.00864280805713888
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM4.l",
+      "score": 0.005994,
+      "up": 0.005994,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 1.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM3.l",
+      "score": 0.00599,
+      "up": 0.00599,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 1.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM7.l",
+      "score": 0.005333,
+      "up": 0.00353,
+      "down": 0.005333,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.005332518171319937,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.00018675740851715068
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM8.l",
+      "score": 0.005101,
+      "up": 0.003535,
+      "down": 0.005101,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.005100886572503074,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102363523125889e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM5.m",
+      "score": 0.003038,
+      "up": 0.002043,
+      "down": 0.003038,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0030384493584798716,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM6.m",
+      "score": 0.002459,
+      "up": 0.002437,
+      "down": 0.002459,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.002458597745702338,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.002174745255795358
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM6.l",
+      "score": 0.001836,
+      "up": 0.000308,
+      "down": 0.001836,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0018359022438028236,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0005696099592253049
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM4.w",
+      "score": 0.001648,
+      "up": 0.001541,
+      "down": 0.001648,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0016483939353656176,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0005149217212448289
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM5.l",
+      "score": 0.001591,
+      "up": 8.5e-05,
+      "down": 0.001591,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0015912843998245121,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM3.w",
+      "score": 0.00156,
+      "up": 0.001549,
+      "down": 0.00156,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.001560237044085355,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0005156319581017612
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM0.l",
+      "score": 0.001231,
+      "up": 0.001231,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 1.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM1.l",
+      "score": 0.001156,
+      "up": 0.001156,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 1.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XPM0.l",
+      "score": 0.001053,
+      "up": 0.000538,
+      "down": 0.001053,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.001053197114154711,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 9.232993890604734e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM6.w",
+      "score": 0.000567,
+      "up": 0.000362,
+      "down": 0.000567,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0001273215190156735,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0005671573986000819
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM2.m",
+      "score": 0.000494,
+      "up": 0.000494,
+      "down": 0.000444,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0004435830878699612,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102363523125889e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM2.w",
+      "score": 0.000449,
+      "up": 0.000449,
+      "down": 0.000388,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.000387610458485797,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102368569322152e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM2.l",
+      "score": 0.000414,
+      "up": 0.000414,
+      "down": 0.00039,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00039040908995501466,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102368569322152e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM5.w",
+      "score": 0.000347,
+      "up": 0.000281,
+      "down": 0.000347,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00034703030218223525,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102363523125889e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM1.w",
+      "score": 0.000201,
+      "up": 0.000201,
+      "down": 0.000167,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00016651857241797857,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 4.261421141336262e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XPM0.m",
+      "score": 0.000196,
+      "up": 0.000149,
+      "down": 0.000196,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0001963521191088623,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.2784263424045506e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM0.w",
+      "score": 0.000147,
+      "up": 0.000147,
+      "down": 0.000106,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00010634799583008266,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 4.545515884090789e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM1.ps",
+      "score": 0.000132,
+      "up": 0.00013,
+      "down": 0.000132,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00013153567905285226,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.00011505837081622596
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM3.ps",
+      "score": 0.000132,
+      "up": 0.00013,
+      "down": 0.000132,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00013153567905285226,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.00011292766024542932
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM0.ps",
+      "score": 0.000119,
+      "up": 0.000116,
+      "down": 0.000119,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00011754252170676379,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.00011860955510051985
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM4.ps",
+      "score": 0.000119,
+      "up": 0.000119,
+      "down": 0.000118,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00011754252170676379,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.00011505837081622596
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM1.as",
+      "score": 0.000112,
+      "up": 0.000111,
+      "down": 0.000112,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00011194525876851805,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 8.522842282819399e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM3.as",
+      "score": 0.000112,
+      "up": 0.000111,
+      "down": 0.000112,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00011194525876851805,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.0653552853432452e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM0.as",
+      "score": 0.000101,
+      "up": 9.9e-05,
+      "down": 0.000101,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00010075073289164728,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.0653552853432452e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM4.as",
+      "score": 0.000101,
+      "up": 9.9e-05,
+      "down": 0.000101,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.00010075073289164728,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.0653552853432452e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM3.pd",
+      "score": 6e-05,
+      "up": 6e-05,
+      "down": 2.9e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 2.9119711132568495e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM4.pd",
+      "score": 6e-05,
+      "up": 6e-05,
+      "down": 3.1e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 3.125042170318155e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM10.pd",
+      "score": 5.8e-05,
+      "up": 5.6e-05,
+      "down": 5.8e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 5.752918540802118e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM0.pd",
+      "score": 5.6e-05,
+      "up": 5.6e-05,
+      "down": 3.1e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 3.125042170318155e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM1.pd",
+      "score": 5.6e-05,
+      "up": 5.6e-05,
+      "down": 3.1e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 3.125042170318155e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM11.pd",
+      "score": 5.5e-05,
+      "up": 5.5e-05,
+      "down": 5.5e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 5.539847483740813e-05
+      }
+    },
+    {
+      "param": "IVD4A/Xmp0.pd",
+      "score": 4.6e-05,
+      "up": 4.6e-05,
+      "down": 4.6e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 4.61774192419971e-05,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.9886631993000473e-05
+      }
+    },
+    {
+      "param": "IVD4A/Xmp0.ad",
+      "score": 3.8e-05,
+      "up": 3.6e-05,
+      "down": 3.8e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 3.7781524834344024e-05,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.4204737138644304e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM10.ad",
+      "score": 3.8e-05,
+      "up": 3.8e-05,
+      "down": 3.3e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 3.267089541704598e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM11.ad",
+      "score": 3.8e-05,
+      "up": 3.2e-05,
+      "down": 3.8e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 3.8352790272136516e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM2.ad",
+      "score": 2.9e-05,
+      "up": 2.9e-05,
+      "down": 2.9e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 2.9385630426690947e-05,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102368569322152e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM7.ps",
+      "score": 2.8e-05,
+      "up": 2e-05,
+      "down": 2.8e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 2.840947427563628e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM8.ps",
+      "score": 2.7e-05,
+      "up": 2.1e-05,
+      "down": 2.7e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 2.698900056177185e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM9.w",
+      "score": 2.5e-05,
+      "up": 1.7e-05,
+      "down": 2.5e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 2.4857672071754344e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM9.m",
+      "score": 2.2e-05,
+      "up": 1.5e-05,
+      "down": 2.2e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 2.2016857810729347e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM9.l",
+      "score": 1.8e-05,
+      "up": 1.7e-05,
+      "down": 1.8e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.775592142238742e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM8.pd",
+      "score": 1.5e-05,
+      "up": 1.3e-05,
+      "down": 1.5e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.4914973994658559e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM7.pd",
+      "score": 1.4e-05,
+      "up": 1.3e-05,
+      "down": 1.4e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.4204737137909936e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM7.as",
+      "score": 1.3e-05,
+      "up": 1.3e-05,
+      "down": 1.3e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.2784263424045506e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM8.as",
+      "score": 1.3e-05,
+      "up": 1.3e-05,
+      "down": 1.3e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.2784263424045506e-05
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM2.pd",
+      "score": 1e-05,
+      "up": 8e-06,
+      "down": 1e-05,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 9.795210142167102e-06,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XPM0.pd",
+      "score": 8e-06,
+      "up": 8e-06,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 8.395823917202003e-06,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102368569322152e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM7.ad",
+      "score": 7e-06,
+      "up": 6e-06,
+      "down": 7e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102368568954968e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM8.ad",
+      "score": 7e-06,
+      "up": 7e-06,
+      "down": 7e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102368568954968e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM1.ad",
+      "score": 7e-06,
+      "up": 2e-06,
+      "down": 7e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102368568954968e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XPM0.ad",
+      "score": 7e-06,
+      "up": 7e-06,
+      "down": 7e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 6.996578672949409e-06,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 6.392131712022753e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM6.pd",
+      "score": 6e-06,
+      "up": 4e-06,
+      "down": 6e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 6.392131712022753e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM0.ad",
+      "score": 6e-06,
+      "up": 1e-06,
+      "down": 6e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 5.681894855090538e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM4.ad",
+      "score": 6e-06,
+      "up": 4e-06,
+      "down": 6e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 6.392131712022753e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM6.ad",
+      "score": 4e-06,
+      "up": 3e-06,
+      "down": 4e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 3.551184284477484e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM3.ad",
+      "score": 4e-06,
+      "up": 1e-06,
+      "down": 4e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 3.551184284477484e-06
+      }
+    },
+    {
+      "param": "IVD4A/Xmp0.as",
+      "score": 3e-06,
+      "up": 3e-06,
+      "down": 1e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.4204737138644304e-06
+      }
+    },
+    {
+      "param": "IVD4A/Xmp0.ps",
+      "score": 1e-06,
+      "up": 1e-06,
+      "down": 1e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102368569322152e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM11.as",
+      "score": 1e-06,
+      "up": 1e-06,
+      "down": 1e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102368569322152e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM11.ps",
+      "score": 1e-06,
+      "up": 0.0,
+      "down": 1e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.4204737138644304e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM5.ad",
+      "score": 1e-06,
+      "up": 1e-06,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM5.as",
+      "score": 1e-06,
+      "up": 0.0,
+      "down": 1e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102368569322152e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM5.pd",
+      "score": 1e-06,
+      "up": 1e-06,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM5.ps",
+      "score": 1e-06,
+      "up": 1e-06,
+      "down": 1e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102368569322152e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM6.as",
+      "score": 1e-06,
+      "up": 1e-06,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM6.ps",
+      "score": 1e-06,
+      "up": 1e-06,
+      "down": 1e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102363523125889e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM9.ad",
+      "score": 1e-06,
+      "up": 0.0,
+      "down": 1e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 7.102368569322152e-07
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM9.as",
+      "score": 1e-06,
+      "up": 1e-06,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM9.pd",
+      "score": 1e-06,
+      "up": 1e-06,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM9.ps",
+      "score": 1e-06,
+      "up": 0.0,
+      "down": 1e-06,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 1.4204737138644304e-06
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM2.as",
+      "score": 1e-06,
+      "up": 1e-06,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "IVD4A/Xmp0.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM10.as",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM10.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM10.ps",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM11.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM5.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM6.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM7.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM8.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated/XNM9.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM0.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM1.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM2.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM2.ps",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM3.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XNM4.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XPM0.as",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    },
+    {
+      "param": "charge_pump_regulated_core/XPM0.mult",
+      "score": 0.0,
+      "up": 0.0,
+      "down": 0.0,
+      "per_corner": {
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi": 0.0,
+        "{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi": 0.0
+      }
+    }
+  ],
+  "groups": [
+    {
+      "group": "charge_pump_regulated_core:sky130_fd_pr__pfet_01v8",
+      "params": [
+        "charge_pump_regulated_core/XPM1.w",
+        "charge_pump_regulated_core/XPM1.l",
+        "charge_pump_regulated_core/XPM1.as",
+        "charge_pump_regulated_core/XPM1.ad",
+        "charge_pump_regulated_core/XPM1.ps",
+        "charge_pump_regulated_core/XPM1.pd",
+        "charge_pump_regulated_core/XPM1.m",
+        "charge_pump_regulated_core/XPM1.mult",
+        "charge_pump_regulated_core/XPM0.w",
+        "charge_pump_regulated_core/XPM0.l",
+        "charge_pump_regulated_core/XPM0.as",
+        "charge_pump_regulated_core/XPM0.ad",
+        "charge_pump_regulated_core/XPM0.ps",
+        "charge_pump_regulated_core/XPM0.pd",
+        "charge_pump_regulated_core/XPM0.m",
+        "charge_pump_regulated_core/XPM0.mult",
+        "charge_pump_regulated_core/Xmp0.w",
+        "charge_pump_regulated_core/Xmp0.l",
+        "charge_pump_regulated_core/Xmp0.as",
+        "charge_pump_regulated_core/Xmp0.ad",
+        "charge_pump_regulated_core/Xmp0.ps",
+        "charge_pump_regulated_core/Xmp0.pd",
+        "charge_pump_regulated_core/Xmp0.m",
+        "charge_pump_regulated_core/Xmp0.mult"
+      ],
+      "score": 0.938034
+    },
+    {
+      "group": "IVD4A:sky130_fd_pr__pfet_01v8",
+      "params": [
+        "IVD4A/Xmp0.w",
+        "IVD4A/Xmp0.l",
+        "IVD4A/Xmp0.as",
+        "IVD4A/Xmp0.ad",
+        "IVD4A/Xmp0.ps",
+        "IVD4A/Xmp0.pd",
+        "IVD4A/Xmp0.m",
+        "IVD4A/Xmp0.mult"
+      ],
+      "score": 0.914789
+    },
+    {
+      "group": "charge_pump_regulated:sky130_fd_pr__nfet_01v8",
+      "params": [
+        "charge_pump_regulated/XNM8.w",
+        "charge_pump_regulated/XNM8.l",
+        "charge_pump_regulated/XNM8.as",
+        "charge_pump_regulated/XNM8.ad",
+        "charge_pump_regulated/XNM8.ps",
+        "charge_pump_regulated/XNM8.pd",
+        "charge_pump_regulated/XNM8.m",
+        "charge_pump_regulated/XNM8.mult",
+        "charge_pump_regulated/XNM7.w",
+        "charge_pump_regulated/XNM7.l",
+        "charge_pump_regulated/XNM7.as",
+        "charge_pump_regulated/XNM7.ad",
+        "charge_pump_regulated/XNM7.ps",
+        "charge_pump_regulated/XNM7.pd",
+        "charge_pump_regulated/XNM7.m",
+        "charge_pump_regulated/XNM7.mult",
+        "charge_pump_regulated/XNM6.w",
+        "charge_pump_regulated/XNM6.l",
+        "charge_pump_regulated/XNM6.as",
+        "charge_pump_regulated/XNM6.ad",
+        "charge_pump_regulated/XNM6.ps",
+        "charge_pump_regulated/XNM6.pd",
+        "charge_pump_regulated/XNM6.m",
+        "charge_pump_regulated/XNM6.mult",
+        "charge_pump_regulated/XNM5.w",
+        "charge_pump_regulated/XNM5.l",
+        "charge_pump_regulated/XNM5.as",
+        "charge_pump_regulated/XNM5.ad",
+        "charge_pump_regulated/XNM5.ps",
+        "charge_pump_regulated/XNM5.pd",
+        "charge_pump_regulated/XNM5.m",
+        "charge_pump_regulated/XNM5.mult",
+        "charge_pump_regulated/XNM9.w",
+        "charge_pump_regulated/XNM9.l",
+        "charge_pump_regulated/XNM9.as",
+        "charge_pump_regulated/XNM9.ad",
+        "charge_pump_regulated/XNM9.ps",
+        "charge_pump_regulated/XNM9.pd",
+        "charge_pump_regulated/XNM9.m",
+        "charge_pump_regulated/XNM9.mult",
+        "charge_pump_regulated/XNM10.w",
+        "charge_pump_regulated/XNM10.l",
+        "charge_pump_regulated/XNM10.as",
+        "charge_pump_regulated/XNM10.ad",
+        "charge_pump_regulated/XNM10.ps",
+        "charge_pump_regulated/XNM10.pd",
+        "charge_pump_regulated/XNM10.m",
+        "charge_pump_regulated/XNM10.mult",
+        "charge_pump_regulated/XNM11.w",
+        "charge_pump_regulated/XNM11.l",
+        "charge_pump_regulated/XNM11.as",
+        "charge_pump_regulated/XNM11.ad",
+        "charge_pump_regulated/XNM11.ps",
+        "charge_pump_regulated/XNM11.pd",
+        "charge_pump_regulated/XNM11.m",
+        "charge_pump_regulated/XNM11.mult"
+      ],
+      "score": 0.179919
+    },
+    {
+      "group": "charge_pump_regulated_core:sky130_fd_pr__nfet_05v0_nvt",
+      "params": [
+        "charge_pump_regulated_core/XNM4.w",
+        "charge_pump_regulated_core/XNM4.l",
+        "charge_pump_regulated_core/XNM4.as",
+        "charge_pump_regulated_core/XNM4.ad",
+        "charge_pump_regulated_core/XNM4.ps",
+        "charge_pump_regulated_core/XNM4.pd",
+        "charge_pump_regulated_core/XNM4.m",
+        "charge_pump_regulated_core/XNM4.mult",
+        "charge_pump_regulated_core/XNM3.w",
+        "charge_pump_regulated_core/XNM3.l",
+        "charge_pump_regulated_core/XNM3.as",
+        "charge_pump_regulated_core/XNM3.ad",
+        "charge_pump_regulated_core/XNM3.ps",
+        "charge_pump_regulated_core/XNM3.pd",
+        "charge_pump_regulated_core/XNM3.m",
+        "charge_pump_regulated_core/XNM3.mult",
+        "charge_pump_regulated_core/XNM1.w",
+        "charge_pump_regulated_core/XNM1.l",
+        "charge_pump_regulated_core/XNM1.as",
+        "charge_pump_regulated_core/XNM1.ad",
+        "charge_pump_regulated_core/XNM1.ps",
+        "charge_pump_regulated_core/XNM1.pd",
+        "charge_pump_regulated_core/XNM1.m",
+        "charge_pump_regulated_core/XNM1.mult",
+        "charge_pump_regulated_core/XNM0.w",
+        "charge_pump_regulated_core/XNM0.l",
+        "charge_pump_regulated_core/XNM0.as",
+        "charge_pump_regulated_core/XNM0.ad",
+        "charge_pump_regulated_core/XNM0.ps",
+        "charge_pump_regulated_core/XNM0.pd",
+        "charge_pump_regulated_core/XNM0.m",
+        "charge_pump_regulated_core/XNM0.mult"
+      ],
+      "score": 0.015245
+    },
+    {
+      "group": "charge_pump_regulated_core:sky130_fd_pr__nfet_01v8",
+      "params": [
+        "charge_pump_regulated_core/XNM2.w",
+        "charge_pump_regulated_core/XNM2.l",
+        "charge_pump_regulated_core/XNM2.as",
+        "charge_pump_regulated_core/XNM2.ad",
+        "charge_pump_regulated_core/XNM2.ps",
+        "charge_pump_regulated_core/XNM2.pd",
+        "charge_pump_regulated_core/XNM2.m",
+        "charge_pump_regulated_core/XNM2.mult",
+        "charge_pump_regulated_core/Xmn0.w",
+        "charge_pump_regulated_core/Xmn0.l",
+        "charge_pump_regulated_core/Xmn0.as",
+        "charge_pump_regulated_core/Xmn0.ad",
+        "charge_pump_regulated_core/Xmn0.ps",
+        "charge_pump_regulated_core/Xmn0.pd",
+        "charge_pump_regulated_core/Xmn0.m",
+        "charge_pump_regulated_core/Xmn0.mult"
+      ],
+      "score": 0.0144
+    },
+    {
+      "group": "IVD2A:sky130_fd_pr__nfet_01v8",
+      "params": [
+        "IVD2A/Xmn0.w",
+        "IVD2A/Xmn0.l",
+        "IVD2A/Xmn0.as",
+        "IVD2A/Xmn0.ad",
+        "IVD2A/Xmn0.ps",
+        "IVD2A/Xmn0.pd",
+        "IVD2A/Xmn0.m",
+        "IVD2A/Xmn0.mult"
+      ],
+      "score": 0.013986
+    },
+    {
+      "group": "charge_pump_regulated:sky130_fd_pr__res_xhigh_po",
+      "params": [
+        "charge_pump_regulated/XR3.l",
+        "charge_pump_regulated/XR3.w",
+        "charge_pump_regulated/XR2.l",
+        "charge_pump_regulated/XR2.w",
+        "charge_pump_regulated/XR1.l",
+        "charge_pump_regulated/XR1.w",
+        "charge_pump_regulated/XR0.l",
+        "charge_pump_regulated/XR0.w"
+      ],
+      "score": 0.010245
+    },
+    {
+      "group": "IVD4A:sky130_fd_pr__nfet_01v8",
+      "params": [
+        "IVD4A/Xmn0.w",
+        "IVD4A/Xmn0.l",
+        "IVD4A/Xmn0.as",
+        "IVD4A/Xmn0.ad",
+        "IVD4A/Xmn0.ps",
+        "IVD4A/Xmn0.pd",
+        "IVD4A/Xmn0.m",
+        "IVD4A/Xmn0.mult"
+      ],
+      "score": 0.009647
+    },
+    {
+      "group": "ND2D1A:sky130_fd_pr__nfet_01v8",
+      "params": [
+        "ND2D1A/Xmn1.w",
+        "ND2D1A/Xmn1.l",
+        "ND2D1A/Xmn1.as",
+        "ND2D1A/Xmn1.ad",
+        "ND2D1A/Xmn1.ps",
+        "ND2D1A/Xmn1.pd",
+        "ND2D1A/Xmn1.m",
+        "ND2D1A/Xmn1.mult",
+        "ND2D1A/Xmn0.w",
+        "ND2D1A/Xmn0.l",
+        "ND2D1A/Xmn0.as",
+        "ND2D1A/Xmn0.ad",
+        "ND2D1A/Xmn0.ps",
+        "ND2D1A/Xmn0.pd",
+        "ND2D1A/Xmn0.m",
+        "ND2D1A/Xmn0.mult"
+      ],
+      "score": 0.007285
+    },
+    {
+      "group": "IVD2A:sky130_fd_pr__pfet_01v8",
+      "params": [
+        "IVD2A/Xmp0.w",
+        "IVD2A/Xmp0.l",
+        "IVD2A/Xmp0.as",
+        "IVD2A/Xmp0.ad",
+        "IVD2A/Xmp0.ps",
+        "IVD2A/Xmp0.pd",
+        "IVD2A/Xmp0.m",
+        "IVD2A/Xmp0.mult"
+      ],
+      "score": 0.006049
+    },
+    {
+      "group": "ND2D1A:sky130_fd_pr__pfet_01v8",
+      "params": [
+        "ND2D1A/Xmp1.w",
+        "ND2D1A/Xmp1.l",
+        "ND2D1A/Xmp1.as",
+        "ND2D1A/Xmp1.ad",
+        "ND2D1A/Xmp1.ps",
+        "ND2D1A/Xmp1.pd",
+        "ND2D1A/Xmp1.m",
+        "ND2D1A/Xmp1.mult",
+        "ND2D1A/Xmp0.w",
+        "ND2D1A/Xmp0.l",
+        "ND2D1A/Xmp0.as",
+        "ND2D1A/Xmp0.ad",
+        "ND2D1A/Xmp0.ps",
+        "ND2D1A/Xmp0.pd",
+        "ND2D1A/Xmp0.m",
+        "ND2D1A/Xmp0.mult"
+      ],
+      "score": 0.002415
+    },
+    {
+      "group": "charge_pump_regulated_core:sky130_fd_pr__cap_mim_m3_1",
+      "params": [
+        "charge_pump_regulated_core/XC1.l",
+        "charge_pump_regulated_core/XC1.w",
+        "charge_pump_regulated_core/XC1.m",
+        "charge_pump_regulated_core/XC1.mult",
+        "charge_pump_regulated_core/XC0.l",
+        "charge_pump_regulated_core/XC0.w",
+        "charge_pump_regulated_core/XC0.m",
+        "charge_pump_regulated_core/XC0.mult"
+      ],
+      "score": 0.000646
+    },
+    {
+      "group": "charge_pump_regulated:sky130_fd_pr__pfet_01v8",
+      "params": [
+        "charge_pump_regulated/XPM3.w",
+        "charge_pump_regulated/XPM3.l",
+        "charge_pump_regulated/XPM3.as",
+        "charge_pump_regulated/XPM3.ad",
+        "charge_pump_regulated/XPM3.ps",
+        "charge_pump_regulated/XPM3.pd",
+        "charge_pump_regulated/XPM3.m",
+        "charge_pump_regulated/XPM3.mult",
+        "charge_pump_regulated/XPM2.w",
+        "charge_pump_regulated/XPM2.l",
+        "charge_pump_regulated/XPM2.as",
+        "charge_pump_regulated/XPM2.ad",
+        "charge_pump_regulated/XPM2.ps",
+        "charge_pump_regulated/XPM2.pd",
+        "charge_pump_regulated/XPM2.m",
+        "charge_pump_regulated/XPM2.mult",
+        "charge_pump_regulated/XPM4.w",
+        "charge_pump_regulated/XPM4.l",
+        "charge_pump_regulated/XPM4.as",
+        "charge_pump_regulated/XPM4.ad",
+        "charge_pump_regulated/XPM4.ps",
+        "charge_pump_regulated/XPM4.pd",
+        "charge_pump_regulated/XPM4.m",
+        "charge_pump_regulated/XPM4.mult"
+      ],
+      "score": 7.5e-05
+    }
+  ],
+  "dims": [
+    "IVD4A/Xmp0.l",
+    "charge_pump_regulated/XNM10.l",
+    "charge_pump_regulated/XNM11.l",
+    "charge_pump_regulated/XNM10.m",
+    "charge_pump_regulated/XNM11.m",
+    "charge_pump_regulated/XNM10.w",
+    "charge_pump_regulated/XNM11.w",
+    "charge_pump_regulated/XNM7.m",
+    "charge_pump_regulated/XNM8.m",
+    "IVD4A/Xmp0.m",
+    "charge_pump_regulated_core/XNM3.m",
+    "charge_pump_regulated_core/XNM4.m",
+    "charge_pump_regulated_core/XNM1.m",
+    "charge_pump_regulated_core/XNM0.m",
+    "charge_pump_regulated/XNM7.w"
+  ],
+  "dims_count": 15,
+  "skipped": [],
+  "notes": [
+    "g:IVD2A:sky130_fd_pr__nfet_01v8::-@{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi: error",
+    "g:IVD2A:sky130_fd_pr__nfet_01v8::-@{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi: error",
+    "g:IVD2A:sky130_fd_pr__nfet_01v8::-@{\"load\": \"25u\", \"process\": \"ff\", \"supply\": 1.98, \"temperature\": 125.0}|tb_charge_pump_regulated.spi: error",
+    "g:IVD2A:sky130_fd_pr__nfet_01v8::-@{\"load\": \"25u\", \"process\": \"ff\", \"supply\": 1.98, \"temperature\": 125.0}|tb_charge_pump_regulated_pd.spi: error",
+    "g:IVD2A:sky130_fd_pr__nfet_01v8::-@{\"load\": \"25u\", \"process\": \"fs\", \"supply\": 1.62, \"temperature\": 125.0}|tb_charge_pump_regulated.spi: error",
+    "g:IVD2A:sky130_fd_pr__nfet_01v8::-@{\"load\": \"25u\", \"process\": \"fs\", \"supply\": 1.62, \"temperature\": 125.0}|tb_charge_pump_regulated_pd.spi: error",
+    "g:IVD2A:sky130_fd_pr__pfet_01v8::-@{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi: error",
+    "g:IVD2A:sky130_fd_pr__pfet_01v8::-@{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi: error",
+    "g:IVD2A:sky130_fd_pr__pfet_01v8::-@{\"load\": \"25u\", \"process\": \"ff\", \"supply\": 1.98, \"temperature\": 125.0}|tb_charge_pump_regulated.spi: error",
+    "g:IVD2A:sky130_fd_pr__pfet_01v8::-@{\"load\": \"25u\", \"process\": \"ff\", \"supply\": 1.98, \"temperature\": 125.0}|tb_charge_pump_regulated_pd.spi: error",
+    "g:IVD2A:sky130_fd_pr__pfet_01v8::-@{\"load\": \"25u\", \"process\": \"fs\", \"supply\": 1.62, \"temperature\": 125.0}|tb_charge_pump_regulated.spi: error",
+    "g:IVD2A:sky130_fd_pr__pfet_01v8::-@{\"load\": \"25u\", \"process\": \"fs\", \"supply\": 1.62, \"temperature\": 125.0}|tb_charge_pump_regulated_pd.spi: error",
+    "g:charge_pump_regulated_core:sky130_fd_pr__nfet_05v0_nvt::-@{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi: error",
+    "g:charge_pump_regulated_core:sky130_fd_pr__nfet_05v0_nvt::-@{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi: error",
+    "g:charge_pump_regulated_core:sky130_fd_pr__nfet_05v0_nvt::-@{\"load\": \"25u\", \"process\": \"ff\", \"supply\": 1.98, \"temperature\": 125.0}|tb_charge_pump_regulated.spi: error",
+    "g:charge_pump_regulated_core:sky130_fd_pr__nfet_05v0_nvt::-@{\"load\": \"25u\", \"process\": \"ff\", \"supply\": 1.98, \"temperature\": 125.0}|tb_charge_pump_regulated_pd.spi: error",
+    "g:charge_pump_regulated_core:sky130_fd_pr__nfet_05v0_nvt::-@{\"load\": \"25u\", \"process\": \"fs\", \"supply\": 1.62, \"temperature\": 125.0}|tb_charge_pump_regulated.spi: error",
+    "g:charge_pump_regulated_core:sky130_fd_pr__nfet_05v0_nvt::-@{\"load\": \"25u\", \"process\": \"fs\", \"supply\": 1.62, \"temperature\": 125.0}|tb_charge_pump_regulated_pd.spi: error",
+    "p:charge_pump_regulated_core/XNM4.l-@{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated.spi: error",
+    "p:charge_pump_regulated_core/XNM4.l-@{\"load\": \"25u\", \"process\": \"tt\", \"supply\": 1.8, \"temperature\": 40.0}|tb_charge_pump_regulated_pd.spi: error"
+  ]
+}

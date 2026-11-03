@@ -48,7 +48,7 @@ tests/                pytest 单测 + docker 端到端 smoke
 | 榜单复算 | 前 4 名 pass@1 与 avgMinutes 与站点逐位一致 |
 
 <!-- block: p1-usage | tags: phase:P1,status:done,kind:usage,topic:solver -->
-## 求解基建（P1–P2）
+## 求解基建（P1–P3 筛选）
 
 ```bash
 make test        # 单测（无 docker 也能跑）；make types = mypy --strict；make p1 = 参考解验收
@@ -61,13 +61,18 @@ PYTHONPATH=src python3 -m adb_solve apply --netlist circuit.spi --cand cand.json
 ... eval --budget 600 --out report.json            # 硬上限
 ... eval --budget 1500 --resume report.json        # 只花剩余预算
 make legality                      # 全部 T0 电路回放 → results/legality.json
+# P3 筛选：OAT ±20%，交叉角点，输出 ≤15 维
+... screen --bench benches/ --corners configs/corners.toml --task <id> \
+    --budget 600 --jobs 12 --compact --out results/screen/<id>.json
 ```
 
 回放基线：3,600 条电路中纯校验拒绝 3 条
 （其中通过的设计 0 条），checker 另外拦下
 219 条；**通过的设计被误杀
 0 条**。checker 实测接受 `m=0.5`，因此整数倍率只是
-搜索建议，不是合法性。
+搜索建议，不是合法性。筛选实测：18 参数任务 444 次仿真压到
+12 维；232 参数任务 602 次仿真压到 15 维
+（预算优先：先粗组、后参数）。
 
 评测跑在 `ghcr.io/arcadia-1/analog-arena-sky130-tools`（ngspice-46 + Sky130 PDK）里，
 每个 worker 一个常驻容器，deck 挂在 `/app`；缓存键是 `netlist + 渲染后的 deck + image id`。

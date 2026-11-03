@@ -128,11 +128,17 @@
     {
       "block": "plan/p3",
       "doc": "plan",
-      "end": 95,
+      "end": 101,
       "facts": [
-        "p1.knobs_median"
+        "p1.knobs_median",
+        "screen.ota.dims",
+        "screen.ota.params",
+        "screen.ota.sims",
+        "screen.rcp.dims",
+        "screen.rcp.params",
+        "screen.rcp.sims"
       ],
-      "heading": "P3 — 筛选与求解（≈5–8 天）",
+      "heading": "P3 — 筛选与求解（进行中：筛选已落地）",
       "line": 86,
       "path": "docs/PLAN.md",
       "tags": [
@@ -145,10 +151,10 @@
     {
       "block": "plan/p4",
       "doc": "plan",
-      "end": 104,
+      "end": 110,
       "facts": [],
       "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
-      "line": 96,
+      "line": 102,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P4",
@@ -160,13 +166,13 @@
     {
       "block": "plan/p5",
       "doc": "plan",
-      "end": 127,
+      "end": 133,
       "facts": [
         "corpus.runs",
         "p1.netlists"
       ],
       "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
-      "line": 105,
+      "line": 111,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P5",
@@ -401,15 +407,20 @@
     {
       "block": "readme/p1-usage",
       "doc": "readme",
-      "end": 74,
+      "end": 79,
       "facts": [
         "legality.checker_false_positive",
         "legality.checker_stricter_failing",
         "legality.circuits",
         "legality.rejected",
-        "legality.rejected_passing"
+        "legality.rejected_passing",
+        "screen.ota.dims",
+        "screen.ota.sims",
+        "screen.rcp.dims",
+        "screen.rcp.params",
+        "screen.rcp.sims"
       ],
-      "heading": "求解基建（P1–P2）",
+      "heading": "求解基建（P1–P3 筛选）",
       "line": 50,
       "path": "README.md",
       "tags": [
@@ -422,7 +433,7 @@
     {
       "block": "readme/corners",
       "doc": "readme",
-      "end": 97,
+      "end": 102,
       "facts": [
         "corners.coverage_subsets",
         "corners.coverage_tasks",
@@ -440,7 +451,7 @@
         "corners.unresolved"
       ],
       "heading": "Corner 矩阵（IaC）",
-      "line": 75,
+      "line": 80,
       "path": "README.md",
       "tags": [
         "phase:P1",
@@ -452,10 +463,10 @@
     {
       "block": "readme/docs",
       "doc": "readme",
-      "end": 120,
+      "end": 125,
       "facts": [],
       "heading": "文档系统",
-      "line": 98,
+      "line": 103,
       "path": "README.md",
       "tags": [
         "kind:usage",
@@ -465,10 +476,10 @@
     {
       "block": "readme/reproduce",
       "doc": "readme",
-      "end": 132,
+      "end": 137,
       "facts": [],
       "heading": "复现",
-      "line": 121,
+      "line": 126,
       "path": "README.md",
       "tags": [
         "kind:usage",
@@ -478,7 +489,7 @@
     {
       "block": "readme/data-gaps",
       "doc": "readme",
-      "end": 145,
+      "end": 150,
       "facts": [
         "corpus.no_gates",
         "corpus.no_gates_median_min",
@@ -487,7 +498,7 @@
         "corpus.runs"
       ],
       "heading": "已知数据质量问题",
-      "line": 133,
+      "line": 138,
       "path": "README.md",
       "tags": [
         "kind:gap",
@@ -497,10 +508,10 @@
     {
       "block": "readme/absent",
       "doc": "readme",
-      "end": 155,
+      "end": 160,
       "facts": [],
       "heading": "不在这里的东西",
-      "line": 146,
+      "line": 151,
       "path": "README.md",
       "tags": [
         "kind:gap",
@@ -510,10 +521,10 @@
     {
       "block": "readme/license",
       "doc": "readme",
-      "end": 172,
+      "end": 177,
       "facts": [],
       "heading": "许可",
-      "line": 156,
+      "line": 161,
       "path": "README.md",
       "tags": [
         "kind:policy",
@@ -686,7 +697,7 @@
     {
       "generated_by": null,
       "id": "plan",
-      "lines": 127,
+      "lines": 133,
       "path": "docs/PLAN.md",
       "source": "docs/src/plan.md",
       "tags": [
@@ -712,7 +723,7 @@
     {
       "generated_by": null,
       "id": "readme",
-      "lines": 172,
+      "lines": 177,
       "path": "README.md",
       "source": "docs/src/readme.md",
       "tags": [
@@ -1244,6 +1255,86 @@
         "requirements/validation"
       ],
       "value": 50
+    },
+    "screen.ota.dims": {
+      "display": "12",
+      "extract": {
+        "file": "results/screen/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json",
+        "kind": "json",
+        "path": "dims_count"
+      },
+      "used_in": [
+        "plan/p3",
+        "readme/p1-usage"
+      ],
+      "value": 12
+    },
+    "screen.ota.params": {
+      "display": "18",
+      "extract": {
+        "file": "results/screen/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json",
+        "kind": "json",
+        "path": "params"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": 18
+    },
+    "screen.ota.sims": {
+      "display": "444",
+      "extract": {
+        "file": "results/screen/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "sims"
+      },
+      "used_in": [
+        "plan/p3",
+        "readme/p1-usage"
+      ],
+      "value": 444
+    },
+    "screen.rcp.dims": {
+      "display": "15",
+      "extract": {
+        "file": "results/screen/sky130-regulated-charge-pump-10mhz-pvt.json",
+        "kind": "json",
+        "path": "dims_count"
+      },
+      "used_in": [
+        "plan/p3",
+        "readme/p1-usage"
+      ],
+      "value": 15
+    },
+    "screen.rcp.params": {
+      "display": "232",
+      "extract": {
+        "file": "results/screen/sky130-regulated-charge-pump-10mhz-pvt.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "params"
+      },
+      "used_in": [
+        "plan/p3",
+        "readme/p1-usage"
+      ],
+      "value": 232
+    },
+    "screen.rcp.sims": {
+      "display": "602",
+      "extract": {
+        "file": "results/screen/sky130-regulated-charge-pump-10mhz-pvt.json",
+        "format": "{:,}",
+        "kind": "json",
+        "path": "sims"
+      },
+      "used_in": [
+        "plan/p3",
+        "readme/p1-usage"
+      ],
+      "value": 602
     },
     "t1.commit": {
       "display": "972f7cd",

@@ -341,3 +341,38 @@ path = "checker_sample.checker_stricter_passing_count"
 kind = "json"
 file = "results/legality.json"
 path = "checker_sample.skipped_preprocessed"
+
+# ---------------------------------------------------------- P3 screening
+
+[facts."screen.ota.params"]
+kind = "json"
+file = "results/screen/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json"
+path = "params"
+
+[facts."screen.ota.dims"]
+kind = "json"
+file = "results/screen/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json"
+path = "dims_count"
+
+[facts."screen.ota.sims"]
+kind = "json"
+file = "results/screen/sky130-ota-5t-gain40-pm60-noise50uv-pvt.json"
+path = "sims"
+format = "{:,}"
+
+[facts."screen.rcp.params"]
+kind = "json"
+file = "results/screen/sky130-regulated-charge-pump-10mhz-pvt.json"
+path = "params"
+format = "{:,}"
+
+[facts."screen.rcp.dims"]
+kind = "json"
+file = "results/screen/sky130-regulated-charge-pump-10mhz-pvt.json"
+path = "dims_count"
+
+[facts."screen.rcp.sims"]
+kind = "json"
+file = "results/screen/sky130-regulated-charge-pump-10mhz-pvt.json"
+path = "sims"
+format = "{:,}"

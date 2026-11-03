@@ -16,9 +16,9 @@ import hashlib
 import itertools
 import json
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
-from typing import Sequence, TypedDict, cast
+from typing import Mapping, Sequence, TypedDict, cast
 
 from . import bench
 from .cache import Cache, hash_inputs
@@ -34,6 +34,7 @@ class CaseReport(SimResultPayload, total=False):
 
     deck: str
     log_tail: str
+    variant: str
 
 
 class EvalReport(TypedDict):
@@ -46,6 +47,12 @@ class EvalReport(TypedDict):
     budget: dict[str, object]
     status_counts: dict[str, int]
     results: list[CaseReport]
+
+
+class EvalManyReport(EvalReport):
+    """A batch of named netlist variants (`evaluate_many`)."""
+
+    design_hashes: dict[str, str]
 
 
 @dataclass(frozen=True)
@@ -139,22 +146,12 @@ def _cache_payload(raw: dict[str, object]) -> SimResultPayload:
     return cast(SimResultPayload, raw)
 
 
-def evaluate(
-    netlist_text: str,
-    decks: Sequence[bench.Deck],
-    corners: Sequence[Corner],
-    options: EvalOptions | None = None,
-    backend: SimBackend | None = None,
-    keys: SweepKeys | None = None,
-) -> EvalReport:
-    """Simulate ``netlist_text`` over ``decks × corners`` and return a report."""
-    options = options or EvalOptions()
-    if options.budget is not None and options.budget < 0:
-        raise ValueError("budget must be >= 0")
-    if options.prior_used < 0:
-        raise ValueError("prior_used must be >= 0")
-    started = time.perf_counter()
-    cases = build_cases(netlist_text, decks, corners, keys)
+def _execute(
+    cases: Sequence[SimCase],
+    options: EvalOptions,
+    backend: SimBackend | None,
+) -> tuple[list[CaseReport], int, int, list[SimCase], Cache]:
+    """Cache, simulate within budget, and decorate rows; shared by both entry points."""
     cache = Cache(options.cache_root, namespace="sim", enabled=options.use_cache)
 
     try:
@@ -205,31 +202,101 @@ def evaluate(
         row["corner"] = dict(corner_of.get(case_id, {}))
         if row.get("status") == "ok":
             row.pop("log_tail", None)
+    return rows, len(fresh), len(cached), skipped, cache
 
+
+def _assemble(
+    rows: Sequence[CaseReport],
+    skipped: Sequence[SimCase],
+    cache: Cache,
+    options: EvalOptions,
+    sims_run: int,
+    cached: int,
+    started: float,
+) -> dict[str, object]:
     counts: dict[str, int] = {}
     for row in rows:
         status = str(row["status"])
         counts[status] = counts.get(status, 0) + 1
-
     return {
         "schema_version": SCHEMA_VERSION,
-        "design_hash": design_hash(netlist_text),
         "sims": len(rows),
-        "sims_run": len(fresh),
+        "sims_run": sims_run,
         "wall_seconds": round(time.perf_counter() - started, 3),
         "cache": cache.stats(),
         "budget": {
             "limit": options.budget,
             "prior_used": options.prior_used,
-            "used": len(fresh),
+            "used": sims_run,
             "returned": len(rows),
-            "cached": len(cached),
+            "cached": cached,
             "exhausted": bool(skipped),
             "skipped": [case.case_id for case in skipped],
         },
         "status_counts": dict(sorted(counts.items())),
-        "results": rows,
+        "results": list(rows),
     }
+
+
+def evaluate(
+    netlist_text: str,
+    decks: Sequence[bench.Deck],
+    corners: Sequence[Corner],
+    options: EvalOptions | None = None,
+    backend: SimBackend | None = None,
+    keys: SweepKeys | None = None,
+) -> EvalReport:
+    """Simulate ``netlist_text`` over ``decks × corners`` and return a report."""
+    options = _checked(options)
+    started = time.perf_counter()
+    rows, sims_run, cached, skipped, cache = _execute(
+        build_cases(netlist_text, decks, corners, keys), options, backend
+    )
+    payload = _assemble(rows, skipped, cache, options, sims_run, cached, started)
+    payload["design_hash"] = design_hash(netlist_text)
+    return cast(EvalReport, payload)
+
+
+def evaluate_many(
+    variants: Mapping[str, str],
+    decks: Sequence[bench.Deck],
+    corners: Sequence[Corner],
+    options: EvalOptions | None = None,
+    backend: SimBackend | None = None,
+    keys: SweepKeys | None = None,
+) -> EvalManyReport:
+    """Simulate several netlist variants in one batch.
+
+    One backend lifecycle and one shared budget: screening perturbs dozens of
+    variants, and paying container start-up (or a fresh budget) per variant
+    would dominate.  Rows carry ``variant``; case ids are prefixed with it so
+    two variants never collide.
+    """
+    options = _checked(options)
+    started = time.perf_counter()
+    cases: list[SimCase] = []
+    variant_of: dict[str, str] = {}
+    for name, text in variants.items():
+        for case in build_cases(text, decks, corners, keys):
+            case_id = f"{name}|{case.case_id}"
+            cases.append(replace(case, case_id=case_id))
+            variant_of[case_id] = name
+    rows, sims_run, cached, skipped, cache = _execute(cases, options, backend)
+    for row in rows:
+        row["variant"] = variant_of.get(str(row["case"]), "")
+    payload = _assemble(rows, skipped, cache, options, sims_run, cached, started)
+    payload["design_hash"] = ""
+    payload["design_hashes"] = {name: design_hash(text) for name, text in variants.items()}
+    return cast(EvalManyReport, payload)
+
+
+def _checked(options: EvalOptions | None) -> EvalOptions:
+    resolved = options or EvalOptions()
+    if resolved.budget is not None and resolved.budget < 0:
+        raise ValueError("budget must be >= 0")
+    if resolved.prior_used < 0:
+        raise ValueError("prior_used must be >= 0")
+    return resolved
 
 
 def write_report(report: EvalReport, path: Path) -> None:

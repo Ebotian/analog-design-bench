@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 from typing import cast
 
-from . import bench, check as checker, corners as corner_asset, evaluate, legality, params
+from . import bench, check as checker, corners as corner_asset, evaluate, legality, params, screen
 from .docker_backend import DEFAULT_IMAGE, SimulationError
 from .sim import CornerValue
 from . import netlist as spice
@@ -240,6 +240,65 @@ def cmd_schema(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_screen(args: argparse.Namespace) -> int:
+    text = Path(args.netlist).read_text()
+    design = params.load_text(text, path=str(args.netlist))
+    if args.legality != "off":
+        verdict = legality.guard(text, design, checker=args.legality == "checker", image=args.image)
+        if not verdict.ok:
+            print(json.dumps(verdict.to_json(), indent=2), file=sys.stderr)
+            print(f"illegal design: {verdict.summary()}", file=sys.stderr)
+            return ILLEGAL
+
+    decks = _decks(args)
+    corners = _matrix(args)
+    keys = None
+    if args.corners is not None and args.task is not None:
+        keys = corner_asset.for_task(corner_asset.load(args.corners), args.task).keys
+    eval_options = evaluate.EvalOptions(
+        image=args.image,
+        jobs=args.jobs,
+        timeout=args.timeout,
+        cache_root=Path(args.cache_dir),
+        use_cache=not args.no_cache,
+        work_root=Path(args.work_dir),
+        oneshot=args.oneshot,
+        memory=None if args.memory == "unlimited" else args.memory,
+    )
+    options = screen.ScreenOptions(
+        delta=args.delta,
+        corners=args.corners_count,
+        max_dims=args.max_dims,
+        top_groups=args.top_groups,
+        budget=args.budget,
+    )
+    try:
+        report = screen.screen(
+            text,
+            decks,
+            [dict(corner) for corner in corners],
+            options,
+            eval_options=eval_options,
+        )
+    except bench.MissingValues as exc:
+        print(f"missing deck values: {', '.join(exc.names)}", file=sys.stderr)
+        return MISSING
+    except SimulationError as exc:
+        print(f"simulation backend error: {exc}", file=sys.stderr)
+        return MISSING
+    payload: dict[str, object] = dict(report)
+    if args.compact:
+        # Keep the ranking and counts, drop the per-case rows: the compact
+        # report is what gets committed as evidence.
+        payload.pop("results", None)
+    if args.out:
+        screen.write_report(payload, Path(args.out))
+        print(f"wrote {args.out}")
+    print(screen.summarise(report))
+    print(f"dims: {', '.join(report['dims'])}")
+    return 0
+
+
 def cmd_solve(args: argparse.Namespace) -> int:
     print(
         "solve is P3 (docs/PLAN.md): the evaluator works, the optimiser does not exist yet.",
@@ -290,6 +349,31 @@ def build_parser() -> argparse.ArgumentParser:
     eval_parser.add_argument("--no-cache", action="store_true")
     eval_parser.add_argument("--oneshot", action="store_true", help="one container per simulation")
     eval_parser.set_defaults(func=cmd_eval)
+
+    screen_parser = sub.add_parser("screen", parents=[common_netlist], help="OAT sensitivity and dimension pick")
+    screen_parser.add_argument("--bench", nargs="+", required=True, help="deck files or directories")
+    screen_parser.add_argument("--corners", type=Path, help="corner asset, e.g. configs/corners.toml")
+    screen_parser.add_argument("--task", help="task id inside the corner asset")
+    screen_parser.add_argument("--values", help="JSON file or inline object of deck values")
+    screen_parser.add_argument("--process", nargs="*", default=None)
+    screen_parser.add_argument("--temperature", nargs="*", type=float, default=None)
+    screen_parser.add_argument("--delta", type=float, default=0.2, help="relative perturbation (default 0.2)")
+    screen_parser.add_argument("--corners-count", type=int, default=3, help="nominal + stress corners")
+    screen_parser.add_argument("--max-dims", type=int, default=15)
+    screen_parser.add_argument("--top-groups", type=int, default=5)
+    screen_parser.add_argument("--budget", type=int, default=None)
+    screen_parser.add_argument("--legality", choices=["precheck", "checker", "off"], default="precheck")
+    screen_parser.add_argument("--jobs", type=int, default=1)
+    screen_parser.add_argument("--timeout", type=float, default=120.0)
+    screen_parser.add_argument("--memory", default="4g")
+    screen_parser.add_argument("--out", type=Path)
+    screen_parser.add_argument("--image", default=DEFAULT_IMAGE)
+    screen_parser.add_argument("--cache-dir", default=".adb-cache")
+    screen_parser.add_argument("--work-dir", default=".work/sim")
+    screen_parser.add_argument("--no-cache", action="store_true")
+    screen_parser.add_argument("--oneshot", action="store_true")
+    screen_parser.add_argument("--compact", action="store_true", help="omit per-case rows from the report")
+    screen_parser.set_defaults(func=cmd_screen)
 
     apply_parser = sub.add_parser("apply", parents=[common_netlist], help="write candidate values back")
     apply_parser.add_argument("--cand", required=True, help="JSON file or inline {param: value}")

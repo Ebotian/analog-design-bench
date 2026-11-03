@@ -242,3 +242,21 @@ def test_worker_sets_single_thread_ngspice_and_memory_limit(tmp_path):
     assert worker._limits() == ["--memory", "2g"]
     unlimited = _Worker("img", tmp_path, 1, 10.0, False, None)
     assert unlimited._limits() == []
+
+
+def test_evaluate_many_shares_one_budget_and_tags_variants(tmp_path):
+    deck = bench.Deck("tb.spi", bench.render(DECK, {"cl": "5p"}))
+    backend = FakeBackend()
+    report = evaluate.evaluate_many(
+        {"base": "netlist", "alt": "netlist 2"},
+        [deck],
+        [{"process": "tt", "temperature": 27.0}],
+        _options(tmp_path, budget=1),
+        backend,
+    )
+    assert report["sims"] == 1
+    assert report["budget"]["used"] == 1
+    assert report["budget"]["exhausted"] is True
+    assert len(report["design_hashes"]) == 2
+    assert report["results"][0]["variant"] == "base"
+    assert report["results"][0]["case"].startswith("base|")
