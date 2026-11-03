@@ -97,17 +97,19 @@
   只夹到搜索盒并回落到合法值。三档精度共享预算：探针扫全角点 → nominal 与绑定角点分阶段搜索
   → 全部 {{fact:solve.ota.validation_corners}} 个角点验证；验证失败时把**违反 gate 的**角点回灌
   搜索集再优化（cutting plane）。
-- **实测（OTA，±20% 扰动）**：单次演示（seed 11，线性扰动）从 {{fact:solve.ota.search_sims}} 次搜索 +
-  {{fact:solve.ota.final_sims}} 次收口（其中 {{fact:solve.ota.polish_sims}} 次 polish 坐标扫描）到达全角点正余量
-  （gain {{fact:solve.ota.validation_gain}}、CMRR {{fact:solve.ota.validation_cmrr}}），
-  官方 {{fact:solve.ota.verifier_passed}}/{{fact:solve.ota.verifier_total}}、reward 1.0（`results/solve/`）。但**这不是稳定现象**：小样本 gym（{{fact:gym.runs}} 个对数扰动）里
-  {{fact:gym.recovered}} 个通过官方判分，最接近的一例整体最差余量 {{fact:gym.best_worst_margin}}，
-  中位 {{fact:gym.median_worst_margin}}——失败模式是“总差最后一两个 gate 一点点”，不是“完全没动”。
-  换掉阈值判据后同种子同预算重测：仍是 {{fact:gym.recovered}}/{{fact:gym.runs}}，中位从
-  {{fact:gym.old_median_worst_margin}} 到 {{fact:gym.median_worst_margin}}（略好），最好一例从
-  {{fact:gym.old_best_worst_margin}} 变差到 {{fact:gym.best_worst_margin}}，且 seed 7 明显回退：
-  **n=4 不足以区分规则，只能说“判据更干净，但没带来恢复率提升”**。报告与两版汇总都在
-  `results/gym/`，`scripts/gym.py` 可重跑。
+- **实测（OTA，±20% 扰动，预算阶梯）**：单次演示（seed 11，线性扰动）能到官方
+  {{fact:solve.ota.verifier_passed}}/{{fact:solve.ota.verifier_total}}、reward 1.0（搜索 {{fact:solve.ota.search_sims}} 次
+  + polish（{{fact:solve.ota.polish_sims}} 次坐标扫描）收口到 {{fact:solve.ota.final_sims}} 次；gain 余量 {{fact:solve.ota.validation_gain}}、CMRR
+  {{fact:solve.ota.validation_cmrr}}；`results/solve/`），但不是稳定现象。用同一批 4 个对数扰动、
+  每次运行使用**独立缓存**（否则重跑不花钱，成本不可比）测预算阶梯：
+  3,200 sims 时 {{fact:gym.3200_best_worst_margin}}…{{fact:gym.3200_median_worst_margin}}（最好/中位；更早那版
+  {{fact:gym.old_median_worst_margin}} 是共享缓存下的假象，重跑成本为零），
+  6,400 sims 时 {{fact:gym.best_worst_margin}}…{{fact:gym.median_worst_margin}}；**两档都是
+  {{fact:gym.recovered}}/{{fact:gym.runs}} 通过**。预算翻倍让 4 个扰动全部变好（中位差 4 倍），
+  但没有一个真正收口——所以“预算不足”只解释了一部分。
+- **失败集中在一个 gate**：8 次运行里 CMRR 出现在每一次的短板列表，其次 gain/UGB。CMRR 正是我们已知
+  代理量与官方定义不一致的那个（我们测 50.2 dB，verifier 测 68.69 dB），所以最后一公里更像
+  **目标函数对 CMRR 的刻画不准**，而不是搜索算力不够。
 - **polish 的时机由实测费率决定，不是拍出来的阈值**：每个阶段结束都算一次“每仿真一次的损失下降率”，
   与上一次 polish 实测的费率比较——搜索更划算就继续搜索，否则花一次 polish（**所有**维度、正负两向）
   再比一次。没有“连续 N 代无改进”“步长小于 1e-4”“只细化前 6 维”这类常数；维度排名来自这次扫描的

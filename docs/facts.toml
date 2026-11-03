@@ -428,34 +428,40 @@ path = "validation.corners"
 
 [facts."gym.runs"]
 kind = "json"
-file = "results/gym/summary.json"
+file = "results/gym/ladder-6400/summary.json"
 path = "runs"
 
 [facts."gym.recovered"]
 kind = "json"
-file = "results/gym/summary.json"
+file = "results/gym/ladder-6400/summary.json"
 path = "recovered"
 
 [facts."gym.best_worst_margin"]
 kind = "json"
-file = "results/gym/summary.json"
+file = "results/gym/ladder-6400/summary.json"
 path = "best_worst_margin"
 format = "{:+.4f}"
 
 [facts."gym.median_worst_margin"]
 kind = "json"
-file = "results/gym/summary.json"
+file = "results/gym/ladder-6400/summary.json"
 path = "median_worst_margin"
-format = "{:+.4f}"
-
-[facts."gym.old_best_worst_margin"]
-kind = "json"
-file = "results/gym/summary-weighted-thresholds.json"
-path = "best_worst_margin"
 format = "{:+.4f}"
 
 [facts."gym.old_median_worst_margin"]
 kind = "json"
 file = "results/gym/summary-weighted-thresholds.json"
+path = "median_worst_margin"
+format = "{:+.4f}"
+
+[facts."gym.3200_best_worst_margin"]
+kind = "json"
+file = "results/gym/ladder-3200/summary.json"
+path = "best_worst_margin"
+format = "{:+.4f}"
+
+[facts."gym.3200_median_worst_margin"]
+kind = "json"
+file = "results/gym/ladder-3200/summary.json"
 path = "median_worst_margin"
 format = "{:+.4f}"

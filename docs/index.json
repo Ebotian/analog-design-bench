@@ -128,11 +128,12 @@
     {
       "block": "plan/p3",
       "doc": "plan",
-      "end": 124,
+      "end": 126,
       "facts": [
+        "gym.3200_best_worst_margin",
+        "gym.3200_median_worst_margin",
         "gym.best_worst_margin",
         "gym.median_worst_margin",
-        "gym.old_best_worst_margin",
         "gym.old_median_worst_margin",
         "gym.recovered",
         "gym.runs",
@@ -165,10 +166,10 @@
     {
       "block": "plan/p4",
       "doc": "plan",
-      "end": 133,
+      "end": 135,
       "facts": [],
       "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
-      "line": 125,
+      "line": 127,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P4",
@@ -180,13 +181,13 @@
     {
       "block": "plan/p5",
       "doc": "plan",
-      "end": 156,
+      "end": 158,
       "facts": [
         "corpus.runs",
         "p1.netlists"
       ],
       "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
-      "line": 134,
+      "line": 136,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P5",
@@ -714,7 +715,7 @@
     {
       "generated_by": null,
       "id": "plan",
-      "lines": 156,
+      "lines": 158,
       "path": "docs/PLAN.md",
       "source": "docs/src/plan.md",
       "tags": [
@@ -1113,10 +1114,36 @@
       ],
       "value": 50
     },
+    "gym.3200_best_worst_margin": {
+      "display": "-0.0392",
+      "extract": {
+        "file": "results/gym/ladder-3200/summary.json",
+        "format": "{:+.4f}",
+        "kind": "json",
+        "path": "best_worst_margin"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": -0.0392
+    },
+    "gym.3200_median_worst_margin": {
+      "display": "-0.1276",
+      "extract": {
+        "file": "results/gym/ladder-3200/summary.json",
+        "format": "{:+.4f}",
+        "kind": "json",
+        "path": "median_worst_margin"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": -0.1276
+    },
     "gym.best_worst_margin": {
       "display": "-0.0165",
       "extract": {
-        "file": "results/gym/summary.json",
+        "file": "results/gym/ladder-6400/summary.json",
         "format": "{:+.4f}",
         "kind": "json",
         "path": "best_worst_margin"
@@ -1128,9 +1155,9 @@
       "value": -0.0165
     },
     "gym.median_worst_margin": {
-      "display": "-0.0352",
+      "display": "-0.0297",
       "extract": {
-        "file": "results/gym/summary.json",
+        "file": "results/gym/ladder-6400/summary.json",
         "format": "{:+.4f}",
         "kind": "json",
         "path": "median_worst_margin"
@@ -1138,20 +1165,7 @@
       "used_in": [
         "plan/p3"
       ],
-      "value": -0.0352
-    },
-    "gym.old_best_worst_margin": {
-      "display": "-0.0086",
-      "extract": {
-        "file": "results/gym/summary-weighted-thresholds.json",
-        "format": "{:+.4f}",
-        "kind": "json",
-        "path": "best_worst_margin"
-      },
-      "used_in": [
-        "plan/p3"
-      ],
-      "value": -0.0086
+      "value": -0.0297
     },
     "gym.old_median_worst_margin": {
       "display": "-0.0403",
@@ -1169,7 +1183,7 @@
     "gym.recovered": {
       "display": "0",
       "extract": {
-        "file": "results/gym/summary.json",
+        "file": "results/gym/ladder-6400/summary.json",
         "kind": "json",
         "path": "recovered"
       },
@@ -1182,7 +1196,7 @@
     "gym.runs": {
       "display": "4",
       "extract": {
-        "file": "results/gym/summary.json",
+        "file": "results/gym/ladder-6400/summary.json",
         "kind": "json",
         "path": "runs"
       },

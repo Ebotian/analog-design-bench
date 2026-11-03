@@ -1,0 +1,542 @@
+{
+  "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+  "seed": 3,
+  "params": 18,
+  "dims": 12,
+  "sims": 2688,
+  "sims_to_feasible": null,
+  "validation_feasible": false,
+  "polish_runs": 2,
+  "official": {
+    "skipped": true
+  },
+  "wall_s": 218.7,
+  "report": {
+    "schema_version": "adb-solve-1",
+    "design_hash": "85241b3892cb99a0fbd9bfe32de21d7ae5546ecc83ad664d775fbcde2a11c173",
+    "dims": [
+      "ota_5t/XM3.l",
+      "ota_5t/XM4.l",
+      "ota_5t/XM1.w",
+      "ota_5t/XM4.w",
+      "ota_5t/XM2.w",
+      "ota_5t/XM3.w",
+      "ota_5t/XM2.l",
+      "ota_5t/XM1.l",
+      "ota_5t/XM4.nf",
+      "ota_5t/XM3.nf",
+      "ota_5t/XM1.nf",
+      "ota_5t/XM2.nf"
+    ],
+    "gates": {
+      "gates": [
+        {
+          "id": "gain_40db",
+          "measure": "dc_gain_db",
+          "threshold": 40.0,
+          "higher_is_better": true,
+          "unit": "dB"
+        },
+        {
+          "id": "ugb_100mhz",
+          "measure": "ugb_hz",
+          "threshold": 100000000.0,
+          "higher_is_better": true,
+          "unit": "Hz"
+        },
+        {
+          "id": "phase_margin_60deg",
+          "measure": "phase_margin_deg",
+          "threshold": 60.0,
+          "higher_is_better": true,
+          "unit": "deg"
+        },
+        {
+          "id": "power_0p5mw",
+          "measure": "power_w",
+          "threshold": 0.0005,
+          "higher_is_better": false,
+          "unit": "W"
+        },
+        {
+          "id": "noise_50uvrms",
+          "measure": "input_noise_vrms",
+          "threshold": 4.9999999999999996e-05,
+          "higher_is_better": false,
+          "unit": "V"
+        },
+        {
+          "id": "cmrr_50db",
+          "measure": "cmrr_db_1khz",
+          "threshold": 50.0,
+          "higher_is_better": true,
+          "unit": ""
+        },
+        {
+          "id": "psrr_30db",
+          "measure": "psrr_db_1khz",
+          "threshold": 30.0,
+          "higher_is_better": true,
+          "unit": ""
+        }
+      ],
+      "unresolved": [],
+      "source": "referenceResult.metrics"
+    },
+    "reference": {
+      "values": {
+        "ota_5t/XM3.l": 8.23054546072e-07,
+        "ota_5t/XM4.l": 8.9918398023e-07,
+        "ota_5t/XM1.w": 7.974219475481e-05,
+        "ota_5t/XM4.w": 5.533784838862e-05,
+        "ota_5t/XM2.w": 7.059987278176001e-05,
+        "ota_5t/XM3.w": 5.0860841051929996e-05,
+        "ota_5t/XM2.l": 1.04244406173e-06,
+        "ota_5t/XM1.l": 9.004918642019999e-07,
+        "ota_5t/XM4.nf": 7.90540691266,
+        "ota_5t/XM3.nf": 7.26583443599,
+        "ota_5t/XM1.nf": 11.39174210783,
+        "ota_5t/XM2.nf": 10.08569611168
+      },
+      "margins": {
+        "gain_40db": 0.037534999999999916,
+        "ugb_100mhz": -0.060429,
+        "phase_margin_60deg": 0.17476999999999995,
+        "power_0p5mw": 0.305723,
+        "noise_50uvrms": 0.11651139999999999,
+        "cmrr_50db": 0.04008200000000002,
+        "psrr_30db": 0.06407666666666666
+      },
+      "score": {
+        "violated": true,
+        "worst_violation": 0.060429,
+        "total": 2.994652
+      },
+      "feasible": false,
+      "failures": 0,
+      "regularization": 0.035031
+    },
+    "best": {
+      "values": {
+        "ota_5t/XM3.l": 7.501338467708643e-07,
+        "ota_5t/XM4.l": 6.730436802728968e-07,
+        "ota_5t/XM1.w": 6.119949013586377e-05,
+        "ota_5t/XM4.w": 4.712123736024154e-05,
+        "ota_5t/XM2.w": 7.059987278176001e-05,
+        "ota_5t/XM3.w": 5.0860841051929996e-05,
+        "ota_5t/XM2.l": 1.1364259407646057e-06,
+        "ota_5t/XM1.l": 9.432621556850978e-07,
+        "ota_5t/XM4.nf": 7.95711111473129,
+        "ota_5t/XM3.nf": 6.567699586726573,
+        "ota_5t/XM1.nf": 11.932087647108913,
+        "ota_5t/XM2.nf": 14.420385800734872
+      },
+      "margins": {
+        "gain_40db": 0.0006099999999999994,
+        "ugb_100mhz": -0.027652,
+        "phase_margin_60deg": 0.21390833333333342,
+        "power_0p5mw": 0.30545440000000007,
+        "noise_50uvrms": 0.07451419999999996,
+        "cmrr_50db": -0.03918599999999998,
+        "psrr_30db": 0.19981666666666673
+      },
+      "score": {
+        "violated": true,
+        "worst_violation": 0.039186,
+        "total": 3.152855
+      },
+      "feasible": false,
+      "failures": 0,
+      "regularization": 0.081388
+    },
+    "sims": 2688,
+    "sims_run": 2688,
+    "sims_to_feasible": null,
+    "budget": {
+      "limit": 3200,
+      "used": 2688,
+      "remaining": 512,
+      "exhausted": true
+    },
+    "search_corners": [
+      {
+        "process": "ss",
+        "supply": 1.62,
+        "temperature": 125.0
+      },
+      {
+        "process": "ss",
+        "supply": 1.62,
+        "temperature": -40.0
+      },
+      {
+        "process": "ff",
+        "supply": 1.62,
+        "temperature": -40.0
+      },
+      {
+        "process": "tt",
+        "supply": 1.62,
+        "temperature": -40.0
+      }
+    ],
+    "validation": {
+      "skipped": false,
+      "corners": 27,
+      "sims": 88,
+      "margins": {
+        "gain_40db": 0.0006099999999999994,
+        "ugb_100mhz": -0.027652,
+        "phase_margin_60deg": 0.21390833333333342,
+        "power_0p5mw": 0.30545440000000007,
+        "noise_50uvrms": 0.07451419999999996,
+        "cmrr_50db": -0.03918599999999998,
+        "psrr_30db": 0.19981666666666673
+      },
+      "failures": 0,
+      "feasible": false,
+      "worst": [
+        {
+          "process": "ff",
+          "supply": 1.62,
+          "temperature": -40.0
+        },
+        {
+          "process": "ss",
+          "supply": 1.62,
+          "temperature": -40.0
+        }
+      ]
+    },
+    "validation_rounds": [
+      {
+        "round": 0,
+        "sims": 88,
+        "skipped": false,
+        "corners": 27,
+        "failures": 0,
+        "feasible": false,
+        "worst": [
+          {
+            "process": "ff",
+            "supply": 1.62,
+            "temperature": -40.0
+          },
+          {
+            "process": "ss",
+            "supply": 1.62,
+            "temperature": -40.0
+          }
+        ]
+      }
+    ],
+    "polish": {
+      "runs": 2,
+      "passes": 0,
+      "sims": 212,
+      "improved": true,
+      "dims": null,
+      "effort": null,
+      "steps": {
+        "ota_5t/XM3.l": 0.048017,
+        "ota_5t/XM4.l": 0.047743,
+        "ota_5t/XM1.w": 0.053761,
+        "ota_5t/XM4.w": 0.054322,
+        "ota_5t/XM2.w": 0.051808,
+        "ota_5t/XM3.w": 0.053218,
+        "ota_5t/XM2.l": 0.049349,
+        "ota_5t/XM1.l": 0.048031,
+        "ota_5t/XM4.nf": 0.122,
+        "ota_5t/XM3.nf": 0.048778,
+        "ota_5t/XM1.nf": 0.048659,
+        "ota_5t/XM2.nf": 0.051889
+      }
+    },
+    "wall_seconds": 218.667,
+    "history": [
+      {
+        "generation": 0,
+        "phase": 0,
+        "sims": 156,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.060429,
+          "total": 2.994652
+        },
+        "best_margin": -0.060429,
+        "feasible": 0
+      },
+      {
+        "generation": 1,
+        "phase": 0,
+        "sims": 200,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.060429,
+          "total": 2.994652
+        },
+        "best_margin": -0.060429,
+        "feasible": 0
+      },
+      {
+        "generation": 2,
+        "phase": 0,
+        "sims": 244,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.060429,
+          "total": 2.994652
+        },
+        "best_margin": -0.060429,
+        "feasible": 0
+      },
+      {
+        "generation": 3,
+        "phase": 0,
+        "sims": 288,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.060429,
+          "total": 2.994652
+        },
+        "best_margin": -0.060429,
+        "feasible": 0
+      },
+      {
+        "generation": 4,
+        "phase": 0,
+        "sims": 332,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.060429,
+          "total": 2.994652
+        },
+        "best_margin": -0.060429,
+        "feasible": 0
+      },
+      {
+        "generation": 5,
+        "phase": 0,
+        "sims": 376,
+        "best_score": {
+          "violated": false,
+          "worst_violation": 0.0,
+          "total": 1.819819
+        },
+        "best_margin": 0.0003,
+        "feasible": 1
+      },
+      {
+        "generation": 6,
+        "phase": 0,
+        "sims": 420,
+        "best_score": {
+          "violated": false,
+          "worst_violation": 0.0,
+          "total": 1.819819
+        },
+        "best_margin": 0.0003,
+        "feasible": 1
+      },
+      {
+        "generation": 7,
+        "phase": 0,
+        "sims": 464,
+        "best_score": {
+          "violated": false,
+          "worst_violation": 0.0,
+          "total": 1.819819
+        },
+        "best_margin": 0.0003,
+        "feasible": 1
+      },
+      {
+        "generation": 8,
+        "phase": 0,
+        "sims": 508,
+        "best_score": {
+          "violated": false,
+          "worst_violation": 0.0,
+          "total": 1.819819
+        },
+        "best_margin": 0.0003,
+        "feasible": 2
+      },
+      {
+        "generation": 9,
+        "phase": 0,
+        "sims": 552,
+        "best_score": {
+          "violated": false,
+          "worst_violation": 0.0,
+          "total": 1.819819
+        },
+        "best_margin": 0.0003,
+        "feasible": 3
+      },
+      {
+        "generation": 10,
+        "phase": 0,
+        "sims": 596,
+        "best_score": {
+          "violated": false,
+          "worst_violation": 0.0,
+          "total": 1.819819
+        },
+        "best_margin": 0.0003,
+        "feasible": 4
+      },
+      {
+        "generation": 11,
+        "phase": 0,
+        "sims": 640,
+        "best_score": {
+          "violated": false,
+          "worst_violation": 0.0,
+          "total": 1.819819
+        },
+        "best_margin": 0.0003,
+        "feasible": 4
+      },
+      {
+        "generation": 12,
+        "phase": 0,
+        "sims": 684,
+        "best_score": {
+          "violated": false,
+          "worst_violation": 0.0,
+          "total": 1.819819
+        },
+        "best_margin": 0.0003,
+        "feasible": 4
+      },
+      {
+        "generation": 13,
+        "phase": 0,
+        "sims": 728,
+        "best_score": {
+          "violated": false,
+          "worst_violation": 0.0,
+          "total": 1.819819
+        },
+        "best_margin": 0.0003,
+        "feasible": 4
+      },
+      {
+        "generation": 14,
+        "phase": 0,
+        "sims": 772,
+        "best_score": {
+          "violated": false,
+          "worst_violation": 0.0,
+          "total": 1.819819
+        },
+        "best_margin": 0.0003,
+        "feasible": 4
+      },
+      {
+        "generation": 15,
+        "phase": 1,
+        "sims": 1240,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.039186,
+          "total": 3.152855
+        },
+        "best_margin": -0.039186,
+        "feasible": 0
+      },
+      {
+        "generation": 16,
+        "phase": 1,
+        "sims": 1416,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.039186,
+          "total": 3.152855
+        },
+        "best_margin": -0.039186,
+        "feasible": 0
+      },
+      {
+        "generation": 17,
+        "phase": 1,
+        "sims": 1592,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.039186,
+          "total": 3.152855
+        },
+        "best_margin": -0.039186,
+        "feasible": 0
+      },
+      {
+        "generation": 18,
+        "phase": 1,
+        "sims": 1768,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.039186,
+          "total": 3.152855
+        },
+        "best_margin": -0.039186,
+        "feasible": 0
+      },
+      {
+        "generation": 19,
+        "phase": 1,
+        "sims": 1944,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.039186,
+          "total": 3.152855
+        },
+        "best_margin": -0.039186,
+        "feasible": 0
+      },
+      {
+        "generation": 20,
+        "phase": 1,
+        "sims": 2120,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.039186,
+          "total": 3.152855
+        },
+        "best_margin": -0.039186,
+        "feasible": 0
+      },
+      {
+        "generation": 21,
+        "phase": 1,
+        "sims": 2296,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.039186,
+          "total": 3.152855
+        },
+        "best_margin": -0.039186,
+        "feasible": 0
+      },
+      {
+        "generation": 22,
+        "phase": 1,
+        "sims": 2472,
+        "best_score": {
+          "violated": true,
+          "worst_violation": 0.039186,
+          "total": 3.152855
+        },
+        "best_margin": -0.039186,
+        "feasible": 0
+      }
+    ],
+    "notes": [
+      "phase 0: budget reached after 772 simulations",
+      "phase 0: polish rate 2.19e-04/sim vs search 1.78e-03/sim",
+      "phase 1: budget reached after 2472 simulations",
+      "phase 1: polish rate 0.00e+00/sim vs search -8.36e-04/sim",
+      "validation failed on corners already being searched"
+    ]
+  }
+}

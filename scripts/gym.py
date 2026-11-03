@@ -94,6 +94,9 @@ def main() -> int:
             values = {p.id: p.value * math.exp(rng.uniform(-args.perturb, args.perturb)) for p in design.writable()}
             perturbed = design.apply(values)
             case = args.out / f"{task}-s{seed}.json"
+            # Each run pays for its own simulations: a shared cache would make
+            # repeated budgets free and "sims-to-recover" incomparable.
+            cache_root = ROOT / ".work" / "gym-cache" / f"{task}-s{seed}-b{args.budget}"
             started = time.perf_counter()
             report = optimize.solve(
                 perturbed,
@@ -111,7 +114,7 @@ def main() -> int:
                     "lambda_reg": args.lambda_reg,
                 },
                 eval_options=evaluate.EvalOptions(
-                    jobs=args.jobs, cache_root=ROOT / ".adb-cache", work_root=ROOT / ".work/sim"
+                    jobs=args.jobs, cache_root=cache_root, work_root=ROOT / ".work/sim"
                 ),
                 validation_corners=corner_list,
             )
