@@ -71,7 +71,6 @@ def main() -> int:
     parser.add_argument("--budget", type=int, default=1500)
     parser.add_argument("--corners-count", type=int, default=4)
     parser.add_argument("--rounds", type=int, default=2)
-    parser.add_argument("--stall-generations", type=int, default=12)
     parser.add_argument("--jobs", type=int, default=12)
     parser.add_argument("--sigma", type=float, default=0.35)
     parser.add_argument("--lambda-reg", type=float, default=0.05)
@@ -106,7 +105,6 @@ def main() -> int:
                     "budget": args.budget,
                     "corners_count": args.corners_count,
                     "rounds": args.rounds,
-                    "stall_generations": args.stall_generations,
                     "seed": seed,
                     "algorithm": "cma",
                     "sigma": args.sigma,

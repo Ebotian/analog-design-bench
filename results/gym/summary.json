@@ -8,13 +8,13 @@
     "sky130-ota-5t-gain40-pm60-noise50uv-pvt"
   ],
   "median_sims_to_feasible": null,
-  "best_worst_margin": -0.0086,
-  "median_worst_margin": -0.0403,
+  "best_worst_margin": -0.0165,
+  "median_worst_margin": -0.0352,
   "runs_detail": [
     {
       "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
       "seed": 3,
-      "sims": 2408,
+      "sims": 2600,
       "sims_to_feasible": null,
       "validation_feasible": false,
       "polish_runs": 2,
@@ -29,28 +29,27 @@
     {
       "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
       "seed": 5,
-      "sims": 2408,
+      "sims": 1936,
       "sims_to_feasible": null,
       "validation_feasible": false,
-      "polish_runs": 1,
+      "polish_runs": 2,
       "official_passed": null,
       "official_total": null,
-      "worst_margin": -0.04150199999999998,
+      "worst_margin": -0.016472500000000067,
       "short_gates": [
-        "cmrr_50db",
         "gain_40db"
       ]
     },
     {
       "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
       "seed": 7,
-      "sims": 2452,
+      "sims": 2328,
       "sims_to_feasible": null,
       "validation_feasible": false,
       "polish_runs": 2,
       "official_passed": null,
       "official_total": null,
-      "worst_margin": -0.008581999999999965,
+      "worst_margin": -0.12764399999999995,
       "short_gates": [
         "cmrr_50db",
         "gain_40db"
@@ -59,15 +58,17 @@
     {
       "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
       "seed": 9,
-      "sims": 2408,
+      "sims": 2672,
       "sims_to_feasible": null,
       "validation_feasible": false,
-      "polish_runs": 0,
+      "polish_runs": 3,
       "official_passed": null,
       "official_total": null,
-      "worst_margin": -0.09092799999999997,
+      "worst_margin": -0.031239999999999952,
       "short_gates": [
-        "cmrr_50db"
+        "cmrr_50db",
+        "gain_40db",
+        "psrr_30db"
       ]
     }
   ]

@@ -101,9 +101,13 @@
   {{fact:solve.ota.final_sims}} 次收口（其中 {{fact:solve.ota.polish_sims}} 次 polish 坐标扫描）到达全角点正余量
   （gain {{fact:solve.ota.validation_gain}}、CMRR {{fact:solve.ota.validation_cmrr}}），
   官方 {{fact:solve.ota.verifier_passed}}/{{fact:solve.ota.verifier_total}}、reward 1.0（`results/solve/`）。但**这不是稳定现象**：小样本 gym（{{fact:gym.runs}} 个对数扰动）里
-  {{fact:gym.recovered}} 个通过官方判分，最接近的一例整体最差余量 {{fact:gym.best_worst_margin}}
-  （只差 0.9%），中位 {{fact:gym.median_worst_margin}}——失败模式是“总差最后一两个 gate 一点点”，
-  不是“完全没动”。报告见 `results/gym/`，`scripts/gym.py` 可重跑。
+  {{fact:gym.recovered}} 个通过官方判分，最接近的一例整体最差余量 {{fact:gym.best_worst_margin}}，
+  中位 {{fact:gym.median_worst_margin}}——失败模式是“总差最后一两个 gate 一点点”，不是“完全没动”。
+  换掉阈值判据后同种子同预算重测：仍是 {{fact:gym.recovered}}/{{fact:gym.runs}}，中位从
+  {{fact:gym.old_median_worst_margin}} 到 {{fact:gym.median_worst_margin}}（略好），最好一例从
+  {{fact:gym.old_best_worst_margin}} 变差到 {{fact:gym.best_worst_margin}}，且 seed 7 明显回退：
+  **n=4 不足以区分规则，只能说“判据更干净，但没带来恢复率提升”**。报告与两版汇总都在
+  `results/gym/`，`scripts/gym.py` 可重跑。
 - **polish 的时机由实测费率决定，不是拍出来的阈值**：每个阶段结束都算一次“每仿真一次的损失下降率”，
   与上一次 polish 实测的费率比较——搜索更划算就继续搜索，否则花一次 polish（**所有**维度、正负两向）
   再比一次。没有“连续 N 代无改进”“步长小于 1e-4”“只细化前 6 维”这类常数；维度排名来自这次扫描的

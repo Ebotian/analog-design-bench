@@ -447,3 +447,15 @@ kind = "json"
 file = "results/gym/summary.json"
 path = "median_worst_margin"
 format = "{:+.4f}"
+
+[facts."gym.old_best_worst_margin"]
+kind = "json"
+file = "results/gym/summary-weighted-thresholds.json"
+path = "best_worst_margin"
+format = "{:+.4f}"
+
+[facts."gym.old_median_worst_margin"]
+kind = "json"
+file = "results/gym/summary-weighted-thresholds.json"
+path = "median_worst_margin"
+format = "{:+.4f}"

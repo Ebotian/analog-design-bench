@@ -128,10 +128,12 @@
     {
       "block": "plan/p3",
       "doc": "plan",
-      "end": 120,
+      "end": 124,
       "facts": [
         "gym.best_worst_margin",
         "gym.median_worst_margin",
+        "gym.old_best_worst_margin",
+        "gym.old_median_worst_margin",
         "gym.recovered",
         "gym.runs",
         "p1.knobs_median",
@@ -163,10 +165,10 @@
     {
       "block": "plan/p4",
       "doc": "plan",
-      "end": 129,
+      "end": 133,
       "facts": [],
       "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
-      "line": 121,
+      "line": 125,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P4",
@@ -178,13 +180,13 @@
     {
       "block": "plan/p5",
       "doc": "plan",
-      "end": 152,
+      "end": 156,
       "facts": [
         "corpus.runs",
         "p1.netlists"
       ],
       "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
-      "line": 130,
+      "line": 134,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P5",
@@ -712,7 +714,7 @@
     {
       "generated_by": null,
       "id": "plan",
-      "lines": 152,
+      "lines": 156,
       "path": "docs/PLAN.md",
       "source": "docs/src/plan.md",
       "tags": [
@@ -1112,7 +1114,7 @@
       "value": 50
     },
     "gym.best_worst_margin": {
-      "display": "-0.0086",
+      "display": "-0.0165",
       "extract": {
         "file": "results/gym/summary.json",
         "format": "{:+.4f}",
@@ -1123,12 +1125,38 @@
         "plan/p3",
         "readme/p1-usage"
       ],
-      "value": -0.0086
+      "value": -0.0165
     },
     "gym.median_worst_margin": {
-      "display": "-0.0403",
+      "display": "-0.0352",
       "extract": {
         "file": "results/gym/summary.json",
+        "format": "{:+.4f}",
+        "kind": "json",
+        "path": "median_worst_margin"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": -0.0352
+    },
+    "gym.old_best_worst_margin": {
+      "display": "-0.0086",
+      "extract": {
+        "file": "results/gym/summary-weighted-thresholds.json",
+        "format": "{:+.4f}",
+        "kind": "json",
+        "path": "best_worst_margin"
+      },
+      "used_in": [
+        "plan/p3"
+      ],
+      "value": -0.0086
+    },
+    "gym.old_median_worst_margin": {
+      "display": "-0.0403",
+      "extract": {
+        "file": "results/gym/summary-weighted-thresholds.json",
         "format": "{:+.4f}",
         "kind": "json",
         "path": "median_worst_margin"
