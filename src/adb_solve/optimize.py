@@ -48,9 +48,6 @@ class SolveOptions(TypedDict, total=False):
     sigma: float
     phase_split: float
     polish: bool
-    polish_passes: int
-    polish_dims: int
-    stall_generations: int
 
 
 @dataclass(frozen=True)
@@ -76,9 +73,6 @@ class Settings:
     sigma: float = 0.35
     phase_split: float = 0.3
     polish: bool = True
-    polish_passes: int = 3
-    polish_dims: int = 6
-    stall_generations: int = 15
 
     @classmethod
     def from_options(cls, options: SolveOptions | None) -> "Settings":
@@ -104,16 +98,13 @@ class Settings:
             sigma=float(raw.get("sigma", 0.35)),
             phase_split=float(raw.get("phase_split", 0.3)),
             polish=bool(raw.get("polish", True)),
-            polish_passes=int(raw.get("polish_passes", 3)),
-            polish_dims=int(raw.get("polish_dims", 6)),
-            stall_generations=int(raw.get("stall_generations", 15)),
         )
 
 
 class CandidateReport(TypedDict, total=False):
     values: dict[str, float]
     margins: dict[str, float | None]
-    loss: float
+    score: dict[str, float | bool]
     feasible: bool
     failures: int
     regularization: float
@@ -143,7 +134,7 @@ class SolveReport(TypedDict):
 class _Candidate:
     values: dict[str, float]
     text: str
-    loss: float = math.inf
+    score: gate_lib.Score = field(default_factory=lambda: gate_lib.Score(True, math.inf, math.inf))
     margins: dict[str, float | None] = field(default_factory=dict)
     failures: int = 0
     regularization: float = 0.0
@@ -154,7 +145,7 @@ class _Candidate:
         return {
             "values": {key: float(value) for key, value in self.values.items()},
             "margins": dict(self.margins),
-            "loss": round(self.loss, 6),
+            "score": self.score.to_json(),
             "feasible": self.feasible,
             "failures": self.failures,
             "regularization": round(self.regularization, 6),
@@ -217,11 +208,11 @@ def _score(
     values: Mapping[str, float],
     reference: Mapping[str, float],
     settings: Settings,
-) -> tuple[dict[str, float | None], int, float, float, bool]:
+) -> tuple[dict[str, float | None], int, float, gate_lib.Score, bool]:
     margins = gate_lib.margins(gate_set, rows)
     failures = gate_lib.failed_cases(rows)
     regularization = _regularization(values, reference)
-    value = gate_lib.loss(
+    value = gate_lib.score(
         margins,
         failures,
         tau=settings.tau,
@@ -253,7 +244,7 @@ def _score_batch(
         candidate.margins = margins
         candidate.failures = failures
         candidate.regularization = regularization
-        candidate.loss = value
+        candidate.score = value
         candidate.feasible = feasible
         candidate.evaluated_at = used_before
 
@@ -294,9 +285,9 @@ def solve(
     rounds = max(1, settings.rounds)
     reserve = rounds * len(validation_corners) * max(1, len(decks)) if validation_corners else 0
     search_cases = max(1, len(decks) * max(1, min(len(corners), settings.corners_count)))
-    polish_reserve = (
-        settings.polish_passes * 2 * settings.polish_dims * search_cases if settings.polish else 0
-    )
+    # One polish pass touches every dimension in both directions; reserve one
+    # such pass, not a fixed number of them.
+    polish_reserve = 2 * len(settings.dims) * search_cases if settings.polish else 0
     polish_cap = None if settings.budget is None else max(0, settings.budget - reserve)
     # Even a hopeless budget must buy one evaluation, otherwise the gate set
     # cannot be resolved and the failure looks like "no gates" instead of
@@ -309,9 +300,6 @@ def solve(
     )
     used = 0
     blocked = False
-    last_stalled = False
-    stall_best: float | None = None
-    stall_counter = 0
     sims_to_feasible: int | None = None
     notes: list[str] = []
 
@@ -385,20 +373,6 @@ def solve(
             )
         return population
 
-    def note_progress(best_loss: float, phase_index: int, generation: int) -> bool:
-        """True when the last ``stall_generations`` bought nothing measurable."""
-        nonlocal last_stalled, stall_counter, stall_best
-        if stall_best is None or best_loss < stall_best - 1e-4:
-            stall_best = best_loss
-            stall_counter = 0
-            return False
-        stall_counter += 1
-        if stall_counter < settings.stall_generations:
-            return False
-        notes.append(f"phase {phase_index}: no progress for {stall_counter} generations after {generation}")
-        last_stalled = True
-        return True
-
     def evolve(
         population: list[_Candidate],
         phase_corners: Sequence[Corner],
@@ -406,9 +380,7 @@ def solve(
         phase_index: int,
         final_phase: bool = False,
     ) -> list[_Candidate]:
-        nonlocal gate_set, sims_to_feasible, blocked, stall_best, stall_counter
-        stall_best, stall_counter = None, 0
-        last_stalled = False
+        nonlocal gate_set, sims_to_feasible, blocked
         if settings.algorithm == "cma":
             return evolve_cma(population, phase_corners, cap, phase_index, final_phase)
         cases = max(1, len(decks) * len(phase_corners))
@@ -421,7 +393,7 @@ def solve(
         # comparing a one-corner loss with a two-corner loss would keep the
         # cheaper candidate forever.  Re-score the population first.
         for candidate in population:
-            candidate.loss = math.inf
+            candidate.score = gate_lib.Score(True, math.inf, math.inf)
             candidate.margins = {}
             candidate.feasible = False
         if gate_set is None:
@@ -433,7 +405,7 @@ def solve(
             notes.extend(f"unresolved gate: {gate}" for gate in resolved.unresolved)
             _score_batch(report, labelled, resolved, reference, settings, used)
         else:
-            pending = [candidate for candidate in population if candidate.loss == math.inf]
+            pending = [candidate for candidate in population if candidate.score.total == math.inf]
             if pending:
                 report, labelled, _ = run_batch(pending, phase_corners)
                 _score_batch(report, labelled, gate_set, reference, settings, used)
@@ -464,14 +436,12 @@ def solve(
             report, labelled, spent = run_batch(trials, phase_corners)
             _score_batch(report, labelled, gate_set, reference, settings, used)
             for position, trial in enumerate(trials):
-                if trial.loss < population[position].loss:
+                if trial.score < population[position].score:
                     population[position] = trial
-            best = min(population, key=lambda candidate: candidate.loss)
+            best = min(population, key=lambda candidate: candidate.score)
             history.append(_generation_row(len(history), population, used, phase_index))
             if final_phase and sims_to_feasible is None and best.feasible:
                 sims_to_feasible = used
-            if note_progress(best.loss, phase_index, generation):
-                break
             if spent == 0 and cap is not None and used >= cap:
                 break
         return population
@@ -483,12 +453,10 @@ def solve(
         phase_index: int,
         final_phase: bool = False,
     ) -> list[_Candidate]:
-        nonlocal gate_set, sims_to_feasible, blocked, stall_best, stall_counter
-        stall_best, stall_counter = None, 0
-        last_stalled = False
+        nonlocal gate_set, sims_to_feasible, blocked
         cases = max(1, len(decks) * len(phase_corners))
         for candidate in population:
-            candidate.loss = math.inf
+            candidate.score = gate_lib.Score(True, math.inf, math.inf)
             candidate.margins = {}
             candidate.feasible = False
         if population:
@@ -499,9 +467,9 @@ def solve(
                     raise ValueError("no gate could be resolved from the task's public specs")
                 notes.extend(f"unresolved gate: {gate}" for gate in gate_set.unresolved)
             _score_batch(report, labelled, gate_set, reference, settings, used)
-        scored = [candidate for candidate in population if candidate.loss < math.inf]
-        start = min(scored, key=lambda candidate: candidate.loss) if scored else baseline
-        if start.loss == math.inf:
+        scored = [candidate for candidate in population if candidate.score.total < math.inf]
+        start = min(scored, key=lambda candidate: candidate.score) if scored else baseline
+        if start.score.total == math.inf:
             report, labelled, _ = run_batch([start], phase_corners)
             if gate_set is None:
                 gate_set = gate_lib.from_task(payload, _measure_names(report))
@@ -533,112 +501,79 @@ def solve(
             ]
             report, labelled, spent = run_batch(candidates, phase_corners)
             _score_batch(report, labelled, gate_set, reference, settings, used)
-            state.tell(samples, [candidate.loss for candidate in candidates])
+            rank_of = [0.0] * len(candidates)
+            for rank, index in enumerate(sorted(range(len(candidates)), key=lambda i: candidates[i].score)):
+                rank_of[index] = float(rank)
+            state.tell(samples, rank_of)
             # The covariance says how far this dimension actually moves; the
             # polish step uses it instead of a hand-chosen per-task step.
             for index, name in enumerate(settings.dims):
                 cma_scales[name] = state.sigma * math.sqrt(max(state.cov[index][index], 1e-24))
             elite.extend(candidates)
-            elite.sort(key=lambda candidate: candidate.loss)
+            elite.sort(key=lambda candidate: candidate.score)
             elite = elite[: max(4, settings.population)]
             best = elite[0]
             history.append(_generation_row(len(history), elite, used, phase_index))
             if final_phase and sims_to_feasible is None and best.feasible:
                 sims_to_feasible = used
-            if note_progress(best.loss, phase_index, generation):
-                break
             if spent == 0 and cap is not None and used >= cap:
                 break
         return elite
 
-    def polish(
+    def polish_pass(
         incumbent: _Candidate,
         phase_corners: Sequence[Corner],
         cap: int | None,
-        phase_index: int,
+        steps: dict[str, float] | None = None,
     ) -> tuple[_Candidate, dict[str, object]]:
-        """Measure which dimensions respond, then refine those.
+        """One measured pass over *every* dimension; no dimension is pre-selected.
 
-        Pass 1 sweeps *every* dimension at a coarse step and ranks them by the
-        loss they actually bought at the incumbent — the covariance scale from
-        the search is only a fallback, because the search's history is not the
-        local gradient.  Later passes move along the top ``polish_dims``
-        dimensions, growing the step of whatever improved and shrinking the
-        rest.  All of it is measured at the current point; nothing here knows
-        which task it is looking at.
+        Both directions are evaluated for each dimension, so the pass measures
+        which dimensions respond at the incumbent and returns the loss per
+        simulation it bought.  The caller compares that rate with the search's
+        measured rate to decide whether another pass is worth its cost.
         """
         nonlocal used, blocked, gate_set
         if gate_set is None:
             raise ValueError("no gate could be resolved from the task's public specs")
         cases = max(1, len(decks) * len(phase_corners))
         before = used
-        passes = 0
-        improved = False
-        coarse = {name: max(cma_scales.get(name, settings.sigma * 0.3), 1e-4) for name in settings.dims}
-        ranked = sorted(settings.dims, key=lambda name: -coarse[name])[: settings.polish_dims]
-        steps = {name: coarse[name] for name in ranked}
+        start_score = incumbent.score
+        if steps is None:
+            steps = {name: max(cma_scales.get(name, settings.sigma), 1e-6) for name in settings.dims}
+        if cap is not None and used + cases * 2 * len(settings.dims) > cap:
+            blocked = True
+            notes.append(f"polish skipped: needs {cases * 2 * len(settings.dims)} sims, {cap - used} left")
+            return incumbent, {"sims": 0, "delta": 0.0, "improved": False, "dims": [], "steps": {}}
+        trials = [
+            (name, spawn({**incumbent.values, name: incumbent.values[name] * math.exp(sign * steps[name])}))
+            for name in settings.dims
+            for sign in (1.0, -1.0)
+        ]
+        report, labelled, _ = run_batch([candidate for _, candidate in trials], phase_corners)
+        _score_batch(report, labelled, gate_set, reference, settings, used)
         effect: dict[str, float] = {}
-
-        if cap is None or used + cases * 2 * len(settings.dims) <= cap:
-            passes += 1
-            trials = [
-                (name, sign, spawn({**incumbent.values, name: incumbent.values[name] * math.exp(sign * coarse[name])}))
-                for name in settings.dims
-                for sign in (1.0, -1.0)
-            ]
-            report, labelled, _ = run_batch([candidate for _, _, candidate in trials], phase_corners)
-            _score_batch(report, labelled, gate_set, reference, settings, used)
-            best_of: dict[str, _Candidate] = {}
-            for name, _, candidate in trials:
-                gain = incumbent.loss - candidate.loss
-                if name not in effect or gain > effect[name]:
-                    effect[name] = gain
-                    best_of[name] = candidate
-            ranked = sorted(settings.dims, key=lambda name: -effect.get(name, 0.0))[: settings.polish_dims]
-            steps = {
-                name: min(max(coarse[name] * (1.6 if effect.get(name, 0.0) > 0 else 0.5), 1e-5), 0.5)
-                for name in ranked
-            }
-            best_probe = min(best_of.values(), key=lambda candidate: candidate.loss, default=None)
-            if best_probe is not None and best_probe.loss < incumbent.loss:
-                incumbent = best_probe
-                improved = True
-
-        while passes < settings.polish_passes + 1 and ranked and not incumbent.feasible:
-            if cap is not None and used + cases * 2 * len(ranked) > cap:
-                blocked = True
-                notes.append(f"polish stopped: needs {cases * 2 * len(ranked)} sims, {cap - used} left")
-                break
-            passes += 1
-            moves = [
-                (name, spawn({**incumbent.values, name: incumbent.values[name] * math.exp(sign * steps[name])}))
-                for name in ranked
-                for sign in (1.0, -1.0)
-            ]
-            report, labelled, _ = run_batch([candidate for _, candidate in moves], phase_corners)
-            _score_batch(report, labelled, gate_set, reference, settings, used)
-            chosen = min((candidate for _, candidate in moves), key=lambda candidate: candidate.loss)
-            if chosen.loss >= incumbent.loss:
-                for name in ranked:
-                    steps[name] *= 0.4
-                if max(steps.values()) < 1e-4:
-                    break
-                continue
-            moved = [name for name, candidate in moves if candidate is chosen]
+        for name, candidate in trials:
+            gain = start_score.total - candidate.score.total
+            effect[name] = max(effect.get(name, -math.inf), gain)
+        chosen = min((candidate for _, candidate in trials), key=lambda candidate: candidate.score)
+        improved = chosen.score < start_score
+        if improved:
             incumbent = chosen
-            improved = True
-            if moved:
-                steps[moved[0]] = min(steps[moved[0]] * 1.6, 0.5)
-            for name in ranked:
-                if not moved or name != moved[0]:
-                    steps[name] *= 0.6
+            moved = [name for name, candidate in trials if candidate is chosen]
+            for name in settings.dims:
+                steps[name] = min(steps[name] * 1.6, 0.5) if name in moved else steps[name] * 0.6
+        else:
+            for name in settings.dims:
+                steps[name] *= 0.5
+        spent = used - before
+        gain = start_score.total - incumbent.score.total
         return incumbent, {
-            "passes": passes,
-            "sims": used - before,
-            "reserve": cap,
+            "sims": spent,
+            "delta": gain,
+            "rate": (gain / spent) if spent else 0.0,
             "improved": improved,
-            "dims": ranked,
-            "effort": {name: round(value, 6) for name, value in sorted(effect.items(), key=lambda item: -item[1])[:6]},
+            "effect": {name: round(value, 6) for name, value in sorted(effect.items(), key=lambda item: -item[1])[:8]},
             "steps": {name: round(value, 6) for name, value in steps.items()},
         }
 
@@ -690,47 +625,74 @@ def solve(
     validation: dict[str, object] = {"skipped": True, "reason": "not run"}
     validation_rounds: list[dict[str, object]] = []
     polish_runs: list[dict[str, object]] = []
+    polish_rate: float | None = None
+    polish_steps: dict[str, float] | None = None
     feedback: list[Corner] = []
 
-    def maybe_polish(
-        population: list[_Candidate], phase_corners: Sequence[Corner], phase_index: int
-    ) -> list[_Candidate]:
-        """Stagnation is the trigger, not a fixed schedule.
+    # Evaluate the untouched input once: it defines the starting score every
+    # block's rate is measured against, and resolves the gate set up front.
+    report, labelled, _ = run_batch([baseline], search_corners[:1] or [dict(corners[0])])
+    if gate_set is None:
+        gate_set = gate_lib.from_task(payload, _measure_names(report))
+        if not gate_set.gates:
+            raise ValueError("no gate could be resolved from the task's public specs")
+        notes.extend(f"unresolved gate: {gate}" for gate in gate_set.unresolved)
+    _score_batch(report, labelled, gate_set, reference, settings, used)
 
-        A phase that stops buying improvement is spending budget on a flat
-        region: refine locally instead of continuing the global search.  After
-        polishing, the next phase (or round) resumes global search from the
-        improved incumbent.
+    def maybe_polish(
+        population: list[_Candidate],
+        phase_corners: Sequence[Corner],
+        phase_index: int,
+        search_rate: float,
+    ) -> list[_Candidate]:
+        """Allocate the next block to whichever operator bought more per sim.
+
+        ``search_rate`` is the loss reduction per simulation the phase just
+        achieved; ``polish_rate`` is the same quantity measured by the previous
+        polish pass.  No schedule, no stall counter: if search is the better
+        buyer it keeps the budget, otherwise one polish pass is paid for and
+        the comparison is redone with its measured rate.
         """
-        if not (settings.polish and last_stalled):
+        nonlocal polish_rate, polish_steps
+        if not settings.polish:
             return population
-        best = min(population, key=lambda candidate: candidate.loss)
-        polished, report = polish(best, phase_corners, polish_cap, phase_index)
-        if report.get("sims"):
-            polish_runs.append(report)
+        if polish_rate is not None and search_rate > polish_rate:
+            return population
+        best = min(population, key=lambda candidate: candidate.score)
+        candidate, stats = polish_pass(best, phase_corners, polish_cap, polish_steps)
+        if stats.get("sims"):
+            polish_runs.append(stats)
+            polish_rate = float(cast(float, stats.get("rate") or 0.0))
+            polished_steps = cast(dict[str, float], stats.get("steps") or {})
+            if polished_steps:
+                polish_steps = polished_steps
             notes.append(
-                f"polish triggered after stagnation in phase {phase_index}: {report['sims']} sims"
+                f"phase {phase_index}: polish rate {polish_rate:.2e}/sim vs search {search_rate:.2e}/sim"
             )
-        if polished.loss < best.loss:
-            population = [polished, *[c for c in population if c is not polished]]
+        if candidate.score < best.score:
+            population = [candidate, *[c for c in population if c is not candidate]]
         return population
 
     for round_index in range(max(1, settings.rounds)):
         if round_index == 0:
             for phase_index, (phase_corners, share) in enumerate(phases):
                 cap = None if search_budget is None else int(search_budget * share)
+                before = min(population, key=lambda c: c.score).score if population else baseline.score
+                before_used = used
                 population = evolve(
                     population, phase_corners, cap, phase_index,
                     final_phase=phase_index == len(phases) - 1,
                 )
-                population = maybe_polish(population, phase_corners, phase_index)
+                after = min(population, key=lambda c: c.score).score
+                rate = (before.total - after.total) / max(1, used - before_used)
+                population = maybe_polish(population, phase_corners, phase_index, rate)
         else:
             if not feedback:
                 break
             # The corner set changed, so the old optimum is probably no longer
             # the right basin.  Keep the best half and respawn the rest around
             # it with a wider spread; without this, DE cannot cross a 2x gap.
-            ranked = sorted(population, key=lambda candidate: candidate.loss)
+            ranked = sorted(population, key=lambda candidate: candidate.score)
             half = max(1, len(ranked) // 2)
             width = settings.bound * 1.5
             population = ranked[:half] + [
@@ -743,9 +705,13 @@ def solve(
                 for _ in range(len(ranked) - half)
             ]
             cap = None if search_budget is None else search_budget - used
+            before = min(population, key=lambda c: c.score).score
+            before_used = used
             population = evolve(population, [*search_corners, *feedback], cap, 10 + round_index, final_phase=True)
-            population = maybe_polish(population, [*search_corners, *feedback], 10 + round_index)
-        best = min(population, key=lambda candidate: candidate.loss)
+            after = min(population, key=lambda c: c.score).score
+            rate = (before.total - after.total) / max(1, used - before_used)
+            population = maybe_polish(population, [*search_corners, *feedback], 10 + round_index, rate)
+        best = min(population, key=lambda candidate: candidate.score)
         validation = validate(best)
         validation_rounds.append(
             {"round": round_index, "sims": used, **{key: value for key, value in validation.items() if key != "margins"}}
@@ -766,18 +732,19 @@ def solve(
     if gate_set is None:
         raise ValueError("no gate could be resolved from the task's public specs")
     polish_report: dict[str, object] = {}
-    if settings.polish and not validation.get("skipped") and not validation.get("feasible"):
-        # Fallback: if stagnation never triggered inside a phase, one last
-        # refinement before the final verdict.
-        best = min(population, key=lambda candidate: candidate.loss)
+    if settings.polish and not validation.get("skipped") and not validation.get("feasible") and not polish_runs:
+        # The rate comparison may never have favoured polish (search was the
+        # better buyer); measure it once before the final verdict so the choice
+        # is at least based on evidence.
+        best = min(population, key=lambda candidate: candidate.score)
         corners_now = [*search_corners, *feedback]
-        polished, report = polish(best, corners_now, polish_cap, 20)
-        if report.get("sims"):
-            polish_runs.append(report)
-        if polished.loss < best.loss:
+        polished, polish_stats = polish_pass(best, corners_now, polish_cap, polish_steps)
+        if polish_stats.get("sims"):
+            polish_runs.append(polish_stats)
+        if polished.score < best.score:
             population = [polished, *[c for c in population if c is not polished]]
         if polish_runs:
-            best = min(population, key=lambda candidate: candidate.loss)
+            best = min(population, key=lambda candidate: candidate.score)
             validation = validate(best)
             validation_rounds.append(
                 {"round": "polish", "sims": used, **{key: value for key, value in validation.items() if key != "margins"}}
@@ -887,8 +854,8 @@ def _generation_row(
         "generation": generation,
         "phase": phase,
         "sims": used,
-        "best_loss": round(min(candidate.loss for candidate in population), 6),
-        "best_margin": _min_margin(min(population, key=lambda candidate: candidate.loss)),
+        "best_score": min(candidate.score for candidate in population).to_json(),
+        "best_margin": _min_margin(min(population, key=lambda candidate: candidate.score)),
         "feasible": sum(1 for candidate in population if candidate.feasible),
     }
 
@@ -910,7 +877,7 @@ def summarise(report: SolveReport) -> str:
         f"dims={len(report['dims'])} sims={report['sims']} "
         f"feasible={best['feasible']} sims_to_feasible={report['sims_to_feasible']} "
         f"budget={report['budget']['used']}/{report['budget']['limit']}",
-        f"reference loss={ref['loss']:.4f}  best loss={best['loss']:.4f}",
+        f"reference score={ref['score']}  best score={best['score']}",
     ]
     for gate_id, margin in best["margins"].items():
         shown = "n/a" if margin is None else f"{margin:+.3f}"

@@ -128,7 +128,7 @@
     {
       "block": "plan/p3",
       "doc": "plan",
-      "end": 116,
+      "end": 120,
       "facts": [
         "gym.best_worst_margin",
         "gym.median_worst_margin",
@@ -163,10 +163,10 @@
     {
       "block": "plan/p4",
       "doc": "plan",
-      "end": 125,
+      "end": 129,
       "facts": [],
       "heading": "P4 — 接口层（CLI + MCP，≈2 天）",
-      "line": 117,
+      "line": 121,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P4",
@@ -178,13 +178,13 @@
     {
       "block": "plan/p5",
       "doc": "plan",
-      "end": 148,
+      "end": 152,
       "facts": [
         "corpus.runs",
         "p1.netlists"
       ],
       "heading": "P5 — 验证：sizing gym 与 agent A/B（≈3–5 天）",
-      "line": 126,
+      "line": 130,
       "path": "docs/PLAN.md",
       "tags": [
         "phase:P5",
@@ -712,7 +712,7 @@
     {
       "generated_by": null,
       "id": "plan",
-      "lines": 148,
+      "lines": 152,
       "path": "docs/PLAN.md",
       "source": "docs/src/plan.md",
       "tags": [

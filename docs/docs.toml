@@ -17,7 +17,7 @@ title = "阶段计划"
 source = "docs/src/plan.md"
 output = "docs/PLAN.md"
 tags = ["doc:plan", "kind:goal", "topic:roadmap"]
-max_lines = 148
+max_lines = 158
 
 [[doc]]
 id = "requirements"

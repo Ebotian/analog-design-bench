@@ -55,7 +55,10 @@ def test_missing_measurement_is_not_a_pass() -> None:
     margins = gates.margins(gate_set(), [{"status": "ok", "measures": {}}])
     assert all(value is None for value in margins.values())
     assert gates.feasible(margins) is False
-    assert gates.loss(margins, 0) > 0
+    result = gates.score(margins, 0)
+    assert result.violated is True
+    # Unmeasured compares worse than any measured violation.
+    assert result.worst_violation == float("inf")
 
 
 def test_ambiguous_quantity_is_left_unresolved() -> None:
@@ -65,21 +68,30 @@ def test_ambiguous_quantity_is_left_unresolved() -> None:
     assert ambiguous.unresolved == ("gain_40db",)
 
 
-def test_loss_penalises_failures_and_keeps_passing_designs_cheap() -> None:
+def test_score_penalises_failures_and_keeps_passing_designs_cheap() -> None:
     passing = {gate.id: 0.2 for gate in gate_set().gates}
     assert gates.feasible(passing)
-    base = gates.loss(passing, 0)
-    assert 0.0 < base < 1.0  # softplus(-m/tau) never reaches zero
-    assert gates.loss(passing, 3, lambda_fail=2.0) - base == pytest.approx(6.0)
+    base = gates.score(passing, 0)
+    assert base.violated is False
+    assert 0.0 < base.total < 1.0  # softplus(-m/tau) never reaches zero
+    assert gates.score(passing, 3, lambda_fail=2.0).total - base.total == pytest.approx(6.0)
 
 
 def test_violated_margins_cost_more_than_passing_ones() -> None:
     failing = {gate.id: -0.2 for gate in gate_set().gates}
     passing = {gate.id: 0.2 for gate in gate_set().gates}
-    assert gates.loss(failing, 0) > gates.loss(passing, 0)
+    assert gates.score(failing, 0) > gates.score(passing, 0)
 
 
-def test_regularization_enters_the_loss() -> None:
+def test_score_is_lexicographic_not_a_weighted_sum() -> None:
+    """Feasibility outranks everything: no weight to tune, no sum to outgrow."""
+    feasible_but_expensive = gates.Score(False, 0.0, 1e9)
+    violated_but_cheap = gates.Score(True, 0.001, 0.0)
+    assert feasible_but_expensive < violated_but_cheap
+    assert gates.Score(False, 0.0, 10.0) < gates.Score(False, 0.0, 20.0)
+
+
+def test_regularization_enters_the_score() -> None:
     passing = {gate.id: 0.2 for gate in gate_set().gates}
-    base = gates.loss(passing, 0)
-    assert gates.loss(passing, 0, regularization=1.0, lambda_reg=0.5) - base == pytest.approx(0.5)
+    base = gates.score(passing, 0)
+    assert gates.score(passing, 0, regularization=1.0, lambda_reg=0.5).total - base.total == pytest.approx(0.5)

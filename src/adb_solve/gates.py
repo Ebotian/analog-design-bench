@@ -198,34 +198,57 @@ def failed_cases(rows: Sequence[Mapping[str, Any]]) -> int:
     return sum(1 for row in rows if row.get("status") != "ok")
 
 
-def loss(
+@dataclass(frozen=True, order=True)
+class Score:
+    """Lexicographic objective: feasibility, then the worst violation, then cost.
+
+    Ordering is the point: a candidate that violates a gate is always worse than
+    one that does not, regardless of how smooth its other margins are.  Written
+    as tuple ordering instead of ``sum + BIG * violation`` so no weight has to
+    be invented (and none can be too small to matter).
+    """
+
+    violated: bool
+    worst_violation: float
+    total: float
+
+    def to_json(self) -> dict[str, float | bool]:
+        return {
+            "violated": self.violated,
+            "worst_violation": round(self.worst_violation, 6),
+            "total": round(self.total, 6),
+        }
+
+
+def score(
     gate_margins: Mapping[str, float | None],
     failures: int,
     tau: float = 0.1,
     lambda_fail: float = 2.0,
     regularization: float = 0.0,
     lambda_reg: float = 0.05,
-    violation_weight: float = 1000.0,
-) -> float:
-    """Scalar objective: worst violation first, then softplus, failures, distance.
+) -> Score:
+    """Lexicographic score; ``tau`` is the margin scale at which a violation hurts.
 
-    The worst violated margin is weighted so heavily that comparing two
-    infeasible candidates is lexicographic in it.  Without that term, a sum of
-    softplus makes -0.003 and -0.007 look almost equal and the last gate never
-    gets the search's attention.
+    ``tau`` is part of the objective's definition (docs/REQUIREMENTS.md), not a
+    searching heuristic: it says a margin of ``-tau`` costs about one unit.
     """
     total = 0.0
-    worst_violation = 0.0
+    worst = 0.0
+    unmeasured = False
     for margin in gate_margins.values():
         if margin is None:
-            total += 1.0  # unmeasured is not a pass
+            unmeasured = True  # unmeasured is not a pass
             continue
-        worst_violation = max(worst_violation, -margin)
+        worst = max(worst, -margin)
         total += _softplus(-margin / tau)
-    total += violation_weight * worst_violation
     total += lambda_fail * failures
     total += lambda_reg * regularization
-    return total
+    if unmeasured:
+        # Treat a missing measurement as a violation larger than any real one:
+        # it compares worse than any measured candidate, by construction.
+        return Score(violated=True, worst_violation=math.inf, total=total)
+    return Score(violated=worst > 0.0, worst_violation=worst, total=total)
 
 
 def _softplus(x: float) -> float:
